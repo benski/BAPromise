@@ -11,7 +11,8 @@
 @interface BACancelToken ()
 @property (nonatomic, strong) dispatch_queue_t queue;
 @property (nonatomic) BAPromiseState promiseState;
-@property (nonatomic) BOOL cancelled;
+@property (atomic) BOOL cancelled;
+@property (nonatomic, strong) dispatch_block_t onCancel;
 @end
 
 @implementation BACancelToken
@@ -24,6 +25,38 @@
         _cancelled = NO;
     }
     return self;
+}
+
+-(void)cancelled:(dispatch_block_t)onCancel
+{
+    dispatch_queue_t currentQueue = dispatch_get_current_queue();
+    dispatch_block_t wrappedCancelBlock = ^ {
+        dispatch_async(currentQueue, ^{
+            onCancel();
+        });
+    };
+    
+    dispatch_async(_queue, ^{
+        if (_promiseState != BAPromise_Rejected && _promiseState != BAPromise_Fulfilled) {
+            if (_cancelled) {
+                wrappedCancelBlock();
+            } else {
+                _onCancel = wrappedCancelBlock;
+            }
+        }
+    });
+}
+
+-(void)cancel
+{
+           _cancelled = YES;
+    dispatch_async(self.queue, ^{
+
+        if (self.onCancel) {
+            self.onCancel();
+            self.onCancel=nil;
+        }
+    });
 }
 @end
 
@@ -99,6 +132,32 @@
             });
         };
     }
+    
+    [cancellationToken cancelled:^{
+        dispatch_async(self.queue, ^{
+            if (onFulfilled) {
+                [self.doneBlocks removeObjectIdenticalTo:wrappedDoneBlock];
+            }
+            
+            if (onObserved) {
+                [self.observerBlocks removeObjectIdenticalTo:wrappedObservedBlock];
+            }
+            
+            if (onRejected) {
+                [self.rejectedBlocks removeObjectIdenticalTo:wrappedRejectedBlock];
+            }
+            
+            if (onFinally) {
+                [self.finallyBlocks removeObjectIdenticalTo:wrappedFinallyBlock];
+            }
+            
+            if (self.doneBlocks.count == 0
+                && self.finallyBlocks.count == 0) {
+                [self cancel];
+            }
+        });
+    }];
+    
     
     dispatch_async(self.queue, ^{
         switch(self.promiseState) {
