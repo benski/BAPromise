@@ -65,7 +65,7 @@
     [self.waiter enter];
     BAPromiseClient *promise = [[BAPromiseClient alloc] init];
     [promise fulfillWithObject:nil];
-
+    
     [promise done:^(id obj) {
         [self.waiter leave];
     }];
@@ -95,5 +95,34 @@
     [[promiseMock expect] fulfillWithObject:nil];
     [promiseMock fulfill];
     [promiseMock verify];
+}
+
+-(void)testFulfillWithObjectFirst
+{
+    [self.waiter enter];
+    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
+    [promise fulfillWithObject:@7];
+    
+    [promise done:^(id obj) {
+        XCTAssertEqualObjects(obj, @7);
+        [self.waiter leave];
+    }];
+    
+    XCTAssertFalse([self.waiter waitForSeconds:0.5]);
+}
+
+-(void)testFulfillWithObjectSecond
+{
+    [self.waiter enter];
+    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
+    
+    [promise done:^(id obj) {
+        XCTAssertEqualObjects(obj, @42);
+        [self.waiter leave];
+    }];
+    
+    [promise fulfillWithObject:@42];
+    
+    XCTAssertFalse([self.waiter waitForSeconds:0.5]);
 }
 @end
