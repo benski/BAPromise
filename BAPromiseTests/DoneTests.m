@@ -86,4 +86,14 @@
     
     XCTAssertFalse([self.waiter waitForSeconds:0.5]);
 }
+
+-(void)testFulfill
+{
+    // calling 'fulfill' should call fulfillWithObject:nil
+    BAPromiseClient *promise = [BAPromiseClient new];
+    id promiseMock = OCMPartialMock(promise);
+    [[promiseMock expect] fulfillWithObject:nil];
+    [promiseMock fulfill];
+    [promiseMock verify];
+}
 @end
