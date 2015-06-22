@@ -25,6 +25,7 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
 // cancel token for promise
 @interface BACancelToken : NSObject
 -(void)cancel;
+-(void)cancelled:(dispatch_block_t)onCancel;
 @end
 
 // promise consumer API
