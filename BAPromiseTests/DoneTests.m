@@ -58,7 +58,32 @@
     [[[promiseMock expect] andReturn:nil] done:block observed:nil rejected:nil finally:nil queue:dispatch_get_current_queue()];
     [promiseMock done:block];
     [promiseMock verify];
-    
 }
 
+-(void)testFulfillmentFirst
+{
+    [self.waiter enter];
+    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
+    [promise fulfillWithObject:nil];
+
+    [promise done:^(id obj) {
+        [self.waiter leave];
+    }];
+    
+    XCTAssertFalse([self.waiter waitForSeconds:0.5]);
+}
+
+-(void)testFulfillmentSecond
+{
+    [self.waiter enter];
+    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
+    
+    [promise done:^(id obj) {
+        [self.waiter leave];
+    }];
+    
+    [promise fulfillWithObject:nil];
+    
+    XCTAssertFalse([self.waiter waitForSeconds:0.5]);
+}
 @end
