@@ -39,4 +39,59 @@
     [promise cancel];
     XCTAssertFalse([self.waiter waitForSeconds:0.5]);
 }
+
+-(void)testDoneAfterCancel
+{
+    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
+    [_waiter enter];
+    [promise cancelled:^{
+        [_waiter leave];
+    }];
+    
+    [[promise done:^(id obj) {
+        XCTFail(@"Cancelation should prevent calling of done block");
+    } observed:^(id obj) {
+        XCTFail(@"Cancelation should prevent calling of observed block");
+    } rejected:^(NSError *error) {
+        XCTFail(@"Cancelation should prevent calling of rejected block");
+    } finally:^{
+        XCTFail(@"Cancelation should prevent calling of finally block");
+    } queue:dispatch_get_current_queue()] cancel];
+    
+    XCTAssertFalse([self.waiter waitForSeconds:0.5]);
+    [TestWaiter pumpForSeconds:0.1];
+}
+
+-(void)testCancelTokenAfterFulfillment
+{
+    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
+    [promise fulfill];
+    [promise cancelled:^{
+        XCTFail(@"Unexpected cancelled callback");
+    }];
+    [[promise done:^(id obj){}] cancel];
+    [TestWaiter pumpForSeconds:0.1];
+}
+
+-(void)testCancelPromiseAfterFulfilment
+{
+    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
+    [promise fulfill];
+    [promise cancelled:^{
+        XCTFail(@"Unexpected cancelled callback");
+    }];
+    [promise cancel];
+    [TestWaiter pumpForSeconds:0.1];
+}
+
+-(void)testLateCancelCallback
+{
+    [_waiter enter];
+    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
+    [promise cancel];
+    [promise cancelled:^{
+         [_waiter leave];
+    }];
+     XCTAssertFalse([self.waiter waitForSeconds:0.5]);
+}
 @end
