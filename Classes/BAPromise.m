@@ -203,4 +203,9 @@
         }
     });
 }
+
+-(void)fulfill
+{
+    [self fulfillWithObject:nil];
+}
 @end

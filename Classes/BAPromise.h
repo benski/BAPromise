@@ -48,6 +48,9 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
 @interface BAPromiseClient : BAPromise
 -(void)fulfillWithObject:(id)obj;
 -(void)rejectWithError:(NSError *)error;
+
+/* helper methods to streamline syntax */
+-(void)fulfill;
 @end
 
 @interface NSArray (PromiseJoin)
