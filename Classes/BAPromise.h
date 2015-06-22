@@ -34,7 +34,10 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
               rejected:(BAPromiseOnRejectedBlock)onRejected
                finally:(BAPromiseFinallyBlock)onFinally
                  queue:(dispatch_queue_t)queue;
+/* helper methods to simplify API usage */
+-(BACancelToken *)done:(BAPromiseOnFulfilledBlock)onFulfilled;
 
+/* then (promise chaining) */
 -(BAPromise *)then:(BAPromiseThenBlock)onFulfilled
           rejected:(BAPromiseThenRejectedBlock)onRejected
            finally:(BAPromiseFinallyBlock)onFinally

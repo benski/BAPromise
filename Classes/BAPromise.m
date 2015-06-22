@@ -164,6 +164,15 @@
     return cancellationToken;
 }
 
+-(BACancelToken *)done:(BAPromiseOnFulfilledBlock)onFulfilled
+{
+    return [self done:onFulfilled
+             observed:nil
+             rejected:nil
+              finally:nil
+                queue:dispatch_get_current_queue()];
+}
+
 @end
 
 @implementation BAPromiseClient

@@ -10,6 +10,7 @@
 #import <XCTest/XCTest.h>
 #import "TestWaiter.h"
 #import "BAPromise.h"
+#import <OCMock/OCMock.h>
 
 @interface DoneTests : XCTestCase
 @property (nonatomic, strong) TestWaiter *waiter;
@@ -31,7 +32,6 @@
 
 -(void)testDone
 {
-    XCTAssert(YES, @"Pass");
     BAPromiseClient *promise = [[BAPromiseClient alloc] init];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [promise fulfillWithObject:nil];
@@ -47,6 +47,18 @@
             queue:dispatch_get_current_queue()];
     
     XCTAssertFalse([self.waiter waitForSeconds:0.5]);
+}
+
+-(void)testDoneHelper
+{
+    // calling 'done' should turn around and call done:observed:rejected:finally:queue
+    BAPromiseOnFulfilledBlock block = ^(id obj) {};
+    BAPromise *promise = [BAPromise new];
+    id promiseMock = OCMPartialMock(promise);
+    [[[promiseMock expect] andReturn:nil] done:block observed:nil rejected:nil finally:nil queue:dispatch_get_current_queue()];
+    [promiseMock done:block];
+    [promiseMock verify];
+    
 }
 
 @end
