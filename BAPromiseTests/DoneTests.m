@@ -41,9 +41,10 @@
     [promise done:^(id obj) {
         [self.waiter leave];
     }
+         observed:nil
          rejected:nil
           finally:nil
-            queue:nil];
+            queue:dispatch_get_current_queue()];
     
     XCTAssertFalse([self.waiter waitForSeconds:0.5]);
 }
