@@ -9,10 +9,7 @@
 /* Begin PBXBuildFile section */
 		E749136D1B3887AF00D4EE69 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E749136C1B3887AF00D4EE69 /* main.m */; };
 		E74913701B3887AF00D4EE69 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E749136F1B3887AF00D4EE69 /* AppDelegate.m */; };
-		E74913731B3887AF00D4EE69 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E74913721B3887AF00D4EE69 /* ViewController.m */; };
-		E74913761B3887AF00D4EE69 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E74913741B3887AF00D4EE69 /* Main.storyboard */; };
 		E74913781B3887AF00D4EE69 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E74913771B3887AF00D4EE69 /* Images.xcassets */; };
-		E749137B1B3887AF00D4EE69 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E74913791B3887AF00D4EE69 /* LaunchScreen.xib */; };
 		E74913871B3887B000D4EE69 /* BAPromiseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E74913861B3887B000D4EE69 /* BAPromiseTests.m */; };
 		E74913931B38886F00D4EE69 /* BAPromise.m in Sources */ = {isa = PBXBuildFile; fileRef = E74913921B38886F00D4EE69 /* BAPromise.m */; };
 /* End PBXBuildFile section */
@@ -33,11 +30,7 @@
 		E749136C1B3887AF00D4EE69 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E749136E1B3887AF00D4EE69 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E749136F1B3887AF00D4EE69 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		E74913711B3887AF00D4EE69 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		E74913721B3887AF00D4EE69 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		E74913751B3887AF00D4EE69 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E74913771B3887AF00D4EE69 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		E749137A1B3887AF00D4EE69 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		E74913801B3887B000D4EE69 /* BAPromiseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BAPromiseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E74913851B3887B000D4EE69 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E74913861B3887B000D4EE69 /* BAPromiseTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BAPromiseTests.m; sourceTree = "<group>"; };
@@ -87,11 +80,7 @@
 			children = (
 				E749136E1B3887AF00D4EE69 /* AppDelegate.h */,
 				E749136F1B3887AF00D4EE69 /* AppDelegate.m */,
-				E74913711B3887AF00D4EE69 /* ViewController.h */,
-				E74913721B3887AF00D4EE69 /* ViewController.m */,
-				E74913741B3887AF00D4EE69 /* Main.storyboard */,
 				E74913771B3887AF00D4EE69 /* Images.xcassets */,
-				E74913791B3887AF00D4EE69 /* LaunchScreen.xib */,
 				E749136A1B3887AF00D4EE69 /* Supporting Files */,
 			);
 			path = BAPromise;
@@ -212,8 +201,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E74913761B3887AF00D4EE69 /* Main.storyboard in Resources */,
-				E749137B1B3887AF00D4EE69 /* LaunchScreen.xib in Resources */,
 				E74913781B3887AF00D4EE69 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -233,7 +220,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E74913931B38886F00D4EE69 /* BAPromise.m in Sources */,
-				E74913731B3887AF00D4EE69 /* ViewController.m in Sources */,
 				E74913701B3887AF00D4EE69 /* AppDelegate.m in Sources */,
 				E749136D1B3887AF00D4EE69 /* main.m in Sources */,
 			);
@@ -256,25 +242,6 @@
 			targetProxy = E74913811B3887B000D4EE69 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		E74913741B3887AF00D4EE69 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E74913751B3887AF00D4EE69 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		E74913791B3887AF00D4EE69 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E749137A1B3887AF00D4EE69 /* Base */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		E74913881B3887B000D4EE69 /* Debug */ = {
@@ -432,6 +399,7 @@
 				E749138C1B3887B000D4EE69 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E749138D1B3887B000D4EE69 /* Build configuration list for PBXNativeTarget "BAPromiseTests" */ = {
 			isa = XCConfigurationList;
@@ -440,6 +408,7 @@
 				E749138F1B3887B000D4EE69 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
