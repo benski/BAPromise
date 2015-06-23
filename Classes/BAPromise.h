@@ -15,13 +15,6 @@ typedef id (^BAPromiseThenBlock)(id obj);
 typedef NSError *(^BAPromiseThenRejectedBlock)(NSError *error);
 typedef dispatch_block_t BAPromiseFinallyBlock;
 
-typedef NS_ENUM(NSInteger, BAPromiseState) {
-    BAPromise_Unfulfilled,
-    BAPromise_Fulfilled,
-    BAPromise_Rejected,
-    BAPromise_Canceled,
-};
-
 // cancel token for promise
 @interface BACancelToken : NSObject
 -(void)cancel;
