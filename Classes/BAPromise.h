@@ -28,8 +28,12 @@ typedef dispatch_block_t BAPromiseFinallyBlock;
               rejected:(BAPromiseOnRejectedBlock)onRejected
                finally:(BAPromiseFinallyBlock)onFinally
                  queue:(dispatch_queue_t)queue;
+
 /* helper methods to simplify API usage */
 -(BACancelToken *)done:(BAPromiseOnFulfilledBlock)onFulfilled;
+-(BACancelToken *)done:(BAPromiseOnFulfilledBlock)onFulfilled
+              rejected:(BAPromiseOnRejectedBlock)onRejected;
+-(BACancelToken *)rejected:(BAPromiseOnRejectedBlock)onRejected;
 
 /* then (promise chaining) */
 -(BAPromise *)then:(BAPromiseThenBlock)onFulfilled
@@ -43,8 +47,9 @@ typedef dispatch_block_t BAPromiseFinallyBlock;
 -(void)fulfillWithObject:(id)obj;
 -(void)rejectWithError:(NSError *)error;
 
-/* helper methods to streamline syntax */
+/* helper methods to streamline syntax for nil objects*/
 -(void)fulfill;
+-(void)reject;
 @end
 
 @interface NSArray (PromiseJoin)

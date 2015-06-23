@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2EE2F1B00BB40D1536FE8A2F /* libPods-BAPromiseTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6811C60F83174428FF3FE35A /* libPods-BAPromiseTests.a */; };
+		E709AD3E1B3997930094636D /* RejectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E709AD3D1B3997930094636D /* RejectTests.m */; };
 		E749136D1B3887AF00D4EE69 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E749136C1B3887AF00D4EE69 /* main.m */; };
 		E74913701B3887AF00D4EE69 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E749136F1B3887AF00D4EE69 /* AppDelegate.m */; };
 		E74913781B3887AF00D4EE69 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E74913771B3887AF00D4EE69 /* Images.xcassets */; };
@@ -31,6 +32,7 @@
 		1A30C6BE8CBE194E7261BDA7 /* Pods-BAPromiseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BAPromiseTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BAPromiseTests/Pods-BAPromiseTests.release.xcconfig"; sourceTree = "<group>"; };
 		6811C60F83174428FF3FE35A /* libPods-BAPromiseTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BAPromiseTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF95E1DBE975DA8AFC095396 /* Pods-BAPromiseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BAPromiseTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BAPromiseTests/Pods-BAPromiseTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E709AD3D1B3997930094636D /* RejectTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RejectTests.m; sourceTree = "<group>"; };
 		E74913671B3887AF00D4EE69 /* BAPromise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BAPromise.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E749136B1B3887AF00D4EE69 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E749136C1B3887AF00D4EE69 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				E74913961B38A33800D4EE69 /* TestWaiter.h */,
 				E74913971B38A33800D4EE69 /* TestWaiter.m */,
 				E74913991B38B16000D4EE69 /* CancelTests.m */,
+				E709AD3D1B3997930094636D /* RejectTests.m */,
 			);
 			path = BAPromiseTests;
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E709AD3E1B3997930094636D /* RejectTests.m in Sources */,
 				E74913981B38A33800D4EE69 /* TestWaiter.m in Sources */,
 				E74913951B38A26E00D4EE69 /* DoneTests.m in Sources */,
 				E749139A1B38B16000D4EE69 /* CancelTests.m in Sources */,
