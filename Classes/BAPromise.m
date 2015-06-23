@@ -239,6 +239,25 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
                 queue:dispatch_get_current_queue()];
 }
 
+-(BACancelToken *)done:(BAPromiseOnFulfilledBlock)onFulfilled
+              rejected:(BAPromiseOnRejectedBlock)onRejected
+{
+    return [self done:onFulfilled
+             observed:nil
+             rejected:onRejected
+              finally:nil
+                queue:dispatch_get_current_queue()];
+}
+
+-(BACancelToken *)rejected:(BAPromiseOnRejectedBlock)onRejected
+{
+    return [self done:nil
+             observed:nil
+             rejected:onRejected
+              finally:nil
+                queue:dispatch_get_current_queue()];
+}
+
 @end
 
 @implementation BAPromiseClient
@@ -273,5 +292,32 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
 -(void)fulfill
 {
     [self fulfillWithObject:nil];
+}
+
+-(void)rejectWithError:(NSError *)error
+{
+    dispatch_async(self.queue, ^{
+        if (self.promiseState == BAPromise_Unfulfilled) {
+            self.promiseState = BAPromise_Rejected;
+            self.fulfilledObject = error;
+            // remove references we'll never call now
+            self.doneBlocks = nil;
+            self.onCancel = nil;
+            for (BAPromiseOnRejectedBlock rejected in self.rejectedBlocks) {
+                rejected(error);
+            }
+            self.rejectedBlocks = nil;
+            
+            for (BAPromiseFinallyBlock finally in self.finallyBlocks) {
+                finally();
+            }
+            self.finallyBlocks = nil;
+        }
+    });
+}
+
+-(void)reject
+{
+    [self rejectWithError:[[NSError alloc] init]];
 }
 @end
