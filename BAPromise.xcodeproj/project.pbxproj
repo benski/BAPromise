@@ -37,6 +37,7 @@
 		E709AD3D1B3997930094636D /* RejectTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RejectTests.m; sourceTree = "<group>"; };
 		E709AD3F1B399B1B0094636D /* ThenTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThenTests.m; sourceTree = "<group>"; };
 		E709AD411B399FD80094636D /* ChainTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChainTests.m; sourceTree = "<group>"; };
+		E709AD431B39AA410094636D /* BAPromise.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = BAPromise.podspec; sourceTree = "<group>"; };
 		E74913671B3887AF00D4EE69 /* BAPromise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BAPromise.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E749136B1B3887AF00D4EE69 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E749136C1B3887AF00D4EE69 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -92,6 +93,7 @@
 		E749135E1B3887AF00D4EE69 = {
 			isa = PBXGroup;
 			children = (
+				E709AD431B39AA410094636D /* BAPromise.podspec */,
 				E74913901B38883900D4EE69 /* Classes */,
 				E74913691B3887AF00D4EE69 /* BAPromise */,
 				E74913831B3887B000D4EE69 /* BAPromiseTests */,
