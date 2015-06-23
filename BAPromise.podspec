@@ -3,7 +3,7 @@ s.name             = "BAPromise"
 s.version          = "1.0.0"
 s.summary          = "Objective C Promise Library"
 s.description      = <<-DESC
-Objective C Promise Library
+    Objective C Promise Library. An alternative to NSOperation for asynchronous operations.
 DESC
 s.homepage         = "https://github.com/benski/BAPromise"
 s.license          = "MIT"
