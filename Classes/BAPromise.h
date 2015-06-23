@@ -40,6 +40,8 @@ typedef dispatch_block_t BAPromiseFinallyBlock;
 -(BACancelToken *)done:(BAPromiseOnFulfilledBlock)onFulfilled
               rejected:(BAPromiseOnRejectedBlock)onRejected;
 -(BACancelToken *)rejected:(BAPromiseOnRejectedBlock)onRejected;
+-(BACancelToken *)finally:(BAPromiseFinallyBlock)onFinally;
+
 -(BAPromise *)then:(BAPromiseThenBlock)onFulfilled;
 -(BAPromise *)then:(BAPromiseThenBlock)onFulfilled
           rejected:(BAPromiseThenRejectedBlock)onRejected;
@@ -49,6 +51,9 @@ typedef dispatch_block_t BAPromiseFinallyBlock;
 @interface BAPromiseClient : BAPromise
 -(void)fulfillWithObject:(id)obj;
 -(void)rejectWithError:(NSError *)error;
+
++(BAPromiseClient *)fulfilledPromise:(id)obj;
++(BAPromiseClient *)rejectedPromise:(NSError *)error;
 
 /* helper methods to streamline syntax for nil objects*/
 -(void)fulfill;
