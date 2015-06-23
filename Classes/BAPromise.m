@@ -8,6 +8,13 @@
 
 #import "BAPromise.h"
 
+typedef NS_ENUM(NSInteger, BAPromiseState) {
+    BAPromise_Unfulfilled,
+    BAPromise_Fulfilled,
+    BAPromise_Rejected,
+    BAPromise_Canceled,
+};
+
 @interface BACancelToken ()
 @property (nonatomic, strong) dispatch_queue_t queue;
 @property (nonatomic) BAPromiseState promiseState;
