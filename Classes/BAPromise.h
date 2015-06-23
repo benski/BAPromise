@@ -29,17 +29,20 @@ typedef dispatch_block_t BAPromiseFinallyBlock;
                finally:(BAPromiseFinallyBlock)onFinally
                  queue:(dispatch_queue_t)queue;
 
-/* helper methods to simplify API usage */
--(BACancelToken *)done:(BAPromiseOnFulfilledBlock)onFulfilled;
--(BACancelToken *)done:(BAPromiseOnFulfilledBlock)onFulfilled
-              rejected:(BAPromiseOnRejectedBlock)onRejected;
--(BACancelToken *)rejected:(BAPromiseOnRejectedBlock)onRejected;
-
 /* then (promise chaining) */
 -(BAPromise *)then:(BAPromiseThenBlock)onFulfilled
           rejected:(BAPromiseThenRejectedBlock)onRejected
            finally:(BAPromiseFinallyBlock)onFinally
              queue:(dispatch_queue_t)queue;
+
+/* helper methods to simplify API usage */
+-(BACancelToken *)done:(BAPromiseOnFulfilledBlock)onFulfilled;
+-(BACancelToken *)done:(BAPromiseOnFulfilledBlock)onFulfilled
+              rejected:(BAPromiseOnRejectedBlock)onRejected;
+-(BACancelToken *)rejected:(BAPromiseOnRejectedBlock)onRejected;
+-(BAPromise *)then:(BAPromiseThenBlock)onFulfilled;
+-(BAPromise *)then:(BAPromiseThenBlock)onFulfilled
+          rejected:(BAPromiseThenRejectedBlock)onRejected;
 @end
 
 // promise producer API
