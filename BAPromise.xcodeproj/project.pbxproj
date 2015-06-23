@@ -11,6 +11,7 @@
 		E709AD3E1B3997930094636D /* RejectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E709AD3D1B3997930094636D /* RejectTests.m */; };
 		E709AD401B399B1B0094636D /* ThenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E709AD3F1B399B1B0094636D /* ThenTests.m */; };
 		E709AD421B399FD80094636D /* ChainTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E709AD411B399FD80094636D /* ChainTests.m */; };
+		E709AD451B39C1730094636D /* JoinTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E709AD441B39C1730094636D /* JoinTests.m */; };
 		E749136D1B3887AF00D4EE69 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E749136C1B3887AF00D4EE69 /* main.m */; };
 		E74913701B3887AF00D4EE69 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E749136F1B3887AF00D4EE69 /* AppDelegate.m */; };
 		E74913781B3887AF00D4EE69 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E74913771B3887AF00D4EE69 /* Images.xcassets */; };
@@ -38,6 +39,7 @@
 		E709AD3F1B399B1B0094636D /* ThenTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThenTests.m; sourceTree = "<group>"; };
 		E709AD411B399FD80094636D /* ChainTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChainTests.m; sourceTree = "<group>"; };
 		E709AD431B39AA410094636D /* BAPromise.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = BAPromise.podspec; sourceTree = "<group>"; };
+		E709AD441B39C1730094636D /* JoinTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JoinTests.m; path = BAPromiseTests/JoinTests.m; sourceTree = SOURCE_ROOT; };
 		E74913671B3887AF00D4EE69 /* BAPromise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BAPromise.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E749136B1B3887AF00D4EE69 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E749136C1B3887AF00D4EE69 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 				E709AD3D1B3997930094636D /* RejectTests.m */,
 				E709AD3F1B399B1B0094636D /* ThenTests.m */,
 				E709AD411B399FD80094636D /* ChainTests.m */,
+				E709AD441B39C1730094636D /* JoinTests.m */,
 			);
 			path = BAPromiseTests;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E709AD451B39C1730094636D /* JoinTests.m in Sources */,
 				E709AD3E1B3997930094636D /* RejectTests.m in Sources */,
 				E74913981B38A33800D4EE69 /* TestWaiter.m in Sources */,
 				E74913951B38A26E00D4EE69 /* DoneTests.m in Sources */,

@@ -84,6 +84,18 @@
     [TestWaiter pumpForSeconds:0.1];
 }
 
+-(void)testCancelPromiseAfterRejection
+{
+    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
+    [promise reject];
+    [promise cancelled:^{
+        XCTFail(@"Unexpected cancelled callback");
+    }];
+    [promise cancel];
+    [TestWaiter pumpForSeconds:0.1];
+}
+
+
 -(void)testLateCancelCallback
 {
     [_waiter enter];

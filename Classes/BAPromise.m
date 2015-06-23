@@ -249,6 +249,17 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
                 queue:dispatch_get_current_queue()];
 }
 
+-(BACancelToken *)done:(BAPromiseOnFulfilledBlock)onFulfilled
+              rejected:(BAPromiseOnRejectedBlock)onRejected
+                 queue:(dispatch_queue_t)queue
+{
+    return [self done:onFulfilled
+             observed:nil
+             rejected:onRejected
+              finally:nil
+                queue:queue];
+}
+
 -(BACancelToken *)rejected:(BAPromiseOnRejectedBlock)onRejected
 {
     return [self done:nil
@@ -298,29 +309,29 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
             [returnedPromise fulfillWithObject:chainedValue];
         }
     } observed:nil
-      rejected:^(NSError *error) {
-          if (failureBlock != nil) {
-              error = failureBlock(error);
-              if ([error isKindOfClass:[BAPromise class]]) {
-                  // returning a BAPromise from the 'rejected' block
-                  // indicates that we should wait on that promise and chain its result
-                  BAPromise *chainedPromise = (BAPromise *)error;
-                  [returnedPromise fulfillWithObject:chainedPromise];
-              } else if ([error isKindOfClass:[NSError class]]) {
-                  // returning anything other than an NSError from the 'rejected' block
-                  // turns the rejection back into a fulfillment
-                  [returnedPromise rejectWithError:error];
-              } else {
-                  [returnedPromise fulfillWithObject:error];
-              }
-          } else {
-              [returnedPromise rejectWithError:error];
-          }
-      } finally:^{
-          if (finallyBlock) {
-              finallyBlock();
-          }
-      } queue:myQueue];
+                          rejected:^(NSError *error) {
+                              if (failureBlock != nil) {
+                                  error = failureBlock(error);
+                                  if ([error isKindOfClass:[BAPromise class]]) {
+                                      // returning a BAPromise from the 'rejected' block
+                                      // indicates that we should wait on that promise and chain its result
+                                      BAPromise *chainedPromise = (BAPromise *)error;
+                                      [returnedPromise fulfillWithObject:chainedPromise];
+                                  } else if ([error isKindOfClass:[NSError class]]) {
+                                      // returning anything other than an NSError from the 'rejected' block
+                                      // turns the rejection back into a fulfillment
+                                      [returnedPromise rejectWithError:error];
+                                  } else {
+                                      [returnedPromise fulfillWithObject:error];
+                                  }
+                              } else {
+                                  [returnedPromise rejectWithError:error];
+                              }
+                          } finally:^{
+                              if (finallyBlock) {
+                                  finallyBlock();
+                              }
+                          } queue:myQueue];
     
     return returnedPromise;
 }
@@ -378,30 +389,30 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
             });
         }];
     } else {
-    dispatch_async(self.queue, ^{
-        if (self.promiseState == BAPromise_Unfulfilled) {
-            self.promiseState = BAPromise_Fulfilled;
-            self.fulfilledObject = obj;
-            
-            // remove references we'll never call now
-            self.rejectedBlocks = nil;
-            
-            for (BAPromiseOnFulfilledBlock done in self.doneBlocks) {
-                done(obj);
+        dispatch_async(self.queue, ^{
+            if (self.promiseState == BAPromise_Unfulfilled) {
+                self.promiseState = BAPromise_Fulfilled;
+                self.fulfilledObject = obj;
+                
+                // remove references we'll never call now
+                self.rejectedBlocks = nil;
+                
+                for (BAPromiseOnFulfilledBlock done in self.doneBlocks) {
+                    done(obj);
+                }
+                self.doneBlocks = nil;
+                
+                for (BAPromiseOnFulfilledBlock done in self.observerBlocks) {
+                    done(obj);
+                }
+                self.observerBlocks = nil;
+                
+                for (BAPromiseFinallyBlock finally in self.finallyBlocks) {
+                    finally();
+                }
+                self.finallyBlocks = nil;
             }
-            self.doneBlocks = nil;
-            
-            for (BAPromiseOnFulfilledBlock done in self.observerBlocks) {
-                done(obj);
-            }
-            self.observerBlocks = nil;
-            
-            for (BAPromiseFinallyBlock finally in self.finallyBlocks) {
-                finally();
-            }
-            self.finallyBlocks = nil;
-        }
-    });
+        });
     }
 }
 
@@ -436,4 +447,54 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
 {
     [self rejectWithError:[[NSError alloc] init]];
 }
+@end
+
+@implementation NSArray (BAPromiseJoin)
+
+-(BAPromise *)joinPromises
+{
+    BAPromiseClient *returnedPromise = [[BAPromiseClient alloc] init];
+    dispatch_queue_t myQueue = returnedPromise.queue;
+    NSMutableArray *cancellationTokens = [[NSMutableArray alloc] initWithCapacity:self.count];
+    
+    // propagate cancellation
+    [returnedPromise cancelled:^{
+        for (BACancelToken *token in cancellationTokens) {
+            dispatch_async(myQueue, ^{
+                [token cancel];
+            });
+        }
+    }];
+    
+    NSUInteger totalCount=self.count;
+    NSMutableArray *results = [[NSMutableArray alloc] initWithCapacity:totalCount];
+    for (NSUInteger i=0;i<self.count;i++) {
+        [results addObject:[NSNull null]];
+    }
+    
+    // manually looping so we have an index
+    __block NSUInteger fulfilledCount=0;
+    [self enumerateObjectsUsingBlock:^(BAPromiseClient *promise, NSUInteger idx, BOOL *stop) {
+        // these are guaranteed to occur on a serial queue, so there is no need to synchronize
+        BACancelToken *token = [promise done:^(id obj) {
+            if (obj) {
+                results[idx] = obj;
+            }
+            
+            if (++fulfilledCount == totalCount) { // this is safe because these callbacks all happen on the same serial dispatch queuue
+                [returnedPromise fulfillWithObject:results];
+            }
+        } rejected:^(NSError *error) {
+            [returnedPromise rejectWithError:error];
+            // cancel all the other promises (cancelling the rejected promise at this point is safe, see testCancelPromiseAfterRejection)
+            [self enumerateObjectsUsingBlock:^(BAPromise *promise, NSUInteger idx, BOOL *stop) {
+                [promise cancel];
+            }];
+        } queue:myQueue];
+        [cancellationTokens addObject:token];
+    }];
+    
+    return returnedPromise;
+}
+
 @end
