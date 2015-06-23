@@ -56,9 +56,9 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
 
 -(void)cancel
 {
-           _cancelled = YES;
+    _cancelled = YES;
     dispatch_async(self.queue, ^{
-
+        
         if (self.onCancel) {
             self.onCancel();
             self.onCancel=nil;
@@ -258,11 +258,103 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
                 queue:dispatch_get_current_queue()];
 }
 
+#pragma mark - Then
+
+-(BAPromise *)then:(BAPromiseThenBlock)thenBlock
+          rejected:(BAPromiseThenRejectedBlock)failureBlock
+           finally:(BAPromiseFinallyBlock)finallyBlock
+             queue:(dispatch_queue_t)myQueue
+{
+    __block BACancelToken *cancellationToken=nil;
+    BAPromiseClient *returnedPromise = [[BAPromiseClient alloc] init];
+    [returnedPromise cancelled:^{
+        dispatch_async(myQueue, ^{
+            if (cancellationToken)
+                [cancellationToken cancel];
+        });
+    }];
+    
+    cancellationToken = [self done:^(id obj) {
+        id chainedValue = thenBlock(obj);
+        if ([chainedValue isKindOfClass:[BAPromise class]]) {
+            // returning a BAPromise from the 'then' block
+            // indicates that we should wait on that promise and chain its result
+            BAPromise *chainedPromise = (BAPromise *)chainedValue;
+            [returnedPromise fulfillWithObject:chainedPromise];
+        }  else if ([chainedValue isKindOfClass:[NSError class]]) {
+            // returning an NSError from the 'then' block
+            // turns the fulfillment into a rejection
+            [returnedPromise rejectWithError:(NSError *)chainedValue];
+        } else {
+            [returnedPromise fulfillWithObject:chainedValue];
+        }
+    } observed:nil
+      rejected:^(NSError *error) {
+          if (failureBlock != nil) {
+              error = failureBlock(error);
+              if ([error isKindOfClass:[BAPromise class]]) {
+                  // returning a BAPromise from the 'rejected' block
+                  // indicates that we should wait on that promise and chain its result
+                  BAPromise *chainedPromise = (BAPromise *)error;
+                  [returnedPromise fulfillWithObject:chainedPromise];
+              } else if ([error isKindOfClass:[NSError class]]) {
+                  // returning anything other than an NSError from the 'rejected' block
+                  // turns the rejection back into a fulfillment
+                  [returnedPromise rejectWithError:error];
+              } else {
+                  [returnedPromise fulfillWithObject:error];
+              }
+          } else {
+              [returnedPromise rejectWithError:error];
+          }
+      } finally:^{
+          if (finallyBlock) {
+              finallyBlock();
+          }
+      } queue:myQueue];
+    
+    return returnedPromise;
+}
+
+-(BAPromise *)then:(BAPromiseThenBlock)onFulfilled
+{
+    return [self then:onFulfilled
+             rejected:nil
+              finally:nil
+                queue:dispatch_get_current_queue()];
+}
+
+-(BAPromise *)then:(BAPromiseThenBlock)onFulfilled
+          rejected:(BAPromiseThenRejectedBlock)onRejected
+{
+    return [self then:onFulfilled
+             rejected:onRejected
+              finally:nil
+                queue:dispatch_get_current_queue()];
+}
+
 @end
 
 @implementation BAPromiseClient
 -(void)fulfillWithObject:(id)obj
 {
+    if ([obj isKindOfClass:[BAPromise class]]) {
+        BAPromise *promise = (BAPromise *)obj;
+        BACancelToken *cancellationToken;
+        
+        cancellationToken = [promise done:^(id obj) {
+            [self fulfillWithObject:obj];
+        } rejected:^(NSError *error) {
+            [self rejectWithError:error];
+        }];
+        
+        dispatch_queue_t myQueue = dispatch_get_current_queue();
+        [self cancelled:^{
+            dispatch_async(myQueue, ^{
+                [cancellationToken cancel];
+            });
+        }];
+    } else {
     dispatch_async(self.queue, ^{
         if (self.promiseState == BAPromise_Unfulfilled) {
             self.promiseState = BAPromise_Fulfilled;
@@ -287,6 +379,7 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
             self.finallyBlocks = nil;
         }
     });
+    }
 }
 
 -(void)fulfill
