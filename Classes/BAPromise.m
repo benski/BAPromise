@@ -488,8 +488,8 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
         } rejected:^(NSError *error) {
             [returnedPromise rejectWithError:error];
             // cancel all the other promises (cancelling the rejected promise at this point is safe, see testCancelPromiseAfterRejection)
-            [self enumerateObjectsUsingBlock:^(BAPromise *promise, NSUInteger idx, BOOL *stop) {
-                [promise cancel];
+            [cancellationTokens enumerateObjectsUsingBlock:^(BACancelToken *token, NSUInteger idx, BOOL *stop) {
+                [token cancel];
             }];
         } queue:myQueue];
         [cancellationTokens addObject:token];
