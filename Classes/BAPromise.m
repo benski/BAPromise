@@ -296,12 +296,7 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
     
     cancellationToken = [self done:^(id obj) {
         id chainedValue = thenBlock(obj);
-        if ([chainedValue isKindOfClass:[BAPromise class]]) {
-            // returning a BAPromise from the 'then' block
-            // indicates that we should wait on that promise and chain its result
-            BAPromise *chainedPromise = (BAPromise *)chainedValue;
-            [returnedPromise fulfillWithObject:chainedPromise];
-        }  else if ([chainedValue isKindOfClass:[NSError class]]) {
+        if ([chainedValue isKindOfClass:[NSError class]]) {
             // returning an NSError from the 'then' block
             // turns the fulfillment into a rejection
             [returnedPromise rejectWithError:(NSError *)chainedValue];
@@ -312,12 +307,7 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
                           rejected:^(NSError *error) {
                               if (failureBlock != nil) {
                                   error = failureBlock(error);
-                                  if ([error isKindOfClass:[BAPromise class]]) {
-                                      // returning a BAPromise from the 'rejected' block
-                                      // indicates that we should wait on that promise and chain its result
-                                      BAPromise *chainedPromise = (BAPromise *)error;
-                                      [returnedPromise fulfillWithObject:chainedPromise];
-                                  } else if ([error isKindOfClass:[NSError class]]) {
+                                  if ([error isKindOfClass:[NSError class]]) {
                                       // returning anything other than an NSError from the 'rejected' block
                                       // turns the rejection back into a fulfillment
                                       [returnedPromise rejectWithError:error];
