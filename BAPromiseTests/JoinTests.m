@@ -158,4 +158,27 @@
     
     XCTAssertFalse([self.waiter waitForSeconds:0.5]);
 }
+
+-(void)testJoinRejectionCancelsOtherPromises
+{
+
+    BAPromiseClient *promise1 = [[BAPromiseClient alloc] init];
+    BAPromiseClient *promise2 = [[BAPromiseClient alloc] init];
+    
+    [_waiter enter];
+    [promise2 cancelled:^{
+        [_waiter leave];
+    }];
+    
+    [_waiter enter];
+    [@[promise1, promise2].joinPromises done:^(id obj) {
+        XCTFail(@"Unexpected Fulfillment");
+        [_waiter leave];
+    } rejected:^(NSError *error) {
+        [_waiter leave];
+    }];
+    
+    [promise1 reject];
+    XCTAssertFalse([self.waiter waitForSeconds:0.5]);
+}
 @end
