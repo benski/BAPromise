@@ -76,13 +76,6 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
 @end
 
 @implementation BAPromise
--(instancetype)init
-{
-    self = [super init];
-    if (self) {
-    }
-    return self;
-}
 
 -(BACancelToken *)done:(BAPromiseOnFulfilledBlock)onFulfilled
               observed:(BAPromiseOnFulfilledBlock)onObserved
