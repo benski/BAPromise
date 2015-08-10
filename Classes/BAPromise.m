@@ -8,6 +8,9 @@
 
 #import "BAPromise.h"
 
+typedef void (^BAPromiseOnFulfilledBlock)(id obj);
+typedef id (^BAPromiseThenBlock)(id obj);
+
 typedef NS_ENUM(NSInteger, BAPromiseState) {
     BAPromise_Unfulfilled,
     BAPromise_Fulfilled,

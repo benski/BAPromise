@@ -218,7 +218,7 @@
 
 -(void)testThenHelper
 {
-    BAPromiseThenBlock block = ^id(id obj) { return obj; };
+    id (^block)(id) = ^id(id obj) { return obj; };
     BAPromise *promise = [BAPromise new];
     id promiseMock = OCMPartialMock(promise);
     [[[promiseMock expect] andReturn:nil] then:block rejected:nil finally:nil queue:dispatch_get_current_queue()];
@@ -228,7 +228,7 @@
 
 -(void)testThenRejectedHelper
 {
-    BAPromiseThenBlock block = ^id(id obj) { return obj; };
+    id (^block)(id) = ^id(id obj) { return obj; };
     BAPromiseThenRejectedBlock block2 = ^NSError *(NSError *obj) { return obj; };
     BAPromise *promise = [BAPromise new];
     id promiseMock = OCMPartialMock(promise);
