@@ -9,9 +9,7 @@
 #import <Foundation/Foundation.h>
 
 /* block definitions */
-typedef void (^BAPromiseOnFulfilledBlock)(id obj);
 typedef void (^BAPromiseOnRejectedBlock)(NSError *error);
-typedef id (^BAPromiseThenBlock)(id obj);
 typedef NSError *(^BAPromiseThenRejectedBlock)(NSError *error);
 typedef dispatch_block_t BAPromiseFinallyBlock;
 
@@ -22,41 +20,41 @@ typedef dispatch_block_t BAPromiseFinallyBlock;
 @end
 
 // promise consumer API
-@interface BAPromise : BACancelToken
--(BACancelToken *)done:(BAPromiseOnFulfilledBlock)onFulfilled
-              observed:(BAPromiseOnFulfilledBlock)onObserved
+@interface BAPromise<__covariant T> : BACancelToken
+-(BACancelToken *)done:(void (^)(T obj))onFulfilled
+              observed:(void (^)(T obj))onObserved
               rejected:(BAPromiseOnRejectedBlock)onRejected
                finally:(BAPromiseFinallyBlock)onFinally
                  queue:(dispatch_queue_t)queue;
 
 /* then (promise chaining) */
--(BAPromise *)then:(BAPromiseThenBlock)onFulfilled
+-(BAPromise *)then:(id (^)(T obj))onFulfilled
           rejected:(BAPromiseThenRejectedBlock)onRejected
            finally:(BAPromiseFinallyBlock)onFinally
              queue:(dispatch_queue_t)queue;
 
 /* helper methods to simplify API usage */
--(BACancelToken *)done:(BAPromiseOnFulfilledBlock)onFulfilled;
--(BACancelToken *)done:(BAPromiseOnFulfilledBlock)onFulfilled
+-(BACancelToken *)done:(void (^)(T obj))onFulfilled;
+-(BACancelToken *)done:(void (^)(T obj))onFulfilled
               rejected:(BAPromiseOnRejectedBlock)onRejected;
--(BACancelToken *)done:(BAPromiseOnFulfilledBlock)onFulfilled
+-(BACancelToken *)done:(void (^)(T obj))onFulfilled
               rejected:(BAPromiseOnRejectedBlock)onRejected
                  queue:(dispatch_queue_t)queue;
 -(BACancelToken *)rejected:(BAPromiseOnRejectedBlock)onRejected;
 -(BACancelToken *)finally:(BAPromiseFinallyBlock)onFinally;
 
--(BAPromise *)then:(BAPromiseThenBlock)onFulfilled;
--(BAPromise *)then:(BAPromiseThenBlock)onFulfilled
+-(BAPromise *)then:(id (^)(T obj))onFulfilled;
+-(BAPromise *)then:(id (^)(T obj))onFulfilled
           rejected:(BAPromiseThenRejectedBlock)onRejected;
 @end
 
 // promise producer API
-@interface BAPromiseClient : BAPromise
--(void)fulfillWithObject:(id)obj;
+@interface BAPromiseClient<__covariant T> : BAPromise<T>
+-(void)fulfillWithObject:(T)obj;
 -(void)rejectWithError:(NSError *)error;
 
-+(BAPromiseClient *)fulfilledPromise:(id)obj;
-+(BAPromiseClient *)rejectedPromise:(NSError *)error;
++(instancetype)fulfilledPromise:(T)obj;
++(instancetype)rejectedPromise:(NSError *)error;
 
 /* helper methods to streamline syntax for nil objects*/
 -(void)fulfill;
@@ -64,5 +62,5 @@ typedef dispatch_block_t BAPromiseFinallyBlock;
 @end
 
 @interface NSArray (BAPromiseJoin)
--(BAPromise *)joinPromises;
+-(BAPromise<NSArray *> *)joinPromises;
 @end

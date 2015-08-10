@@ -94,7 +94,7 @@
 -(void)testDoneRejectedHelper
 {
     // calling done:rejected: should turn around and call done:observed:rejected:finally:queue
-    BAPromiseOnFulfilledBlock block = ^(id obj) {};
+    void (^block)(id) = ^(id obj) {};
     BAPromiseOnRejectedBlock block2 = ^(NSError *obj) {};
     BAPromise *promise = [BAPromise new];
     id promiseMock = OCMPartialMock(promise);

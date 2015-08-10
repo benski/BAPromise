@@ -52,7 +52,7 @@
 -(void)testDoneHelper
 {
     // calling 'done' should turn around and call done:observed:rejected:finally:queue
-    BAPromiseOnFulfilledBlock block = ^(id obj) {};
+    void (^block)(id) = ^(id obj) {};
     BAPromise *promise = [BAPromise new];
     id promiseMock = OCMPartialMock(promise);
     [[[promiseMock expect] andReturn:nil] done:block observed:nil rejected:nil finally:nil queue:dispatch_get_current_queue()];
