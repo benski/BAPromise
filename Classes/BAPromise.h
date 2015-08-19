@@ -10,7 +10,7 @@
 
 /* block definitions */
 typedef void (^BAPromiseOnRejectedBlock)(NSError *error);
-typedef NSError *(^BAPromiseThenRejectedBlock)(NSError *error);
+typedef id (^BAPromiseThenRejectedBlock)(NSError *error);
 typedef dispatch_block_t BAPromiseFinallyBlock;
 
 // cancel token for promise
