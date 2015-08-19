@@ -256,6 +256,17 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
                 queue:queue];
 }
 
+-(BACancelToken *)done:(BAPromiseOnFulfilledBlock)onFulfilled
+              rejected:(BAPromiseOnRejectedBlock)onRejected
+               finally:(BAPromiseFinallyBlock)onFinally
+{
+    return [self done:onFulfilled
+             observed:nil
+             rejected:onRejected
+              finally:onFinally
+                queue:dispatch_get_current_queue()];
+}
+
 -(BACancelToken *)rejected:(BAPromiseOnRejectedBlock)onRejected
 {
     return [self done:nil
