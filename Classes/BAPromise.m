@@ -451,6 +451,12 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
 
 -(BAPromise *)joinPromises
 {
+    // an empty array should return a promise that fulfills with 'nil'.
+    // We shortcut the rest of the method here because there are no other promises to trigger our returned promise
+    if (self.count == 0) {
+        return [BAPromiseClient fulfilledPromise:nil];
+    }
+    
     BAPromiseClient *returnedPromise = [[BAPromiseClient alloc] init];
     dispatch_queue_t myQueue = returnedPromise.queue;
     NSMutableArray *cancellationTokens = [[NSMutableArray alloc] initWithCapacity:self.count];

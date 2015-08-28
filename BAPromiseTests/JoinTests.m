@@ -180,4 +180,43 @@
     [promise1 reject];
     XCTAssertFalse([self.waiter waitForSeconds:0.5]);
 }
+
+-(void)testJoinEmptyArrayReturnsValidPromise
+{
+    XCTAssertNotNil(@[].joinPromises);
+}
+
+-(void)testJoinEmptyArray
+{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Promise should complete"];
+    [@[].joinPromises done:^(NSArray *obj) {
+        XCTAssertNil(obj);
+        XCTAssertTrue(@YES, @"Just noting which path the promise should follow");
+    } rejected:^(NSError *error) {
+        XCTFail(@"Unexpected Rejection");
+    } finally:^{
+        [expectation fulfill];
+    }];
+    [self waitForExpectationsWithTimeout:0.5 handler:nil];
+}
+
+-(void)testJoinedPromiseWithNilFulfillment
+{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Joined Promise should complete"];
+    
+    BAPromiseClient *promise1 = [BAPromiseClient fulfilledPromise:nil];
+    BAPromiseClient *promise2 = [BAPromiseClient fulfilledPromise:@2];
+    
+    [@[promise1, promise2].joinPromises done:^(NSArray *obj) {
+        XCTAssertEqual(obj.count, 2);
+        XCTAssertEqualObjects(obj[0], [NSNull null]);
+        XCTAssertEqualObjects(obj[1], @2);
+    } rejected:^(NSError *error) {
+        XCTFail(@"Unexpected Rejection");
+    } finally:^{
+        [expectation fulfill];
+    }];
+    [self waitForExpectationsWithTimeout:0.5 handler:nil];
+}
+
 @end
