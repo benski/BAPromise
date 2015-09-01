@@ -58,7 +58,7 @@
     } queue:dispatch_get_current_queue()] cancel];
     
     XCTAssertFalse([self.waiter waitForSeconds:0.5]);
-    [TestWaiter pumpForSeconds:0.1];
+    [NSRunLoop.currentRunLoop runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
 }
 
 -(void)testCancelTokenAfterFulfillment
@@ -69,7 +69,7 @@
         XCTFail(@"Unexpected cancelled callback");
     }];
     [[promise done:^(id obj){}] cancel];
-    [TestWaiter pumpForSeconds:0.1];
+    [NSRunLoop.currentRunLoop runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
 }
 
 -(void)testCancelPromiseAfterFulfilment
@@ -80,7 +80,7 @@
         XCTFail(@"Unexpected cancelled callback");
     }];
     [promise cancel];
-    [TestWaiter pumpForSeconds:0.1];
+    [NSRunLoop.currentRunLoop runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
 }
 
 -(void)testCancelPromiseAfterRejection
@@ -91,7 +91,7 @@
         XCTFail(@"Unexpected cancelled callback");
     }];
     [promise cancel];
-    [TestWaiter pumpForSeconds:0.1];
+    [NSRunLoop.currentRunLoop runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
 }
 
 

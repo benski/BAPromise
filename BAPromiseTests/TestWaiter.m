@@ -46,19 +46,4 @@
     return didTimeOut;
 }
 
-+(void)pumpForSeconds:(double)seconds
-{
-    __block BOOL done = NO;
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        usleep(seconds*1000000.0);
-        done = YES;
-    });
-    
-    while (!done) {
-        // we will keep calling this method until either `done` is set or we find some work to do in the current run loop
-        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode
-                                 beforeDate:[NSDate distantPast]];
-    }
-}
-
 @end

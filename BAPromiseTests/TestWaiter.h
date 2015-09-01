@@ -12,5 +12,4 @@
 -(void)enter;
 -(void)leave;
 -(BOOL)waitForSeconds:(double)seconds;
-+(void)pumpForSeconds:(double)seconds;
 @end
