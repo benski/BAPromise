@@ -38,6 +38,8 @@ typedef dispatch_block_t BAPromiseFinallyBlock;
 -(BACancelToken *)done:(void (^)(T obj))onFulfilled
               rejected:(BAPromiseOnRejectedBlock)onRejected;
 -(BACancelToken *)done:(void (^)(T obj))onFulfilled
+               finally:(BAPromiseFinallyBlock)onFinally;
+-(BACancelToken *)done:(void (^)(T obj))onFulfilled
               rejected:(BAPromiseOnRejectedBlock)onRejected
                  queue:(dispatch_queue_t)queue;
 -(BACancelToken *)done:(void (^)(T obj))onFulfilled
