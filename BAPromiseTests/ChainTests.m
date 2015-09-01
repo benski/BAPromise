@@ -12,7 +12,7 @@
 #import <OCMock/OCMock.h>
 
 @interface ChainTests : XCTestCase
-@property (nonatomic, strong) TestWaiter *waiter;
+
 @end
 
 @implementation ChainTests
@@ -20,19 +20,17 @@
 -(void)setUp
 {
     [super setUp];
-    _waiter = [TestWaiter new];
 }
 
 -(void)tearDown
 {
     [super tearDown];
-    _waiter = nil;
 }
 
 // calling fulfillWithObject:somePromise calls when, so we'll test that (the rest of the tests just test 'when'
 -(void)testSimpleFulfill
 {
-    [_waiter enter];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
     BAPromiseClient *promise = [[BAPromiseClient alloc] init];
     BAPromise *anotherPromise = [BAPromiseClient fulfilledPromise:@7];
     
@@ -40,15 +38,15 @@
     [promise done:^(id obj) {
         XCTAssert([obj isKindOfClass:[NSNumber class]], @"Expected NSNumber");
         XCTAssertEqualObjects(obj, @7, @"Expected 7");
-        [_waiter leave];
+        [expectation fulfill];
     }];
     
-    XCTAssertFalse([self.waiter waitForSeconds:0.5]);
+    [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
 
 -(void)testSimpleWhen
 {
-    [_waiter enter];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
     BAPromiseClient *promise = [[BAPromiseClient alloc] init];
     BAPromise *anotherPromise = [BAPromiseClient fulfilledPromise:@7];
     
@@ -56,15 +54,15 @@
     [promise done:^(id obj) {
         XCTAssert([obj isKindOfClass:[NSNumber class]], @"Expected NSNumber");
         XCTAssertEqualObjects(obj, @7, @"Expected 7");
-        [_waiter leave];
+        [expectation fulfill];
     }];
     
-    XCTAssertFalse([self.waiter waitForSeconds:0.5]);
+    [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
 
 -(void)testAsyncWhen
 {
-    [_waiter enter];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
     BAPromiseClient *promise = [[BAPromiseClient alloc] init];
     BAPromise *anotherPromise = [BAPromiseClient new];
     
@@ -72,110 +70,110 @@
     [promise done:^(id obj) {
         XCTAssert([obj isKindOfClass:[NSNumber class]], @"Expected NSNumber");
         XCTAssertEqualObjects(obj, @7, @"Expected 7");
-        [_waiter leave];
+        [expectation fulfill];
     }];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [promise fulfillWithObject:@7];
     });
     
-    XCTAssertFalse([self.waiter waitForSeconds:0.5]);
+    [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
 
 -(void)testSimpleWhenFail
 {
-    [_waiter enter];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
     BAPromiseClient *promise = [[BAPromiseClient alloc] init];
     BAPromise *anotherPromise = [BAPromiseClient rejectedPromise:nil];
     
     [promise fulfillWithObject:anotherPromise];
     [promise rejected:^(id obj) {
-        [_waiter leave];
+        [expectation fulfill];
     }];
     
-    XCTAssertFalse([self.waiter waitForSeconds:0.5]);
+    [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
 
 -(void)testAsyncWhenFail
 {
-    [_waiter enter];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
     BAPromiseClient *promise = [[BAPromiseClient alloc] init];
     BAPromise *anotherPromise = [BAPromiseClient new];
     
     [promise fulfillWithObject:anotherPromise];
     [promise rejected:^(id obj) {
-        [_waiter leave];
+        [expectation fulfill];
     }];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [promise reject];
     });
     
-    XCTAssertFalse([self.waiter waitForSeconds:0.5]);
+    [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
 
 -(void)testSimpleWhenFinallyDone
 {
-    [_waiter enter];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
     BAPromiseClient *promise = [[BAPromiseClient alloc] init];
     BAPromise *anotherPromise = [BAPromiseClient fulfilledPromise:nil];
     
     [promise fulfillWithObject:anotherPromise];
     [promise finally:^() {
-        [_waiter leave];
+        [expectation fulfill];
     }];
     
-    XCTAssertFalse([self.waiter waitForSeconds:0.5]);
+    [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
 
 -(void)testSimpleWhenFinallyFail
 {
-    [_waiter enter];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
     BAPromiseClient *promise = [[BAPromiseClient alloc] init];
     BAPromise *anotherPromise = [BAPromiseClient rejectedPromise:nil];
     
     [promise fulfillWithObject:anotherPromise];
     [promise finally:^() {
-        [_waiter leave];
+        [expectation fulfill];
     }];
     
-    XCTAssertFalse([self.waiter waitForSeconds:0.5]);
+    [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
 
 -(void)testAsyncWhenFinallyDone
 {
-    [_waiter enter];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
     BAPromiseClient *promise = [[BAPromiseClient alloc] init];
     BAPromise *anotherPromise = [BAPromiseClient new];
     
     [promise fulfillWithObject:anotherPromise];
     [promise finally:^() {
-        [_waiter leave];
+        [expectation fulfill];
     }];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [promise fulfillWithObject:nil];
     });
     
-    XCTAssertFalse([self.waiter waitForSeconds:0.5]);
+    [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
 
 -(void)testAsyncWhenFinallyFail
 {
-    [_waiter enter];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
     BAPromiseClient *promise = [[BAPromiseClient alloc] init];
     BAPromise *anotherPromise = [BAPromiseClient new];
     
     [promise fulfillWithObject:anotherPromise];
     [promise finally:^() {
-        [_waiter leave];
+        [expectation fulfill];
     }];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [promise reject];
     });
     
-    XCTAssertFalse([self.waiter waitForSeconds:0.5]);
+    [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
 
 @end

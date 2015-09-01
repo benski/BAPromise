@@ -11,7 +11,7 @@
 #import "BAPromise.h"
 
 @interface CancelTests : XCTestCase
-@property (nonatomic, strong) TestWaiter *waiter;
+
 @end
 
 @implementation CancelTests
@@ -19,32 +19,30 @@
 -(void)setUp
 {
     [super setUp];
-    _waiter = [TestWaiter new];
 }
 
 -(void)tearDown
 {
     [super tearDown];
-    _waiter = nil;
 }
 
 -(void)testCancel
 {
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
     BAPromiseClient *promise = [[BAPromiseClient alloc] init];
-    [_waiter enter];
     [promise cancelled:^{
-        [_waiter leave];
+        [expectation fulfill];
     }];
     [promise cancel];
-    XCTAssertFalse([self.waiter waitForSeconds:0.5]);
+    [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
 
 -(void)testDoneAfterCancel
 {
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
     BAPromiseClient *promise = [[BAPromiseClient alloc] init];
-    [_waiter enter];
     [promise cancelled:^{
-        [_waiter leave];
+        [expectation fulfill];
     }];
     
     [[promise done:^(id obj) {
@@ -57,7 +55,7 @@
         XCTFail(@"Cancelation should prevent calling of finally block");
     } queue:dispatch_get_current_queue()] cancel];
     
-    XCTAssertFalse([self.waiter waitForSeconds:0.5]);
+    [self waitForExpectationsWithTimeout:0.5 handler:nil];
     [NSRunLoop.currentRunLoop runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
 }
 
@@ -97,12 +95,12 @@
 
 -(void)testLateCancelCallback
 {
-    [_waiter enter];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
     BAPromiseClient *promise = [[BAPromiseClient alloc] init];
     [promise cancel];
     [promise cancelled:^{
-         [_waiter leave];
+        [expectation fulfill];
     }];
-     XCTAssertFalse([self.waiter waitForSeconds:0.5]);
+    [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
 @end

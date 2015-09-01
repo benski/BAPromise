@@ -8,6 +8,37 @@
 
 #import "TestWaiter.h"
 
+@implementation XCTestCase (Promise)
+
+-(void)expectPromiseRejection:(BAPromise *)promise
+{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Fulfillment"];
+    [promise done:^(id obj) {
+        XCTFail(@"Unexpected Fulfillment - %@", obj);
+    } finally:^{
+        [expectation fulfill];
+    }];
+}
+
+-(void)expectPromiseFulfillment:(BAPromise *)promise
+{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Fulfillment"];
+    [promise rejected:^(NSError *error) {
+        XCTFail(@"Unexpected Rejection - %@", error);
+    } finally:^{
+        [expectation fulfill];
+    }];
+}
+
+-(void)expectPromiseResolution:(BAPromise *)promise
+{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
+    [promise finally:^{
+        [expectation fulfill];
+    }];
+}
+
+@end
 @interface TestWaiter ()
 @property (nonatomic, strong) dispatch_group_t group;
 @end

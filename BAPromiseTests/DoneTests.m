@@ -12,7 +12,6 @@
 #import <OCMock/OCMock.h>
 
 @interface DoneTests : XCTestCase
-@property (nonatomic, strong) TestWaiter *waiter;
 @end
 
 @implementation DoneTests
@@ -20,32 +19,30 @@
 -(void)setUp
 {
     [super setUp];
-    _waiter = [TestWaiter new];
 }
 
 -(void)tearDown
 {
     [super tearDown];
-    _waiter = nil;
 }
 
 -(void)testDone
 {
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
     BAPromiseClient *promise = [[BAPromiseClient alloc] init];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [promise fulfillWithObject:nil];
     });
     
-    [self.waiter enter];
     [promise done:^(id obj) {
-        [self.waiter leave];
+        [expectation fulfill];
     }
          observed:nil
          rejected:nil
           finally:nil
             queue:dispatch_get_current_queue()];
     
-    XCTAssertFalse([self.waiter waitForSeconds:0.5]);
+    [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
 
 -(void)testDoneHelper
@@ -61,29 +58,29 @@
 
 -(void)testFulfillmentFirst
 {
-    [self.waiter enter];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
     BAPromiseClient *promise = [[BAPromiseClient alloc] init];
     [promise fulfillWithObject:nil];
     
     [promise done:^(id obj) {
-        [self.waiter leave];
+        [expectation fulfill];
     }];
     
-    XCTAssertFalse([self.waiter waitForSeconds:0.5]);
+    [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
 
 -(void)testFulfillmentSecond
 {
-    [self.waiter enter];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
     BAPromiseClient *promise = [[BAPromiseClient alloc] init];
     
     [promise done:^(id obj) {
-        [self.waiter leave];
+        [expectation fulfill];
     }];
     
     [promise fulfillWithObject:nil];
     
-    XCTAssertFalse([self.waiter waitForSeconds:0.5]);
+    [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
 
 -(void)testFulfill
@@ -98,30 +95,30 @@
 
 -(void)testFulfillWithObjectFirst
 {
-    [self.waiter enter];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
     BAPromiseClient *promise = [[BAPromiseClient alloc] init];
     [promise fulfillWithObject:@7];
     
     [promise done:^(id obj) {
         XCTAssertEqualObjects(obj, @7);
-        [self.waiter leave];
+        [expectation fulfill];
     }];
     
-    XCTAssertFalse([self.waiter waitForSeconds:0.5]);
+    [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
 
 -(void)testFulfillWithObjectSecond
 {
-    [self.waiter enter];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
     BAPromiseClient *promise = [[BAPromiseClient alloc] init];
     
     [promise done:^(id obj) {
         XCTAssertEqualObjects(obj, @42);
-        [self.waiter leave];
+        [expectation fulfill];
     }];
     
     [promise fulfillWithObject:@42];
     
-    XCTAssertFalse([self.waiter waitForSeconds:0.5]);
+    [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
 @end

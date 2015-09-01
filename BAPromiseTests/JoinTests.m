@@ -75,7 +75,7 @@
         [expectation fulfill];
     }];
     
-   [self waitForExpectationsWithTimeout:0.5 handler:nil];
+    [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
 
 - (void)testRejectedJoin
@@ -100,12 +100,12 @@
         [expectation fulfill];
     }];
     
-   [self waitForExpectationsWithTimeout:0.5 handler:nil];
+    [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
 
 - (void)testDoubleRejectedJoin
 {
-   XCTestExpectation *expectation = [self expectationWithDescription:@"Joined Promise should only reject once"];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Joined Promise should only reject once"];
     
     BAPromiseClient *promise1 = [[BAPromiseClient alloc] init];
     BAPromiseClient *promise2 = [[BAPromiseClient alloc] init];
@@ -126,12 +126,12 @@
         [expectation fulfill];
     }];
     
-   [self waitForExpectationsWithTimeout:0.5 handler:nil];
+    [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
 
 - (void)testJoinElementsInOrder
 {
-   XCTestExpectation *expectation = [self expectationWithDescription:@"Joined Promise should fulfill"];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Joined Promise should fulfill"];
     BAPromiseClient *promise1 = [[BAPromiseClient alloc] init];
     BAPromiseClient *promise2 = [[BAPromiseClient alloc] init];
     
@@ -153,20 +153,20 @@
     
     [promise2 fulfillWithObject:@2];
     
-   [self waitForExpectationsWithTimeout:0.5 handler:nil];
+    [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
 
 -(void)testJoinRejectionCancelsOtherPromises
 {
-   BAPromiseClient *promise1 = [[BAPromiseClient alloc] init];
+    BAPromiseClient *promise1 = [[BAPromiseClient alloc] init];
     BAPromiseClient *promise2 = [[BAPromiseClient alloc] init];
     
-   XCTestExpectation *cancelExpectation = [self expectationWithDescription:@"Joined Promise should cancel"];
+    XCTestExpectation *cancelExpectation = [self expectationWithDescription:@"Joined Promise should cancel"];
     [promise2 cancelled:^{
         [cancelExpectation fulfill];
     }];
     
-   XCTestExpectation *expectation = [self expectationWithDescription:@"Joined Promise should reject"];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Joined Promise should reject"];
     [@[promise1, promise2].joinPromises done:^(id obj) {
         XCTFail(@"Unexpected Fulfillment");
     } finally:^{
@@ -174,7 +174,7 @@
     }];
     
     [promise1 reject];
-   [self waitForExpectationsWithTimeout:0.5 handler:nil];
+    [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
 
 -(void)testJoinEmptyArrayReturnsValidPromise

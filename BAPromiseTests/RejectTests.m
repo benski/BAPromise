@@ -12,7 +12,7 @@
 #import <OCMock/OCMock.h>
 
 @interface RejectTests : XCTestCase
-@property (nonatomic, strong) TestWaiter *waiter;
+
 @end
 
 @implementation RejectTests
@@ -20,63 +20,61 @@
 -(void)setUp
 {
     [super setUp];
-    _waiter = [TestWaiter new];
 }
 
 -(void)tearDown
 {
     [super tearDown];
-    _waiter = nil;
 }
 
 -(void)testRejectionAsynchronous
 {
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
     BAPromiseClient *promise = [[BAPromiseClient alloc] init];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [promise rejectWithError:[[NSError alloc] init]];
     });
     
-    [_waiter enter];
     [promise done:^(id obj) {
         XCTFail(@"Unexpected fulfillment");
-        [_waiter leave];
+        [expectation fulfill];
     } rejected:^(NSError *error) {
-        [_waiter leave];
+        [expectation fulfill];
     }];
     
-    XCTAssertFalse([self.waiter waitForSeconds:0.5]);
+    [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
 
 -(void)testRejectionFirst
 {
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
     BAPromiseClient *promise = [[BAPromiseClient alloc] init];
     [promise rejectWithError:[[NSError alloc] init]];
     
-    [_waiter enter];
     [promise done:^(id obj) {
         XCTFail(@"Unexpected fulfillment");
-        [_waiter leave];
+        [expectation fulfill];
     } rejected:^(NSError *error) {
-        [_waiter leave];
+        [expectation fulfill];
     }];
     
-    XCTAssertFalse([self.waiter waitForSeconds:0.5]);
+    [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
 
 -(void)testRejectionSecond
 {
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
     BAPromiseClient *promise = [[BAPromiseClient alloc] init];
     
-    [_waiter enter];
     [promise done:^(id obj) {
         XCTFail(@"Unexpected fulfillment");
-        [_waiter leave];
+        [expectation fulfill];
     } rejected:^(NSError *error) {
-        [_waiter leave];
+        [expectation fulfill];
     }];
     
     [promise rejectWithError:[[NSError alloc] init]];
-    XCTAssertFalse([self.waiter waitForSeconds:0.5]);
+    [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
 
 -(void)testRejectedHelper

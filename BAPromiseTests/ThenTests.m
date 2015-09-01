@@ -12,7 +12,7 @@
 #import <OCMock/OCMock.h>
 
 @interface ThenTests : XCTestCase
-@property (nonatomic, strong) TestWaiter *waiter;
+
 @end
 
 @implementation ThenTests
@@ -20,18 +20,16 @@
 -(void)setUp
 {
     [super setUp];
-    _waiter = [TestWaiter new];
 }
 
 -(void)tearDown
 {
     [super tearDown];
-    _waiter = nil;
 }
 
 -(void)testSimpleThen
 {
-    [_waiter enter];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
     BAPromiseClient *promise = [[BAPromiseClient alloc] init];
     
     [[promise then:^id(id obj) {
@@ -40,19 +38,19 @@
     }] done:^(id obj) {
         XCTAssert([obj isKindOfClass:[NSNumber class]], @"Expected NSNumber");
         XCTAssertEqualObjects(obj, @7, @"Expected 7");
-        [_waiter leave];
+        [expectation fulfill];
     }];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [promise fulfill];
     });
     
-    XCTAssertFalse([self.waiter waitForSeconds:0.5]);
+    [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
 
 -(void)testPromiseThen
 {
-    [_waiter enter];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
     BAPromiseClient *promise = [[BAPromiseClient alloc] init];
     
     [[promise then:^id(id obj) {
@@ -64,7 +62,7 @@
         return promise2;
     }] done:^(id obj) {
         XCTAssertEqualObjects(obj, @8, @"Expected 8");
-        [_waiter leave];
+        [expectation fulfill];
     }];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -72,12 +70,12 @@
     });
     
     
-    XCTAssertFalse([self.waiter waitForSeconds:0.5]);
+    [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
 
 -(void)testPromiseThenTwice
 {
-    [_waiter enter];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
     BAPromiseClient *promise = [[BAPromiseClient alloc] init];
     
     [[[promise then:^id(id obj) {
@@ -96,49 +94,43 @@
         return promise2;
     }] done:^(id obj) {
         XCTAssertEqualObjects(obj, @NO, @"Expected NO");
-        [_waiter leave];
+        [expectation fulfill];
     }];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [promise fulfillWithObject:@6];
     });
     
-    
-    XCTAssertFalse([self.waiter waitForSeconds:0.5]);
+    [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
 
 -(void)testFulfilledPromiseThen
 {
-    [_waiter enter];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
     BAPromiseClient *promise = [[BAPromiseClient alloc] init];
     
     [[promise then:^id(id obj) {
         XCTAssertEqualObjects(obj, @6, @"Expected 6");
-        TestWaiter *waiter = [[TestWaiter alloc] init];
-        [waiter enter];
         BAPromiseClient *promise2 = [[BAPromiseClient alloc] init];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [promise2 fulfillWithObject:@8];
-            [waiter leave];
         });
-        XCTAssertFalse([waiter waitForSeconds:0.5]);
         return promise2;
     }] done:^(id obj) {
         XCTAssertEqualObjects(obj, @8, @"Expected 8");
-        [_waiter leave];
+        [expectation fulfill];
     }];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [promise fulfillWithObject:@6];
     });
     
-    
-    XCTAssertFalse([self.waiter waitForSeconds:0.5]);
+    [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
 
 -(void)testRejectedThen
 {
-    [_waiter enter];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
     BAPromiseClient *promise = [[BAPromiseClient alloc] init];
     
     [[promise then:^id(id obj) {
@@ -148,22 +140,22 @@
                                userInfo:nil];;
     }] done:^(id obj) {
         XCTFail(@"Unexpected fulfillment");
-        [_waiter leave];
+        [expectation fulfill];
     } rejected:^(NSError *error) {
-        [_waiter leave];
+        [expectation fulfill];
     }];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [promise fulfill];
     });
     
-    XCTAssertFalse([self.waiter waitForSeconds:0.5]);
+    [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
 
 // a rejected promise that is turned back into fulfillment in a 'then' clause
 -(void)testUnrejectedThen
 {
-    [_waiter enter];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
     BAPromiseClient *promise = [[BAPromiseClient alloc] init];
     
     [[promise then:^id(id obj) {
@@ -176,22 +168,22 @@
     }
       ] done:^(id obj) {
         XCTAssertEqualObjects(obj, @3, @"Unexpected value");
-        [_waiter leave];
+        [expectation fulfill];
     } rejected:^(NSError *error) {
         XCTFail(@"Unexpected rejection");
-        [_waiter leave];
+        [expectation fulfill];
     }];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [promise rejectWithError:[NSError errorWithDomain:@"whatever" code:777 userInfo:nil]];
     });
     
-    XCTAssertFalse([self.waiter waitForSeconds:0.5]);
+    [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
 
 -(void)testRejectedPromiseThen
 {
-    [_waiter enter];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
     BAPromiseClient *promise = [[BAPromiseClient alloc] init];
     
     [[promise then:^id(id obj) {
@@ -204,15 +196,14 @@
     }] done:^(id obj) {
         XCTFail(@"Unexpected fulfillment");
     } rejected:^(NSError *error) {
-        [_waiter leave];
+        [expectation fulfill];
     }];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [promise fulfillWithObject:@6];
     });
     
-    
-    XCTAssertFalse([self.waiter waitForSeconds:0.5]);
+    [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
 
 -(void)testThenHelper
