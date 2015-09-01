@@ -44,6 +44,8 @@ typedef dispatch_block_t BAPromiseFinallyBlock;
               rejected:(BAPromiseOnRejectedBlock)onRejected
                finally:(BAPromiseFinallyBlock)onFinally;
 -(BACancelToken *)rejected:(BAPromiseOnRejectedBlock)onRejected;
+-(BACancelToken *)rejected:(BAPromiseOnRejectedBlock)onRejected
+                   finally:(BAPromiseFinallyBlock)onFinally;
 -(BACancelToken *)finally:(BAPromiseFinallyBlock)onFinally;
 
 -(BAPromise *)then:(id (^)(T obj))onFulfilled;
