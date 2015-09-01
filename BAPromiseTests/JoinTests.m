@@ -12,7 +12,6 @@
 #import <OCMock/OCMock.h>
 
 @interface JoinTests : XCTestCase
-@property (nonatomic, strong) TestWaiter *waiter;
 @end
 
 @implementation JoinTests
@@ -20,18 +19,16 @@
 -(void)setUp
 {
     [super setUp];
-    _waiter = [TestWaiter new];
 }
 
 -(void)tearDown
 {
     [super tearDown];
-    _waiter = nil;
 }
 
 - (void)testJoins
 {
-    [_waiter enter];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Joined Promise should fulfill"];
     
     BAPromiseClient *promise1 = [[BAPromiseClient alloc] init];
     BAPromiseClient *promise2 = [[BAPromiseClient alloc] init];
@@ -43,16 +40,18 @@
     
     BAPromise * joined = [@[promise1, promise2] joinPromises];
     
-    [joined done:^(NSArray *obj) {
-        [_waiter leave];
+    [joined rejected:^(NSError *error) {
+        XCTFail(@"Unexpected rejection - %@", error);
+    } finally:^{
+        [expectation fulfill];
     }];
     
-    XCTAssertFalse([self.waiter waitForSeconds:0.5]);
+    [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
 
 - (void)testJoinedData
 {
-    [_waiter enter];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Joined Promise should fulfill"];
     
     BAPromiseClient *promise1 = [[BAPromiseClient alloc] init];
     BAPromiseClient *promise2 = [[BAPromiseClient alloc] init];
@@ -65,22 +64,23 @@
     BAPromise * joined = [@[promise1, promise2] joinPromises];
     
     [joined done:^(NSArray *obj) {
+        XCTAssertTrue([obj isKindOfClass:NSArray.class]);
         XCTAssertEqual(obj.count, 2, @"Unexpected array size");
         for (NSNumber *value in obj) {
             XCTAssert([value isEqualToValue:@3] || [value isEqualToValue:@4], @"Unexpected value, %@", value);
         }
-        [_waiter leave];
     } rejected:^(NSError *error) {
-        XCTFail(@"Unexpected Failure");
-        [_waiter leave];
+        XCTFail(@"Unexpected rejection - %@", error);
+    } finally:^{
+        [expectation fulfill];
     }];
     
-    XCTAssertFalse([self.waiter waitForSeconds:0.5]);
+   [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
 
 - (void)testRejectedJoin
 {
-    [_waiter enter];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Joined Promise should reject when one at least promise rejects"];
     
     BAPromiseClient *promise1 = [[BAPromiseClient alloc] init];
     BAPromiseClient *promise2 = [[BAPromiseClient alloc] init];
@@ -96,18 +96,16 @@
     
     [joined done:^(NSArray *obj) {
         XCTFail(@"Unexpected Fulfillment");
-        [_waiter leave];
-    } rejected:^(NSError *error) {
-        
-        [_waiter leave];
+    } finally:^{
+        [expectation fulfill];
     }];
     
-    XCTAssertFalse([self.waiter waitForSeconds:0.5]);
+   [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
 
 - (void)testDoubleRejectedJoin
 {
-    [_waiter enter];
+   XCTestExpectation *expectation = [self expectationWithDescription:@"Joined Promise should only reject once"];
     
     BAPromiseClient *promise1 = [[BAPromiseClient alloc] init];
     BAPromiseClient *promise2 = [[BAPromiseClient alloc] init];
@@ -121,19 +119,19 @@
     __block BOOL calledAlready=NO;
     [joined done:^(NSArray *obj) {
         XCTFail(@"Unexpected Fulfillment");
-        [_waiter leave];
     } rejected:^(NSError *error) {
         XCTAssert(!calledAlready, @"Should only fail once");
         calledAlready = YES;
-        [_waiter leave];
+    } finally:^{
+        [expectation fulfill];
     }];
     
-    XCTAssertFalse([self.waiter waitForSeconds:0.5]);
+   [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
 
 - (void)testJoinElementsInOrder
 {
-    [_waiter enter];
+   XCTestExpectation *expectation = [self expectationWithDescription:@"Joined Promise should fulfill"];
     BAPromiseClient *promise1 = [[BAPromiseClient alloc] init];
     BAPromiseClient *promise2 = [[BAPromiseClient alloc] init];
     
@@ -147,38 +145,36 @@
         XCTAssertEqual(obj.count, 2);
         XCTAssertEqualObjects(obj[0], @1);
         XCTAssertEqualObjects(obj[1], @2);
-        [_waiter leave];
     } rejected:^(NSError *error) {
         XCTFail(@"Unexpected Error");
-        [_waiter leave];
+    } finally:^{
+        [expectation fulfill];
     }];
     
     [promise2 fulfillWithObject:@2];
     
-    XCTAssertFalse([self.waiter waitForSeconds:0.5]);
+   [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
 
 -(void)testJoinRejectionCancelsOtherPromises
 {
-
-    BAPromiseClient *promise1 = [[BAPromiseClient alloc] init];
+   BAPromiseClient *promise1 = [[BAPromiseClient alloc] init];
     BAPromiseClient *promise2 = [[BAPromiseClient alloc] init];
     
-    [_waiter enter];
+   XCTestExpectation *cancelExpectation = [self expectationWithDescription:@"Joined Promise should cancel"];
     [promise2 cancelled:^{
-        [_waiter leave];
+        [cancelExpectation fulfill];
     }];
     
-    [_waiter enter];
+   XCTestExpectation *expectation = [self expectationWithDescription:@"Joined Promise should reject"];
     [@[promise1, promise2].joinPromises done:^(id obj) {
         XCTFail(@"Unexpected Fulfillment");
-        [_waiter leave];
-    } rejected:^(NSError *error) {
-        [_waiter leave];
+    } finally:^{
+        [expectation fulfill];
     }];
     
     [promise1 reject];
-    XCTAssertFalse([self.waiter waitForSeconds:0.5]);
+   [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
 
 -(void)testJoinEmptyArrayReturnsValidPromise
