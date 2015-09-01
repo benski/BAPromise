@@ -8,6 +8,14 @@
 
 #import "BAPromise.h"
 
+static dispatch_queue_t ba_dispatch_get_current_queue()
+{
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+    return dispatch_get_current_queue();
+#pragma GCC diagnostic pop
+}
+
 typedef void (^BAPromiseOnFulfilledBlock)(id obj);
 typedef id (^BAPromiseThenBlock)(id obj);
 
@@ -39,7 +47,7 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
 
 -(void)cancelled:(dispatch_block_t)onCancel
 {
-    dispatch_queue_t currentQueue = dispatch_get_current_queue();
+    dispatch_queue_t currentQueue = ba_dispatch_get_current_queue();
     dispatch_block_t wrappedCancelBlock = ^ {
         dispatch_async(currentQueue, ^{
             onCancel();
@@ -232,7 +240,7 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
              observed:nil
              rejected:nil
               finally:nil
-                queue:dispatch_get_current_queue()];
+                queue:ba_dispatch_get_current_queue()];
 }
 
 -(BACancelToken *)done:(BAPromiseOnFulfilledBlock)onFulfilled
@@ -242,7 +250,7 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
              observed:nil
              rejected:onRejected
               finally:nil
-                queue:dispatch_get_current_queue()];
+                queue:ba_dispatch_get_current_queue()];
 }
 
 
@@ -253,7 +261,7 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
              observed:nil
              rejected:nil
               finally:onFinally
-                queue:dispatch_get_current_queue()];
+                queue:ba_dispatch_get_current_queue()];
 }
 
 -(BACancelToken *)done:(BAPromiseOnFulfilledBlock)onFulfilled
@@ -275,7 +283,7 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
              observed:nil
              rejected:onRejected
               finally:onFinally
-                queue:dispatch_get_current_queue()];
+                queue:ba_dispatch_get_current_queue()];
 }
 
 -(BACancelToken *)rejected:(BAPromiseOnRejectedBlock)onRejected
@@ -284,7 +292,7 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
              observed:nil
              rejected:onRejected
               finally:nil
-                queue:dispatch_get_current_queue()];
+                queue:ba_dispatch_get_current_queue()];
 }
 
 -(BACancelToken *)rejected:(BAPromiseOnRejectedBlock)onRejected
@@ -294,7 +302,7 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
              observed:nil
              rejected:onRejected
               finally:onFinally
-                queue:dispatch_get_current_queue()];
+                queue:ba_dispatch_get_current_queue()];
 }
 
 
@@ -304,7 +312,7 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
              observed:nil
              rejected:nil
               finally:onFinally
-                queue:dispatch_get_current_queue()];
+                queue:ba_dispatch_get_current_queue()];
 }
 
 #pragma mark - Then
@@ -332,7 +340,7 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
         } else {
             [returnedPromise fulfillWithObject:chainedValue];
         }
-    } observed:nil
+    }  observed:nil
                           rejected:^(NSError *error) {
                               if (failureBlock != nil) {
                                   error = failureBlock(error);
@@ -360,7 +368,7 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
     return [self then:onFulfilled
              rejected:nil
               finally:nil
-                queue:dispatch_get_current_queue()];
+                queue:ba_dispatch_get_current_queue()];
 }
 
 -(BAPromise *)then:(BAPromiseThenBlock)onFulfilled
@@ -369,7 +377,7 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
     return [self then:onFulfilled
              rejected:onRejected
               finally:nil
-                queue:dispatch_get_current_queue()];
+                queue:ba_dispatch_get_current_queue()];
 }
 
 @end

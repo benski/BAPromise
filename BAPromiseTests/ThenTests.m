@@ -211,7 +211,7 @@
     id (^block)(id) = ^id(id obj) { return obj; };
     BAPromise *promise = [BAPromise new];
     id promiseMock = OCMPartialMock(promise);
-    [[[promiseMock expect] andReturn:nil] then:block rejected:nil finally:nil queue:dispatch_get_current_queue()];
+    [[[promiseMock expect] andReturn:nil] then:block rejected:nil finally:nil queue:dispatch_get_main_queue()];
     [promiseMock then:block];
     [promiseMock verify];
 }
@@ -222,7 +222,7 @@
     BAPromiseThenRejectedBlock block2 = ^NSError *(NSError *obj) { return obj; };
     BAPromise *promise = [BAPromise new];
     id promiseMock = OCMPartialMock(promise);
-    [[[promiseMock expect] andReturn:nil] then:block rejected:block2 finally:nil queue:dispatch_get_current_queue()];
+    [[[promiseMock expect] andReturn:nil] then:block rejected:block2 finally:nil queue:dispatch_get_main_queue()];
     [promiseMock then:block rejected:block2];
     [promiseMock verify];
 }

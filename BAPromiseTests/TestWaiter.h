@@ -17,9 +17,3 @@
 -(void)expectPromiseRejection:(BAPromise *)promise; // XCTFails on done
 -(void)expectPromiseResolution:(BAPromise *)promise;
 @end
-
-@interface TestWaiter : NSObject
--(void)enter;
--(void)leave;
--(BOOL)waitForSeconds:(double)seconds;
-@end
