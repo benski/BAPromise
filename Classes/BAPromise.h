@@ -52,6 +52,8 @@ typedef dispatch_block_t BAPromiseFinallyBlock;
 
 -(BAPromise *)then:(id (^)(T obj))onFulfilled;
 -(BAPromise *)then:(id (^)(T obj))onFulfilled
+             queue:(dispatch_queue_t)queue;
+-(BAPromise *)then:(id (^)(T obj))onFulfilled
           rejected:(BAPromiseThenRejectedBlock)onRejected;
 @end
 

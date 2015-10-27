@@ -372,6 +372,15 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
 }
 
 -(BAPromise *)then:(BAPromiseThenBlock)onFulfilled
+             queue:(dispatch_queue_t)queue
+{
+    return [self then:onFulfilled
+             rejected:nil
+              finally:nil
+                queue:queue];
+}
+
+-(BAPromise *)then:(BAPromiseThenBlock)onFulfilled
           rejected:(BAPromiseThenRejectedBlock)onRejected
 {
     return [self then:onFulfilled
