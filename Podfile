@@ -11,3 +11,9 @@ target :osx do
  link_with 'OS XTests'
  pod "OCMock"
 end
+
+target :tvos do
+ platform :tvos, '9.0'
+ link_with 'tvOSTests'
+ pod "OCMock"
+end

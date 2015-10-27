@@ -39,6 +39,20 @@
 		E7B8D23A1B7E6D0200823BFC /* TestWaiter.h in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D2221B7E6CDF00823BFC /* TestWaiter.h */; };
 		E7B8D23B1B7E6D0200823BFC /* TestWaiter.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D2231B7E6CDF00823BFC /* TestWaiter.m */; };
 		E7B8D23C1B7E6D0200823BFC /* ThenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D2241B7E6CDF00823BFC /* ThenTests.m */; };
+		E7CA16FD1BB9B0FC002D7196 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CA16FC1BB9B0FC002D7196 /* main.m */; };
+		E7CA17001BB9B0FC002D7196 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CA16FF1BB9B0FC002D7196 /* AppDelegate.m */; };
+		E7CA17031BB9B0FC002D7196 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CA17021BB9B0FC002D7196 /* ViewController.m */; };
+		E7CA17061BB9B0FC002D7196 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7CA17041BB9B0FC002D7196 /* Main.storyboard */; };
+		E7CA17081BB9B0FC002D7196 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7CA17071BB9B0FC002D7196 /* Assets.xcassets */; };
+		E7CA17131BB9B0FC002D7196 /* tvOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CA17121BB9B0FC002D7196 /* tvOSTests.m */; };
+		E7CA171B1BB9B131002D7196 /* BAPromise.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D21A1B7E6CB000823BFC /* BAPromise.m */; };
+		E7CA171C1BB9B151002D7196 /* CancelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D21D1B7E6CDF00823BFC /* CancelTests.m */; };
+		E7CA171D1BB9B153002D7196 /* ChainTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D21E1B7E6CDF00823BFC /* ChainTests.m */; };
+		E7CA171E1BB9B154002D7196 /* DoneTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D21F1B7E6CDF00823BFC /* DoneTests.m */; };
+		E7CA171F1BB9B156002D7196 /* JoinTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D2201B7E6CDF00823BFC /* JoinTests.m */; };
+		E7CA17201BB9B158002D7196 /* RejectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D2211B7E6CDF00823BFC /* RejectTests.m */; };
+		E7CA17211BB9B15C002D7196 /* TestWaiter.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D2231B7E6CDF00823BFC /* TestWaiter.m */; };
+		E7CA17221BB9B15E002D7196 /* ThenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D2241B7E6CDF00823BFC /* ThenTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +69,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = E712B3511B7E6B7800590AA8;
 			remoteInfo = iOS;
+		};
+		E7CA170F1BB9B0FC002D7196 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E712B3241B7E6B4800590AA8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E7CA16F81BB9B0FC002D7196;
+			remoteInfo = tvOS;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -98,6 +119,18 @@
 		E7B8D2221B7E6CDF00823BFC /* TestWaiter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestWaiter.h; path = BAPromiseTests/TestWaiter.h; sourceTree = "<group>"; };
 		E7B8D2231B7E6CDF00823BFC /* TestWaiter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestWaiter.m; path = BAPromiseTests/TestWaiter.m; sourceTree = "<group>"; };
 		E7B8D2241B7E6CDF00823BFC /* ThenTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ThenTests.m; path = BAPromiseTests/ThenTests.m; sourceTree = "<group>"; };
+		E7CA16F91BB9B0FC002D7196 /* tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tvOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7CA16FC1BB9B0FC002D7196 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		E7CA16FE1BB9B0FC002D7196 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		E7CA16FF1BB9B0FC002D7196 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		E7CA17011BB9B0FC002D7196 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		E7CA17021BB9B0FC002D7196 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		E7CA17051BB9B0FC002D7196 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E7CA17071BB9B0FC002D7196 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E7CA17091BB9B0FC002D7196 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E7CA170E1BB9B0FC002D7196 /* tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = tvOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7CA17121BB9B0FC002D7196 /* tvOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = tvOSTests.m; sourceTree = "<group>"; };
+		E7CA17141BB9B0FC002D7196 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +164,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E7CA16F61BB9B0FC002D7196 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7CA170B1BB9B0FC002D7196 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -154,6 +201,8 @@
 				E712B3421B7E6B4900590AA8 /* OS XTests */,
 				E712B3531B7E6B7800590AA8 /* iOS */,
 				E712B36D1B7E6B7900590AA8 /* iOSTests */,
+				E7CA16FA1BB9B0FC002D7196 /* tvOS */,
+				E7CA17111BB9B0FC002D7196 /* tvOSTests */,
 				E712B32D1B7E6B4800590AA8 /* Products */,
 				C5098F2B2A404E9A1547D841 /* Pods */,
 				E8A63FA7DF2322FADBA59E26 /* Frameworks */,
@@ -167,6 +216,8 @@
 				E712B33F1B7E6B4900590AA8 /* OS XTests.xctest */,
 				E712B3521B7E6B7800590AA8 /* iOS.app */,
 				E712B36A1B7E6B7900590AA8 /* iOSTests.xctest */,
+				E7CA16F91BB9B0FC002D7196 /* tvOS.app */,
+				E7CA170E1BB9B0FC002D7196 /* tvOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -258,6 +309,38 @@
 			name = Tests;
 			sourceTree = "<group>";
 		};
+		E7CA16FA1BB9B0FC002D7196 /* tvOS */ = {
+			isa = PBXGroup;
+			children = (
+				E7CA16FE1BB9B0FC002D7196 /* AppDelegate.h */,
+				E7CA16FF1BB9B0FC002D7196 /* AppDelegate.m */,
+				E7CA17011BB9B0FC002D7196 /* ViewController.h */,
+				E7CA17021BB9B0FC002D7196 /* ViewController.m */,
+				E7CA17041BB9B0FC002D7196 /* Main.storyboard */,
+				E7CA17071BB9B0FC002D7196 /* Assets.xcassets */,
+				E7CA17091BB9B0FC002D7196 /* Info.plist */,
+				E7CA16FB1BB9B0FC002D7196 /* Supporting Files */,
+			);
+			path = tvOS;
+			sourceTree = "<group>";
+		};
+		E7CA16FB1BB9B0FC002D7196 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E7CA16FC1BB9B0FC002D7196 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E7CA17111BB9B0FC002D7196 /* tvOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				E7CA17121BB9B0FC002D7196 /* tvOSTests.m */,
+				E7CA17141BB9B0FC002D7196 /* Info.plist */,
+			);
+			path = tvOSTests;
+			sourceTree = "<group>";
+		};
 		E8A63FA7DF2322FADBA59E26 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -344,6 +427,41 @@
 			productReference = E712B36A1B7E6B7900590AA8 /* iOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		E7CA16F81BB9B0FC002D7196 /* tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E7CA17191BB9B0FC002D7196 /* Build configuration list for PBXNativeTarget "tvOS" */;
+			buildPhases = (
+				E7CA16F51BB9B0FC002D7196 /* Sources */,
+				E7CA16F61BB9B0FC002D7196 /* Frameworks */,
+				E7CA16F71BB9B0FC002D7196 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = tvOS;
+			productName = tvOS;
+			productReference = E7CA16F91BB9B0FC002D7196 /* tvOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E7CA170D1BB9B0FC002D7196 /* tvOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E7CA171A1BB9B0FC002D7196 /* Build configuration list for PBXNativeTarget "tvOSTests" */;
+			buildPhases = (
+				E7CA170A1BB9B0FC002D7196 /* Sources */,
+				E7CA170B1BB9B0FC002D7196 /* Frameworks */,
+				E7CA170C1BB9B0FC002D7196 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E7CA17101BB9B0FC002D7196 /* PBXTargetDependency */,
+			);
+			name = tvOSTests;
+			productName = tvOSTests;
+			productReference = E7CA170E1BB9B0FC002D7196 /* tvOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -367,6 +485,13 @@
 						CreatedOnToolsVersion = 7.0;
 						TestTargetID = E712B3511B7E6B7800590AA8;
 					};
+					E7CA16F81BB9B0FC002D7196 = {
+						CreatedOnToolsVersion = 7.1;
+					};
+					E7CA170D1BB9B0FC002D7196 = {
+						CreatedOnToolsVersion = 7.1;
+						TestTargetID = E7CA16F81BB9B0FC002D7196;
+					};
 				};
 			};
 			buildConfigurationList = E712B3271B7E6B4800590AA8 /* Build configuration list for PBXProject "BAPromise" */;
@@ -386,6 +511,8 @@
 				E712B33E1B7E6B4900590AA8 /* OS XTests */,
 				E712B3511B7E6B7800590AA8 /* iOS */,
 				E712B3691B7E6B7900590AA8 /* iOSTests */,
+				E7CA16F81BB9B0FC002D7196 /* tvOS */,
+				E7CA170D1BB9B0FC002D7196 /* tvOSTests */,
 			);
 		};
 /* End PBXProject section */
@@ -418,6 +545,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		E712B3681B7E6B7900590AA8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7CA16F71BB9B0FC002D7196 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7CA17081BB9B0FC002D7196 /* Assets.xcassets in Resources */,
+				E7CA17061BB9B0FC002D7196 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7CA170C1BB9B0FC002D7196 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -543,6 +686,32 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E7CA16F51BB9B0FC002D7196 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7CA171B1BB9B131002D7196 /* BAPromise.m in Sources */,
+				E7CA17031BB9B0FC002D7196 /* ViewController.m in Sources */,
+				E7CA17001BB9B0FC002D7196 /* AppDelegate.m in Sources */,
+				E7CA16FD1BB9B0FC002D7196 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7CA170A1BB9B0FC002D7196 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7CA17131BB9B0FC002D7196 /* tvOSTests.m in Sources */,
+				E7CA171C1BB9B151002D7196 /* CancelTests.m in Sources */,
+				E7CA171D1BB9B153002D7196 /* ChainTests.m in Sources */,
+				E7CA171E1BB9B154002D7196 /* DoneTests.m in Sources */,
+				E7CA171F1BB9B156002D7196 /* JoinTests.m in Sources */,
+				E7CA17201BB9B158002D7196 /* RejectTests.m in Sources */,
+				E7CA17211BB9B15C002D7196 /* TestWaiter.m in Sources */,
+				E7CA17221BB9B15E002D7196 /* ThenTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -555,6 +724,11 @@
 			isa = PBXTargetDependency;
 			target = E712B3511B7E6B7800590AA8 /* iOS */;
 			targetProxy = E712B36B1B7E6B7900590AA8 /* PBXContainerItemProxy */;
+		};
+		E7CA17101BB9B0FC002D7196 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E7CA16F81BB9B0FC002D7196 /* tvOS */;
+			targetProxy = E7CA170F1BB9B0FC002D7196 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -581,6 +755,14 @@
 				E712B3631B7E6B7900590AA8 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		E7CA17041BB9B0FC002D7196 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E7CA17051BB9B0FC002D7196 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -779,6 +961,66 @@
 			};
 			name = Release;
 		};
+		E7CA17151BB9B0FC002D7196 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				INFOPLIST_FILE = tvOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.benski.promise.tvOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+			};
+			name = Debug;
+		};
+		E7CA17161BB9B0FC002D7196 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				INFOPLIST_FILE = tvOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.benski.promise.tvOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E7CA17171BB9B0FC002D7196 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = tvOSTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.benski.promise.tvOSTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/tvOS.app/tvOS";
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+			};
+			name = Debug;
+		};
+		E7CA17181BB9B0FC002D7196 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = tvOSTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.benski.promise.tvOSTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/tvOS.app/tvOS";
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -826,6 +1068,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		E7CA17191BB9B0FC002D7196 /* Build configuration list for PBXNativeTarget "tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E7CA17151BB9B0FC002D7196 /* Debug */,
+				E7CA17161BB9B0FC002D7196 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		E7CA171A1BB9B0FC002D7196 /* Build configuration list for PBXNativeTarget "tvOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E7CA17171BB9B0FC002D7196 /* Debug */,
+				E7CA17181BB9B0FC002D7196 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
