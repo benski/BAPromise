@@ -40,7 +40,7 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
     if (self) {
         _queue = dispatch_queue_create(nil, DISPATCH_QUEUE_SERIAL);
         _promiseState = BAPromise_Unfulfilled;
-        _cancelled = NO;
+        self.cancelled = NO;
     }
     return self;
 }
@@ -56,7 +56,7 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
     
     dispatch_async(_queue, ^{
         if (_promiseState != BAPromise_Rejected && _promiseState != BAPromise_Fulfilled) {
-            if (_cancelled) {
+            if (self.cancelled) {
                 wrappedCancelBlock();
             } else {
                 _onCancel = wrappedCancelBlock;
@@ -67,7 +67,7 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
 
 -(void)cancel
 {
-    _cancelled = YES;
+    self.cancelled = YES;
     dispatch_async(self.queue, ^{
         
         if (self.onCancel) {
