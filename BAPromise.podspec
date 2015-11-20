@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
 s.name             = "BAPromise"
-s.version          = "1.1.3"
+s.version          = "1.1.4"
 s.summary          = "Objective C Promise Library"
 s.description      = <<-DESC
     Objective C Promise Library. An alternative to NSOperation for asynchronous operations.
