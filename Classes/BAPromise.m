@@ -101,13 +101,12 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
     BACancelToken *cancellationToken;
     
     cancellationToken = [BACancelToken new];
-    __weak BACancelToken *weakCancellationToken = cancellationToken;
-    
+
     // wrap the passed in blocks to dispatch to the appropriate queue and check for cancellaltion
     if (onFulfilled) {
         wrappedDoneBlock = ^(id obj) {
             dispatch_async(queue, ^{
-                if (!weakCancellationToken.cancelled) {
+                if (!cancellationToken.cancelled) {
                     onFulfilled(obj);
                 }
             });
@@ -117,7 +116,7 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
     if (onObserved) {
         wrappedObservedBlock = ^(id obj) {
             dispatch_async(queue, ^{
-                if (!weakCancellationToken.cancelled) {
+                if (!cancellationToken.cancelled) {
                     onObserved(obj);
                 }
             });
@@ -127,7 +126,7 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
     if (onRejected) {
         wrappedRejectedBlock = ^(id obj) {
             dispatch_async(queue, ^{
-                if (!weakCancellationToken.cancelled) {
+                if (!cancellationToken.cancelled) {
                     onRejected(obj);
                 }
             });
@@ -137,7 +136,7 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
     if (onFinally) {
         wrappedFinallyBlock = ^{
             dispatch_async(queue, ^{
-                if (!weakCancellationToken.cancelled) {
+                if (!cancellationToken.cancelled) {
                     onFinally();
                 }
             });
