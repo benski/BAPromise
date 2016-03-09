@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B8042A288FCD8EFAD706830 /* libPods-tvos.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8880F1B58B30D5FBAAA6C115 /* libPods-tvos.a */; };
 		3B9D8BA8F2EFE3F5CE9A57E0 /* libPods-osx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D714C8E81167F0524D18B92 /* libPods-osx.a */; };
 		C551DD0B60B08A20F5F5CCC6 /* libPods-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 54AD8ABD64B2BF785CB7B8D1 /* libPods-ios.a */; };
 		E712B3311B7E6B4800590AA8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E712B3301B7E6B4800590AA8 /* AppDelegate.m */; };
@@ -85,7 +86,10 @@
 		2E9195B178DB790ED866E310 /* Pods-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ios/Pods-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		3EF2D03E2BA940AD4BF4FB27 /* Pods-osx.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-osx.release.xcconfig"; path = "Pods/Target Support Files/Pods-osx/Pods-osx.release.xcconfig"; sourceTree = "<group>"; };
 		54AD8ABD64B2BF785CB7B8D1 /* libPods-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8880F1B58B30D5FBAAA6C115 /* libPods-tvos.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-tvos.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8AC2F4560C0EB728686E1554 /* Pods-osx.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-osx.debug.xcconfig"; path = "Pods/Target Support Files/Pods-osx/Pods-osx.debug.xcconfig"; sourceTree = "<group>"; };
+		CC02C6D8EBC5AA822D8AE4DD /* Pods-tvos.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tvos.release.xcconfig"; path = "Pods/Target Support Files/Pods-tvos/Pods-tvos.release.xcconfig"; sourceTree = "<group>"; };
+		DE91B690EE7C6AC4FF42BF31 /* Pods-tvos.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tvos.debug.xcconfig"; path = "Pods/Target Support Files/Pods-tvos/Pods-tvos.debug.xcconfig"; sourceTree = "<group>"; };
 		E712B32C1B7E6B4800590AA8 /* OS X.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OS X.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E712B32F1B7E6B4800590AA8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E712B3301B7E6B4800590AA8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -175,6 +179,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B8042A288FCD8EFAD706830 /* libPods-tvos.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,6 +193,8 @@
 				243B8F2E624F6BE5D0C933E7 /* Pods-ios.release.xcconfig */,
 				8AC2F4560C0EB728686E1554 /* Pods-osx.debug.xcconfig */,
 				3EF2D03E2BA940AD4BF4FB27 /* Pods-osx.release.xcconfig */,
+				DE91B690EE7C6AC4FF42BF31 /* Pods-tvos.debug.xcconfig */,
+				CC02C6D8EBC5AA822D8AE4DD /* Pods-tvos.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -346,6 +353,7 @@
 			children = (
 				54AD8ABD64B2BF785CB7B8D1 /* libPods-ios.a */,
 				1D714C8E81167F0524D18B92 /* libPods-osx.a */,
+				8880F1B58B30D5FBAAA6C115 /* libPods-tvos.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -379,6 +387,7 @@
 				E712B33C1B7E6B4900590AA8 /* Frameworks */,
 				E712B33D1B7E6B4900590AA8 /* Resources */,
 				646A91D06660699602346844 /* Copy Pods Resources */,
+				ED19499E40F5FCA5FE0D70F2 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -416,6 +425,7 @@
 				E712B3671B7E6B7900590AA8 /* Frameworks */,
 				E712B3681B7E6B7900590AA8 /* Resources */,
 				EBEABADCF1D2F3AC30F6F513 /* Copy Pods Resources */,
+				EB0DEEE7EC9161F1F593C0FF /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -448,9 +458,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E7CA171A1BB9B0FC002D7196 /* Build configuration list for PBXNativeTarget "tvOSTests" */;
 			buildPhases = (
+				6D4EAFD8C54B3127689C764F /* Check Pods Manifest.lock */,
 				E7CA170A1BB9B0FC002D7196 /* Sources */,
 				E7CA170B1BB9B0FC002D7196 /* Frameworks */,
 				E7CA170C1BB9B0FC002D7196 /* Resources */,
+				BA43232D498484C3F2DBCE2E /* Embed Pods Frameworks */,
+				864C6A0F385F914A3E085AD3 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -585,6 +598,36 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-osx/Pods-osx-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		6D4EAFD8C54B3127689C764F /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		864C6A0F385F914A3E085AD3 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-tvos/Pods-tvos-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		973B5F3CE34EAB60428D7614 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -598,6 +641,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		BA43232D498484C3F2DBCE2E /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-tvos/Pods-tvos-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C97CF3414709012E06DC305D /* Check Pods Manifest.lock */ = {
@@ -615,6 +673,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		EB0DEEE7EC9161F1F593C0FF /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ios/Pods-ios-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		EBEABADCF1D2F3AC30F6F513 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -628,6 +701,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ios/Pods-ios-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ED19499E40F5FCA5FE0D70F2 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-osx/Pods-osx-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -994,6 +1082,7 @@
 		};
 		E7CA17171BB9B0FC002D7196 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DE91B690EE7C6AC4FF42BF31 /* Pods-tvos.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = tvOSTests/Info.plist;
@@ -1008,6 +1097,7 @@
 		};
 		E7CA17181BB9B0FC002D7196 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CC02C6D8EBC5AA822D8AE4DD /* Pods-tvos.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = tvOSTests/Info.plist;
@@ -1076,6 +1166,7 @@
 				E7CA17161BB9B0FC002D7196 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E7CA171A1BB9B0FC002D7196 /* Build configuration list for PBXNativeTarget "tvOSTests" */ = {
 			isa = XCConfigurationList;
@@ -1084,6 +1175,7 @@
 				E7CA17181BB9B0FC002D7196 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
