@@ -2,15 +2,17 @@
 
 ## Objective C Promise Library ##
 
-### BAPromise 
-
 This is a promise library for Objective C. It is a lightweight library and does not bring in any additional dependencies and adds very little complexity.
+
+### What are promises?
 
 If you are not familiar with promises, the easiest way to think of them is as a managed object for completion/failure blocks. Instead of passing in a completion and failure block, an API can return a promise to which you attach the blocks. The promise object can have multiple completion blocks assigned, can be canceled, and can be transformed into another promise via a block.
 
-These examples are concerned with how to use the APIs that return promises. Creating promise objects is not covered here, for simplicity. I can provide additional documentation on that if you need it.
 
-As a replacement for completion failure blocks
+### Examples
+These examples are concerned with how to use the APIs that return promises. Creating promise objects is not covered here, for simplicity. 
+
+As a replacement for completion failure blocks:
 
 ```objc
 	BAPromise *promise = [someObject methodThatReturnsPromise]; 
@@ -32,6 +34,7 @@ You typically know what is passed in the completion block, so the following is m
       }];
 ```
 
+### Templating
 Promise objects can be optionally templated with the completion block parameter, using features new to XCode 7. This makes it a syntax error to have the wrong block parameter, and also makes autocompletion work as expected. The above example would instead be as follows. 
 
 ```objc
@@ -41,7 +44,9 @@ Promise objects can be optionally templated with the completion block parameter,
         rejected:^(NSError *error) { 
            self.textLabel = error.localizedDescription; 
         }];
+```
 
+### Cancellation
 Promises can be canceled. The rules for promise cancelation are as follows: 
  1) When you cancel a promise, it is guaranteed that neither your completion nor failure block are called. The promise's reference to your blocks will also be removed. 
  2) Promises must be canceled on the same queue as where the done callback completes. See the section on threading for more information. 
@@ -49,7 +54,7 @@ Promises can be canceled. The rules for promise cancelation are as follows:
  4) Calling cancel on the promise object itself will call the failure block for all attached blocks 
  5) The underlying operation may or may not be canceled, depending on the implementation of the code that creating the original promise.
 
-Promise chaining 
+### Promise chaining 
 A common idiom with completion block APIs is implementing a method that accepts a completion/failure block and in turn calling another API that takes a completion/failure block. This is implemented in the promise library via a method called 'then'. A simple example.
 
 	```objc 
