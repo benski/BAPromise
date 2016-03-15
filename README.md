@@ -49,6 +49,7 @@ Promise objects can be optionally templated with the completion block parameter,
 
 ### Cancellation
 Promises can be canceled. The rules for promise cancelation are as follows: 
+
 1. When you cancel a promise, it is guaranteed that neither your completion nor failure block are called. The promise's reference to your blocks will also be removed. 
 2. Promises must be canceled on the same queue as where the done callback completes. See the section on threading for more information. 
 3. Most of the time, you should cancel the CancelToken returned from the 'done' method call (block attachment method). 
@@ -68,9 +69,10 @@ A common idiom with completion block APIs is implementing a method that accepts 
 ```
 
 A few things of note: 
+
 1. Due to limitations in XCode 7 generics, it is not possible to autocomplete the parametize the promise returned from 'then' 
 2. If the failure ('rejected') block is not defined, a default implementation is provided that will chain the rejection failure 
-3. Returning NSError from the 'then' block (or a non-NSError object from the 'rejected' block) will convert a failure to a success or vice-versa
+3. Returning `NSError` from the 'then' block (or a non-NSError object from the 'rejected' block) will convert a failure to a success or vice-versa
 
 
 ### Installation
