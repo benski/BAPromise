@@ -141,4 +141,42 @@
     
     [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
+
+-(void)testCancelThen
+{
+    XCTestExpectation *expectation1 = [self expectationWithDescription:@"Promise reached inside of then block"];
+    BAPromiseClient *thenPromise = BAPromiseClient.new;
+    
+    BACancelToken *cancelToken = [[BAPromiseClient fulfilledPromise:nil] then:^id(id obj) {
+        [expectation1 fulfill];
+        return thenPromise;
+    }];
+    
+    [self waitForExpectationsWithTimeout:0.5 handler:nil];
+    XCTestExpectation *expectation2 = [self expectationWithDescription:@"Inner Promise cancelled"];
+
+    [thenPromise cancelled:^{
+        [expectation2 fulfill];
+    }];
+    
+    [cancelToken cancel];
+    [self waitForExpectationsWithTimeout:0.5 handler:nil];
+}
+
+-(void)testCancelThenRaceCondition
+{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Promise reached inside of then block"];
+    BAPromiseClient *thenPromise = BAPromiseClient.new;
+    [thenPromise cancelled:^{
+        [expectation fulfill];
+    }];
+    
+    BACancelToken *cancelToken = [[BAPromiseClient fulfilledPromise:nil] then:^id(id obj) {
+        [cancelToken cancel];
+        return thenPromise;
+    }];
+
+    [cancelToken cancel];
+    [self waitForExpectationsWithTimeout:0.5 handler:nil];
+}
 @end

@@ -409,21 +409,25 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
 {
     if ([obj isKindOfClass:[BAPromise class]]) {
         BAPromise *promise = (BAPromise *)obj;
-        BACancelToken *cancellationToken;
-
-        dispatch_queue_t myQueue = promise.queue;
-        
-        cancellationToken = [promise done:^(id obj) {
-            [self fulfillWithObject:obj];
-        } rejected:^(NSError *error) {
-            [self rejectWithError:error];
-        } queue:myQueue];
-        
-        [self cancelled:^{
-            dispatch_async(myQueue, ^{
-                [cancellationToken cancel];
-            });
-        }];
+        if (self.cancelled) {
+            [promise cancel];
+        } else {
+            BACancelToken *cancellationToken;
+            
+            dispatch_queue_t myQueue = promise.queue;
+            
+            cancellationToken = [promise done:^(id obj) {
+                [self fulfillWithObject:obj];
+            } rejected:^(NSError *error) {
+                [self rejectWithError:error];
+            } queue:myQueue];
+            
+            [self cancelled:^{
+                dispatch_async(myQueue, ^{
+                    [cancellationToken cancel];
+                });
+            }];
+        }
     } else {
         dispatch_async(self.queue, ^{
             if (self.promiseState == BAPromise_Unfulfilled) {
