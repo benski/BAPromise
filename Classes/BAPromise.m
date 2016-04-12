@@ -491,6 +491,58 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
 
 @implementation NSArray (BAPromiseJoin)
 
+-(BAPromise *)whenPromises
+{
+    // an empty array should return a promise that fulfills with 'nil'.
+    // We shortcut the rest of the method here because there are no other promises to trigger our returned promise
+    if (self.count == 0) {
+        return [BAPromiseClient fulfilledPromise:nil];
+    }
+    
+    BAPromiseClient *returnedPromise = [[BAPromiseClient alloc] init];
+    dispatch_queue_t myQueue = returnedPromise.queue;
+    NSMutableArray *cancellationTokens = [[NSMutableArray alloc] initWithCapacity:self.count];
+    
+    // propagate cancellation
+    [returnedPromise cancelled:^{
+        for (BACancelToken *token in cancellationTokens) {
+            dispatch_async(myQueue, ^{
+                [token cancel];
+            });
+        }
+    }];
+    
+    NSUInteger totalCount=self.count;
+    NSMutableArray *results = [[NSMutableArray alloc] initWithCapacity:totalCount];
+    for (NSUInteger i=0;i<self.count;i++) {
+        [results addObject:[NSNull null]];
+    }
+    
+    // manually looping so we have an index
+    __block NSUInteger fulfilledCount=0;
+    [self enumerateObjectsUsingBlock:^(BAPromiseClient *promise, NSUInteger idx, BOOL *stop) {
+        // these are guaranteed to occur on a serial queue, so there is no need to synchronize
+        BACancelToken *token = [promise done:^(id obj) {
+            if (obj) {
+                results[idx] = obj;
+            }
+            
+            if (++fulfilledCount == totalCount) { // this is safe because these callbacks all happen on the same serial dispatch queuue
+                [returnedPromise fulfillWithObject:results];
+            }
+        } rejected:^(NSError *error) {
+            [returnedPromise rejectWithError:error];
+            // cancel all the other promises (cancelling the rejected promise at this point is safe, see testCancelPromiseAfterRejection)
+            [cancellationTokens enumerateObjectsUsingBlock:^(BACancelToken *token, NSUInteger idx, BOOL *stop) {
+                [token cancel];
+            }];
+        } queue:myQueue];
+        [cancellationTokens addObject:token];
+    }];
+    
+    return returnedPromise;
+}
+
 -(BAPromise *)joinPromises
 {
     // an empty array should return a promise that fulfills with 'nil'.

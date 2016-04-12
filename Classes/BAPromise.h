@@ -71,5 +71,6 @@ typedef dispatch_block_t BAPromiseFinallyBlock;
 @end
 
 @interface NSArray (BAPromiseJoin)
+-(BAPromise<NSArray *> *)whenPromises;
 -(BAPromise<NSArray *> *)joinPromises;
 @end
