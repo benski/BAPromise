@@ -506,9 +506,7 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
     // propagate cancellation
     [returnedPromise cancelled:^{
         for (BACancelToken *token in cancellationTokens) {
-            dispatch_async(myQueue, ^{
-                [token cancel];
-            });
+            [token cancel];
         }
     }];
     
@@ -558,9 +556,7 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
     // propagate cancellation
     [returnedPromise cancelled:^{
         for (BACancelToken *token in cancellationTokens) {
-            dispatch_async(myQueue, ^{
-                [token cancel];
-            });
+            [token cancel];
         }
     }];
     
