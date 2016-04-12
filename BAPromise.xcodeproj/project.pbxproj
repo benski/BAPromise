@@ -54,6 +54,9 @@
 		E7CA17201BB9B158002D7196 /* RejectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D2211B7E6CDF00823BFC /* RejectTests.m */; };
 		E7CA17211BB9B15C002D7196 /* TestWaiter.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D2231B7E6CDF00823BFC /* TestWaiter.m */; };
 		E7CA17221BB9B15E002D7196 /* ThenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D2241B7E6CDF00823BFC /* ThenTests.m */; };
+		E7E3E8D01CBD511F00C55538 /* WhenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E3E8CF1CBD511F00C55538 /* WhenTests.m */; };
+		E7E3E8D11CBD511F00C55538 /* WhenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E3E8CF1CBD511F00C55538 /* WhenTests.m */; };
+		E7E3E8D21CBD511F00C55538 /* WhenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E3E8CF1CBD511F00C55538 /* WhenTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,6 +138,7 @@
 		E7CA170E1BB9B0FC002D7196 /* tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = tvOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7CA17121BB9B0FC002D7196 /* tvOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = tvOSTests.m; sourceTree = "<group>"; };
 		E7CA17141BB9B0FC002D7196 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E7E3E8CF1CBD511F00C55538 /* WhenTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WhenTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -312,6 +316,7 @@
 				E7B8D2221B7E6CDF00823BFC /* TestWaiter.h */,
 				E7B8D2231B7E6CDF00823BFC /* TestWaiter.m */,
 				E7B8D2241B7E6CDF00823BFC /* ThenTests.m */,
+				E7E3E8CF1CBD511F00C55538 /* WhenTests.m */,
 			);
 			name = Tests;
 			sourceTree = "<group>";
@@ -736,6 +741,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7B8D22D1B7E6CFE00823BFC /* CancelTests.m in Sources */,
+				E7E3E8D01CBD511F00C55538 /* WhenTests.m in Sources */,
 				E7B8D22E1B7E6CFE00823BFC /* ChainTests.m in Sources */,
 				E7B8D22F1B7E6CFE00823BFC /* DoneTests.m in Sources */,
 				E7B8D2301B7E6CFE00823BFC /* JoinTests.m in Sources */,
@@ -763,6 +769,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7B8D2351B7E6D0200823BFC /* CancelTests.m in Sources */,
+				E7E3E8D11CBD511F00C55538 /* WhenTests.m in Sources */,
 				E7B8D2361B7E6D0200823BFC /* ChainTests.m in Sources */,
 				E7B8D2371B7E6D0200823BFC /* DoneTests.m in Sources */,
 				E7B8D2381B7E6D0200823BFC /* JoinTests.m in Sources */,
@@ -797,6 +804,7 @@
 				E7CA17201BB9B158002D7196 /* RejectTests.m in Sources */,
 				E7CA17211BB9B15C002D7196 /* TestWaiter.m in Sources */,
 				E7CA17221BB9B15E002D7196 /* ThenTests.m in Sources */,
+				E7E3E8D21CBD511F00C55538 /* WhenTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

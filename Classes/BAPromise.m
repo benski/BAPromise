@@ -572,9 +572,11 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
     
     // manually looping so we have an index
     __block NSUInteger fulfilledCount=0;
+    __block BOOL success = NO;
     [self enumerateObjectsUsingBlock:^(BAPromiseClient *promise, NSUInteger idx, BOOL *stop) {
         // these are guaranteed to occur on a serial queue, so there is no need to synchronize
         BACancelToken *token = [promise done:^(id obj) {
+            success = YES;
             if (obj) {
                 results[idx] = obj;
             }
@@ -583,11 +585,17 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
                 [returnedPromise fulfillWithObject:results];
             }
         } rejected:^(NSError *error) {
-            [returnedPromise rejectWithError:error];
-            // cancel all the other promises (cancelling the rejected promise at this point is safe, see testCancelPromiseAfterRejection)
-            [cancellationTokens enumerateObjectsUsingBlock:^(BACancelToken *token, NSUInteger idx, BOOL *stop) {
-                [token cancel];
-            }];
+            if (error) {
+                results[idx] = error;
+            }
+            
+            if (++fulfilledCount == totalCount) { // this is safe because these callbacks all happen on the same serial dispatch queuue
+                if (success) { // if we had any successful promises, we'll return the array
+                    [returnedPromise fulfillWithObject:results];
+                } else { // otherwise we return an error
+                    [returnedPromise rejectWithError:error]; // TODO(benski) combine all errors in some way
+                }
+            }
         } queue:myQueue];
         [cancellationTokens addObject:token];
     }];
