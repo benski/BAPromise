@@ -16,8 +16,8 @@ s.osx.deployment_target = '10.10'
 s.tvos.deployment_target = '9.0'
 s.requires_arc = true
 
-s.source_files = 'Classes/*'
+s.source_files = 'Classes/*', 'Categories/*'
 
-s.public_header_files = 'Classes/BAPromise.h'
+s.public_header_files = 'Classes/BAPromise.h', 'Categories/*.h'
 
 end
