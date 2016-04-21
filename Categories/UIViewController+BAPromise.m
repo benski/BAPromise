@@ -20,7 +20,7 @@
     }
     
     [self dismissViewControllerAnimated:animated completion:^{
-        [promise fulfil];
+        [promise fulfill];
     }];
     return promise;
 }
