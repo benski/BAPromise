@@ -40,6 +40,7 @@
 		E7B8D23A1B7E6D0200823BFC /* TestWaiter.h in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D2221B7E6CDF00823BFC /* TestWaiter.h */; };
 		E7B8D23B1B7E6D0200823BFC /* TestWaiter.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D2231B7E6CDF00823BFC /* TestWaiter.m */; };
 		E7B8D23C1B7E6D0200823BFC /* ThenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D2241B7E6CDF00823BFC /* ThenTests.m */; };
+		E7C2C0791CC9160800D271CC /* UIViewController+BAPromise.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C2C0781CC9160800D271CC /* UIViewController+BAPromise.m */; };
 		E7CA16FD1BB9B0FC002D7196 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CA16FC1BB9B0FC002D7196 /* main.m */; };
 		E7CA17001BB9B0FC002D7196 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CA16FF1BB9B0FC002D7196 /* AppDelegate.m */; };
 		E7CA17031BB9B0FC002D7196 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CA17021BB9B0FC002D7196 /* ViewController.m */; };
@@ -126,6 +127,8 @@
 		E7B8D2221B7E6CDF00823BFC /* TestWaiter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestWaiter.h; path = BAPromiseTests/TestWaiter.h; sourceTree = "<group>"; };
 		E7B8D2231B7E6CDF00823BFC /* TestWaiter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestWaiter.m; path = BAPromiseTests/TestWaiter.m; sourceTree = "<group>"; };
 		E7B8D2241B7E6CDF00823BFC /* ThenTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ThenTests.m; path = BAPromiseTests/ThenTests.m; sourceTree = "<group>"; };
+		E7C2C0771CC9160800D271CC /* UIViewController+BAPromise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+BAPromise.h"; sourceTree = "<group>"; };
+		E7C2C0781CC9160800D271CC /* UIViewController+BAPromise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+BAPromise.m"; sourceTree = "<group>"; };
 		E7CA16F91BB9B0FC002D7196 /* tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tvOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7CA16FC1BB9B0FC002D7196 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E7CA16FE1BB9B0FC002D7196 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -206,6 +209,7 @@
 		E712B3231B7E6B4800590AA8 = {
 			isa = PBXGroup;
 			children = (
+				E7C2C0761CC915DA00D271CC /* Categories */,
 				E7B8D22C1B7E6CE400823BFC /* Tests */,
 				E712B3771B7E6B8000590AA8 /* Classes */,
 				E712B32E1B7E6B4800590AA8 /* OS X */,
@@ -319,6 +323,15 @@
 				E7E3E8CF1CBD511F00C55538 /* WhenTests.m */,
 			);
 			name = Tests;
+			sourceTree = "<group>";
+		};
+		E7C2C0761CC915DA00D271CC /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				E7C2C0771CC9160800D271CC /* UIViewController+BAPromise.h */,
+				E7C2C0781CC9160800D271CC /* UIViewController+BAPromise.m */,
+			);
+			path = Categories;
 			sourceTree = "<group>";
 		};
 		E7CA16FA1BB9B0FC002D7196 /* tvOS */ = {
@@ -731,6 +744,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E712B3341B7E6B4800590AA8 /* main.m in Sources */,
+				E7C2C0791CC9160800D271CC /* UIViewController+BAPromise.m in Sources */,
 				E7B8D21B1B7E6CB000823BFC /* BAPromise.m in Sources */,
 				E712B3311B7E6B4800590AA8 /* AppDelegate.m in Sources */,
 			);
