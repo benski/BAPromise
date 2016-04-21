@@ -10,4 +10,14 @@
 
 @interface UIViewController (BAPromise)
 
+-(BAPromise *)promise_DismissViewControllerAnimated:(BOOL)animated;
+-(BAPromise *)promise_presentViewController:(UIViewController *)controller
+                                   animated:(BOOL)animated;
+- (BAPromise<NSNumber *> *)transitionFromViewController:(UIViewController *)fromViewController
+                                       toViewController:(UIViewController *)toViewController
+                                               duration:(NSTimeInterval)duration
+                                                options:(UIViewAnimationOptions)options
+                                             animations:(void (^ __nullable)(void))animations
+                                             completion:(void (^ __nullable)(BOOL finished))completion;
+
 @end
