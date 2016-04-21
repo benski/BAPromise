@@ -41,6 +41,8 @@
 		E7B8D23B1B7E6D0200823BFC /* TestWaiter.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D2231B7E6CDF00823BFC /* TestWaiter.m */; };
 		E7B8D23C1B7E6D0200823BFC /* ThenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D2241B7E6CDF00823BFC /* ThenTests.m */; };
 		E7C2C0791CC9160800D271CC /* UIViewController+BAPromise.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C2C0781CC9160800D271CC /* UIViewController+BAPromise.m */; };
+		E7C2C07D1CC971BC00D271CC /* UIViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C2C07C1CC971BC00D271CC /* UIViewControllerTests.m */; };
+		E7C2C07E1CC9724100D271CC /* UIViewController+BAPromise.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C2C0781CC9160800D271CC /* UIViewController+BAPromise.m */; };
 		E7CA16FD1BB9B0FC002D7196 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CA16FC1BB9B0FC002D7196 /* main.m */; };
 		E7CA17001BB9B0FC002D7196 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CA16FF1BB9B0FC002D7196 /* AppDelegate.m */; };
 		E7CA17031BB9B0FC002D7196 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CA17021BB9B0FC002D7196 /* ViewController.m */; };
@@ -129,6 +131,7 @@
 		E7B8D2241B7E6CDF00823BFC /* ThenTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ThenTests.m; path = BAPromiseTests/ThenTests.m; sourceTree = "<group>"; };
 		E7C2C0771CC9160800D271CC /* UIViewController+BAPromise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+BAPromise.h"; sourceTree = "<group>"; };
 		E7C2C0781CC9160800D271CC /* UIViewController+BAPromise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+BAPromise.m"; sourceTree = "<group>"; };
+		E7C2C07C1CC971BC00D271CC /* UIViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewControllerTests.m; sourceTree = "<group>"; };
 		E7CA16F91BB9B0FC002D7196 /* tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tvOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7CA16FC1BB9B0FC002D7196 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E7CA16FE1BB9B0FC002D7196 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -321,6 +324,7 @@
 				E7B8D2231B7E6CDF00823BFC /* TestWaiter.m */,
 				E7B8D2241B7E6CDF00823BFC /* ThenTests.m */,
 				E7E3E8CF1CBD511F00C55538 /* WhenTests.m */,
+				E7C2C07C1CC971BC00D271CC /* UIViewControllerTests.m */,
 			);
 			name = Tests;
 			sourceTree = "<group>";
@@ -771,6 +775,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7C2C07E1CC9724100D271CC /* UIViewController+BAPromise.m in Sources */,
 				E7B8D21C1B7E6CC300823BFC /* BAPromise.m in Sources */,
 				E712B35C1B7E6B7900590AA8 /* ViewController.m in Sources */,
 				E712B3591B7E6B7800590AA8 /* AppDelegate.m in Sources */,
@@ -790,6 +795,7 @@
 				E7B8D2391B7E6D0200823BFC /* RejectTests.m in Sources */,
 				E7B8D23A1B7E6D0200823BFC /* TestWaiter.h in Sources */,
 				E7B8D23B1B7E6D0200823BFC /* TestWaiter.m in Sources */,
+				E7C2C07D1CC971BC00D271CC /* UIViewControllerTests.m in Sources */,
 				E7B8D23C1B7E6D0200823BFC /* ThenTests.m in Sources */,
 				E712B36F1B7E6B7900590AA8 /* iOSTests.m in Sources */,
 			);

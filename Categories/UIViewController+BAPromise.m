@@ -7,16 +7,16 @@
 //
 
 #import "UIViewController+BAPromise.h"
-#import "BAPromiseClient.h"
+#import "BAPromise.h"
 
 @implementation UIViewController (BAPromise)
 
--(BAPromise *)promise_DismissViewControllerAnimated:(BOOL)animated
+-(BAPromise *)promiseDismissViewControllerAnimated:(BOOL)animated
 {
     BAPromiseClient *promise = BAPromiseClient.new;
     if (!self.presentedViewController) {
         // TODO(benski) a better error
-        return [promise rejectedPromise:[NSError errorWithDomain:@"org.benski.promise" code:0 info:nil]];
+        return [BAPromiseClient rejectedPromise:[NSError errorWithDomain:@"org.benski.promise" code:0 userInfo:nil]];
     }
     
     [self dismissViewControllerAnimated:animated completion:^{
@@ -25,17 +25,21 @@
     return promise;
 }
 
--(BAPromise *)promise_presentViewController:(UIViewController *)controller
+-(BAPromise *)promisePresentViewController:(UIViewController *)controller
                                    animated:(BOOL)animated
 {
     BAPromiseClient *promise = BAPromiseClient.new;
     [self presentViewController:controller animated:YES completion:^{
-        [promise fullfil];
+        [promise fulfill];
     }];
     return promise;
 }
 
-- (BAPromise<NSNumber *> *)transitionFromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController duration:(NSTimeInterval)duration options:(UIViewAnimationOptions)options animations:(void (^ __nullable)(void))animations completion:(void (^ __nullable)(BOOL finished))completion
+- (BAPromise<NSNumber *> *)promiseTransitionFromViewController:(UIViewController *)fromViewController
+                                              toViewController:(UIViewController *)toViewController
+                                                      duration:(NSTimeInterval)duration
+                                                       options:(UIViewAnimationOptions)options animations:(void (^ __nullable)(void))animations
+                                                    completion:(void (^ __nullable)(BOOL finished))completion
 {
     BAPromiseClient *promise = BAPromiseClient.new;
     [self transitionFromViewController:fromViewController

@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BAPromise.h"
 
 @interface UIViewController (BAPromise)
 
--(BAPromise *)promise_DismissViewControllerAnimated:(BOOL)animated;
--(BAPromise *)promise_presentViewController:(UIViewController *)controller
+-(BAPromise *)promiseDismissViewControllerAnimated:(BOOL)animated;
+-(BAPromise *)promisePresentViewController:(UIViewController *)controller
                                    animated:(BOOL)animated;
 - (BAPromise<NSNumber *> *)transitionFromViewController:(UIViewController *)fromViewController
                                        toViewController:(UIViewController *)toViewController
