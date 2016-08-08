@@ -94,6 +94,26 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
                finally:(BAPromiseFinallyBlock)onFinally
                  queue:(dispatch_queue_t)queue
 {
+    return [self done:onFulfilled
+             observed:onObserved
+             rejected:onRejected
+              finally:onFinally
+                queue:queue
+               thread:nil];
+}
+
+-(void)ba_runBlock:(dispatch_block_t)block
+{
+    block();
+}
+
+-(BACancelToken *)done:(BAPromiseOnFulfilledBlock)onFulfilled
+              observed:(BAPromiseOnFulfilledBlock)onObserved
+              rejected:(BAPromiseOnRejectedBlock)onRejected
+               finally:(BAPromiseFinallyBlock)onFinally
+                 queue:(dispatch_queue_t)queue
+                thread:(NSThread *)thread
+{
     BAPromiseOnFulfilledBlock wrappedDoneBlock, wrappedObservedBlock;
     BAPromiseOnRejectedBlock wrappedRejectedBlock;
     BAPromiseFinallyBlock wrappedFinallyBlock;
@@ -101,45 +121,77 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
     BACancelToken *cancellationToken;
     
     cancellationToken = [BACancelToken new];
-
+    
     // wrap the passed in blocks to dispatch to the appropriate queue and check for cancellaltion
     if (onFulfilled) {
         wrappedDoneBlock = ^(id obj) {
-            dispatch_async(queue, ^{
-                if (!cancellationToken.cancelled) {
-                    onFulfilled(obj);
-                }
-            });
+            if (thread) {
+                [self performSelector:@selector(ba_runBlock:) onThread:thread withObject:^{
+                    if (!cancellationToken.cancelled) {
+                        onFulfilled(obj);
+                    }
+                } waitUntilDone:NO];
+            } else {
+                dispatch_async(queue, ^{
+                    if (!cancellationToken.cancelled) {
+                        onFulfilled(obj);
+                    }
+                });
+            }
         };
     }
     
     if (onObserved) {
         wrappedObservedBlock = ^(id obj) {
-            dispatch_async(queue, ^{
-                if (!cancellationToken.cancelled) {
-                    onObserved(obj);
-                }
-            });
+            if (thread) {
+                [thread performSelector:@selector(ba_runBlock:) onThread:thread withObject:^{
+                    if (!cancellationToken.cancelled) {
+                        onObserved(obj);
+                    }
+                } waitUntilDone:NO];
+            } else {
+                dispatch_async(queue, ^{
+                    if (!cancellationToken.cancelled) {
+                        onObserved(obj);
+                    }
+                });
+            }
         };
     }
     
     if (onRejected) {
         wrappedRejectedBlock = ^(id obj) {
-            dispatch_async(queue, ^{
-                if (!cancellationToken.cancelled) {
-                    onRejected(obj);
-                }
-            });
+            if (thread) {
+                [thread performSelector:@selector(ba_runBlock:) onThread:thread withObject:^{
+                    if (!cancellationToken.cancelled) {
+                        onRejected(obj);
+                    }
+                } waitUntilDone:NO];
+            } else {
+                dispatch_async(queue, ^{
+                    if (!cancellationToken.cancelled) {
+                        onRejected(obj);
+                    }
+                });
+            }
         };
     }
     
     if (onFinally) {
         wrappedFinallyBlock = ^{
-            dispatch_async(queue, ^{
-                if (!cancellationToken.cancelled) {
-                    onFinally();
-                }
-            });
+            if (thread) {
+                [thread performSelector:@selector(ba_runBlock:) onThread:thread withObject:^{
+                    if (!cancellationToken.cancelled) {
+                        onFinally();
+                    }
+                } waitUntilDone:NO];
+            } else {
+                dispatch_async(queue, ^{
+                    if (!cancellationToken.cancelled) {
+                        onFinally();
+                    }
+                });
+            }
         };
     }
     
@@ -321,13 +373,31 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
            finally:(BAPromiseFinallyBlock)finallyBlock
              queue:(dispatch_queue_t)myQueue
 {
+    return [self then:thenBlock
+             rejected:failureBlock
+              finally:finallyBlock
+                queue:myQueue
+               thread:nil];
+}
+
+-(BAPromise *)then:(BAPromiseThenBlock)thenBlock
+          rejected:(BAPromiseThenRejectedBlock)failureBlock
+           finally:(BAPromiseFinallyBlock)finallyBlock
+             queue:(dispatch_queue_t)myQueue
+            thread:(NSThread *)thread
+{
     __block BACancelToken *cancellationToken=nil;
     BAPromiseClient *returnedPromise = [[BAPromiseClient alloc] init];
     [returnedPromise cancelled:^{
-        dispatch_async(myQueue, ^{
-            if (cancellationToken)
+        if (thread) {
+            [thread performSelector:@selector(ba_runBlock:) onThread:thread withObject:^{
                 [cancellationToken cancel];
-        });
+            } waitUntilDone:NO];
+        } else {
+            dispatch_async(myQueue, ^{
+                [cancellationToken cancel];
+            });
+        }
     }];
     
     cancellationToken = [self done:^(id obj) {
