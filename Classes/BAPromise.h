@@ -25,13 +25,15 @@ typedef dispatch_block_t BAPromiseFinallyBlock;
               observed:(void (^)(T obj))onObserved
               rejected:(BAPromiseOnRejectedBlock)onRejected
                finally:(BAPromiseFinallyBlock)onFinally
-                 queue:(dispatch_queue_t)queue;
+                 queue:(dispatch_queue_t)queue
+                thread:(NSThread *)thread;
 
 /* then (promise chaining) */
--(BAPromise *)then:(id (^)(T obj))onFulfilled
-          rejected:(BAPromiseThenRejectedBlock)onRejected
-           finally:(BAPromiseFinallyBlock)onFinally
-             queue:(dispatch_queue_t)queue;
+-(BAPromise *)then:(BAPromiseThenBlock)thenBlock
+          rejected:(BAPromiseThenRejectedBlock)failureBlock
+           finally:(BAPromiseFinallyBlock)finallyBlock
+             queue:(dispatch_queue_t)myQueue
+            thread:(NSThread *)thread
 
 /* helper methods to simplify API usage */
 -(BACancelToken *)done:(void (^)(T obj))onFulfilled;
@@ -49,12 +51,21 @@ typedef dispatch_block_t BAPromiseFinallyBlock;
 -(BACancelToken *)rejected:(BAPromiseOnRejectedBlock)onRejected
                    finally:(BAPromiseFinallyBlock)onFinally;
 -(BACancelToken *)finally:(BAPromiseFinallyBlock)onFinally;
+-(BACancelToken *)done:(void (^)(T obj))onFulfilled
+              observed:(void (^)(T obj))onObserved
+              rejected:(BAPromiseOnRejectedBlock)onRejected
+               finally:(BAPromiseFinallyBlock)onFinally
+                 queue:(dispatch_queue_t)queue;
 
 -(BAPromise *)then:(id (^)(T obj))onFulfilled;
 -(BAPromise *)then:(id (^)(T obj))onFulfilled
              queue:(dispatch_queue_t)queue;
 -(BAPromise *)then:(id (^)(T obj))onFulfilled
           rejected:(BAPromiseThenRejectedBlock)onRejected;
+-(BAPromise *)then:(id (^)(T obj))onFulfilled
+          rejected:(BAPromiseThenRejectedBlock)onRejected
+           finally:(BAPromiseFinallyBlock)onFinally
+             queue:(dispatch_queue_t)queue;
 @end
 
 // promise producer API
