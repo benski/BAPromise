@@ -33,7 +33,7 @@ typedef dispatch_block_t BAPromiseFinallyBlock;
           rejected:(BAPromiseThenRejectedBlock)failureBlock
            finally:(BAPromiseFinallyBlock)finallyBlock
              queue:(dispatch_queue_t)myQueue
-            thread:(NSThread *)thread
+            thread:(NSThread *)thread;
 
 /* helper methods to simplify API usage */
 -(BACancelToken *)done:(void (^)(T obj))onFulfilled;
