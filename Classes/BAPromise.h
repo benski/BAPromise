@@ -29,7 +29,7 @@ typedef dispatch_block_t BAPromiseFinallyBlock;
                 thread:(NSThread *)thread;
 
 /* then (promise chaining) */
--(BAPromise *)then:(BAPromiseThenBlock)thenBlock
+-(BAPromise *)then:(id (^)(T obj))thenBlock
           rejected:(BAPromiseThenRejectedBlock)failureBlock
            finally:(BAPromiseFinallyBlock)finallyBlock
              queue:(dispatch_queue_t)myQueue
