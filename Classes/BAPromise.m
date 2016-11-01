@@ -30,7 +30,7 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
 @property (nonatomic, strong) dispatch_queue_t queue;
 @property (nonatomic) BAPromiseState promiseState;
 @property (atomic) BOOL cancelled;
-@property (nonatomic, strong) dispatch_block_t onCancel;
+@property (nonatomic, copy) dispatch_block_t onCancel;
 @end
 
 @implementation BACancelToken
@@ -59,7 +59,7 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
             if (self.cancelled) {
                 wrappedCancelBlock();
             } else {
-                _onCancel = wrappedCancelBlock;
+                self.onCancel = wrappedCancelBlock;
             }
         }
     });
@@ -69,7 +69,6 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
 {
     self.cancelled = YES;
     dispatch_async(self.queue, ^{
-        
         if (self.onCancel) {
             self.onCancel();
             self.onCancel=nil;
@@ -78,11 +77,42 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
 }
 @end
 
+@interface BAPromiseBlocks : NSObject
+@property (nonatomic, copy) BAPromiseOnFulfilledBlock done;
+@property (nonatomic, copy) BAPromiseOnFulfilledBlock observed;
+@property (nonatomic, copy) BAPromiseOnRejectedBlock rejected;
+@property (nonatomic, copy) BAPromiseFinallyBlock finally;
+@end
+
+@implementation BAPromiseBlocks
+- (BOOL)shouldKeepPromise
+{
+    return self.done != nil || self.finally != nil;
+}
+
+- (void)callBlocksWithObject:(id)object
+{
+    if ([object isKindOfClass:NSError.class]) {
+        if (self.rejected) {
+            self.rejected(object);
+        }
+    } else {
+        if (self.done) {
+            self.done(object);
+        }
+        if (self.observed) {
+            self.observed(object);
+        }
+    }
+    if (self.finally) {
+        self.finally();
+    }
+}
+@end
+
+
 @interface BAPromise ()
-@property (nonatomic, strong) NSMutableArray *doneBlocks;
-@property (nonatomic, strong) NSMutableArray *observerBlocks;
-@property (nonatomic, strong) NSMutableArray *rejectedBlocks;
-@property (nonatomic, strong) NSMutableArray *finallyBlocks;
+@property (nonatomic, strong) NSMutableArray<BAPromiseBlocks *> *blocks;
 @property (nonatomic, strong) id fulfilledObject;
 @end
 
@@ -118,15 +148,14 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
     BAPromiseOnRejectedBlock wrappedRejectedBlock;
     BAPromiseFinallyBlock wrappedFinallyBlock;
     
-    BACancelToken *cancellationToken;
+    BACancelToken *cancellationToken = [BACancelToken new];
     
-    cancellationToken = [BACancelToken new];
-    
+    __weak typeof(self) weakSelf = self;
     // wrap the passed in blocks to dispatch to the appropriate queue and check for cancellaltion
     if (onFulfilled) {
         wrappedDoneBlock = ^(id obj) {
             if (thread) {
-                [self performSelector:@selector(ba_runBlock:) onThread:thread withObject:^{
+                [weakSelf performSelector:@selector(ba_runBlock:) onThread:thread withObject:^{
                     if (!cancellationToken.cancelled) {
                         onFulfilled(obj);
                     }
@@ -144,7 +173,7 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
     if (onObserved) {
         wrappedObservedBlock = ^(id obj) {
             if (thread) {
-                [thread performSelector:@selector(ba_runBlock:) onThread:thread withObject:^{
+                [weakSelf performSelector:@selector(ba_runBlock:) onThread:thread withObject:^{
                     if (!cancellationToken.cancelled) {
                         onObserved(obj);
                     }
@@ -162,7 +191,7 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
     if (onRejected) {
         wrappedRejectedBlock = ^(id obj) {
             if (thread) {
-                [thread performSelector:@selector(ba_runBlock:) onThread:thread withObject:^{
+                [weakSelf performSelector:@selector(ba_runBlock:) onThread:thread withObject:^{
                     if (!cancellationToken.cancelled) {
                         onRejected(obj);
                     }
@@ -180,7 +209,7 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
     if (onFinally) {
         wrappedFinallyBlock = ^{
             if (thread) {
-                [thread performSelector:@selector(ba_runBlock:) onThread:thread withObject:^{
+                [weakSelf performSelector:@selector(ba_runBlock:) onThread:thread withObject:^{
                     if (!cancellationToken.cancelled) {
                         onFinally();
                     }
@@ -194,91 +223,49 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
             }
         };
     }
+    BAPromiseBlocks *blocks = BAPromiseBlocks.new;
+    blocks.done = wrappedDoneBlock;
+    blocks.observed = wrappedObservedBlock;
+    blocks.rejected = wrappedRejectedBlock;
+    blocks.finally = wrappedFinallyBlock;
     
     [cancellationToken cancelled:^{
-        dispatch_async(self.queue, ^{
-            if (onFulfilled) {
-                [self.doneBlocks removeObjectIdenticalTo:wrappedDoneBlock];
-            }
-            
-            if (onObserved) {
-                [self.observerBlocks removeObjectIdenticalTo:wrappedObservedBlock];
-            }
-            
-            if (onRejected) {
-                [self.rejectedBlocks removeObjectIdenticalTo:wrappedRejectedBlock];
-            }
-            
-            if (onFinally) {
-                [self.finallyBlocks removeObjectIdenticalTo:wrappedFinallyBlock];
-            }
-            
-            if (self.doneBlocks.count == 0
-                && self.finallyBlocks.count == 0) {
-                [self cancel];
-            }
-        });
+        typeof(self) strongSelf = weakSelf;
+        if (strongSelf) {
+            dispatch_async(strongSelf.queue, ^{
+                @autoreleasepool {
+                    [strongSelf.blocks removeObjectIdenticalTo:blocks];
+                    
+                    BOOL strongCount = NO;
+                    for (BAPromiseBlocks *block in strongSelf.blocks) {
+                        if ([block shouldKeepPromise]) {
+                            strongCount = YES;
+                            break;
+                        }
+                    }
+                    if (!strongCount) {
+                        [strongSelf cancel];
+                    }
+                }
+            });
+        }
     }];
     
     
     dispatch_async(self.queue, ^{
         switch(self.promiseState) {
             case BAPromise_Unfulfilled:
-                // save the blocks for later
-                if (wrappedDoneBlock) {
-                    if (!_doneBlocks) {
-                        _doneBlocks = [[NSMutableArray alloc] init];
-                    }
-                    [_doneBlocks addObject:wrappedDoneBlock];
+                      // save the blocks for later
+                if (!self.blocks) {
+                    self.blocks = NSMutableArray.new;
                 }
-                
-                if (wrappedObservedBlock) {
-                    if (!_observerBlocks) {
-                        _observerBlocks = [[NSMutableArray alloc] init];
-                    }
-                    [_observerBlocks addObject:wrappedObservedBlock];
-                }
-                
-                if (wrappedRejectedBlock) {
-                    if (!_rejectedBlocks) {
-                        _rejectedBlocks = [[NSMutableArray alloc] init];
-                    }
-                    [_rejectedBlocks addObject:wrappedRejectedBlock];
-                }
-                
-                if (wrappedFinallyBlock) {
-                    if (!_finallyBlocks) {
-                        _finallyBlocks = [[NSMutableArray alloc] init];
-                    }
-                    [_finallyBlocks addObject:wrappedFinallyBlock];
-                }
+                [self.blocks addObject:blocks];
                 break;
                 
             case BAPromise_Fulfilled:
-                if (wrappedDoneBlock) {
-                    // it was already fulfilled then call it now
-                    wrappedDoneBlock(_fulfilledObject);
-                }
-                
-                if (wrappedObservedBlock) {
-                    wrappedObservedBlock(_fulfilledObject);
-                }
-                
-                if (wrappedFinallyBlock) {
-                    wrappedFinallyBlock();
-                }
-                break;
-                
             case BAPromise_Rejected:
             case BAPromise_Canceled:
-                // if it was already rejected, but no failureBlock was set, then call it now
-                if (wrappedRejectedBlock) {
-                    wrappedRejectedBlock(_fulfilledObject);
-                }
-                
-                if (wrappedFinallyBlock) {
-                    wrappedFinallyBlock();
-                }
+                [blocks callBlocksWithObject:self.fulfilledObject];
                 break;
         }
     });
@@ -504,23 +491,11 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
                 self.promiseState = BAPromise_Fulfilled;
                 self.fulfilledObject = obj;
                 
+                for (BAPromiseBlocks *blocks in self.blocks) {
+                    [blocks callBlocksWithObject:obj];
+                }
                 // remove references we'll never call now
-                self.rejectedBlocks = nil;
-                
-                for (BAPromiseOnFulfilledBlock done in self.doneBlocks) {
-                    done(obj);
-                }
-                self.doneBlocks = nil;
-                
-                for (BAPromiseOnFulfilledBlock done in self.observerBlocks) {
-                    done(obj);
-                }
-                self.observerBlocks = nil;
-                
-                for (BAPromiseFinallyBlock finally in self.finallyBlocks) {
-                    finally();
-                }
-                self.finallyBlocks = nil;
+                self.blocks = nil;
             }
         });
     }
@@ -537,18 +512,11 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
         if (self.promiseState == BAPromise_Unfulfilled) {
             self.promiseState = BAPromise_Rejected;
             self.fulfilledObject = error;
+            for (BAPromiseBlocks *blocks in self.blocks) {
+                [blocks callBlocksWithObject:error];
+            }
             // remove references we'll never call now
-            self.doneBlocks = nil;
-            self.onCancel = nil;
-            for (BAPromiseOnRejectedBlock rejected in self.rejectedBlocks) {
-                rejected(error);
-            }
-            self.rejectedBlocks = nil;
-            
-            for (BAPromiseFinallyBlock finally in self.finallyBlocks) {
-                finally();
-            }
-            self.finallyBlocks = nil;
+            self.blocks = nil;
         }
     });
 }
@@ -557,6 +525,7 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
 {
     [self rejectWithError:[[NSError alloc] init]];
 }
+
 @end
 
 @implementation NSArray (BAPromiseJoin)

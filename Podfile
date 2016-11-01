@@ -1,19 +1,22 @@
 xcodeproj 'BAPromise'
 
-target :ios do
+target 'iOS' do
 	platform :ios, '8.0'
-	link_with 'iOSTests'
-	pod "OCMock"
+	target 'iOSTests' do
+		pod "OCMock"
+	end
 end
 
-target :osx do
+target 'OS X' do
  platform :osx, '10.10'
- link_with 'OS XTests'
- pod "OCMock"
+ target 'OS XTests' do
+ 	pod "OCMock"
+ end
 end
 
-target :tvos do
+target 'tvOS' do
  platform :tvos, '9.0'
- link_with 'tvOSTests'
- pod "OCMock"
+ target 'tvOSTests' do
+ 	pod "OCMock"
+ end
 end

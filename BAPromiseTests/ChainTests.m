@@ -84,7 +84,7 @@
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
     BAPromiseClient *promise = [[BAPromiseClient alloc] init];
-    BAPromise *anotherPromise = [BAPromiseClient rejectedPromise:nil];
+    BAPromise *anotherPromise = [BAPromiseClient rejectedPromise:[NSError errorWithDomain:@"org.benski" code:0 userInfo:nil]];
     
     [promise fulfillWithObject:anotherPromise];
     [promise rejected:^(id obj) {
