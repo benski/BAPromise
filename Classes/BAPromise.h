@@ -66,6 +66,8 @@ typedef dispatch_block_t BAPromiseFinallyBlock;
           rejected:(BAPromiseThenRejectedBlock)onRejected
            finally:(BAPromiseFinallyBlock)onFinally
              queue:(dispatch_queue_t)queue;
+-(BAPromise *)then:(id (^)(T obj))onFulfilled
+           finally:(BAPromiseFinallyBlock)onFinally;
 @end
 
 // promise producer API
