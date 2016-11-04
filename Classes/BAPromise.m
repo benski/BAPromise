@@ -87,7 +87,7 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
 @implementation BAPromiseBlocks
 - (BOOL)shouldKeepPromise
 {
-    return self.done != nil || self.finally != nil;
+    return self.done != nil || self.finally != nil || self.rejected != nil;
 }
 
 - (void)callBlocksWithObject:(id)object
@@ -496,6 +496,7 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
                 }
                 // remove references we'll never call now
                 self.blocks = nil;
+                self.onCancel = nil;
             }
         });
     }
@@ -517,6 +518,7 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
             }
             // remove references we'll never call now
             self.blocks = nil;
+            self.onCancel = nil;
         }
     });
 }

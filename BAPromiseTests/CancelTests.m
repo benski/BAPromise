@@ -108,15 +108,16 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
     BAPromiseClient *promise = [[BAPromiseClient alloc] init];
     [promise cancelled:^{
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [expectation fulfill];
-        });
+        XCTFail(@"unepected onCancel");
     }];
     [promise fulfill];
     BACancelToken *token = [promise done:^(id obj) {
         XCTFail(@"unepected fulfillment");
     }];
     [token cancel];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [expectation fulfill];
+    });
     [self waitForExpectationsWithTimeout:0.5 handler:nil];
     
 }
@@ -126,9 +127,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
     BAPromiseClient *promise = [[BAPromiseClient alloc] init];
     [promise cancelled:^{
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [expectation fulfill];
-        });
+        XCTFail(@"unepected onCancel");
     }];
     dispatch_async(dispatch_get_main_queue(), ^{
         [promise fulfill];
@@ -137,6 +136,9 @@
         }];
         [token cancel];
         
+    });
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [expectation fulfill];
     });
     
     [self waitForExpectationsWithTimeout:0.5 handler:nil];
@@ -147,15 +149,17 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
     BAPromiseClient *promise = [[BAPromiseClient alloc] init];
     [promise cancelled:^{
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [expectation fulfill];
-        });
+     XCTFail(@"unepected onCancel");
     }];
     [promise rejectWithError:[NSError errorWithDomain:@"org.benski" code:0 userInfo:nil]];
     BACancelToken *token = [promise rejected:^(NSError *obj) {
         XCTFail(@"unepected rejection");
     }];
     [token cancel];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [expectation fulfill];
+    });
+    
     [self waitForExpectationsWithTimeout:0.5 handler:nil];
     
 }
@@ -165,10 +169,9 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
     BAPromiseClient *promise = [[BAPromiseClient alloc] init];
     [promise cancelled:^{
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [expectation fulfill];
-        });
+        XCTFail(@"unepected onCancel");
     }];
+
     dispatch_async(dispatch_get_main_queue(), ^{
         [promise rejectWithError:[NSError errorWithDomain:@"org.benski" code:0 userInfo:nil]];
         BACancelToken *token = [promise rejected:^(NSError *error) {
@@ -177,7 +180,9 @@
         [token cancel];
         
     });
-    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [expectation fulfill];
+    });
     [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
 
