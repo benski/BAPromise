@@ -125,4 +125,28 @@
     });
     [self waitForExpectationsWithTimeout:3.0 handler:nil];
 }
+
+- (void)testFulfilledObjectEventuallyReleases
+{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"expect object to be released eventually"];
+    
+    __block BACancelToken *token;
+    @autoreleasepool {
+        CancelLeak *tester = CancelLeak.new;
+        tester.expectation = expectation;
+        
+        BAPromiseClient *client = BAPromiseClient.new;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [client fulfillWithObject:tester];
+        });
+        
+        
+        token = [client done:^(id obj) {
+            // noop
+        } finally:^{
+            token = nil;
+        }];
+    }
+    [self waitForExpectationsWithTimeout:1.0 handler:nil];
+}
 @end
