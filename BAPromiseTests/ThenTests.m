@@ -226,4 +226,18 @@
     [promiseMock then:block rejected:block2];
     [promiseMock verify];
 }
+
+-(void)testThenRejectedPassThru
+{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
+    BAPromiseClient *promise = [BAPromiseClient fulfilledPromise:nil];
+    
+    [[promise thenRejected:^id(NSError *error) {
+        XCTFail(@"unexpected rejection");
+        return error;
+    }] done:^(id obj) {
+        [expectation fulfill];
+    }];
+    [self waitForExpectationsWithTimeout:0.5 handler:nil];
+}
 @end

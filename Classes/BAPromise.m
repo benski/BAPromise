@@ -407,13 +407,17 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
     }];
     
     cancellationToken = [self done:^(id obj) {
-        id chainedValue = thenBlock(obj);
-        if ([chainedValue isKindOfClass:[NSError class]]) {
-            // returning an NSError from the 'then' block
-            // turns the fulfillment into a rejection
-            [returnedPromise rejectWithError:(NSError *)chainedValue];
+        if (thenBlock != nil) {
+            id chainedValue = thenBlock(obj);
+            if ([chainedValue isKindOfClass:[NSError class]]) {
+                // returning an NSError from the 'then' block
+                // turns the fulfillment into a rejection
+                [returnedPromise rejectWithError:(NSError *)chainedValue];
+            } else {
+                [returnedPromise fulfillWithObject:chainedValue];
+            }
         } else {
-            [returnedPromise fulfillWithObject:chainedValue];
+            [returnedPromise fulfillWithObject:obj];
         }
     }  observed:nil
                           rejected:^(NSError *error) {
