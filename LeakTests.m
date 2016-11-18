@@ -9,16 +9,24 @@
 #import <XCTest/XCTest.h>
 #import "BAPromise.h"
 
-@interface CancelLeak : NSObject
-@property (nonatomic, strong) BACancelToken *token;
+@interface LeakTester : NSObject
 @property (nonatomic, strong) XCTestExpectation *expectation;
 @end
 
-@implementation CancelLeak
+
+@implementation LeakTester : NSObject
 - (void)dealloc
 {
     [self.expectation fulfill];
 }
+@end
+
+@interface CancelLeak : LeakTester
+@property (nonatomic, strong) BACancelToken *token;
+@end
+
+@implementation CancelLeak
+
 @end
 
 
@@ -100,29 +108,30 @@
     [self waitForExpectationsWithTimeout:3.0 handler:nil];
 }
 
-- (void)testCancelDOESLeakWhenCapturingSelf
+- (void)testCancelLeakWhenCapturingSelf
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"expect strong reference cycle to be resolved"];
+    XCTestExpectation *expectationWait = [self expectationWithDescription:@"Wait to be able to check for leak"];
     
-    CancelLeak *leakTester = CancelLeak.new;
-    leakTester.expectation = expectation;
-    BAPromiseClient *promise = BAPromiseClient.new;
-    [promise cancelled:^{
-        [expectation fulfill];
-    }];
-    __weak CancelLeak *weakLeak = leakTester;
-    leakTester.token = [promise done:^(id obj) {
-        NSLog(@"%@", leakTester.token);
+    @autoreleasepool {
+        CancelLeak *leakTester = CancelLeak.new;
+        leakTester.expectation = expectation;
+        BAPromiseClient *promise = BAPromiseClient.new;
+
+        __weak CancelLeak *weakLeak = leakTester;
+        leakTester.token = [promise done:^(id obj) {
+            NSLog(@"%@", leakTester.token);
+        }
+                                 finally:^{
+                                     weakLeak.token = nil;
+                                 }];
+        
+        leakTester = nil;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            XCTAssertNil(weakLeak);
+            [expectationWait fulfill];
+        });
     }
-                        finally:^{
-                            weakLeak.token = nil;
-                        }];
-    
-    leakTester = nil;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        XCTAssertNotNil(weakLeak);
-        [expectation fulfill];
-    });
     [self waitForExpectationsWithTimeout:3.0 handler:nil];
 }
 
