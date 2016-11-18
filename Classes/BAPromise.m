@@ -229,12 +229,13 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
     blocks.rejected = wrappedRejectedBlock;
     blocks.finally = wrappedFinallyBlock;
     
+    __weak BAPromiseBlocks *weakBlocks = blocks;
     [cancellationToken cancelled:^{
         typeof(self) strongSelf = weakSelf;
         if (strongSelf) {
             dispatch_async(strongSelf.queue, ^{
                 @autoreleasepool {
-                    [strongSelf.blocks removeObjectIdenticalTo:blocks];
+                    [strongSelf.blocks removeObjectIdenticalTo:weakBlocks];
                     
                     BOOL strongCount = NO;
                     for (BAPromiseBlocks *block in strongSelf.blocks) {
