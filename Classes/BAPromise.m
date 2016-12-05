@@ -395,9 +395,10 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
 {
     __block BACancelToken *cancellationToken=nil;
     BAPromiseClient *returnedPromise = [[BAPromiseClient alloc] init];
+    __weak typeof(self) weakSelf = self;
     [returnedPromise cancelled:^{
         if (thread) {
-            [thread performSelector:@selector(ba_runBlock:) onThread:thread withObject:^{
+            [weakSelf performSelector:@selector(ba_runBlock:) onThread:thread withObject:^{
                 [cancellationToken cancel];
             } waitUntilDone:NO];
         } else {
