@@ -438,7 +438,8 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
                               if (finallyBlock) {
                                   finallyBlock();
                               }
-                          } queue:myQueue];
+                          } queue:myQueue
+                            thread:thread];
     
     return returnedPromise;
 }
