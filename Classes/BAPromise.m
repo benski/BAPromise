@@ -354,6 +354,17 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
                 queue:ba_dispatch_get_current_queue()];
 }
 
+-(BACancelToken *)done:(BAPromiseOnFulfilledBlock)onFulfilled
+                thread:(NSThread *)thread
+{
+    return [self done:onFulfilled
+             observed:nil
+             rejected:nil
+              finally:nil
+                queue:nil
+               thread:thread];
+}
+
 #pragma mark - Then
 
 -(BAPromise *)then:(BAPromiseThenBlock)thenBlock
@@ -469,6 +480,27 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
              rejected:onRejected
               finally:nil
                 queue:ba_dispatch_get_current_queue()];
+}
+
+-(BAPromise *)then:(BAPromiseThenBlock)thenBlock
+            thread:(NSThread *)thread
+{
+    return [self then:thenBlock
+             rejected:nil
+              finally:nil
+                queue:nil
+               thread:thread];
+}
+
+-(BAPromise *)then:(BAPromiseThenBlock)thenBlock
+          rejected:(BAPromiseThenRejectedBlock)failureBlock
+            thread:(NSThread *)thread
+{
+    return [self then:thenBlock
+             rejected:failureBlock
+              finally:nil
+                queue:nil
+               thread:thread];
 }
 
 @end

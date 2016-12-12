@@ -56,6 +56,8 @@ typedef dispatch_block_t BAPromiseFinallyBlock;
               rejected:(BAPromiseOnRejectedBlock)onRejected
                finally:(BAPromiseFinallyBlock)onFinally
                  queue:(dispatch_queue_t)queue;
+-(BACancelToken *)done:(void (^)(T obj))onFulfilled
+                thread:(NSThread *)thread;
 
 -(BAPromise *)then:(id (^)(T obj))onFulfilled;
 -(BAPromise *)then:(id (^)(T obj))onFulfilled
@@ -69,6 +71,11 @@ typedef dispatch_block_t BAPromiseFinallyBlock;
 -(BAPromise *)then:(id (^)(T obj))onFulfilled
            finally:(BAPromiseFinallyBlock)onFinally;
 -(BAPromise *)thenRejected:(BAPromiseThenRejectedBlock)onRejected;
+-(BAPromise *)then:(id (^)(T obj))thenBlock
+            thread:(NSThread *)thread;
+-(BAPromise *)then:(id (^)(T obj))thenBlock
+          rejected:(BAPromiseThenRejectedBlock)failureBlock
+            thread:(NSThread *)thread;
 
 @end
 
