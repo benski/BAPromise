@@ -520,6 +520,18 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
     return promise;
 }
 
++(instancetype)promiseWithResolver:(void (^)(void (^fulfill)(id), void (^reject)(NSError *)))resolver
+{
+    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
+    resolver(^(id obj) {
+                 [promise fulfillWithObject:obj];
+             },
+             ^(NSError *error) {
+                 [promise rejectWithError:error];
+             });
+    return promise;
+}
+
 -(void)fulfillWithObject:(id)obj
 {
     if ([obj isKindOfClass:[BAPromise class]]) {
