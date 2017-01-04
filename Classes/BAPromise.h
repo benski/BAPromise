@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 /* block definitions */
+typedef void (^BAPromiseOnFulfillBlock)(id value);
 typedef void (^BAPromiseOnRejectedBlock)(NSError *error);
 typedef id (^BAPromiseThenRejectedBlock)(NSError *error);
 typedef dispatch_block_t BAPromiseFinallyBlock;

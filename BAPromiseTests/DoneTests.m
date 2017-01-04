@@ -126,7 +126,7 @@
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
 
-    [[BAPromise promiseWithResolver:^(void (^ fulfill)(id), void (^ reject)(NSError *)) {
+    [[BAPromise promiseWithResolver:^(BAPromiseOnFulfillBlock fulfill, BAPromiseOnRejectedBlock reject) {
         fulfill(@"Success");
     }] done:^(id obj) {
         [expectation fulfill];
