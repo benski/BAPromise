@@ -99,6 +99,6 @@ __attribute__((deprecated))
 @end
 
 @interface NSArray (BAPromiseJoin)
--(BAPromise<NSArray *> *)whenPromises;
--(BAPromise<NSArray *> *)joinPromises;
+-(nonnull BAPromise<NSArray *> *)whenPromises;
+-(nonnull BAPromise<NSArray *> *)joinPromises;
 @end
