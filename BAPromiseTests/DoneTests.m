@@ -121,4 +121,18 @@
     
     [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
+
+-(void)testSyntaxSugar
+{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
+
+    [[BAPromise promiseWithResolver:^(void (^ fulfill)(id), void (^ reject)(NSError *)) {
+        fulfill(@"Success");
+    }] done:^(id obj) {
+        [expectation fulfill];
+    }];
+    
+    [self waitForExpectationsWithTimeout:0.5 handler:nil];
+}
+
 @end
