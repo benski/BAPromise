@@ -86,7 +86,7 @@ typedef dispatch_block_t BAPromiseFinallyBlock;
 
 // Unfortunate signature thanks to objc fukcing block syntax.
 // This method takes one block "resolver" as a parameter, which takes two blocks "fulfill" and "reject".
-+(nonnull instancetype)promiseWithResolver:(void (^ __nonnull)(void (^ __nonnull fulfill)(__nonnull T), void (^ __nonnull reject)(NSError * __nonnull)))resolver NS_SWIFT_NAME(promise(_:));
++(nonnull instancetype)promiseWithResolver:(void (^ __nonnull)(void (^ __nonnull fulfill)(__nonnull T), void (^ __nonnull reject)(NSError * __nonnull)))resolver NS_SWIFT_NAME(init(_:));
 
 /* helper methods to streamline syntax for nil objects*/
 -(void)fulfill;
