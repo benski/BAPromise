@@ -41,7 +41,7 @@
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Promise should fulfill"];
     
-    BAPromiseClient *promise = BAPromiseClient.new;
+    BAPromise *promise = BAPromise.new;
     
     [promise done:^(id obj){
         XCTAssertEqualObjects(NSThread.currentThread, self.thread);

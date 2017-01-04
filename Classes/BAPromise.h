@@ -77,10 +77,7 @@ typedef dispatch_block_t BAPromiseFinallyBlock;
           rejected:(BAPromiseThenRejectedBlock)failureBlock
             thread:(NSThread *)thread;
 
-@end
-
 // promise producer API
-@interface BAPromiseClient<__covariant T> : BAPromise<T>
 -(void)fulfillWithObject:(T)obj;
 -(void)rejectWithError:(NSError *)error;
 
@@ -94,6 +91,11 @@ typedef dispatch_block_t BAPromiseFinallyBlock;
 /* helper methods to streamline syntax for nil objects*/
 -(void)fulfill;
 -(void)reject;
+
+@end
+
+__attribute__((deprecated))
+@interface BAPromiseClient<__covariant T> : BAPromise<T>
 @end
 
 @interface NSArray (BAPromiseJoin)

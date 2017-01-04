@@ -30,7 +30,7 @@
 -(void)testRejectionAsynchronous
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
-    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
+    BAPromise *promise = [[BAPromise alloc] init];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [promise rejectWithError:[[NSError alloc] init]];
     });
@@ -48,7 +48,7 @@
 -(void)testRejectionFirst
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
-    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
+    BAPromise *promise = [[BAPromise alloc] init];
     [promise rejectWithError:[[NSError alloc] init]];
     
     [promise done:^(id obj) {
@@ -64,7 +64,7 @@
 -(void)testRejectionSecond
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
-    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
+    BAPromise *promise = [[BAPromise alloc] init];
     
     [promise done:^(id obj) {
         XCTFail(@"Unexpected fulfillment");
@@ -103,7 +103,7 @@
 -(void)testRejectHelper
 {
     // calling done:rejected: should turn around and call done:observed:rejected:finally:queue
-    BAPromiseClient *promise = [BAPromiseClient new];
+    BAPromise *promise = [BAPromise new];
     id promiseMock = OCMPartialMock(promise);
     [[promiseMock expect] rejectWithError:OCMOCK_ANY];
     [promise reject];

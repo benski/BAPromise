@@ -62,7 +62,7 @@
     
     @autoreleasepool {
         CancelLeak *leakTester = CancelLeak.new;
-        BAPromiseClient *promise = BAPromiseClient.new;
+        BAPromise *promise = BAPromise.new;
         leakTester.expectation = expectation;
         leakTester.token = [promise finally:^{
             leakTester.token = nil;
@@ -78,7 +78,7 @@
     
     CancelLeak *leakTester = CancelLeak.new;
     leakTester.expectation = expectation;
-    leakTester.token = [BAPromiseClient.new
+    leakTester.token = [BAPromise.new
                         finally:^{
                         }];
     
@@ -94,7 +94,7 @@
     
     CancelLeak *leakTester = CancelLeak.new;
     leakTester.expectation = expectation;
-    BAPromiseClient *promise = BAPromiseClient.new;
+    BAPromise *promise = BAPromise.new;
     [promise cancelled:^{
         [expectation fulfill];
     }];
@@ -116,7 +116,7 @@
     @autoreleasepool {
         CancelLeak *leakTester = CancelLeak.new;
         leakTester.expectation = expectation;
-        BAPromiseClient *promise = BAPromiseClient.new;
+        BAPromise *promise = BAPromise.new;
 
         __weak CancelLeak *weakLeak = leakTester;
         leakTester.token = [promise done:^(id obj) {
@@ -144,7 +144,7 @@
         CancelLeak *tester = CancelLeak.new;
         tester.expectation = expectation;
         
-        BAPromiseClient *client = BAPromiseClient.new;
+        BAPromise *client = BAPromise.new;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [client fulfillWithObject:tester];
         });

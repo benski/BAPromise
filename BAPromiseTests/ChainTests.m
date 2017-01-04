@@ -31,8 +31,8 @@
 -(void)testSimpleFulfill
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
-    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
-    BAPromise *anotherPromise = [BAPromiseClient fulfilledPromise:@7];
+    BAPromise *promise = [[BAPromise alloc] init];
+    BAPromise *anotherPromise = [BAPromise fulfilledPromise:@7];
     
     [promise fulfillWithObject:anotherPromise];
     [promise done:^(id obj) {
@@ -47,8 +47,8 @@
 -(void)testSimpleWhen
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
-    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
-    BAPromise *anotherPromise = [BAPromiseClient fulfilledPromise:@7];
+    BAPromise *promise = [[BAPromise alloc] init];
+    BAPromise *anotherPromise = [BAPromise fulfilledPromise:@7];
     
     [promise fulfillWithObject:anotherPromise];
     [promise done:^(id obj) {
@@ -63,8 +63,8 @@
 -(void)testAsyncWhen
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
-    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
-    BAPromise *anotherPromise = [BAPromiseClient new];
+    BAPromise *promise = [[BAPromise alloc] init];
+    BAPromise *anotherPromise = [BAPromise new];
     
     [promise fulfillWithObject:anotherPromise];
     [promise done:^(id obj) {
@@ -83,8 +83,8 @@
 -(void)testSimpleWhenFail
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
-    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
-    BAPromise *anotherPromise = [BAPromiseClient rejectedPromise:[NSError errorWithDomain:@"org.benski" code:0 userInfo:nil]];
+    BAPromise *promise = [[BAPromise alloc] init];
+    BAPromise *anotherPromise = [BAPromise rejectedPromise:[NSError errorWithDomain:@"org.benski" code:0 userInfo:nil]];
     
     [promise fulfillWithObject:anotherPromise];
     [promise rejected:^(id obj) {
@@ -97,8 +97,8 @@
 -(void)testAsyncWhenFail
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
-    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
-    BAPromise *anotherPromise = [BAPromiseClient new];
+    BAPromise *promise = [[BAPromise alloc] init];
+    BAPromise *anotherPromise = [BAPromise new];
     
     [promise fulfillWithObject:anotherPromise];
     [promise rejected:^(id obj) {
@@ -115,8 +115,8 @@
 -(void)testSimpleWhenFinallyDone
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
-    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
-    BAPromise *anotherPromise = [BAPromiseClient fulfilledPromise:nil];
+    BAPromise *promise = [[BAPromise alloc] init];
+    BAPromise *anotherPromise = [BAPromise fulfilledPromise:nil];
     
     [promise fulfillWithObject:anotherPromise];
     [promise finally:^() {
@@ -129,8 +129,8 @@
 -(void)testSimpleWhenFinallyFail
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
-    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
-    BAPromise *anotherPromise = [BAPromiseClient rejectedPromise:nil];
+    BAPromise *promise = [[BAPromise alloc] init];
+    BAPromise *anotherPromise = [BAPromise rejectedPromise:nil];
     
     [promise fulfillWithObject:anotherPromise];
     [promise finally:^() {
@@ -143,8 +143,8 @@
 -(void)testAsyncWhenFinallyDone
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
-    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
-    BAPromise *anotherPromise = [BAPromiseClient new];
+    BAPromise *promise = [[BAPromise alloc] init];
+    BAPromise *anotherPromise = [BAPromise new];
     
     [promise fulfillWithObject:anotherPromise];
     [promise finally:^() {
@@ -161,8 +161,8 @@
 -(void)testAsyncWhenFinallyFail
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
-    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
-    BAPromise *anotherPromise = [BAPromiseClient new];
+    BAPromise *promise = [BAPromise new];
+    BAPromise *anotherPromise = [BAPromise new];
     
     [promise fulfillWithObject:anotherPromise];
     [promise finally:^() {

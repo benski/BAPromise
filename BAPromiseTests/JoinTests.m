@@ -30,8 +30,8 @@
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Joined Promise should fulfill"];
     
-    BAPromiseClient *promise1 = [[BAPromiseClient alloc] init];
-    BAPromiseClient *promise2 = [[BAPromiseClient alloc] init];
+    BAPromise *promise1 = [[BAPromise alloc] init];
+    BAPromise *promise2 = [[BAPromise alloc] init];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [promise1 fulfill];
@@ -53,8 +53,8 @@
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Joined Promise should fulfill"];
     
-    BAPromiseClient *promise1 = [[BAPromiseClient alloc] init];
-    BAPromiseClient *promise2 = [[BAPromiseClient alloc] init];
+    BAPromise *promise1 = [[BAPromise alloc] init];
+    BAPromise *promise2 = [[BAPromise alloc] init];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [promise1 fulfillWithObject:@3];
@@ -82,9 +82,9 @@
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Joined Promise should not reject when one at least promise fulfills"];
     
-    BAPromiseClient *promise1 = [[BAPromiseClient alloc] init];
-    BAPromiseClient *promise2 = [[BAPromiseClient alloc] init];
-    BAPromiseClient *promise3 = [[BAPromiseClient alloc] init];
+    BAPromise *promise1 = [[BAPromise alloc] init];
+    BAPromise *promise2 = [[BAPromise alloc] init];
+    BAPromise *promise3 = [[BAPromise alloc] init];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [promise1 fulfill];
@@ -111,8 +111,8 @@
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Joined Promise should only reject when all promises reject"];
     
-    BAPromiseClient *promise1 = [[BAPromiseClient alloc] init];
-    BAPromiseClient *promise2 = [[BAPromiseClient alloc] init];
+    BAPromise *promise1 = [[BAPromise alloc] init];
+    BAPromise *promise2 = [[BAPromise alloc] init];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [promise1 reject];
@@ -134,8 +134,8 @@
 - (void)testJoinElementsInOrder
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Joined Promise should fulfill"];
-    BAPromiseClient *promise1 = [[BAPromiseClient alloc] init];
-    BAPromiseClient *promise2 = [[BAPromiseClient alloc] init];
+    BAPromise *promise1 = [[BAPromise alloc] init];
+    BAPromise *promise2 = [[BAPromise alloc] init];
     
     BAPromise * joined = [@[promise1, [promise2 then:^id(id obj) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -181,8 +181,8 @@
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Joined Promise should complete"];
     
-    BAPromiseClient *promise1 = [BAPromiseClient fulfilledPromise:nil];
-    BAPromiseClient *promise2 = [BAPromiseClient fulfilledPromise:@2];
+    BAPromise *promise1 = [BAPromise fulfilledPromise:nil];
+    BAPromise *promise2 = [BAPromise fulfilledPromise:@2];
     
     [@[promise1, promise2].joinPromises done:^(NSArray *obj) {
         XCTAssertEqual(obj.count, 2);

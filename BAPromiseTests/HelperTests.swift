@@ -22,7 +22,7 @@ class HelperTests: XCTestCase {
     func testFulfillWithFactoryMethod() {
         let expectation = XCTestExpectation()
         
-        BAPromiseClient<NSString>.promise({fulfill, reject in
+        BAPromise<NSString>.promise({fulfill, reject in
             fulfill("Success" as NSString)
         }).then { value in
             expectation.fulfill()
@@ -34,7 +34,7 @@ class HelperTests: XCTestCase {
     func testRejectWithFactoryMethod() {
         let expectation = XCTestExpectation()
         
-        BAPromiseClient<NSString>.promise({fulfill, reject in
+        BAPromise<NSString>.promise({fulfill, reject in
             reject(NSError(domain: "promise test", code: 0, userInfo: nil))
         }).then { value in
             XCTFail("the promise should never be fulfilled")
