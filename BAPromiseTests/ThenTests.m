@@ -30,7 +30,7 @@
 -(void)testSimpleThen
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
-    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
+    BAPromise *promise = [[BAPromise alloc] init];
     
     [[promise then:^id(id obj) {
         XCTAssertNil(obj);
@@ -51,11 +51,11 @@
 -(void)testPromiseThen
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
-    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
+    BAPromise *promise = [[BAPromise alloc] init];
     
     [[promise then:^id(id obj) {
         XCTAssertEqualObjects(obj, @6, @"Expected 6");
-        BAPromiseClient *promise2 = [[BAPromiseClient alloc] init];
+        BAPromise *promise2 = [[BAPromise alloc] init];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [promise2 fulfillWithObject:@8];
         });
@@ -76,18 +76,18 @@
 -(void)testPromiseThenTwice
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
-    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
+    BAPromise *promise = [[BAPromise alloc] init];
     
     [[[promise then:^id(id obj) {
         XCTAssertEqualObjects(obj, @6, @"Expected 6");
-        BAPromiseClient *promise2 = [[BAPromiseClient alloc] init];
+        BAPromise *promise2 = [[BAPromise alloc] init];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [promise2 fulfillWithObject:@8];
         });
         return promise2;
     }] then:^id(id obj) {
         XCTAssertEqualObjects(obj, @8, @"Expected 8");
-        BAPromiseClient *promise2 = [[BAPromiseClient alloc] init];
+        BAPromise *promise2 = [[BAPromise alloc] init];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [promise2 fulfillWithObject:@NO];
         });
@@ -107,11 +107,11 @@
 -(void)testFulfilledPromiseThen
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
-    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
+    BAPromise *promise = [[BAPromise alloc] init];
     
     [[promise then:^id(id obj) {
         XCTAssertEqualObjects(obj, @6, @"Expected 6");
-        BAPromiseClient *promise2 = [[BAPromiseClient alloc] init];
+        BAPromise *promise2 = [[BAPromise alloc] init];
         dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [promise2 fulfillWithObject:@8];
         });
@@ -131,7 +131,7 @@
 -(void)testRejectedThen
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
-    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
+    BAPromise *promise = [[BAPromise alloc] init];
     
     [[promise then:^id(id obj) {
         XCTAssertNil(obj);
@@ -156,7 +156,7 @@
 -(void)testUnrejectedThen
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
-    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
+    BAPromise *promise = [[BAPromise alloc] init];
     
     [[promise then:^id(id obj) {
         XCTFail(@"Unexpected fulfillment");
@@ -184,11 +184,11 @@
 -(void)testRejectedPromiseThen
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
-    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
+    BAPromise *promise = [[BAPromise alloc] init];
     
     [[promise then:^id(id obj) {
         XCTAssertEqualObjects(obj, @6, @"Expected 6");
-        BAPromiseClient *promise2 = [[BAPromiseClient alloc] init];
+        BAPromise *promise2 = [[BAPromise alloc] init];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [promise2 reject];
         });
@@ -230,7 +230,7 @@
 -(void)testThenRejectedPassThru
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
-    BAPromiseClient *promise = [BAPromiseClient fulfilledPromise:nil];
+    BAPromise *promise = [BAPromise fulfilledPromise:nil];
     
     [[promise thenRejected:^id(NSError *error) {
         XCTFail(@"unexpected rejection");

@@ -29,7 +29,7 @@
 -(void)testDone
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
-    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
+    BAPromise *promise = [[BAPromise alloc] init];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [promise fulfillWithObject:nil];
     });
@@ -59,7 +59,7 @@
 -(void)testFulfillmentFirst
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
-    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
+    BAPromise *promise = [[BAPromise alloc] init];
     [promise fulfillWithObject:nil];
     
     [promise done:^(id obj) {
@@ -72,7 +72,7 @@
 -(void)testFulfillmentSecond
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
-    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
+    BAPromise *promise = [[BAPromise alloc] init];
     
     [promise done:^(id obj) {
         [expectation fulfill];
@@ -86,7 +86,7 @@
 -(void)testFulfill
 {
     // calling 'fulfill' should call fulfillWithObject:nil
-    BAPromiseClient *promise = [BAPromiseClient new];
+    BAPromise *promise = [BAPromise new];
     id promiseMock = OCMPartialMock(promise);
     [[promiseMock expect] fulfillWithObject:nil];
     [promiseMock fulfill];
@@ -96,7 +96,7 @@
 -(void)testFulfillWithObjectFirst
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
-    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
+    BAPromise *promise = [[BAPromise alloc] init];
     [promise fulfillWithObject:@7];
     
     [promise done:^(id obj) {
@@ -110,7 +110,7 @@
 -(void)testFulfillWithObjectSecond
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
-    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
+    BAPromise *promise = [[BAPromise alloc] init];
     
     [promise done:^(id obj) {
         XCTAssertEqualObjects(obj, @42);
@@ -121,4 +121,18 @@
     
     [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
+
+-(void)testSyntaxSugar
+{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
+
+    [[BAPromise promiseWithResolver:^(BAPromiseOnFulfillBlock fulfill, BAPromiseOnRejectedBlock reject) {
+        fulfill(@"Success");
+    }] done:^(id obj) {
+        [expectation fulfill];
+    }];
+    
+    [self waitForExpectationsWithTimeout:0.5 handler:nil];
+}
+
 @end

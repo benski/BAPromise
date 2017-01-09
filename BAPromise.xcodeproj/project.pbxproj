@@ -13,7 +13,6 @@
 		6F6C8C0B6970DFB7A14E3423 /* Pods_OS_X_OS_XTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B90205B55A87D2F3869C79E4 /* Pods_OS_X_OS_XTests.framework */; };
 		A8751095199B3ADE9CC77F99 /* Pods_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 297F45050D01BCF34E393ECC /* Pods_tvOS.framework */; };
 		B3AADFC61E144AE000E538A2 /* HelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AADFC41E1448DF00E538A2 /* HelperTests.swift */; };
-		C551DD0B60B08A20F5F5CCC6 /* libPods-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 54AD8ABD64B2BF785CB7B8D1 /* libPods-ios.a */; };
 		C9843192B1033B9887D6325A /* Pods_iOS_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9EB8957964B1D09D022C484 /* Pods_iOS_iOSTests.framework */; };
 		D1E0E9C2C71BFBE3BFDF4F22 /* Pods_OS_X.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E77BFEAC3DF4C3784C6CBB4F /* Pods_OS_X.framework */; };
 		D2F7946EDACAE174A5C757DC /* Pods_tvOS_tvOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2667770040C7B146CCC69D3D /* Pods_tvOS_tvOSTests.framework */; };
@@ -108,7 +107,6 @@
 		2E9195B178DB790ED866E310 /* Pods-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ios/Pods-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		3EF2D03E2BA940AD4BF4FB27 /* Pods-osx.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-osx.release.xcconfig"; path = "Pods/Target Support Files/Pods-osx/Pods-osx.release.xcconfig"; sourceTree = "<group>"; };
 		5129D17C789F624CAE958541 /* Pods-OS X.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OS X.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OS X/Pods-OS X.debug.xcconfig"; sourceTree = "<group>"; };
-		54AD8ABD64B2BF785CB7B8D1 /* libPods-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D414C51DEAAB359F2B867D1 /* Pods-iOS-iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-iOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOS-iOSTests/Pods-iOS-iOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		5FF7D83DEA2A4AA8AA86B2F8 /* Pods-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tvOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-tvOS/Pods-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		742837DFA25D4147301AE923 /* Pods-iOS-iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-iOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOS-iOSTests/Pods-iOS-iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -206,7 +204,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C551DD0B60B08A20F5F5CCC6 /* libPods-ios.a in Frameworks */,
 				C9843192B1033B9887D6325A /* Pods_iOS_iOSTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -413,7 +410,6 @@
 		E8A63FA7DF2322FADBA59E26 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				54AD8ABD64B2BF785CB7B8D1 /* libPods-ios.a */,
 				1D714C8E81167F0524D18B92 /* libPods-osx.a */,
 				8880F1B58B30D5FBAAA6C115 /* libPods-tvos.a */,
 				E77BFEAC3DF4C3784C6CBB4F /* Pods_OS_X.framework */,

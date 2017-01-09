@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 /* block definitions */
+typedef void (^BAPromiseOnFulfillBlock)(id value);
 typedef void (^BAPromiseOnRejectedBlock)(NSError *error);
 typedef id (^BAPromiseThenRejectedBlock)(NSError *error);
 typedef dispatch_block_t BAPromiseFinallyBlock;
@@ -77,10 +78,7 @@ typedef dispatch_block_t BAPromiseFinallyBlock;
           rejected:(BAPromiseThenRejectedBlock)failureBlock
             thread:(NSThread *)thread;
 
-@end
-
 // promise producer API
-@interface BAPromiseClient<__covariant T> : BAPromise<T>
 -(void)fulfillWithObject:(T)obj;
 -(void)rejectWithError:(NSError *)error;
 
@@ -89,14 +87,19 @@ typedef dispatch_block_t BAPromiseFinallyBlock;
 
 // Unfortunate signature thanks to objc fukcing block syntax.
 // This method takes one block "resolver" as a parameter, which takes two blocks "fulfill" and "reject".
-+(nonnull instancetype)promiseWithResolver:(void (^ __nonnull)(void (^ __nonnull fulfill)(__nonnull T), void (^ __nonnull reject)(NSError * __nonnull)))resolver NS_SWIFT_NAME(promise(_:));
++(nonnull instancetype)promiseWithResolver:(void (^ __nonnull)(void (^ __nonnull fulfill)(__nonnull T), void (^ __nonnull reject)(NSError * __nonnull)))resolver NS_SWIFT_NAME(init(_:));
 
 /* helper methods to streamline syntax for nil objects*/
 -(void)fulfill;
 -(void)reject;
+
+@end
+
+__attribute__((deprecated))
+@interface BAPromiseClient<__covariant T> : BAPromise<T>
 @end
 
 @interface NSArray (BAPromiseJoin)
--(BAPromise<NSArray *> *)whenPromises;
--(BAPromise<NSArray *> *)joinPromises;
+-(nonnull BAPromise<NSArray *> *)whenPromises;
+-(nonnull BAPromise<NSArray *> *)joinPromises;
 @end

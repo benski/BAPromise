@@ -29,7 +29,7 @@
 -(void)testCancel
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
-    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
+    BAPromise *promise = [[BAPromise alloc] init];
     [promise cancelled:^{
         [expectation fulfill];
     }];
@@ -40,7 +40,7 @@
 -(void)testDoneAfterCancel
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
-    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
+    BAPromise *promise = [[BAPromise alloc] init];
     [promise cancelled:^{
         [expectation fulfill];
     }];
@@ -61,7 +61,7 @@
 
 -(void)testCancelTokenAfterFulfillment
 {
-    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
+    BAPromise *promise = [[BAPromise alloc] init];
     [promise fulfill];
     [promise cancelled:^{
         XCTFail(@"Unexpected cancelled callback");
@@ -72,7 +72,7 @@
 
 -(void)testCancelPromiseAfterFulfilment
 {
-    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
+    BAPromise *promise = [[BAPromise alloc] init];
     [promise fulfill];
     [promise cancelled:^{
         XCTFail(@"Unexpected cancelled callback");
@@ -83,7 +83,7 @@
 
 -(void)testCancelPromiseAfterRejection
 {
-    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
+    BAPromise *promise = [[BAPromise alloc] init];
     [promise reject];
     [promise cancelled:^{
         XCTFail(@"Unexpected cancelled callback");
@@ -95,7 +95,7 @@
 -(void)testLateCancelCallback
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
-    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
+    BAPromise *promise = [[BAPromise alloc] init];
     [promise cancel];
     [promise cancelled:^{
         [expectation fulfill];
@@ -106,7 +106,7 @@
 -(void)testCancelToken
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
-    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
+    BAPromise *promise = [[BAPromise alloc] init];
     [promise cancelled:^{
         XCTFail(@"unepected onCancel");
     }];
@@ -125,7 +125,7 @@
 -(void)testCancelAsyncARC
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
-    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
+    BAPromise *promise = [[BAPromise alloc] init];
     [promise cancelled:^{
         XCTFail(@"unepected onCancel");
     }];
@@ -147,7 +147,7 @@
 -(void)testCancelTokenReject
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
-    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
+    BAPromise *promise = [[BAPromise alloc] init];
     [promise cancelled:^{
      XCTFail(@"unepected onCancel");
     }];
@@ -167,7 +167,7 @@
 -(void)testCancelAsyncARCReject
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
-    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
+    BAPromise *promise = [[BAPromise alloc] init];
     [promise cancelled:^{
         XCTFail(@"unepected onCancel");
     }];
@@ -189,9 +189,9 @@
 -(void)testCancelThen
 {
     XCTestExpectation *expectation1 = [self expectationWithDescription:@"Promise reached inside of then block"];
-    BAPromiseClient *thenPromise = BAPromiseClient.new;
+    BAPromise *thenPromise = BAPromise.new;
     
-    BACancelToken *cancelToken = [[BAPromiseClient fulfilledPromise:nil] then:^id(id obj) {
+    BACancelToken *cancelToken = [[BAPromise fulfilledPromise:nil] then:^id(id obj) {
         [expectation1 fulfill];
         return thenPromise;
     }];
@@ -210,12 +210,12 @@
 -(void)testCancelThenRaceCondition
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Promise reached inside of then block"];
-    BAPromiseClient *thenPromise = BAPromiseClient.new;
+    BAPromise *thenPromise = BAPromise.new;
     [thenPromise cancelled:^{
         [expectation fulfill];
     }];
     
-    BACancelToken *cancelToken = [[BAPromiseClient fulfilledPromise:nil] then:^id(id obj) {
+    BACancelToken *cancelToken = [[BAPromise fulfilledPromise:nil] then:^id(id obj) {
         [cancelToken cancel];
         return thenPromise;
     }];

@@ -30,8 +30,8 @@
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Whened Promise should fulfill"];
     
-    BAPromiseClient *promise1 = [[BAPromiseClient alloc] init];
-    BAPromiseClient *promise2 = [[BAPromiseClient alloc] init];
+    BAPromise *promise1 = [[BAPromise alloc] init];
+    BAPromise *promise2 = [[BAPromise alloc] init];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [promise1 fulfill];
@@ -53,8 +53,8 @@
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Whened Promise should fulfill"];
     
-    BAPromiseClient *promise1 = [[BAPromiseClient alloc] init];
-    BAPromiseClient *promise2 = [[BAPromiseClient alloc] init];
+    BAPromise *promise1 = [[BAPromise alloc] init];
+    BAPromise *promise2 = [[BAPromise alloc] init];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [promise1 fulfillWithObject:@3];
@@ -82,9 +82,9 @@
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Whened Promise should reject when one at least promise rejects"];
     
-    BAPromiseClient *promise1 = [[BAPromiseClient alloc] init];
-    BAPromiseClient *promise2 = [[BAPromiseClient alloc] init];
-    BAPromiseClient *promise3 = [[BAPromiseClient alloc] init];
+    BAPromise *promise1 = [[BAPromise alloc] init];
+    BAPromise *promise2 = [[BAPromise alloc] init];
+    BAPromise *promise3 = [[BAPromise alloc] init];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [promise1 fulfill];
@@ -107,8 +107,8 @@
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Whened Promise should only reject once"];
     
-    BAPromiseClient *promise1 = [[BAPromiseClient alloc] init];
-    BAPromiseClient *promise2 = [[BAPromiseClient alloc] init];
+    BAPromise *promise1 = [[BAPromise alloc] init];
+    BAPromise *promise2 = [[BAPromise alloc] init];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [promise1 reject];
@@ -132,8 +132,8 @@
 - (void)testWhenElementsInOrder
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Whened Promise should fulfill"];
-    BAPromiseClient *promise1 = [[BAPromiseClient alloc] init];
-    BAPromiseClient *promise2 = [[BAPromiseClient alloc] init];
+    BAPromise *promise1 = [[BAPromise alloc] init];
+    BAPromise *promise2 = [[BAPromise alloc] init];
     
     BAPromise * joined = [@[promise1, [promise2 then:^id(id obj) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -158,8 +158,8 @@
 
 -(void)testWhenRejectionCancelsOtherPromises
 {
-    BAPromiseClient *promise1 = [[BAPromiseClient alloc] init];
-    BAPromiseClient *promise2 = [[BAPromiseClient alloc] init];
+    BAPromise *promise1 = [[BAPromise alloc] init];
+    BAPromise *promise2 = [[BAPromise alloc] init];
     
     XCTestExpectation *cancelExpectation = [self expectationWithDescription:@"Whened Promise should cancel"];
     [promise2 cancelled:^{
@@ -200,8 +200,8 @@
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Whened Promise should complete"];
     
-    BAPromiseClient *promise1 = [BAPromiseClient fulfilledPromise:nil];
-    BAPromiseClient *promise2 = [BAPromiseClient fulfilledPromise:@2];
+    BAPromise *promise1 = [BAPromise fulfilledPromise:nil];
+    BAPromise *promise2 = [BAPromise fulfilledPromise:@2];
     
     [@[promise1, promise2].whenPromises done:^(NSArray *obj) {
         XCTAssertEqual(obj.count, 2);

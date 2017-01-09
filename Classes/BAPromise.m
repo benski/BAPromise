@@ -405,7 +405,7 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
             thread:(NSThread *)thread
 {
     __block BACancelToken *cancellationToken=nil;
-    BAPromiseClient *returnedPromise = [[BAPromiseClient alloc] init];
+    BAPromise *returnedPromise = [[BAPromise alloc] init];
     __weak typeof(self) weakSelf = self;
     [returnedPromise cancelled:^{
         if (thread) {
@@ -503,26 +503,23 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
                thread:thread];
 }
 
-@end
-
-@implementation BAPromiseClient
-+(BAPromiseClient *)fulfilledPromise:(id)obj
++(BAPromise *)fulfilledPromise:(id)obj
 {
-    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
+    BAPromise *promise = [[BAPromise alloc] init];
     [promise fulfillWithObject:obj];
     return promise;
 }
 
-+(BAPromiseClient *)rejectedPromise:(NSError *)error
++(BAPromise *)rejectedPromise:(NSError *)error
 {
-    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
+    BAPromise *promise = [[BAPromise alloc] init];
     [promise rejectWithError:error];
     return promise;
 }
 
 +(instancetype)promiseWithResolver:(void (^)(void (^fulfill)(id), void (^reject)(NSError *)))resolver
 {
-    BAPromiseClient *promise = [[BAPromiseClient alloc] init];
+    BAPromise *promise = [[BAPromise alloc] init];
     resolver(^(id obj) {
                  [promise fulfillWithObject:obj];
              },
@@ -607,10 +604,10 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
     // an empty array should return a promise that fulfills with 'nil'.
     // We shortcut the rest of the method here because there are no other promises to trigger our returned promise
     if (self.count == 0) {
-        return [BAPromiseClient fulfilledPromise:nil];
+        return [BAPromise fulfilledPromise:nil];
     }
     
-    BAPromiseClient *returnedPromise = [[BAPromiseClient alloc] init];
+    BAPromise *returnedPromise = [[BAPromise alloc] init];
     dispatch_queue_t myQueue = returnedPromise.queue;
     NSMutableArray *cancellationTokens = [[NSMutableArray alloc] initWithCapacity:self.count];
     
@@ -629,7 +626,7 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
     
     // manually looping so we have an index
     __block NSUInteger fulfilledCount=0;
-    [self enumerateObjectsUsingBlock:^(BAPromiseClient *promise, NSUInteger idx, BOOL *stop) {
+    [self enumerateObjectsUsingBlock:^(BAPromise *promise, NSUInteger idx, BOOL *stop) {
         // these are guaranteed to occur on a serial queue, so there is no need to synchronize
         BACancelToken *token = [promise done:^(id obj) {
             if (obj) {
@@ -657,10 +654,10 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
     // an empty array should return a promise that fulfills with 'nil'.
     // We shortcut the rest of the method here because there are no other promises to trigger our returned promise
     if (self.count == 0) {
-        return [BAPromiseClient fulfilledPromise:nil];
+        return [BAPromise fulfilledPromise:nil];
     }
     
-    BAPromiseClient *returnedPromise = [[BAPromiseClient alloc] init];
+    BAPromise *returnedPromise = [[BAPromise alloc] init];
     dispatch_queue_t myQueue = returnedPromise.queue;
     NSMutableArray *cancellationTokens = [[NSMutableArray alloc] initWithCapacity:self.count];
     
@@ -680,7 +677,7 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
     // manually looping so we have an index
     __block NSUInteger fulfilledCount=0;
     __block BOOL success = NO;
-    [self enumerateObjectsUsingBlock:^(BAPromiseClient *promise, NSUInteger idx, BOOL *stop) {
+    [self enumerateObjectsUsingBlock:^(BAPromise *promise, NSUInteger idx, BOOL *stop) {
         // these are guaranteed to occur on a serial queue, so there is no need to synchronize
         BACancelToken *token = [promise done:^(id obj) {
             success = YES;
