@@ -21,6 +21,7 @@ typedef dispatch_block_t BAPromiseFinallyBlock;
 @end
 
 // promise consumer API
+NS_SWIFT_NAME(Promise)
 @interface BAPromise<__covariant T> : BACancelToken
 -(BACancelToken *)done:(void (^)(T obj))onFulfilled
               observed:(void (^)(T obj))onObserved
