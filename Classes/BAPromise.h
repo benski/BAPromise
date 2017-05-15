@@ -101,6 +101,36 @@ __attribute__((deprecated))
 @end
 
 @interface NSArray (BAPromiseJoin)
+/**
+ *   @brief rejects if any single promise in the array rejects.
+ *
+ *   Method guarantees that the order of the resultant array is the same as the order of promises in the original array.
+ */
 -(nonnull BAPromise<NSArray *> *)whenPromises;
+/**
+ *   @brief rejects only if all promises reject. Otherwise, the fulfilled NSArray value will contain NSError entries in the appropriate array position for promises that have rejected.
+ *
+ *   Method guarantees that the order of the resultant array is the same as the order of promises in the original array.
+ *    @code
+ *    BAPromise <NSString *> *firstPromise = [[BAPromise alloc] init];
+ *    BAPromise <NSString *> *secondPromise = [[BAPromise alloc] init];
+ *    BAPromise <NSArray <NSString *>*> *promises = [@[firstPromise, secondPromise] joinPromises];
+ *    
+ *    [promises then:^id(NSArray *strings) {
+ *          NSLog(@"firstPromise %@", strings[0]);
+ *          NSLog(@"firstPromise is kind Of NSString %d", [strings[0] isKindOfClass:[NSString class]]);
+ *          NSLog(@"secondPromise %@", strings[1]);
+ *          NSLog(@"secondPromise is kind Of NSString %d", [strings[1] isKindOfClass:[NSString class]]);
+ *          return nil;
+ *     }];
+ *     [firstPromise fulfillWithObject:@"Hello"];
+ *     [secondPromise rejectWithError:nil];
+ *
+ *    // firstPromise Hello
+ *    // firstPromise is kind Of NSString 1
+ *    // secondPromise <null>
+ *    // secondPromise is kind Of NSString 0
+ *    @endcode
+ */
 -(nonnull BAPromise<NSArray *> *)joinPromises;
 @end
