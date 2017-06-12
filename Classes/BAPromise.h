@@ -9,82 +9,82 @@
 #import <Foundation/Foundation.h>
 
 /* block definitions */
-typedef void (^BAPromiseOnFulfillBlock)(id value);
-typedef void (^BAPromiseOnRejectedBlock)(NSError *error);
-typedef id (^BAPromiseThenRejectedBlock)(NSError *error);
+typedef void (^BAPromiseOnFulfillBlock)(id _Nullable value);
+typedef void (^BAPromiseOnRejectedBlock)(NSError * _Nullable error);
+typedef id _Nullable (^BAPromiseThenRejectedBlock)(NSError * _Nullable error);
 typedef dispatch_block_t BAPromiseFinallyBlock;
 
 // cancel token for promise
 @interface BACancelToken : NSObject
 -(void)cancel;
--(void)cancelled:(dispatch_block_t)onCancel;
+-(void)cancelled:(nonnull dispatch_block_t)onCancel;
 @end
 
 // promise consumer API
 NS_SWIFT_NAME(Promise)
 @interface BAPromise<__covariant T> : BACancelToken
--(BACancelToken *)done:(void (^)(T obj))onFulfilled
-              observed:(void (^)(T obj))onObserved
-              rejected:(BAPromiseOnRejectedBlock)onRejected
-               finally:(BAPromiseFinallyBlock)onFinally
-                 queue:(dispatch_queue_t)queue
-                thread:(NSThread *)thread;
+-(nonnull BACancelToken *)done:(void (^_Nullable)(T _Nullable obj))onFulfilled
+                      observed:(void (^_Nullable)(T _Nullable obj))onObserved
+                      rejected:(nullable BAPromiseOnRejectedBlock)onRejected
+                       finally:(nullable BAPromiseFinallyBlock)onFinally
+                         queue:(nullable dispatch_queue_t)queue
+                        thread:(nullable NSThread *)thread;
 
 /* then (promise chaining) */
--(BAPromise *)then:(id (^)(T obj))thenBlock
-          rejected:(BAPromiseThenRejectedBlock)failureBlock
-           finally:(BAPromiseFinallyBlock)finallyBlock
-             queue:(dispatch_queue_t)myQueue
-            thread:(NSThread *)thread;
+-(nonnull BAPromise *)then:(id _Nullable (^_Nullable)(T _Nullable obj))thenBlock
+          rejected:(nullable BAPromiseThenRejectedBlock)failureBlock
+           finally:(nullable BAPromiseFinallyBlock)finallyBlock
+             queue:(nullable dispatch_queue_t)myQueue
+            thread:(nullable NSThread *)thread;
 
 /* helper methods to simplify API usage */
--(BACancelToken *)done:(void (^)(T obj))onFulfilled;
--(BACancelToken *)done:(void (^)(T obj))onFulfilled
-              rejected:(BAPromiseOnRejectedBlock)onRejected;
--(BACancelToken *)done:(void (^)(T obj))onFulfilled
-               finally:(BAPromiseFinallyBlock)onFinally;
--(BACancelToken *)done:(void (^)(T obj))onFulfilled
-              rejected:(BAPromiseOnRejectedBlock)onRejected
-                 queue:(dispatch_queue_t)queue;
--(BACancelToken *)done:(void (^)(T obj))onFulfilled
-              rejected:(BAPromiseOnRejectedBlock)onRejected
-               finally:(BAPromiseFinallyBlock)onFinally;
--(BACancelToken *)rejected:(BAPromiseOnRejectedBlock)onRejected;
--(BACancelToken *)rejected:(BAPromiseOnRejectedBlock)onRejected
-                   finally:(BAPromiseFinallyBlock)onFinally;
--(BACancelToken *)finally:(BAPromiseFinallyBlock)onFinally;
--(BACancelToken *)done:(void (^)(T obj))onFulfilled
-              observed:(void (^)(T obj))onObserved
-              rejected:(BAPromiseOnRejectedBlock)onRejected
-               finally:(BAPromiseFinallyBlock)onFinally
-                 queue:(dispatch_queue_t)queue;
--(BACancelToken *)done:(void (^)(T obj))onFulfilled
-                thread:(NSThread *)thread;
+-(nonnull BACancelToken *)done:(void (^ _Nullable)(T _Nullable obj))onFulfilled;
+-(nonnull BACancelToken *)done:(void (^ _Nullable)(T _Nullable obj))onFulfilled
+              rejected:(nullable BAPromiseOnRejectedBlock)onRejected;
+-(nonnull BACancelToken *)done:(void (^ _Nullable)(T _Nullable obj))onFulfilled
+               finally:(nullable BAPromiseFinallyBlock)onFinally;
+-(nonnull BACancelToken *)done:(void (^ _Nullable)(T _Nullable obj))onFulfilled
+              rejected:(nullable BAPromiseOnRejectedBlock)onRejected
+                 queue:(nullable dispatch_queue_t)queue;
+-(nonnull BACancelToken *)done:(void (^ _Nullable)(T _Nullable obj))onFulfilled
+                      rejected:(nullable BAPromiseOnRejectedBlock)onRejected
+                       finally:(nullable BAPromiseFinallyBlock)onFinally;
+-(nonnull BACancelToken *)rejected:(nullable BAPromiseOnRejectedBlock)onRejected;
+-(nonnull BACancelToken *)rejected:(nullable BAPromiseOnRejectedBlock)onRejected
+                   finally:(nullable BAPromiseFinallyBlock)onFinally;
+-(nonnull BACancelToken *)finally:(nullable BAPromiseFinallyBlock)onFinally;
+-(nonnull BACancelToken *)done:(void (^ _Nullable)(T _Nullable obj))onFulfilled
+              observed:(void (^ _Nullable)(T _Nullable obj))onObserved
+              rejected:(nullable BAPromiseOnRejectedBlock)onRejected
+               finally:(nullable BAPromiseFinallyBlock)onFinally
+                 queue:(nullable dispatch_queue_t)queue;
+-(nonnull BACancelToken *)done:(void (^ _Nullable)(T _Nullable obj))onFulfilled
+                thread:(nullable NSThread *)thread;
 
--(BAPromise *)then:(id (^)(T obj))onFulfilled;
--(BAPromise *)then:(id (^)(T obj))onFulfilled
-             queue:(dispatch_queue_t)queue;
--(BAPromise *)then:(id (^)(T obj))onFulfilled
-          rejected:(BAPromiseThenRejectedBlock)onRejected;
--(BAPromise *)then:(id (^)(T obj))onFulfilled
-          rejected:(BAPromiseThenRejectedBlock)onRejected
-           finally:(BAPromiseFinallyBlock)onFinally
-             queue:(dispatch_queue_t)queue;
--(BAPromise *)then:(id (^)(T obj))onFulfilled
-           finally:(BAPromiseFinallyBlock)onFinally;
--(BAPromise *)thenRejected:(BAPromiseThenRejectedBlock)onRejected;
--(BAPromise *)then:(id (^)(T obj))thenBlock
-            thread:(NSThread *)thread;
--(BAPromise *)then:(id (^)(T obj))thenBlock
-          rejected:(BAPromiseThenRejectedBlock)failureBlock
-            thread:(NSThread *)thread;
+-(nonnull BAPromise *)then:(id _Nullable (^ _Nullable)(T _Nullable obj))onFulfilled;
+-(nonnull BAPromise *)then:(id _Nullable (^ _Nullable)(T _Nullable obj))onFulfilled
+             queue:(nullable dispatch_queue_t)queue;
+-(nonnull BAPromise *)then:(id _Nullable (^ _Nullable)(T _Nullable obj))onFulfilled
+          rejected:(nullable BAPromiseThenRejectedBlock)onRejected;
+-(nonnull BAPromise *)then:(id _Nullable (^ _Nullable)(T _Nullable obj))onFulfilled
+          rejected:(nullable BAPromiseThenRejectedBlock)onRejected
+           finally:(nullable BAPromiseFinallyBlock)onFinally
+             queue:(nullable dispatch_queue_t)queue;
+-(nonnull BAPromise *)then:(id _Nullable (^ _Nullable)(T _Nullable obj))onFulfilled
+           finally:(nullable BAPromiseFinallyBlock)onFinally;
+-(nonnull BAPromise *)thenRejected:(nullable BAPromiseThenRejectedBlock)onRejected;
+-(nonnull BAPromise *)then:(id _Nullable (^ _Nullable)(T _Nullable obj))thenBlock
+            thread:(nullable NSThread *)thread;
+-(nonnull BAPromise *)then:(id _Nullable (^ _Nullable)(T _Nullable obj))thenBlock
+          rejected:(nullable BAPromiseThenRejectedBlock)failureBlock
+            thread:(nullable NSThread *)thread;
 
 // promise producer API
--(void)fulfillWithObject:(T)obj;
--(void)rejectWithError:(NSError *)error;
+-(void)fulfillWithObject:(nullable T)obj;
+-(void)rejectWithError:(nullable NSError *)error;
 
-+(instancetype)fulfilledPromise:(T)obj;
-+(instancetype)rejectedPromise:(NSError *)error;
++(nonnull instancetype)fulfilledPromise:(nullable T)obj;
++(nonnull instancetype)rejectedPromise:(nullable NSError *)error;
 
 // Unfortunate signature thanks to objc fukcing block syntax.
 // This method takes one block "resolver" as a parameter, which takes two blocks "fulfill" and "reject".
