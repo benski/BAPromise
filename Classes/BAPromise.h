@@ -10,8 +10,8 @@
 
 /* block definitions */
 typedef void (^BAPromiseOnFulfillBlock)(id _Nullable value);
-typedef void (^BAPromiseOnRejectedBlock)(NSError * _Nullable error);
-typedef id _Nullable (^BAPromiseThenRejectedBlock)(NSError * _Nullable error);
+typedef void (^BAPromiseOnRejectedBlock)(NSError * _Nonnull error);
+typedef id _Nullable (^BAPromiseThenRejectedBlock)(NSError * _Nonnull error);
 typedef dispatch_block_t BAPromiseFinallyBlock;
 
 // cancel token for promise
@@ -81,10 +81,10 @@ NS_SWIFT_NAME(Promise)
 
 // promise producer API
 -(void)fulfillWithObject:(nullable T)obj;
--(void)rejectWithError:(nullable NSError *)error;
+-(void)rejectWithError:(nonnull NSError *)error;
 
 +(nonnull instancetype)fulfilledPromise:(nullable T)obj;
-+(nonnull instancetype)rejectedPromise:(nullable NSError *)error;
++(nonnull instancetype)rejectedPromise:(nonnull NSError *)error;
 
 // Unfortunate signature thanks to objc fukcing block syntax.
 // This method takes one block "resolver" as a parameter, which takes two blocks "fulfill" and "reject".
