@@ -595,6 +595,22 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
     [self rejectWithError:[[NSError alloc] init]];
 }
 
+-(void)fulfillWithObject:(id)object orRejectWithError:(NSError *)error
+{
+    if (error) {
+        [self rejectWithError:error];
+    } else {
+        [self fulfillWithObject:object];
+    }
+}
+
+-(void (^)(id object, NSError *error))completionBlock
+{
+    return ^(id object, NSError *error) {
+        return [self fulfillWithObject:object orRejectWithError:error];
+    };
+}
+
 @end
 
 @implementation NSArray (BAPromiseJoin)

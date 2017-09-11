@@ -82,6 +82,8 @@ NS_SWIFT_NAME(Promise)
 // promise producer API
 -(void)fulfillWithObject:(nullable T)obj;
 -(void)rejectWithError:(nonnull NSError *)error;
+-(void)fulfillWithObject:(nullable T)object orRejectWithError:(nullable NSError *)error;
+-(void (^ _Nonnull)(_Nullable T object,  NSError * _Nullable error))completionBlock;
 
 +(nonnull instancetype)fulfilledPromise:(nullable T)obj;
 +(nonnull instancetype)rejectedPromise:(nonnull NSError *)error;
