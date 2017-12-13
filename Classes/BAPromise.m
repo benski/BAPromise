@@ -21,6 +21,7 @@ typedef id (^BAPromiseThenBlock)(id obj);
 
 typedef NS_ENUM(NSInteger, BAPromiseState) {
     BAPromise_Unfulfilled,
+    BAPromise_Pending, // fulfilled with another promise that's not yet resolved
     BAPromise_Fulfilled,
     BAPromise_Rejected,
     BAPromise_Canceled,
@@ -256,6 +257,7 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
     dispatch_async(self.queue, ^{
         switch(self.promiseState) {
             case BAPromise_Unfulfilled:
+            case BAPromise_Pending:
                       // save the blocks for later
                 if (!self.blocks) {
                     self.blocks = NSMutableArray.new;
@@ -531,30 +533,43 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
 
 -(void)fulfillWithObject:(id)obj
 {
+    [self fulfillWithObject:obj force:NO];
+}
+
+-(void)fulfillWithObject:(id)obj
+                   force:(BOOL)force
+{
     if ([obj isKindOfClass:[BAPromise class]]) {
-        BAPromise *promise = (BAPromise *)obj;
-        if (self.cancelled) {
-            [promise cancel];
-        } else {
-            BACancelToken *cancellationToken;
-            
-            dispatch_queue_t myQueue = promise.queue;
-            
-            cancellationToken = [promise done:^(id obj) {
-                [self fulfillWithObject:obj];
-            } rejected:^(NSError *error) {
-                [self rejectWithError:error];
-            } queue:myQueue];
-            
-            [self cancelled:^{
-                dispatch_async(myQueue, ^{
-                    [cancellationToken cancel];
-                });
-            }];
-        }
+        dispatch_async(self.queue, ^{
+            BAPromise *promise = (BAPromise *)obj;
+            if (self.promiseState == BAPromise_Unfulfilled) {
+                self.promiseState = BAPromise_Pending;
+                self.fulfilledObject = promise;
+                
+                if (self.cancelled) {
+                    [promise cancel];
+                } else {
+                    BACancelToken *cancellationToken;
+                    
+                    dispatch_queue_t myQueue = promise.queue;
+                    
+                    cancellationToken = [promise done:^(id obj) {
+                        [self fulfillWithObject:obj force:YES];
+                    } rejected:^(NSError *error) {
+                        [self rejectWithError:error force:YES];
+                    } queue:myQueue];
+                    
+                    [self cancelled:^{
+                        dispatch_async(myQueue, ^{
+                            [cancellationToken cancel];
+                        });
+                    }];
+                }
+            }
+        });
     } else {
         dispatch_async(self.queue, ^{
-            if (self.promiseState == BAPromise_Unfulfilled) {
+            if (self.promiseState == BAPromise_Unfulfilled || (force && self.promiseState == BAPromise_Pending)) {
                 self.promiseState = BAPromise_Fulfilled;
                 self.fulfilledObject = obj;
                 
@@ -576,8 +591,14 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
 
 -(void)rejectWithError:(NSError *)error
 {
+    [self rejectWithError:error force:NO];
+}
+
+-(void)rejectWithError:(NSError *)error
+                 force:(BOOL)force
+{
     dispatch_async(self.queue, ^{
-        if (self.promiseState == BAPromise_Unfulfilled) {
+        if (self.promiseState == BAPromise_Unfulfilled || (force && self.promiseState == BAPromise_Pending)) {
             self.promiseState = BAPromise_Rejected;
             self.fulfilledObject = error;
             for (BAPromiseBlocks *blocks in self.blocks) {
