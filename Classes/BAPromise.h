@@ -71,7 +71,10 @@ NS_SWIFT_NAME(Promise)
            finally:(nullable BAPromiseFinallyBlock)onFinally
              queue:(nullable dispatch_queue_t)queue;
 -(nonnull BAPromise *)then:(id _Nullable (^ _Nullable)(T _Nullable obj))onFulfilled
-           finally:(nullable BAPromiseFinallyBlock)onFinally;
+                   finally:(nullable BAPromiseFinallyBlock)onFinally;
+-(nonnull BAPromise *)then:(id _Nullable (^ _Nullable)(T _Nullable obj))onFulfilled
+                   finally:(nullable BAPromiseFinallyBlock)onFinally
+                     queue:(nullable dispatch_queue_t)queue;
 -(nonnull BAPromise *)thenRejected:(nullable BAPromiseThenRejectedBlock)onRejected;
 -(nonnull BAPromise *)then:(id _Nullable (^ _Nullable)(T _Nullable obj))thenBlock
             thread:(nullable NSThread *)thread;
