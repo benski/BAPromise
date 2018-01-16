@@ -408,6 +408,17 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
                thread:nil];
 }
 
+-(void)resolveWith:(id)obj
+{
+    if ([obj isKindOfClass:[NSError class]]) {
+        // returning an NSError from the 'then' block
+        // turns the fulfillment into a rejection
+        [self rejectWithError:(NSError *)obj];
+    } else {
+        [self fulfillWithObject:obj];
+    }
+}
+
 -(BAPromise *)then:(BAPromiseThenBlock)thenBlock
           rejected:(BAPromiseThenRejectedBlock)failureBlock
            finally:(BAPromiseFinallyBlock)finallyBlock
@@ -431,37 +442,33 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
     
     cancellationToken = [self done:^(id obj) {
         if (thenBlock != nil) {
-            id chainedValue = thenBlock(obj);
-            if ([chainedValue isKindOfClass:[NSError class]]) {
-                // returning an NSError from the 'then' block
-                // turns the fulfillment into a rejection
-                [returnedPromise rejectWithError:(NSError *)chainedValue];
-            } else {
-                [returnedPromise fulfillWithObject:chainedValue];
+            @try {
+                [returnedPromise resolveWith:thenBlock(obj)];
+            } @catch (NSError *thrownError) {
+                [returnedPromise rejectWithError:thrownError];
             }
         } else {
             [returnedPromise fulfillWithObject:obj];
         }
-    }  observed:nil
-                          rejected:^(NSError *error) {
-                              if (failureBlock != nil) {
-                                  error = failureBlock(error);
-                                  if ([error isKindOfClass:[NSError class]]) {
-                                      // returning anything other than an NSError from the 'rejected' block
-                                      // turns the rejection back into a fulfillment
-                                      [returnedPromise rejectWithError:error];
-                                  } else {
-                                      [returnedPromise fulfillWithObject:error];
-                                  }
-                              } else {
-                                  [returnedPromise rejectWithError:error];
-                              }
-                          } finally:^{
-                              if (finallyBlock) {
-                                  finallyBlock();
-                              }
-                          } queue:myQueue
-                            thread:thread];
+    } observed:nil rejected:^(NSError *error) {
+        if (failureBlock != nil) {
+            @try {
+                @try {
+                    [returnedPromise resolveWith:failureBlock(error)];
+                } @catch (NSError *thrownError) {
+                    [returnedPromise rejectWithError:thrownError];
+                }
+            } @catch (NSError *error) {
+                [returnedPromise rejectWithError:error];
+            }
+        } else {
+            [returnedPromise rejectWithError:error];
+        }
+    } finally:^{
+        if (finallyBlock) {
+            finallyBlock();
+        }
+    } queue:myQueue thread:thread];
     
     return returnedPromise;
 }
