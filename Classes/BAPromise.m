@@ -752,4 +752,49 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
     return returnedPromise;
 }
 
+-(NSArray *)ba_flatten
+{
+    if (self.count == 0) {
+        return self;
+    }
+    
+    NSMutableArray *output = [[NSMutableArray alloc] initWithCapacity:self.count];
+    [self enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        if ([obj isKindOfClass:NSArray.class]) {
+            NSArray *arrayObject = (NSArray *)obj;
+            [output addObjectsFromArray:[arrayObject ba_flatten]];
+        } else {
+            [output addObject:obj];
+        }
+    }];
+    return output;
+}
+
+-(BAPromise<NSArray *> *)flattenPromises
+{
+    // this isn't very optimized, but re-uses some working code
+    // it turns the whole thing into an Array of promises, joins that Array (see joinPromises), and then flattens the array
+    BOOL foundPromise = NO;
+    NSMutableArray *results = NSMutableArray.new;
+    
+    for (id value in self) {
+        if ([value isKindOfClass:BAPromise.class]) {
+            foundPromise = YES;
+            [results addObject:value];
+        } else {
+            [results addObject:[BAPromise fulfilledPromise:value]];
+        }
+    }
+    
+    if (!foundPromise) {
+        return [BAPromise fulfilledPromise:self];
+    } else {
+        return [[results joinPromises] then:^id _Nullable(NSArray * _Nullable obj) {
+            return [obj ba_flatten];
+        }];
+    }
+}
+
+
+
 @end

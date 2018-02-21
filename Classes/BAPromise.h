@@ -138,4 +138,15 @@ __attribute__((deprecated))
  *    @endcode
  */
 -(nonnull BAPromise<NSArray *> *)joinPromises;
+
+/**
+ *   @brief combines an array of Promise objects and non-Promise object into a Promise that returns a single array of non-Promise objects
+ *
+ *   e.g. [@1, @2, SomePromise, @4].
+ *      if SomePromise resolves to @3, the returned promise will resolve to
+ *        [@1, @2, @3, @4]
+ *
+ */
+-(nonnull BAPromise<NSArray *> *)flattenPromises;
+
 @end
