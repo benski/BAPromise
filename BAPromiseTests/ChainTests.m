@@ -74,7 +74,7 @@
     }];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [anotherPromise fulfillWithObject:@7];
+        [promise fulfillWithObject:@7];
     });
     
     [self waitForExpectationsWithTimeout:0.5 handler:nil];
@@ -106,7 +106,7 @@
     }];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [anotherPromise reject];
+        [promise reject];
     });
     
     [self waitForExpectationsWithTimeout:0.5 handler:nil];
@@ -152,7 +152,7 @@
     }];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [anotherPromise fulfillWithObject:nil];
+        [promise fulfillWithObject:nil];
     });
     
     [self waitForExpectationsWithTimeout:0.5 handler:nil];
@@ -170,7 +170,7 @@
     }];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [anotherPromise reject];
+        [promise reject];
     });
     
     [self waitForExpectationsWithTimeout:0.5 handler:nil];
