@@ -42,21 +42,12 @@ public class Promise : PromiseCancelToken {
         private func internalCall(with object: Any) {
             if !self.cancellationToken.cancelled {
                 if let error = object as? Error {
-                    if let rejected = self.rejected {
-                        rejected(error)
-                    }
+                    rejected?(error)
                 } else {
-                    if let done = self.done {
-                        done(object)
-                    }
-                    
-                    if let observed = self.observed {
-                        observed(object)
-                    }
+                    done?(object)
+                    observed?(object)
                 }
-                if let always = self.always {
-                    always()
-                }
+                always?()
             }
         }
         
