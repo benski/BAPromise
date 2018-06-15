@@ -33,6 +33,11 @@
 		E77B335A1D58EACA0083903F /* ThreadTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E77B33591D58EACA0083903F /* ThreadTests.m */; };
 		E77B335B1D58EACA0083903F /* ThreadTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E77B33591D58EACA0083903F /* ThreadTests.m */; };
 		E77B335C1D58EACA0083903F /* ThreadTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E77B33591D58EACA0083903F /* ThreadTests.m */; };
+		E7A7153020D435A5004CCDEE /* PromiseBlocksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A7152F20D435A5004CCDEE /* PromiseBlocksTests.swift */; };
+		E7A7153120D4374B004CCDEE /* PromiseBlocksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A7152F20D435A5004CCDEE /* PromiseBlocksTests.swift */; };
+		E7A7153220D437B8004CCDEE /* BAPromise.swift in Sources */ = {isa = PBXBuildFile; fileRef = E750EAC620D4212C008417E6 /* BAPromise.swift */; };
+		E7A7153320D437B9004CCDEE /* BAPromise.swift in Sources */ = {isa = PBXBuildFile; fileRef = E750EAC620D4212C008417E6 /* BAPromise.swift */; };
+		E7A7153420D437C0004CCDEE /* PromiseBlocksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A7152F20D435A5004CCDEE /* PromiseBlocksTests.swift */; };
 		E7B8D21B1B7E6CB000823BFC /* BAPromise.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D21A1B7E6CB000823BFC /* BAPromise.m */; };
 		E7B8D21C1B7E6CC300823BFC /* BAPromise.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D21A1B7E6CB000823BFC /* BAPromise.m */; };
 		E7B8D22D1B7E6CFE00823BFC /* CancelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D21D1B7E6CDF00823BFC /* CancelTests.m */; };
@@ -147,6 +152,7 @@
 		E76F50711DC8FF7100C6425C /* LeakTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeakTests.m; sourceTree = "<group>"; };
 		E77B33591D58EACA0083903F /* ThreadTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ThreadTests.m; path = BAPromiseTests/ThreadTests.m; sourceTree = "<group>"; };
 		E77BFEAC3DF4C3784C6CBB4F /* Pods_OS_X.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OS_X.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7A7152F20D435A5004CCDEE /* PromiseBlocksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PromiseBlocksTests.swift; path = BAPromiseTests/PromiseBlocksTests.swift; sourceTree = "<group>"; };
 		E7B8D2191B7E6CB000823BFC /* BAPromise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BAPromise.h; path = Classes/BAPromise.h; sourceTree = "<group>"; };
 		E7B8D21A1B7E6CB000823BFC /* BAPromise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BAPromise.m; path = Classes/BAPromise.m; sourceTree = "<group>"; };
 		E7B8D21D1B7E6CDF00823BFC /* CancelTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CancelTests.m; path = BAPromiseTests/CancelTests.m; sourceTree = "<group>"; };
@@ -370,6 +376,7 @@
 				E76F50711DC8FF7100C6425C /* LeakTests.m */,
 				B3AADFC41E1448DF00E538A2 /* HelperTests.swift */,
 				B3AADFC31E1448DF00E538A2 /* OS XTests-Bridging-Header.h */,
+				E7A7152F20D435A5004CCDEE /* PromiseBlocksTests.swift */,
 			);
 			name = Tests;
 			sourceTree = "<group>";
@@ -944,6 +951,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7B8D22D1B7E6CFE00823BFC /* CancelTests.m in Sources */,
+				E7A7153020D435A5004CCDEE /* PromiseBlocksTests.swift in Sources */,
 				E77B335A1D58EACA0083903F /* ThreadTests.m in Sources */,
 				E7E3E8D01CBD511F00C55538 /* WhenTests.m in Sources */,
 				E7B8D22E1B7E6CFE00823BFC /* ChainTests.m in Sources */,
@@ -965,6 +973,7 @@
 				E7B8D21C1B7E6CC300823BFC /* BAPromise.m in Sources */,
 				E712B35C1B7E6B7900590AA8 /* ViewController.m in Sources */,
 				E712B3591B7E6B7800590AA8 /* AppDelegate.m in Sources */,
+				E7A7153220D437B8004CCDEE /* BAPromise.swift in Sources */,
 				E712B3561B7E6B7800590AA8 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -973,6 +982,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7A7153120D4374B004CCDEE /* PromiseBlocksTests.swift in Sources */,
 				E7B8D2351B7E6D0200823BFC /* CancelTests.m in Sources */,
 				E77B335B1D58EACA0083903F /* ThreadTests.m in Sources */,
 				E7E3E8D11CBD511F00C55538 /* WhenTests.m in Sources */,
@@ -996,6 +1006,7 @@
 				E7CA171B1BB9B131002D7196 /* BAPromise.m in Sources */,
 				E7CA17031BB9B0FC002D7196 /* ViewController.m in Sources */,
 				E7CA17001BB9B0FC002D7196 /* AppDelegate.m in Sources */,
+				E7A7153320D437B9004CCDEE /* BAPromise.swift in Sources */,
 				E7CA16FD1BB9B0FC002D7196 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1011,6 +1022,7 @@
 				E7CA171E1BB9B154002D7196 /* DoneTests.m in Sources */,
 				E7CA171F1BB9B156002D7196 /* JoinTests.m in Sources */,
 				E7CA17201BB9B158002D7196 /* RejectTests.m in Sources */,
+				E7A7153420D437C0004CCDEE /* PromiseBlocksTests.swift in Sources */,
 				E7CA17211BB9B15C002D7196 /* TestWaiter.m in Sources */,
 				E7CA17221BB9B15E002D7196 /* ThenTests.m in Sources */,
 				E7E3E8D21CBD511F00C55538 /* WhenTests.m in Sources */,
@@ -1264,6 +1276,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 742837DFA25D4147301AE923 /* Pods-iOS-iOSTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = iOSTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1280,6 +1293,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5D414C51DEAAB359F2B867D1 /* Pods-iOS-iOSTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = iOSTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1332,6 +1346,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0518CB3DF35F802C5ED1D0D7 /* Pods-tvOS-tvOSTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = tvOSTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1348,6 +1363,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C1C40DD6F36EB21757E7B24E /* Pods-tvOS-tvOSTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = tvOSTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

@@ -9,17 +9,17 @@
 import Foundation
 
 
-class PromiseCancelToken {
+public class PromiseCancelToken {
     var cancelled : Bool = false
 }
 
-class Promise : PromiseCancelToken {
+public class Promise : PromiseCancelToken {
 
     enum PromiseState {
-        case .unfulfilled
-        case .fulfilled
-        case .rejected
-        case .canceled
+        case unfulfilled
+        case fulfilled
+        case rejected
+        case canceled
     }
     
     class PromiseBlock {
@@ -30,37 +30,42 @@ class Promise : PromiseCancelToken {
         var queue : DispatchQueue?
         let cancellationToken : PromiseCancelToken
         
-        let shouldKeepPromise {
+        init(cancellationToken: PromiseCancelToken) {
+            self.cancellationToken = cancellationToken
+        }
+        var shouldKeepPromise: Bool {
             get {
-                return done != nil || finally != nil || rejected != nil
+                return done != nil || always != nil || rejected != nil
             }
         }
         
         func call(with object: Any) {
             if let queue = queue {
-                if !cancellationToken.cancelled {
-                    if let error = object as? Error {
-                        if let rejected = rejected {
-                            rejected(error)
+                queue.async {
+                    if !self.cancellationToken.cancelled {
+                        if let error = object as? Error {
+                            if let rejected = self.rejected {
+                                rejected(error)
+                            }
+                        } else {
+                            if let done = self.done {
+                                done(object)
+                            }
+                            
+                            if let observed = self.observed {
+                                observed(object)
+                            }
                         }
-                    } else {
-                        if let done = done {
-                            done(object)
+                        if let always = self.always {
+                            always()
                         }
-                        
-                        if let observed = observed {
-                            observed(object)
-                        }
-                    }
-                    if let finally = finally {
-                        finally()
                     }
                 }
             }
         }
     }
     
-    let queue : dispatch_queue_t = DispatchQueue()
+    let queue = DispatchQueue(label: "Promise")
     
     
     
