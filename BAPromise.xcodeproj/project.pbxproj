@@ -26,7 +26,7 @@
 		E712B3611B7E6B7900590AA8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E712B3601B7E6B7900590AA8 /* Assets.xcassets */; };
 		E712B3641B7E6B7900590AA8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E712B3621B7E6B7900590AA8 /* LaunchScreen.storyboard */; };
 		E712B36F1B7E6B7900590AA8 /* iOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E712B36E1B7E6B7900590AA8 /* iOSTests.m */; };
-		E750EAC720D4212C008417E6 /* BAPromise.swift in Sources */ = {isa = PBXBuildFile; fileRef = E750EAC620D4212C008417E6 /* BAPromise.swift */; };
+		E750EAC720D4212C008417E6 /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = E750EAC620D4212C008417E6 /* Promise.swift */; };
 		E76F50721DC8FF7100C6425C /* LeakTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E76F50711DC8FF7100C6425C /* LeakTests.m */; };
 		E76F50731DC8FF7100C6425C /* LeakTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E76F50711DC8FF7100C6425C /* LeakTests.m */; };
 		E76F50741DC8FF7100C6425C /* LeakTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E76F50711DC8FF7100C6425C /* LeakTests.m */; };
@@ -35,9 +35,10 @@
 		E77B335C1D58EACA0083903F /* ThreadTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E77B33591D58EACA0083903F /* ThreadTests.m */; };
 		E7A7153020D435A5004CCDEE /* PromiseBlocksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A7152F20D435A5004CCDEE /* PromiseBlocksTests.swift */; };
 		E7A7153120D4374B004CCDEE /* PromiseBlocksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A7152F20D435A5004CCDEE /* PromiseBlocksTests.swift */; };
-		E7A7153220D437B8004CCDEE /* BAPromise.swift in Sources */ = {isa = PBXBuildFile; fileRef = E750EAC620D4212C008417E6 /* BAPromise.swift */; };
-		E7A7153320D437B9004CCDEE /* BAPromise.swift in Sources */ = {isa = PBXBuildFile; fileRef = E750EAC620D4212C008417E6 /* BAPromise.swift */; };
+		E7A7153220D437B8004CCDEE /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = E750EAC620D4212C008417E6 /* Promise.swift */; };
+		E7A7153320D437B9004CCDEE /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = E750EAC620D4212C008417E6 /* Promise.swift */; };
 		E7A7153420D437C0004CCDEE /* PromiseBlocksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A7152F20D435A5004CCDEE /* PromiseBlocksTests.swift */; };
+		E7A7153620D43AE5004CCDEE /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = E750EAC620D4212C008417E6 /* Promise.swift */; };
 		E7B8D21B1B7E6CB000823BFC /* BAPromise.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D21A1B7E6CB000823BFC /* BAPromise.m */; };
 		E7B8D21C1B7E6CC300823BFC /* BAPromise.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D21A1B7E6CB000823BFC /* BAPromise.m */; };
 		E7B8D22D1B7E6CFE00823BFC /* CancelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D21D1B7E6CDF00823BFC /* CancelTests.m */; };
@@ -148,7 +149,7 @@
 		E712B36E1B7E6B7900590AA8 /* iOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iOSTests.m; sourceTree = "<group>"; };
 		E712B3701B7E6B7900590AA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E750EAC520D4212B008417E6 /* OS X-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OS X-Bridging-Header.h"; sourceTree = "<group>"; };
-		E750EAC620D4212C008417E6 /* BAPromise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BAPromise.swift; path = Classes/BAPromise.swift; sourceTree = "<group>"; };
+		E750EAC620D4212C008417E6 /* Promise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Promise.swift; path = Classes/Promise.swift; sourceTree = "<group>"; };
 		E76F50711DC8FF7100C6425C /* LeakTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeakTests.m; sourceTree = "<group>"; };
 		E77B33591D58EACA0083903F /* ThreadTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ThreadTests.m; path = BAPromiseTests/ThreadTests.m; sourceTree = "<group>"; };
 		E77BFEAC3DF4C3784C6CBB4F /* Pods_OS_X.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OS_X.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -354,7 +355,7 @@
 			children = (
 				E7B8D2191B7E6CB000823BFC /* BAPromise.h */,
 				E7B8D21A1B7E6CB000823BFC /* BAPromise.m */,
-				E750EAC620D4212C008417E6 /* BAPromise.swift */,
+				E750EAC620D4212C008417E6 /* Promise.swift */,
 				E750EAC520D4212B008417E6 /* OS X-Bridging-Header.h */,
 			);
 			name = Classes;
@@ -939,7 +940,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E750EAC720D4212C008417E6 /* BAPromise.swift in Sources */,
+				E750EAC720D4212C008417E6 /* Promise.swift in Sources */,
 				E712B3341B7E6B4800590AA8 /* main.m in Sources */,
 				E7B8D21B1B7E6CB000823BFC /* BAPromise.m in Sources */,
 				E712B3311B7E6B4800590AA8 /* AppDelegate.m in Sources */,
@@ -973,7 +974,7 @@
 				E7B8D21C1B7E6CC300823BFC /* BAPromise.m in Sources */,
 				E712B35C1B7E6B7900590AA8 /* ViewController.m in Sources */,
 				E712B3591B7E6B7800590AA8 /* AppDelegate.m in Sources */,
-				E7A7153220D437B8004CCDEE /* BAPromise.swift in Sources */,
+				E7A7153220D437B8004CCDEE /* Promise.swift in Sources */,
 				E712B3561B7E6B7800590AA8 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -984,6 +985,7 @@
 			files = (
 				E7A7153120D4374B004CCDEE /* PromiseBlocksTests.swift in Sources */,
 				E7B8D2351B7E6D0200823BFC /* CancelTests.m in Sources */,
+				E7A7153620D43AE5004CCDEE /* Promise.swift in Sources */,
 				E77B335B1D58EACA0083903F /* ThreadTests.m in Sources */,
 				E7E3E8D11CBD511F00C55538 /* WhenTests.m in Sources */,
 				E7B8D2361B7E6D0200823BFC /* ChainTests.m in Sources */,
@@ -1006,7 +1008,7 @@
 				E7CA171B1BB9B131002D7196 /* BAPromise.m in Sources */,
 				E7CA17031BB9B0FC002D7196 /* ViewController.m in Sources */,
 				E7CA17001BB9B0FC002D7196 /* AppDelegate.m in Sources */,
-				E7A7153320D437B9004CCDEE /* BAPromise.swift in Sources */,
+				E7A7153320D437B9004CCDEE /* Promise.swift in Sources */,
 				E7CA16FD1BB9B0FC002D7196 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

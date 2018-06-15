@@ -22,33 +22,33 @@ class PromiseBlocksTests: XCTestCase {
     }
     
     func testKeepBlockEmpty() {
-        let promiseBlock = Promise.PromiseBlock()
+        let promiseBlock = Promise.PromiseBlock(cancellationToken: PromiseCancelToken())
         XCTAssertFalse(promiseBlock.shouldKeepPromise)
     }
     
     func testKeepBlockObserved() {
-        let promiseBlock = Promise.PromiseBlock()
-        promiseBlock.observed = { }
+        let promiseBlock = Promise.PromiseBlock(cancellationToken: PromiseCancelToken())
+        promiseBlock.observed = { (obj) in }
         XCTAssertFalse(promiseBlock.shouldKeepPromise)
     }
     
     func testKeepBlockDone() {
-        let promiseBlock = Promise.PromiseBlock()
-        promiseBlock.done = { }
+        let promiseBlock = Promise.PromiseBlock(cancellationToken: PromiseCancelToken())
+        promiseBlock.done = { (obj) in }
         XCTAssertTrue(promiseBlock.shouldKeepPromise)
     }
     
     func testKeepBlockRejected() {
-        let promiseBlock = Promise.PromiseBlock()
-        promiseBlock.rejected = { }
+        let promiseBlock = Promise.PromiseBlock(cancellationToken: PromiseCancelToken())
+        promiseBlock.rejected = { (obj) in }
         XCTAssertTrue(promiseBlock.shouldKeepPromise)
     }
     
     func testKeepBlockAlways() {
-        let promiseBlock = Promise.PromiseBlock()
+        let promiseBlock = Promise.PromiseBlock(cancellationToken: PromiseCancelToken())
         promiseBlock.always = { }
         XCTAssertTrue(promiseBlock.shouldKeepPromise)
     }
-
+    
     
 }

@@ -22,7 +22,7 @@ public class Promise : PromiseCancelToken {
         case canceled
     }
     
-    class PromiseBlock {
+    public class PromiseBlock {
         var done : ((Any) -> Void)?
         var observed : ((Any) -> Void)?
         var rejected : ((Error) -> Void)?
