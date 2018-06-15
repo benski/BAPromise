@@ -202,7 +202,7 @@
     NSArray *toFlatten = @[@1, [BAPromise fulfilledPromise:@[@1.1, @[@1.2]]], @2, [BAPromise fulfilledPromise:@3], @4];
     
     [toFlatten.flattenPromises done:^(NSArray *obj) {
-        NSArray *compare = @[@1, @1.1, @[@1.2], @2, @3, @4];
+        NSArray *compare = @[@1, @1.1, @1.2, @2, @3, @4];
         XCTAssertEqualObjects(obj, compare);
     } rejected:^(NSError *error) {
         XCTFail(@"Unexpected Rejection");

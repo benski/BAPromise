@@ -45,6 +45,27 @@
     [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
 
+-(void)testDoneVerifyQueue
+{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
+    BAPromise *promise = [[BAPromise alloc] init];
+    dispatch_queue_t myQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [promise fulfillWithObject:nil];
+    });
+    
+    [promise done:^(id obj) {
+        XCTAssertEqual(myQueue, dispatch_get_current_queue(), @"Unexpected queue for fulfillment");
+        [expectation fulfill];
+    }
+         observed:nil
+         rejected:nil
+          finally:nil
+            queue:myQueue];
+    
+    [self waitForExpectationsWithTimeout:0.5 handler:nil];
+}
+
 -(void)testDoneHelper
 {
     // calling 'done' should turn around and call done:observed:rejected:finally:queue
