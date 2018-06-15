@@ -39,28 +39,34 @@ public class Promise : PromiseCancelToken {
             }
         }
         
+        private func internalCall(with object: Any) {
+            if !self.cancellationToken.cancelled {
+                if let error = object as? Error {
+                    if let rejected = self.rejected {
+                        rejected(error)
+                    }
+                } else {
+                    if let done = self.done {
+                        done(object)
+                    }
+                    
+                    if let observed = self.observed {
+                        observed(object)
+                    }
+                }
+                if let always = self.always {
+                    always()
+                }
+            }
+        }
+        
         func call(with object: Any) {
             if let queue = queue {
                 queue.async {
-                    if !self.cancellationToken.cancelled {
-                        if let error = object as? Error {
-                            if let rejected = self.rejected {
-                                rejected(error)
-                            }
-                        } else {
-                            if let done = self.done {
-                                done(object)
-                            }
-                            
-                            if let observed = self.observed {
-                                observed(object)
-                            }
-                        }
-                        if let always = self.always {
-                            always()
-                        }
-                    }
+                    self.internalCall(with: object)
                 }
+            } else {
+                internalCall(with: object)
             }
         }
     }
