@@ -26,6 +26,7 @@
 		E712B3611B7E6B7900590AA8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E712B3601B7E6B7900590AA8 /* Assets.xcassets */; };
 		E712B3641B7E6B7900590AA8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E712B3621B7E6B7900590AA8 /* LaunchScreen.storyboard */; };
 		E712B36F1B7E6B7900590AA8 /* iOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E712B36E1B7E6B7900590AA8 /* iOSTests.m */; };
+		E750EAC720D4212C008417E6 /* BAPromise.swift in Sources */ = {isa = PBXBuildFile; fileRef = E750EAC620D4212C008417E6 /* BAPromise.swift */; };
 		E76F50721DC8FF7100C6425C /* LeakTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E76F50711DC8FF7100C6425C /* LeakTests.m */; };
 		E76F50731DC8FF7100C6425C /* LeakTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E76F50711DC8FF7100C6425C /* LeakTests.m */; };
 		E76F50741DC8FF7100C6425C /* LeakTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E76F50711DC8FF7100C6425C /* LeakTests.m */; };
@@ -141,6 +142,8 @@
 		E712B36A1B7E6B7900590AA8 /* iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E712B36E1B7E6B7900590AA8 /* iOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iOSTests.m; sourceTree = "<group>"; };
 		E712B3701B7E6B7900590AA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E750EAC520D4212B008417E6 /* OS X-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OS X-Bridging-Header.h"; sourceTree = "<group>"; };
+		E750EAC620D4212C008417E6 /* BAPromise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BAPromise.swift; path = Classes/BAPromise.swift; sourceTree = "<group>"; };
 		E76F50711DC8FF7100C6425C /* LeakTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeakTests.m; sourceTree = "<group>"; };
 		E77B33591D58EACA0083903F /* ThreadTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ThreadTests.m; path = BAPromiseTests/ThreadTests.m; sourceTree = "<group>"; };
 		E77BFEAC3DF4C3784C6CBB4F /* Pods_OS_X.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OS_X.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -345,6 +348,8 @@
 			children = (
 				E7B8D2191B7E6CB000823BFC /* BAPromise.h */,
 				E7B8D21A1B7E6CB000823BFC /* BAPromise.m */,
+				E750EAC620D4212C008417E6 /* BAPromise.swift */,
+				E750EAC520D4212B008417E6 /* OS X-Bridging-Header.h */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -551,6 +556,7 @@
 				TargetAttributes = {
 					E712B32B1B7E6B4800590AA8 = {
 						CreatedOnToolsVersion = 7.0;
+						LastSwiftMigration = 0940;
 					};
 					E712B33E1B7E6B4900590AA8 = {
 						CreatedOnToolsVersion = 7.0;
@@ -926,6 +932,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E750EAC720D4212C008417E6 /* BAPromise.swift in Sources */,
 				E712B3341B7E6B4800590AA8 /* main.m in Sources */,
 				E7B8D21B1B7E6CB000823BFC /* BAPromise.m in Sources */,
 				E712B3311B7E6B4800590AA8 /* AppDelegate.m in Sources */,
@@ -1153,11 +1160,14 @@
 			baseConfigurationReference = 5129D17C789F624CAE958541 /* Pods-OS X.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "OS X/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.benski.promise.OS-X";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "OS X-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -1167,11 +1177,13 @@
 			baseConfigurationReference = 8A66D686E60BD55536E75979 /* Pods-OS X.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "OS X/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.benski.promise.OS-X";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "OS X-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -1180,6 +1192,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E14F693767827D731C33ACC1 /* Pods-OS X-OS XTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1198,6 +1211,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DBCB8FAFF3B7C9A5E69B6303 /* Pods-OS X-OS XTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
