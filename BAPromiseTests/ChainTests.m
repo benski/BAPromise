@@ -130,7 +130,7 @@
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
     BAPromise *promise = [[BAPromise alloc] init];
-    BAPromise *anotherPromise = [BAPromise rejectedPromise:nil];
+    BAPromise *anotherPromise = [BAPromise rejectedPromise:[NSError errorWithDomain:@"com.github.benski.promise" code:0 userInfo:nil]];
     
     [promise fulfillWithObject:anotherPromise];
     [promise finally:^() {

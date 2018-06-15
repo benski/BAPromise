@@ -56,7 +56,7 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
     };
     
     dispatch_async(_queue, ^{
-        if (_promiseState != BAPromise_Rejected && _promiseState != BAPromise_Fulfilled) {
+        if (self.promiseState != BAPromise_Rejected && self.promiseState != BAPromise_Fulfilled) {
             if (self.cancelled) {
                 wrappedCancelBlock();
             } else {
