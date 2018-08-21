@@ -8,6 +8,11 @@
 
 import Foundation
 
+public enum PromiseResult {
+    case success(Any?)
+    case promise(Promise)
+    case failure(Error)
+}
 
 public class PromiseCancelToken {
     enum PromiseState {
@@ -98,7 +103,7 @@ public class Promise : PromiseCancelToken {
               observed: ((Any?) -> Void)? = nil,
               rejected : ((Error) -> Void)? = nil,
               always : (() -> Void)? = nil,
-              queue : DispatchQueue) {
+              queue : DispatchQueue) -> PromiseCancelToken {
         let cancellationToken = PromiseCancelToken()
         let blocks = PromiseBlock(cancellationToken: cancellationToken)
         blocks.queue = queue
@@ -142,7 +147,74 @@ public class Promise : PromiseCancelToken {
                 }
             }
         }
+        return cancellationToken
     }
     
     lazy var blocks: Array<PromiseBlock> = []
+}
+
+// fulfillment
+extension Promise {
+    
+    func fulfill(with: PromiseResult) {
+        switch(with) {
+        case .success(let value):
+            Promise.queue.async {
+                guard self.promiseState == .unfulfilled else { return }
+                self.fulfilledObject = value
+                self.promiseState = .fulfilled
+                for block in self.blocks {
+                    block.call(with: value)
+                }
+                // remove references we'll never call now
+                self.blocks.removeAll()
+                self.onCancel = nil
+            }
+            
+        case .failure(let error):
+            Promise.queue.async {
+                guard self.promiseState == .unfulfilled else { return }
+                self.fulfilledObject = error
+                self.promiseState = .rejected
+                for block in self.blocks {
+                    block.call(with: error)
+                }
+                // remove references we'll never call now
+                self.blocks.removeAll()
+                self.onCancel = nil
+            }
+            
+        case .promise(let promise):
+            if self.cancelled {
+                promise.cancel()
+            } else {
+                let cancellationToken = promise.done({ self.fulfill(with: .success($0)) },
+                                                     rejected: { self.fulfill(with: .failure($0)) },
+                                                     queue: Promise.queue)
+                
+                self.cancelled({ cancellationToken.cancel() }, on: Promise.queue)
+            }
+        }
+    }
+}
+
+// Then
+extension Promise {
+    func then(_ onFulfilled: ((Any?) -> PromiseResult)? = nil,
+              rejected : ((Error) -> PromiseResult)? = nil,
+              queue : DispatchQueue) -> Promise {
+        var cancellationToken: PromiseCancelToken? = nil
+        let returnedPromise = Promise()
+        returnedPromise.cancelled({ cancellationToken?.cancel() }, on: queue)
+
+        cancellationToken = self.done({ value in
+            let chained = onFulfilled?(value) ?? .success(value)
+            returnedPromise.fulfill(with: chained)
+        }, rejected: { error in
+            let chained = rejected?(error) ?? .failure(error)
+            returnedPromise.fulfill(with: chained)
+        }, queue: queue)
+        
+        return returnedPromise
+    }
 }
