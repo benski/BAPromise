@@ -26,47 +26,47 @@ class PromiseBlocksTests: XCTestCase {
     }
     
     func testKeepBlockEmpty() {
-        let promiseBlock = Promise.PromiseBlock(cancellationToken: PromiseCancelToken())
+        let promiseBlock = Promise<Void>.PromiseBlock(cancellationToken: PromiseCancelToken())
         XCTAssertFalse(promiseBlock.shouldKeepPromise)
     }
     
     func testKeepBlockObserved() {
-        let promiseBlock = Promise.PromiseBlock(cancellationToken: PromiseCancelToken())
+        let promiseBlock = Promise<Void>.PromiseBlock(cancellationToken: PromiseCancelToken())
         promiseBlock.observed = { (obj) in }
         XCTAssertFalse(promiseBlock.shouldKeepPromise)
     }
     
     func testKeepBlockDone() {
-        let promiseBlock = Promise.PromiseBlock(cancellationToken: PromiseCancelToken())
+        let promiseBlock = Promise<Void>.PromiseBlock(cancellationToken: PromiseCancelToken())
         promiseBlock.done = { (obj) in }
         XCTAssertTrue(promiseBlock.shouldKeepPromise)
     }
     
     func testKeepBlockRejected() {
-        let promiseBlock = Promise.PromiseBlock(cancellationToken: PromiseCancelToken())
+        let promiseBlock = Promise<Void>.PromiseBlock(cancellationToken: PromiseCancelToken())
         promiseBlock.rejected = { (obj) in }
         XCTAssertTrue(promiseBlock.shouldKeepPromise)
     }
     
     func testKeepBlockAlways() {
-        let promiseBlock = Promise.PromiseBlock(cancellationToken: PromiseCancelToken())
+        let promiseBlock = Promise<Void>.PromiseBlock(cancellationToken: PromiseCancelToken())
         promiseBlock.always = { }
         XCTAssertTrue(promiseBlock.shouldKeepPromise)
     }
     
     func testCallNonError() {
-        let promiseBlock = Promise.PromiseBlock(cancellationToken: PromiseCancelToken())
+        let promiseBlock = Promise<Int>.PromiseBlock(cancellationToken: PromiseCancelToken())
         let callObj = 7
         
         let doneExpect = XCTestExpectation()
         promiseBlock.done = { (obj) in
-            XCTAssertEqual(obj as! Int, callObj)
+            XCTAssertEqual(obj, callObj)
             doneExpect.fulfill()
         }
         
         let observedExpect = XCTestExpectation()
         promiseBlock.observed = { (obj) in
-            XCTAssertEqual(obj as! Int, callObj)
+            XCTAssertEqual(obj, callObj)
             observedExpect.fulfill()
         }
         
@@ -79,13 +79,13 @@ class PromiseBlocksTests: XCTestCase {
             alwaysExpect.fulfill()
         }
         
-        promiseBlock.call(with: callObj)
+        promiseBlock.call(with: .success(callObj))
         
         self.wait(for: [doneExpect, observedExpect, alwaysExpect], timeout: 10)
     }
  
     func testCallNonErrorOnQueue() {
-        let promiseBlock = Promise.PromiseBlock(cancellationToken: PromiseCancelToken())
+        let promiseBlock = Promise<Int>.PromiseBlock(cancellationToken: PromiseCancelToken())
         let key = DispatchSpecificKey<String>()
         promiseBlock.queue = DispatchQueue(label: "testCallNonErrorOnQueue")
         promiseBlock.queue?.setSpecific(key: key, value: "testCallNonErrorOnQueue")
@@ -93,7 +93,7 @@ class PromiseBlocksTests: XCTestCase {
         
         let doneExpect = XCTestExpectation()
         promiseBlock.done = { obj in
-            XCTAssertEqual(obj as! Int, callObj)
+            XCTAssertEqual(obj, callObj)
             XCTAssertEqual(DispatchQueue.getSpecific(key: key), "testCallNonErrorOnQueue")
             doneExpect.fulfill()
         }
@@ -115,13 +115,13 @@ class PromiseBlocksTests: XCTestCase {
             alwaysExpect.fulfill()
         }
         
-        promiseBlock.call(with: callObj)
+        promiseBlock.call(with: .success(callObj))
         
         self.wait(for: [doneExpect, observedExpect, alwaysExpect], timeout: 10)
     }
     
     func testCallError() {
-        let promiseBlock = Promise.PromiseBlock(cancellationToken: PromiseCancelToken())
+        let promiseBlock = Promise<Void>.PromiseBlock(cancellationToken: PromiseCancelToken())
         let callObj = DummyError.dummy
         
         promiseBlock.done = { obj in
@@ -143,13 +143,13 @@ class PromiseBlocksTests: XCTestCase {
             alwaysExpect.fulfill()
         }
         
-        promiseBlock.call(with: callObj)
+        promiseBlock.call(with: .failure(callObj))
         
         self.wait(for: [rejectedExpectation, alwaysExpect], timeout: 10)
     }
     
     func testCallErrorOnQueue() {
-        let promiseBlock = Promise.PromiseBlock(cancellationToken: PromiseCancelToken())
+        let promiseBlock = Promise<Void>.PromiseBlock(cancellationToken: PromiseCancelToken())
         let key = DispatchSpecificKey<String>()
         promiseBlock.queue = DispatchQueue(label: "testCallNonErrorOnQueue")
         promiseBlock.queue?.setSpecific(key: key, value: "testCallNonErrorOnQueue")
@@ -175,7 +175,7 @@ class PromiseBlocksTests: XCTestCase {
             alwaysExpect.fulfill()
         }
         
-        promiseBlock.call(with: callObj)
+        promiseBlock.call(with: .failure(callObj))
         
         self.wait(for: [rejectedExpectation, alwaysExpect], timeout: 10)
     }

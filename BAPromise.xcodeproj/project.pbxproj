@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0CFAEB19212C71C500777107 /* Promise+ObjC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFAEB18212C71C500777107 /* Promise+ObjC.swift */; };
+		0CFAEB1D212C9A8F00777107 /* DoneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFAEB1C212C9A8F00777107 /* DoneTests.swift */; };
+		0CFAEB1E212C9A8F00777107 /* DoneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFAEB1C212C9A8F00777107 /* DoneTests.swift */; };
+		0CFAEB1F212C9A8F00777107 /* DoneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFAEB1C212C9A8F00777107 /* DoneTests.swift */; };
 		3214F58F6DA81220AA8CC2F1 /* Pods_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1877D722813E904D61872347 /* Pods_iOS.framework */; };
 		6F6C8C0B6970DFB7A14E3423 /* Pods_OS_X_OS_XTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B90205B55A87D2F3869C79E4 /* Pods_OS_X_OS_XTests.framework */; };
 		A8751095199B3ADE9CC77F99 /* Pods_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 297F45050D01BCF34E393ECC /* Pods_tvOS.framework */; };
@@ -103,6 +106,7 @@
 /* Begin PBXFileReference section */
 		0518CB3DF35F802C5ED1D0D7 /* Pods-tvOS-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tvOS-tvOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-tvOS-tvOSTests/Pods-tvOS-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		0CFAEB18212C71C500777107 /* Promise+ObjC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Promise+ObjC.swift"; path = "Classes/Promise+ObjC.swift"; sourceTree = "<group>"; };
+		0CFAEB1C212C9A8F00777107 /* DoneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DoneTests.swift; path = BAPromiseTests/DoneTests.swift; sourceTree = "<group>"; };
 		0DC6C8A91AB714249173C72B /* Pods-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tvOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-tvOS/Pods-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		16DD4F3550F929C5BBD8BDD9 /* Pods-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOS/Pods-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		1877D722813E904D61872347 /* Pods_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -380,6 +384,7 @@
 				B3AADFC41E1448DF00E538A2 /* HelperTests.swift */,
 				B3AADFC31E1448DF00E538A2 /* OS XTests-Bridging-Header.h */,
 				E7A7152F20D435A5004CCDEE /* PromiseBlocksTests.swift */,
+				0CFAEB1C212C9A8F00777107 /* DoneTests.swift */,
 			);
 			name = Tests;
 			sourceTree = "<group>";
@@ -871,6 +876,7 @@
 				E7B8D2311B7E6CFE00823BFC /* RejectTests.m in Sources */,
 				E7B8D2321B7E6CFE00823BFC /* TestWaiter.h in Sources */,
 				E7B8D2331B7E6CFE00823BFC /* TestWaiter.m in Sources */,
+				0CFAEB1D212C9A8F00777107 /* DoneTests.swift in Sources */,
 				E7B8D2341B7E6CFE00823BFC /* ThenTests.m in Sources */,
 				E712B3441B7E6B4900590AA8 /* OS_XTests.m in Sources */,
 			);
@@ -895,6 +901,7 @@
 				E7A7153120D4374B004CCDEE /* PromiseBlocksTests.swift in Sources */,
 				E7B8D2351B7E6D0200823BFC /* CancelTests.m in Sources */,
 				E7A7153620D43AE5004CCDEE /* Promise.swift in Sources */,
+				0CFAEB1E212C9A8F00777107 /* DoneTests.swift in Sources */,
 				E77B335B1D58EACA0083903F /* ThreadTests.m in Sources */,
 				E7E3E8D11CBD511F00C55538 /* WhenTests.m in Sources */,
 				E7B8D2361B7E6D0200823BFC /* ChainTests.m in Sources */,
@@ -925,6 +932,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CFAEB1F212C9A8F00777107 /* DoneTests.swift in Sources */,
 				E7CA17131BB9B0FC002D7196 /* tvOSTests.m in Sources */,
 				E7CA171C1BB9B151002D7196 /* CancelTests.m in Sources */,
 				E7CA171D1BB9B153002D7196 /* ChainTests.m in Sources */,
