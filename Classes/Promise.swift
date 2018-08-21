@@ -227,19 +227,41 @@ extension Promise {
 
 // Then
 extension Promise {
-    func then(_ onFulfilled: ((ValueType) -> PromiseResult<ValueType>)? = nil,
-              rejected : ((Error) -> PromiseResult<ValueType>)? = nil,
-              queue : DispatchQueue) -> Promise {
+    func then<ReturnType>(_ onFulfilled: @escaping ((ValueType) throws -> PromiseResult<ReturnType>),
+                          rejected : ((Error) -> PromiseResult<ReturnType>)? = nil,
+                          queue : DispatchQueue) -> Promise<ReturnType> {
         var cancellationToken: PromiseCancelToken? = nil
-        let returnedPromise = Promise()
+        let returnedPromise = Promise<ReturnType>()
         returnedPromise.cancelled({ cancellationToken?.cancel() }, on: queue)
 
         cancellationToken = self.then({ value -> Void in
-            let chained = onFulfilled?(value) ?? .success(value)
-            returnedPromise.fulfill(with: chained)
+            do {
+                let chained = try onFulfilled(value)
+                returnedPromise.fulfill(with: chained)
+            } catch let error {
+                returnedPromise.fulfill(with: .failure(error))
+            }
         }, rejected: { error in
             let chained = rejected?(error) ?? .failure(error)
             returnedPromise.fulfill(with: chained)
+        }, queue: queue)
+        
+        return returnedPromise
+    }
+    
+    func map<ReturnType>(_ onFulfilled: @escaping ((ValueType) throws -> ReturnType),
+                          queue : DispatchQueue) -> Promise<ReturnType> {
+        var cancellationToken: PromiseCancelToken? = nil
+        let returnedPromise = Promise<ReturnType>()
+        returnedPromise.cancelled({ cancellationToken?.cancel() }, on: queue)
+        
+        cancellationToken = self.then({ value -> Void in
+            do {
+                let chained = try onFulfilled(value)
+                returnedPromise.fulfill(with: .success(chained))
+            } catch let error {
+                returnedPromise.fulfill(with: .failure(error))
+            }
         }, queue: queue)
         
         return returnedPromise

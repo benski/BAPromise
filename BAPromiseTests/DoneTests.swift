@@ -35,4 +35,19 @@ class DoneTests: XCTestCase {
         self.wait(for: [expectation], timeout: 0.5)
     }
     
+    func testDonePrimitive() {
+        let expectation = XCTestExpectation()
+        let promise = Promise<Float?>()
+        DispatchQueue.global().async {
+            promise.fulfill(with: .success(3.14))
+        }
+        
+        promise.then({ value in
+//            XCTAssertEqual(value, 3.14, "Unexpected Value")
+            expectation.fulfill()
+        }, queue:DispatchQueue.main)
+        
+        self.wait(for: [expectation], timeout: 0.5)
+    }
+    
 }
