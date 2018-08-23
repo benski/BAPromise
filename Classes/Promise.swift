@@ -103,15 +103,15 @@ public class Promise<ValueType> : PromiseCancelToken {
         }
         
         private func internalCall(with object: PromiseResult<ValueType>) {
-            if !self.cancellationToken.cancelled {
-                if case let .failure(error) = object {
-                    rejected?(error)
-                } else if case let .success(value) = object {
-                    done?(value)
-                    observed?(value)
-                }
-                always?()
+            guard !cancellationToken.cancelled else { return }
+            
+            if case let .failure(error) = object {
+                rejected?(error)
+            } else if case let .success(value) = object {
+                done?(value)
+                observed?(value)
             }
+            always?()
         }
         
         func call(with object: PromiseResult<ValueType>) {
@@ -138,27 +138,20 @@ public class Promise<ValueType> : PromiseCancelToken {
         blocks.rejected = rejected
         blocks.always = always
         
-        cancellationToken.cancelled({ [weak self, unowned blocks] in
+        cancellationToken.cancelled({ [weak self, weak blocks] in
             Promise.queue.async {
-                if let `self` = self {                    
-                    blocks.done = nil
-                    blocks.observed = nil
-                    blocks.rejected = nil
-                    blocks.always = nil
-                    
-                    var strongCount = false
-                    for block in `self`.blocks {
-                        if block.shouldKeepPromise {
-                            strongCount = true
-                            break
-                        }
-                    }
-                    if strongCount {
-                        `self`.cancel()
-                    }
+                guard let strongBlocks = blocks else { return }
+                strongBlocks.done = nil
+                strongBlocks.observed = nil
+                strongBlocks.rejected = nil
+                strongBlocks.always = nil
+                
+                guard let strongSelf = self else { return }                
+                if !strongSelf.blocks.contains(where: { $0.shouldKeepPromise }) {
+                    strongSelf.cancel()
                 }
             }
-        }, on: queue)
+            }, on: queue)
 
         if let fulfilledObject = self.fulfilledObject, fulfilledObject.resolved {
             blocks.call(with: fulfilledObject)
