@@ -81,13 +81,17 @@ public class Promise<ValueType> : PromiseCancelToken {
     
     var fulfilledObject: PromiseResult<ValueType>?
     
+    public typealias Fulfilled = (ValueType) -> Void
+    public typealias Rejected = (Error) -> Void
+    public typealias Always = () -> Void
+    
     public class PromiseBlock {
-        var done : ((ValueType) -> Void)?
-        var observed : ((ValueType) -> Void)?
-        var rejected : ((Error) -> Void)?
-        var always : (() -> Void)?
-        var queue : DispatchQueue?
-        let cancellationToken : PromiseCancelToken
+        var done: Fulfilled?
+        var observed: Fulfilled?
+        var rejected: Rejected?
+        var always: Always?
+        var queue: DispatchQueue?
+        let cancellationToken: PromiseCancelToken
         
         init(cancellationToken: PromiseCancelToken) {
             self.cancellationToken = cancellationToken
@@ -121,11 +125,11 @@ public class Promise<ValueType> : PromiseCancelToken {
         }
     }
     
-    @discardableResult func then(_ onFulfilled: ((ValueType) -> Void)? = nil,
-                                 observed: ((ValueType) -> Void)? = nil,
-                                 rejected : ((Error) -> Void)? = nil,
-                                 always : (() -> Void)? = nil,
-                                 queue : DispatchQueue) -> PromiseCancelToken {
+    @discardableResult func then(_ onFulfilled: Fulfilled? = nil,
+                                 observed: Fulfilled? = nil,
+                                 rejected: Rejected? = nil,
+                                 always: Always? = nil,
+                                 queue: DispatchQueue) -> PromiseCancelToken {
         let cancellationToken = PromiseCancelToken()
         let blocks = PromiseBlock(cancellationToken: cancellationToken)
         blocks.queue = queue
@@ -194,6 +198,18 @@ public class Promise<ValueType> : PromiseCancelToken {
 
 }
 
+// creation
+extension Promise {
+    convenience init(_ value: ValueType) {
+        self.init()
+        self.fulfilledObject = .success(value)
+    }
+    
+    convenience init(_ error: Error) {
+        self.init()
+        self.fulfilledObject = .failure(error)
+    }
+}
 // fulfillment
 extension Promise {
     
@@ -227,8 +243,10 @@ extension Promise {
 
 // Then
 extension Promise {
+    public typealias ThenRejected<ReturnType> = (Error) -> PromiseResult<ReturnType>
+    
     func then<ReturnType>(_ onFulfilled: @escaping ((ValueType) throws -> PromiseResult<ReturnType>),
-                          rejected : ((Error) -> PromiseResult<ReturnType>)? = nil,
+                          rejected : @escaping ThenRejected<ReturnType> = { return .failure($0) },
                           queue : DispatchQueue) -> Promise<ReturnType> {
         var cancellationToken: PromiseCancelToken? = nil
         let returnedPromise = Promise<ReturnType>()
@@ -242,7 +260,7 @@ extension Promise {
                 returnedPromise.fulfill(with: .failure(error))
             }
         }, rejected: { error in
-            let chained = rejected?(error) ?? .failure(error)
+            let chained = rejected(error)
             returnedPromise.fulfill(with: chained)
         }, queue: queue)
         
@@ -263,6 +281,76 @@ extension Promise {
                 returnedPromise.fulfill(with: .failure(error))
             }
         }, queue: queue)
+        
+        return returnedPromise
+    }
+}
+
+// Join
+extension Promise {
+    // we can't currently have a templated extension (e.g. extension Array where Element = Promise<_>) so we have to do it this way
+    class func when(promises: [Promise<ValueType>]) -> Promise<Array<ValueType>> {
+        guard promises.count > 0 else { return Promise<Array<ValueType>>([]) }
+        var cancelTokens = [PromiseCancelToken]()
+        
+        let returnedPromise = Promise<Array<ValueType>> ()
+        var results = Array<ValueType?>(repeating:nil, count:promises.count)
+        
+        returnedPromise.cancelled({
+            for token in cancelTokens {
+                token.cancel()
+            }
+        }, on: Promise.queue)
+        
+        var remaining = promises.count
+        
+        for (offset, promise) in promises.enumerated() {
+            let token = promise.then({ (value) in
+                results[offset] = value
+                remaining = remaining - 1
+                if remaining == 0 {
+                    returnedPromise.fulfill(with: .success(results.compactMap {$0}))
+                }
+            }, rejected: { (error) in
+                returnedPromise.fulfill(with: .failure(error))
+                for token in cancelTokens {
+                    token.cancel()
+                }
+            }, queue: Promise.queue)
+            cancelTokens.append(token)
+        }
+        
+        return returnedPromise
+    }
+    
+    class func join(promises: [Promise<ValueType>]) -> Promise<Array<PromiseResult<ValueType>>> {
+        guard promises.count > 0 else { return Promise<Array<PromiseResult<ValueType>>>([]) }
+        var cancelTokens = [PromiseCancelToken]()
+        
+        let returnedPromise = Promise<Array<PromiseResult<ValueType>>> ()
+        var results = Array<PromiseResult<ValueType>?>(repeating:nil, count:promises.count)
+        
+        var remaining = promises.count
+        
+        returnedPromise.cancelled({
+            for token in cancelTokens {
+                token.cancel()
+            }
+        }, on: Promise.queue)
+        
+        for (offset, promise) in promises.enumerated() {
+            let token = promise.then({ (value) in
+                results[offset] = .success(value)
+            }, rejected: { (error) in
+                results[offset] = .failure(error)
+            }, always: {
+                remaining = remaining - 1
+                if remaining == 0 {
+                    returnedPromise.fulfill(with: .success(results.compactMap({$0})))
+                }
+            }, queue: Promise.queue)
+            cancelTokens.append(token)
+        }
         
         return returnedPromise
     }

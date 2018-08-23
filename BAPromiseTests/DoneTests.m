@@ -143,17 +143,17 @@
     [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
 
--(void)testSyntaxSugar
-{
-    XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
-
-    [[BAPromise promiseWithResolver:^(BAPromiseOnFulfillBlock fulfill, BAPromiseOnRejectedBlock reject) {
-        fulfill(@"Success");
-    }] done:^(id obj) {
-        [expectation fulfill];
-    }];
-    
-    [self waitForExpectationsWithTimeout:0.5 handler:nil];
-}
+//-(void)testSyntaxSugar
+//{
+//    XCTestExpectation *expectation = [self expectationWithDescription:@"Promise Resolution"];
+//
+//    [[BAPromise promiseWithResolver:^(BAPromiseOnFulfillBlock fulfill, BAPromiseOnRejectedBlock reject) {
+//        fulfill(@"Success");
+//    }] done:^(id obj) {
+//        [expectation fulfill];
+//    }];
+//    
+//    [self waitForExpectationsWithTimeout:0.5 handler:nil];
+//}
 
 @end

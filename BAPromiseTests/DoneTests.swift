@@ -43,7 +43,7 @@ class DoneTests: XCTestCase {
         }
         
         promise.then({ value in
-//            XCTAssertEqual(value, 3.14, "Unexpected Value")
+            XCTAssertEqual(value, 3.14, "Unexpected Value")
             expectation.fulfill()
         }, queue:DispatchQueue.main)
         

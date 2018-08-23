@@ -21,7 +21,6 @@ typedef dispatch_block_t BAPromiseFinallyBlock;
 @end
 
 // promise consumer API
-//NS_SWIFT_NAME(Promise)
 @interface BAPromise<__covariant T> : BACancelToken
 -(nonnull BACancelToken *)done:(void (^_Nullable)(T _Nullable obj))onFulfilled
                       observed:(void (^_Nullable)(T _Nullable obj))onObserved
@@ -99,6 +98,8 @@ typedef dispatch_block_t BAPromiseFinallyBlock;
 -(void)fulfill;
 -(void)reject;
 
+/* private! */
+@property (nonatomic, strong, readonly) dispatch_queue_t queue;
 @end
 
 __attribute__((deprecated))

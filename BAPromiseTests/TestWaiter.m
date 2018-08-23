@@ -7,6 +7,7 @@
 //
 
 #import "TestWaiter.h"
+#import "BAPromise.h"
 
 @implementation XCTestCase (Promise)
 

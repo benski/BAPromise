@@ -8,7 +8,17 @@
 
 import Foundation
 
-/* ObjC bridge for Promise. We need a separate object so we can use Any instead of AnyObject */
-@objc public class PromiseObjC : NSObject {
-    
+extension Promise where ValueType : AnyObject {
+    public func objcPromise() -> BAPromise<ValueType> {
+        let baPromise = BAPromise<ValueType>()
+        let token = self.then({ (value) in
+            baPromise.fulfill(with: value)
+        }, rejected: { (error) in
+            baPromise.rejectWithError(error)
+        }, queue: baPromise.queue ?? DispatchQueue.main)
+        baPromise.cancelled {
+            token.cancel()
+        }
+        return baPromise
+    }
 }
