@@ -8,14 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		0CFAEB19212C71C500777107 /* Promise+ObjC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFAEB18212C71C500777107 /* Promise+ObjC.swift */; };
-		0CFAEB1D212C9A8F00777107 /* DoneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFAEB1C212C9A8F00777107 /* DoneTests.swift */; };
-		0CFAEB1E212C9A8F00777107 /* DoneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFAEB1C212C9A8F00777107 /* DoneTests.swift */; };
-		0CFAEB1F212C9A8F00777107 /* DoneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFAEB1C212C9A8F00777107 /* DoneTests.swift */; };
+		0CFAEB1D212C9A8F00777107 /* DoneTestsSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFAEB1C212C9A8F00777107 /* DoneTestsSwift.swift */; };
+		0CFAEB1E212C9A8F00777107 /* DoneTestsSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFAEB1C212C9A8F00777107 /* DoneTestsSwift.swift */; };
+		0CFAEB1F212C9A8F00777107 /* DoneTestsSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFAEB1C212C9A8F00777107 /* DoneTestsSwift.swift */; };
 		0CFAEB20212DF38400777107 /* Promise+ObjC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFAEB18212C71C500777107 /* Promise+ObjC.swift */; };
 		0CFAEB21212DF38400777107 /* Promise+ObjC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFAEB18212C71C500777107 /* Promise+ObjC.swift */; };
 		0CFAEB24212EFE9D00777107 /* BAPromise.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CFAEB22212EFE9D00777107 /* BAPromise.m */; };
 		0CFAEB25212EFE9D00777107 /* BAPromise.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CFAEB22212EFE9D00777107 /* BAPromise.m */; };
 		0CFAEB26212EFE9D00777107 /* BAPromise.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CFAEB22212EFE9D00777107 /* BAPromise.m */; };
+		0CFAEB28212F1DE200777107 /* CancelTestsSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFAEB27212F1DE200777107 /* CancelTestsSwift.swift */; };
+		0CFAEB29212F1DE200777107 /* CancelTestsSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFAEB27212F1DE200777107 /* CancelTestsSwift.swift */; };
+		0CFAEB2A212F1DE200777107 /* CancelTestsSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFAEB27212F1DE200777107 /* CancelTestsSwift.swift */; };
+		0CFAEB2C212F370100777107 /* ChainTestsSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFAEB2B212F370100777107 /* ChainTestsSwift.swift */; };
+		0CFAEB2D212F370100777107 /* ChainTestsSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFAEB2B212F370100777107 /* ChainTestsSwift.swift */; };
+		0CFAEB2E212F370100777107 /* ChainTestsSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFAEB2B212F370100777107 /* ChainTestsSwift.swift */; };
 		3214F58F6DA81220AA8CC2F1 /* Pods_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1877D722813E904D61872347 /* Pods_iOS.framework */; };
 		6F6C8C0B6970DFB7A14E3423 /* Pods_OS_X_OS_XTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B90205B55A87D2F3869C79E4 /* Pods_OS_X_OS_XTests.framework */; };
 		A8751095199B3ADE9CC77F99 /* Pods_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 297F45050D01BCF34E393ECC /* Pods_tvOS.framework */; };
@@ -107,9 +113,11 @@
 /* Begin PBXFileReference section */
 		0518CB3DF35F802C5ED1D0D7 /* Pods-tvOS-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tvOS-tvOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-tvOS-tvOSTests/Pods-tvOS-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		0CFAEB18212C71C500777107 /* Promise+ObjC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Promise+ObjC.swift"; path = "Classes/Promise+ObjC.swift"; sourceTree = "<group>"; };
-		0CFAEB1C212C9A8F00777107 /* DoneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DoneTests.swift; path = BAPromiseTests/DoneTests.swift; sourceTree = "<group>"; };
+		0CFAEB1C212C9A8F00777107 /* DoneTestsSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DoneTestsSwift.swift; path = BAPromiseTests/DoneTestsSwift.swift; sourceTree = "<group>"; };
 		0CFAEB22212EFE9D00777107 /* BAPromise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BAPromise.m; path = Classes/BAPromise.m; sourceTree = "<group>"; };
 		0CFAEB23212EFE9D00777107 /* BAPromise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BAPromise.h; path = Classes/BAPromise.h; sourceTree = "<group>"; };
+		0CFAEB27212F1DE200777107 /* CancelTestsSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CancelTestsSwift.swift; path = BAPromiseTests/CancelTestsSwift.swift; sourceTree = "<group>"; };
+		0CFAEB2B212F370100777107 /* ChainTestsSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChainTestsSwift.swift; path = BAPromiseTests/ChainTestsSwift.swift; sourceTree = "<group>"; };
 		0DC6C8A91AB714249173C72B /* Pods-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tvOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-tvOS/Pods-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		16DD4F3550F929C5BBD8BDD9 /* Pods-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOS/Pods-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		1877D722813E904D61872347 /* Pods_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -371,8 +379,11 @@
 			isa = PBXGroup;
 			children = (
 				E7B8D21D1B7E6CDF00823BFC /* CancelTests.m */,
+				0CFAEB27212F1DE200777107 /* CancelTestsSwift.swift */,
 				E7B8D21E1B7E6CDF00823BFC /* ChainTests.m */,
+				0CFAEB2B212F370100777107 /* ChainTestsSwift.swift */,
 				E7B8D21F1B7E6CDF00823BFC /* DoneTests.m */,
+				0CFAEB1C212C9A8F00777107 /* DoneTestsSwift.swift */,
 				E7B8D2201B7E6CDF00823BFC /* JoinTests.m */,
 				E7B8D2211B7E6CDF00823BFC /* RejectTests.m */,
 				E7B8D2221B7E6CDF00823BFC /* TestWaiter.h */,
@@ -383,7 +394,6 @@
 				E76F50711DC8FF7100C6425C /* LeakTests.m */,
 				B3AADFC31E1448DF00E538A2 /* OS XTests-Bridging-Header.h */,
 				E7A7152F20D435A5004CCDEE /* PromiseBlocksTests.swift */,
-				0CFAEB1C212C9A8F00777107 /* DoneTests.swift */,
 			);
 			name = Tests;
 			sourceTree = "<group>";
@@ -867,15 +877,17 @@
 				E7B8D22D1B7E6CFE00823BFC /* CancelTests.m in Sources */,
 				E7A7153020D435A5004CCDEE /* PromiseBlocksTests.swift in Sources */,
 				E77B335A1D58EACA0083903F /* ThreadTests.m in Sources */,
+				0CFAEB2C212F370100777107 /* ChainTestsSwift.swift in Sources */,
 				E7E3E8D01CBD511F00C55538 /* WhenTests.m in Sources */,
 				E7B8D22E1B7E6CFE00823BFC /* ChainTests.m in Sources */,
 				E7B8D22F1B7E6CFE00823BFC /* DoneTests.m in Sources */,
 				E7B8D2301B7E6CFE00823BFC /* JoinTests.m in Sources */,
 				E76F50721DC8FF7100C6425C /* LeakTests.m in Sources */,
+				0CFAEB28212F1DE200777107 /* CancelTestsSwift.swift in Sources */,
 				E7B8D2311B7E6CFE00823BFC /* RejectTests.m in Sources */,
 				E7B8D2321B7E6CFE00823BFC /* TestWaiter.h in Sources */,
 				E7B8D2331B7E6CFE00823BFC /* TestWaiter.m in Sources */,
-				0CFAEB1D212C9A8F00777107 /* DoneTests.swift in Sources */,
+				0CFAEB1D212C9A8F00777107 /* DoneTestsSwift.swift in Sources */,
 				E7B8D2341B7E6CFE00823BFC /* ThenTests.m in Sources */,
 				E712B3441B7E6B4900590AA8 /* OS_XTests.m in Sources */,
 			);
@@ -901,11 +913,13 @@
 				E7A7153120D4374B004CCDEE /* PromiseBlocksTests.swift in Sources */,
 				E7B8D2351B7E6D0200823BFC /* CancelTests.m in Sources */,
 				E7A7153620D43AE5004CCDEE /* Promise.swift in Sources */,
-				0CFAEB1E212C9A8F00777107 /* DoneTests.swift in Sources */,
+				0CFAEB2D212F370100777107 /* ChainTestsSwift.swift in Sources */,
+				0CFAEB1E212C9A8F00777107 /* DoneTestsSwift.swift in Sources */,
 				E77B335B1D58EACA0083903F /* ThreadTests.m in Sources */,
 				E7E3E8D11CBD511F00C55538 /* WhenTests.m in Sources */,
 				E7B8D2361B7E6D0200823BFC /* ChainTests.m in Sources */,
 				E7B8D2371B7E6D0200823BFC /* DoneTests.m in Sources */,
+				0CFAEB29212F1DE200777107 /* CancelTestsSwift.swift in Sources */,
 				E7B8D2381B7E6D0200823BFC /* JoinTests.m in Sources */,
 				E76F50731DC8FF7100C6425C /* LeakTests.m in Sources */,
 				E7B8D2391B7E6D0200823BFC /* RejectTests.m in Sources */,
@@ -932,7 +946,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0CFAEB1F212C9A8F00777107 /* DoneTests.swift in Sources */,
+				0CFAEB1F212C9A8F00777107 /* DoneTestsSwift.swift in Sources */,
 				E7CA17131BB9B0FC002D7196 /* tvOSTests.m in Sources */,
 				E7CA171C1BB9B151002D7196 /* CancelTests.m in Sources */,
 				E7CA171D1BB9B153002D7196 /* ChainTests.m in Sources */,
@@ -941,8 +955,10 @@
 				E7CA171F1BB9B156002D7196 /* JoinTests.m in Sources */,
 				E7CA17201BB9B158002D7196 /* RejectTests.m in Sources */,
 				E7A7153420D437C0004CCDEE /* PromiseBlocksTests.swift in Sources */,
+				0CFAEB2A212F1DE200777107 /* CancelTestsSwift.swift in Sources */,
 				E7CA17211BB9B15C002D7196 /* TestWaiter.m in Sources */,
 				E7CA17221BB9B15E002D7196 /* ThenTests.m in Sources */,
+				0CFAEB2E212F370100777107 /* ChainTestsSwift.swift in Sources */,
 				E7E3E8D21CBD511F00C55538 /* WhenTests.m in Sources */,
 				E76F50741DC8FF7100C6425C /* LeakTests.m in Sources */,
 			);

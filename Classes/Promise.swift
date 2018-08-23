@@ -90,37 +90,29 @@ public class Promise<ValueType> : PromiseCancelToken {
         var observed: Fulfilled?
         var rejected: Rejected?
         var always: Always?
-        var queue: DispatchQueue?
+        var queue: DispatchQueue
         let cancellationToken: PromiseCancelToken
         
-        init(cancellationToken: PromiseCancelToken) {
+        init(cancellationToken: PromiseCancelToken,
+             queue: DispatchQueue) {
             self.cancellationToken = cancellationToken
+            self.queue = queue
         }
         var shouldKeepPromise: Bool {
-            get {
-                return done != nil || always != nil || rejected != nil
-            }
-        }
-        
-        private func internalCall(with object: PromiseResult<ValueType>) {
-            guard !cancellationToken.cancelled else { return }
-            
-            if case let .failure(error) = object {
-                rejected?(error)
-            } else if case let .success(value) = object {
-                done?(value)
-                observed?(value)
-            }
-            always?()
+            return done != nil || always != nil || rejected != nil
         }
         
         func call(with object: PromiseResult<ValueType>) {
-            if let queue = queue {
-                queue.async {
-                    self.internalCall(with: object)
+            queue.async {
+                guard !self.cancellationToken.cancelled else { return }
+                
+                if case let .failure(error) = object {
+                    self.rejected?(error)
+                } else if case let .success(value) = object {
+                    self.done?(value)
+                    self.observed?(value)
                 }
-            } else {
-                internalCall(with: object)
+                self.always?()
             }
         }
     }
@@ -131,8 +123,7 @@ public class Promise<ValueType> : PromiseCancelToken {
                                  always: Always? = nil,
                                  queue: DispatchQueue) -> PromiseCancelToken {
         let cancellationToken = PromiseCancelToken()
-        let blocks = PromiseBlock(cancellationToken: cancellationToken)
-        blocks.queue = queue
+        let blocks = PromiseBlock(cancellationToken: cancellationToken, queue: queue)
         blocks.done = onFulfilled
         blocks.observed = observed
         blocks.rejected = rejected
@@ -146,7 +137,7 @@ public class Promise<ValueType> : PromiseCancelToken {
                 strongBlocks.rejected = nil
                 strongBlocks.always = nil
                 
-                guard let strongSelf = self else { return }                
+                guard let strongSelf = self else { return }
                 if !strongSelf.blocks.contains(where: { $0.shouldKeepPromise }) {
                     strongSelf.cancel()
                 }
@@ -243,7 +234,9 @@ extension Promise {
                           queue : DispatchQueue) -> Promise<ReturnType> {
         var cancellationToken: PromiseCancelToken? = nil
         let returnedPromise = Promise<ReturnType>()
-        returnedPromise.cancelled({ cancellationToken?.cancel() }, on: queue)
+        returnedPromise.cancelled({
+            cancellationToken?.cancel()            
+        }, on: queue)
 
         cancellationToken = self.then({ value -> Void in
             do {

@@ -26,36 +26,36 @@ class PromiseBlocksTests: XCTestCase {
     }
     
     func testKeepBlockEmpty() {
-        let promiseBlock = Promise<Void>.PromiseBlock(cancellationToken: PromiseCancelToken())
+        let promiseBlock = Promise<Void>.PromiseBlock(cancellationToken: PromiseCancelToken(), queue:DispatchQueue.main)
         XCTAssertFalse(promiseBlock.shouldKeepPromise)
     }
     
     func testKeepBlockObserved() {
-        let promiseBlock = Promise<Void>.PromiseBlock(cancellationToken: PromiseCancelToken())
+        let promiseBlock = Promise<Void>.PromiseBlock(cancellationToken: PromiseCancelToken(), queue:DispatchQueue.main)
         promiseBlock.observed = { (obj) in }
         XCTAssertFalse(promiseBlock.shouldKeepPromise)
     }
     
     func testKeepBlockDone() {
-        let promiseBlock = Promise<Void>.PromiseBlock(cancellationToken: PromiseCancelToken())
+        let promiseBlock = Promise<Void>.PromiseBlock(cancellationToken: PromiseCancelToken(), queue:DispatchQueue.main)
         promiseBlock.done = { (obj) in }
         XCTAssertTrue(promiseBlock.shouldKeepPromise)
     }
     
     func testKeepBlockRejected() {
-        let promiseBlock = Promise<Void>.PromiseBlock(cancellationToken: PromiseCancelToken())
+        let promiseBlock = Promise<Void>.PromiseBlock(cancellationToken: PromiseCancelToken(), queue:DispatchQueue.main)
         promiseBlock.rejected = { (obj) in }
         XCTAssertTrue(promiseBlock.shouldKeepPromise)
     }
     
     func testKeepBlockAlways() {
-        let promiseBlock = Promise<Void>.PromiseBlock(cancellationToken: PromiseCancelToken())
+        let promiseBlock = Promise<Void>.PromiseBlock(cancellationToken: PromiseCancelToken(), queue:DispatchQueue.main)
         promiseBlock.always = { }
         XCTAssertTrue(promiseBlock.shouldKeepPromise)
     }
     
     func testCallNonError() {
-        let promiseBlock = Promise<Int>.PromiseBlock(cancellationToken: PromiseCancelToken())
+        let promiseBlock = Promise<Int>.PromiseBlock(cancellationToken: PromiseCancelToken(), queue:DispatchQueue.main)
         let callObj = 7
         
         let doneExpect = XCTestExpectation()
@@ -85,10 +85,9 @@ class PromiseBlocksTests: XCTestCase {
     }
  
     func testCallNonErrorOnQueue() {
-        let promiseBlock = Promise<Int>.PromiseBlock(cancellationToken: PromiseCancelToken())
+        let promiseBlock = Promise<Int>.PromiseBlock(cancellationToken: PromiseCancelToken(), queue:DispatchQueue(label: "testCallNonErrorOnQueue"))
         let key = DispatchSpecificKey<String>()
-        promiseBlock.queue = DispatchQueue(label: "testCallNonErrorOnQueue")
-        promiseBlock.queue?.setSpecific(key: key, value: "testCallNonErrorOnQueue")
+        promiseBlock.queue.setSpecific(key: key, value: "testCallNonErrorOnQueue")
         let callObj = 7
         
         let doneExpect = XCTestExpectation()
@@ -121,7 +120,7 @@ class PromiseBlocksTests: XCTestCase {
     }
     
     func testCallError() {
-        let promiseBlock = Promise<Void>.PromiseBlock(cancellationToken: PromiseCancelToken())
+        let promiseBlock = Promise<Void>.PromiseBlock(cancellationToken: PromiseCancelToken(), queue:DispatchQueue.main)
         let callObj = DummyError.dummy
         
         promiseBlock.done = { obj in
@@ -149,10 +148,9 @@ class PromiseBlocksTests: XCTestCase {
     }
     
     func testCallErrorOnQueue() {
-        let promiseBlock = Promise<Void>.PromiseBlock(cancellationToken: PromiseCancelToken())
+        let promiseBlock = Promise<Void>.PromiseBlock(cancellationToken: PromiseCancelToken(), queue:DispatchQueue(label: "testCallNonErrorOnQueue"))
         let key = DispatchSpecificKey<String>()
-        promiseBlock.queue = DispatchQueue(label: "testCallNonErrorOnQueue")
-        promiseBlock.queue?.setSpecific(key: key, value: "testCallNonErrorOnQueue")
+        promiseBlock.queue.setSpecific(key: key, value: "testCallNonErrorOnQueue")
         let callObj = DummyError.dummy
         
         promiseBlock.done = { obj in
