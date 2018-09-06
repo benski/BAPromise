@@ -50,7 +50,7 @@ public class PromiseCancelToken {
     
     public typealias Canceled = () -> Void
     
-    var cancelled: Bool = false
+    internal var cancelled: Bool = false
     static let queue = DispatchQueue(label: "com.github.benski.promise")
     var onCancel : Canceled?
     
@@ -162,7 +162,7 @@ public class Promise<ValueType> : PromiseCancelToken {
         return cancellationToken
     }
     
-    lazy var blocks: Array<PromiseBlock> = []
+    private lazy var blocks: Array<PromiseBlock> = []
 
     override func cancelled(_ onCancel: @escaping Canceled, on queue: DispatchQueue) {
         let wrappedBlock = {
