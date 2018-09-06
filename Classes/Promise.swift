@@ -264,24 +264,23 @@ extension Promise {
 }
 
 // Join
-extension Promise {
-    // we can't currently have a templated extension (e.g. extension Array where Element = Promise<_>) so we have to do it this way
-    class func when(promises: [Promise<ValueType>]) -> Promise<Array<ValueType>> {
-        guard promises.count > 0 else { return Promise<Array<ValueType>>([]) }
+extension Array {
+    func when<ValueType>() -> Promise<Array<ValueType>> where Element == Promise<ValueType> {
+        guard self.count > 0 else { return Promise<Array<ValueType>>([]) }
         var cancelTokens = [PromiseCancelToken]()
         
         let returnedPromise = Promise<Array<ValueType>> ()
-        var results = Array<ValueType?>(repeating:nil, count:promises.count)
+        var results = Array<ValueType?>(repeating:nil, count:self.count)
         
         returnedPromise.cancelled({
             for token in cancelTokens {
                 token.cancel()
             }
-        }, on: Promise.queue)
+        }, on: PromiseCancelToken.queue)
         
-        var remaining = promises.count
+        var remaining = self.count
         
-        for (offset, promise) in promises.enumerated() {
+        for (offset, promise) in self.enumerated() {
             let token = promise.then({ (value) in
                 results[offset] = value
                 remaining = remaining - 1
@@ -293,29 +292,29 @@ extension Promise {
                 for token in cancelTokens {
                     token.cancel()
                 }
-            }, queue: Promise.queue)
+            }, queue: PromiseCancelToken.queue)
             cancelTokens.append(token)
         }
         
         return returnedPromise
     }
     
-    class func join(promises: [Promise<ValueType>]) -> Promise<Array<PromiseResult<ValueType>>> {
-        guard promises.count > 0 else { return Promise<Array<PromiseResult<ValueType>>>([]) }
+    func join <ValueType>() -> Promise<Array<PromiseResult<ValueType>>> where Element == Promise<ValueType>  {
+        guard self.count > 0 else { return Promise<Array<PromiseResult<ValueType>>>([]) }
         var cancelTokens = [PromiseCancelToken]()
         
         let returnedPromise = Promise<Array<PromiseResult<ValueType>>> ()
-        var results = Array<PromiseResult<ValueType>?>(repeating:nil, count:promises.count)
+        var results = Array<PromiseResult<ValueType>?>(repeating:nil, count:self.count)
         
-        var remaining = promises.count
+        var remaining = self.count
         
         returnedPromise.cancelled({
             for token in cancelTokens {
                 token.cancel()
             }
-        }, on: Promise.queue)
+        }, on: PromiseCancelToken.queue)
         
-        for (offset, promise) in promises.enumerated() {
+        for (offset, promise) in self.enumerated() {
             let token = promise.then({ (value) in
                 results[offset] = .success(value)
             }, rejected: { (error) in
@@ -325,7 +324,7 @@ extension Promise {
                 if remaining == 0 {
                     returnedPromise.fulfill(with: .success(results.compactMap({$0})))
                 }
-            }, queue: Promise.queue)
+            }, queue: PromiseCancelToken.queue)
             cancelTokens.append(token)
         }
         
