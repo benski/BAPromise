@@ -253,22 +253,13 @@ extension Promise {
         return returnedPromise
     }
     
+    // a simpler method to use when doing type conversion
     func map<ReturnType>(_ onFulfilled: @escaping ((ValueType) throws -> ReturnType),
                           queue : DispatchQueue) -> Promise<ReturnType> {
-        var cancellationToken: PromiseCancelToken? = nil
-        let returnedPromise = Promise<ReturnType>()
-        returnedPromise.cancelled({ cancellationToken?.cancel() }, on: queue)
-        
-        cancellationToken = self.then({ value -> Void in
-            do {
-                let chained = try onFulfilled(value)
-                returnedPromise.fulfill(with: .success(chained))
-            } catch let error {
-                returnedPromise.fulfill(with: .failure(error))
-            }
+        return then({ (value) -> PromiseResult<ReturnType> in
+            let chained = try onFulfilled(value)
+            return .success(chained)
         }, queue: queue)
-        
-        return returnedPromise
     }
 }
 
