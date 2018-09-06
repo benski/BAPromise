@@ -215,7 +215,7 @@
         [expectation fulfill];
     }];
     
-    BACancelToken *cancelToken = [[BAPromise fulfilledPromise:nil] then:^id(id obj) {
+    __block BACancelToken *cancelToken = [[BAPromise fulfilledPromise:nil] then:^id(id obj) {
         [cancelToken cancel];
         return thenPromise;
     }];

@@ -8,7 +8,8 @@
 
 #import <XCTest/XCTest.h>
 #import <Foundation/Foundation.h>
-#import "BAPromise.h"
+
+@class BAPromise;
 
 @interface XCTestCase (Promise)
 // helper methods that create an XCTestExpectation (not returned) that fulfills on promise resolution

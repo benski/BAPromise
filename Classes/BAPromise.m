@@ -24,7 +24,6 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
     BAPromise_Unfulfilled,
     BAPromise_Fulfilled,
     BAPromise_Rejected,
-    BAPromise_Canceled,
 };
 
 @interface BACancelToken ()
@@ -56,7 +55,7 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
     };
     
     dispatch_async(_queue, ^{
-        if (_promiseState != BAPromise_Rejected && _promiseState != BAPromise_Fulfilled) {
+        if (self.promiseState != BAPromise_Rejected && self.promiseState != BAPromise_Fulfilled) {
             if (self.cancelled) {
                 wrappedCancelBlock();
             } else {
@@ -217,7 +216,6 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
              so we don't need to serialize to the promises's queue */
         case BAPromise_Fulfilled:
         case BAPromise_Rejected:
-        case BAPromise_Canceled:
             [blocks callBlocksWithObject:self.fulfilledObject];
             break;
         default:
@@ -233,7 +231,6 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
                         
                     case BAPromise_Fulfilled:
                     case BAPromise_Rejected:
-                    case BAPromise_Canceled:
                         [blocks callBlocksWithObject:self.fulfilledObject];
                         break;
                 }
