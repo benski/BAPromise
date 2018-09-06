@@ -10,6 +10,7 @@ s.license          = "MIT"
 s.author           = { "Ben Allison" => "benski@winamp.com" }
 s.source           = { :git => "https://github.com/benski/BAPromise.git", :tag => s.version.to_s }
 s.static_framework = true
+s.swift_version = '4.1'
 
 s.ios.deployment_target = '10.0'
 s.osx.deployment_target = '10.12'

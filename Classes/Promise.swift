@@ -162,7 +162,7 @@ public class Promise<ValueType> : PromiseCancelToken {
         return cancellationToken
     }
     
-    private lazy var blocks: Array<PromiseBlock> = []
+    fileprivate lazy var blocks: Array<PromiseBlock> = []
 
     override func cancelled(_ onCancel: @escaping Canceled, on queue: DispatchQueue) {
         let wrappedBlock = {
