@@ -47,11 +47,14 @@ extension PromiseResult where ValueType == Void {
 }
 
 public class PromiseCancelToken {
+    
+    public typealias Canceled = () -> Void
+    
     var cancelled: Bool = false
     static let queue = DispatchQueue(label: "com.github.benski.promise")
-    var onCancel : (() -> Void)?
+    var onCancel : Canceled?
     
-    func cancelled(_ onCancel: @escaping () -> Void, on queue: DispatchQueue) {
+    func cancelled(_ onCancel: @escaping Canceled, on queue: DispatchQueue) {
         let wrappedBlock = {
             queue.async {
                 onCancel()
@@ -79,12 +82,12 @@ public class PromiseCancelToken {
 
 public class Promise<ValueType> : PromiseCancelToken {
     
-    var fulfilledObject: PromiseResult<ValueType>?
-    
     public typealias Fulfilled = (ValueType) -> Void
     public typealias Rejected = (Error) -> Void
     public typealias Always = () -> Void
     
+    var fulfilledObject: PromiseResult<ValueType>?
+
     public class PromiseBlock {
         var done: Fulfilled?
         var observed: Fulfilled?
@@ -161,7 +164,7 @@ public class Promise<ValueType> : PromiseCancelToken {
     
     lazy var blocks: Array<PromiseBlock> = []
 
-    override func cancelled(_ onCancel: @escaping () -> Void, on queue: DispatchQueue) {
+    override func cancelled(_ onCancel: @escaping Canceled, on queue: DispatchQueue) {
         let wrappedBlock = {
             queue.async {
                 onCancel()
