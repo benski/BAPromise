@@ -99,7 +99,7 @@ typedef dispatch_block_t BAPromiseFinallyBlock;
 -(void)reject;
 
 /* private! */
-@property (nonatomic, strong, readonly) dispatch_queue_t queue;
+@property (nonatomic, strong, readonly, nonnull) dispatch_queue_t queue;
 @end
 
 __attribute__((deprecated))
