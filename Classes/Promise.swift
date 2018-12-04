@@ -62,6 +62,7 @@ public class PromiseCancelToken {
         }
         
         PromiseCancelToken.queue.async {
+            atomic_thread_fence(memory_order_acquire)
             if self.cancelled {
                 wrappedBlock()
             } else {
@@ -72,7 +73,7 @@ public class PromiseCancelToken {
     
     func cancel() {
         cancelled = true
-        OSMemoryBarrier()
+        atomic_thread_fence(memory_order_release)
         PromiseCancelToken.queue.async {
             self.onCancel?()
             self.onCancel = nil
@@ -173,6 +174,7 @@ public class Promise<ValueType> : PromiseCancelToken {
         
         PromiseCancelToken.queue.async {
             guard let fulfilledObject = self.fulfilledObject, fulfilledObject.resolved else {
+                atomic_thread_fence(memory_order_acquire)
                 if self.cancelled {
                     wrappedBlock()
                 } else {
@@ -215,6 +217,7 @@ extension Promise {
             }
             
         case .promise(let promise):
+            atomic_thread_fence(memory_order_acquire)
             if self.cancelled {
                 promise.cancel()
             } else {

@@ -581,11 +581,11 @@
 					};
 					E712B3511B7E6B7800590AA8 = {
 						CreatedOnToolsVersion = 7.0;
-						LastSwiftMigration = 0940;
+						LastSwiftMigration = 1010;
 					};
 					E712B3691B7E6B7900590AA8 = {
 						CreatedOnToolsVersion = 7.0;
-						LastSwiftMigration = 0940;
+						LastSwiftMigration = 1010;
 						TestTargetID = E712B3511B7E6B7800590AA8;
 					};
 					E7CA16F81BB9B0FC002D7196 = {
@@ -1208,8 +1208,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "BAPromise-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "BAPromise-Swift.h";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1228,8 +1227,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "BAPromise-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "BAPromise-Swift.h";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1247,8 +1245,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.benski.promise.iOSTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iOS.app/iOS";
 			};
 			name = Debug;
@@ -1265,8 +1262,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.benski.promise.iOSTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iOS.app/iOS";
 				VALIDATE_PRODUCT = YES;
 			};

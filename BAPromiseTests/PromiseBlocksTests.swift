@@ -99,7 +99,7 @@ class PromiseBlocksTests: XCTestCase {
         
         let observedExpect = XCTestExpectation()
         promiseBlock.observed = { obj in
-            XCTAssertEqual(obj as! Int, callObj)
+            XCTAssertEqual(obj , callObj)
             XCTAssertEqual(DispatchQueue.getSpecific(key: key), "testCallNonErrorOnQueue")
             observedExpect.fulfill()
         }

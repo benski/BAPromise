@@ -18,6 +18,9 @@ typedef dispatch_block_t BAPromiseFinallyBlock;
 @interface BACancelToken : NSObject
 -(void)cancel;
 -(void)cancelled:(nonnull dispatch_block_t)onCancel;
+
+/* private! */
+@property (nonatomic, strong, readonly, nonnull) dispatch_queue_t queue;
 @end
 
 // promise consumer API
@@ -98,8 +101,6 @@ typedef dispatch_block_t BAPromiseFinallyBlock;
 -(void)fulfill;
 -(void)reject;
 
-/* private! */
-@property (nonatomic, strong, readonly, nonnull) dispatch_queue_t queue;
 @end
 
 __attribute__((deprecated))

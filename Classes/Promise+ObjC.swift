@@ -15,7 +15,7 @@ extension Promise where ValueType : AnyObject {
             baPromise.fulfill(with: value)
         }, rejected: { (error) in
             baPromise.rejectWithError(error)
-        }, queue: baPromise.queue ?? DispatchQueue.main)
+        }, queue: baPromise.queue)
         baPromise.cancelled {
             token.cancel()
         }
