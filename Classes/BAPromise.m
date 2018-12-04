@@ -8,6 +8,7 @@
 
 #import "BAPromise.h"
 #import "libkern/OSAtomic.h"
+#import <stdatomic.h>
 
 static dispatch_queue_t ba_dispatch_get_current_queue()
 {
@@ -532,7 +533,7 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
         dispatch_async(self.queue, ^{
             if (self.promiseState == BAPromise_Unfulfilled) {
                 self.fulfilledObject = obj;
-                OSMemoryBarrier();
+                atomic_thread_fence(memory_order_release);
                 self.promiseState = BAPromise_Fulfilled; 
                 
                 for (BAPromiseBlocks *blocks in self.blocks) {
@@ -556,7 +557,7 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
     dispatch_async(self.queue, ^{
         if (self.promiseState == BAPromise_Unfulfilled) {
             self.fulfilledObject = error;
-            OSMemoryBarrier();
+            atomic_thread_fence(memory_order_release);
             self.promiseState = BAPromise_Rejected;
             
             for (BAPromiseBlocks *blocks in self.blocks) {
