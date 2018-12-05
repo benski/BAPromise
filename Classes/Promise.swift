@@ -135,14 +135,15 @@ public class Promise<ValueType> : PromiseCancelToken {
         cancellationToken.cancelled({ [weak self, weak blocks] in
             Promise.queue.async {
                 guard let strongBlocks = blocks else { return }
-                strongBlocks.done = nil
-                strongBlocks.observed = nil
-                strongBlocks.rejected = nil
-                strongBlocks.always = nil
-                
                 guard let strongSelf = self else { return }
-                if !strongSelf.blocks.contains(where: { $0.shouldKeepPromise }) {
-                    strongSelf.cancel()
+                autoreleasepool {
+                    if let index = strongSelf.blocks.index(where: { $0 === strongBlocks }) {
+                        strongSelf.blocks.remove(at: index)
+                    }
+                    
+                    if !strongSelf.blocks.contains(where: { $0.shouldKeepPromise }) {
+                        strongSelf.cancel()
+                    }
                 }
             }
             }, on: queue)
