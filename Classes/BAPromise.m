@@ -374,6 +374,11 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
                thread:nil];
 }
 
+-(void)ba_runBlock:(dispatch_block_t)block
+{
+    block();
+}
+
 -(BAPromise *)then:(BAPromiseThenBlock)thenBlock
           rejected:(BAPromiseThenRejectedBlock)failureBlock
            finally:(BAPromiseFinallyBlock)finallyBlock
