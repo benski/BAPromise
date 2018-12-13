@@ -54,7 +54,7 @@ public class PromiseCancelToken {
     static let queue = DispatchQueue(label: "com.github.benski.promise")
     var onCancel : Canceled?
     
-    func cancelled(_ onCancel: @escaping Canceled, on queue: DispatchQueue) {
+    public func cancelled(_ onCancel: @escaping Canceled, on queue: DispatchQueue) {
         let wrappedBlock = {
             queue.async {
                 onCancel()
@@ -71,7 +71,7 @@ public class PromiseCancelToken {
         }
     }
     
-    func cancel() {
+    public func cancel() {
         cancelled = true
         atomic_thread_fence(memory_order_release)
         PromiseCancelToken.queue.async {
@@ -89,6 +89,10 @@ public class Promise<ValueType> : PromiseCancelToken {
     
     var fulfilledObject: PromiseResult<ValueType>?
 
+    public override init() {
+        super.init()
+    }
+    
     public class PromiseBlock {
         var done: Fulfilled?
         var observed: Fulfilled?
@@ -121,7 +125,7 @@ public class Promise<ValueType> : PromiseCancelToken {
         }
     }
     
-    @discardableResult func then(_ onFulfilled: Fulfilled? = nil,
+    @discardableResult public func then(_ onFulfilled: Fulfilled? = nil,
                                  observed: Fulfilled? = nil,
                                  rejected: Rejected? = nil,
                                  always: Always? = nil,
@@ -165,7 +169,7 @@ public class Promise<ValueType> : PromiseCancelToken {
     
     fileprivate lazy var blocks: Array<PromiseBlock> = []
 
-    override func cancelled(_ onCancel: @escaping Canceled, on queue: DispatchQueue) {
+    public override func cancelled(_ onCancel: @escaping Canceled, on queue: DispatchQueue) {
         let wrappedBlock = {
             queue.async {
                 onCancel()
@@ -202,7 +206,7 @@ extension Promise {
 // fulfillment
 extension Promise {
     
-    func fulfill(with: PromiseResult<ValueType>) {
+    public func fulfill(with: PromiseResult<ValueType>) {
         switch(with) {
         case .success, .failure:
             Promise.queue.async {
@@ -235,7 +239,7 @@ extension Promise {
 extension Promise {
     public typealias ThenRejected<ReturnType> = (Error) -> PromiseResult<ReturnType>
     
-    func then<ReturnType>(_ onFulfilled: @escaping ((ValueType) throws -> PromiseResult<ReturnType>),
+    public func then<ReturnType>(_ onFulfilled: @escaping ((ValueType) throws -> PromiseResult<ReturnType>),
                           rejected : @escaping ThenRejected<ReturnType> = { return .failure($0) },
                           queue : DispatchQueue) -> Promise<ReturnType> {
         var cancellationToken: PromiseCancelToken? = nil

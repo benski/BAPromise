@@ -2,7 +2,7 @@ xcodeproj 'BAPromise'
 use_frameworks!
 
 target 'iOS' do
-  platform :ios, '8.0'
+  platform :ios, '10.0'
   pod "BAPromise"  , :path => "."
   target 'iOSTests' do
 	pod "OCMock"
@@ -10,15 +10,15 @@ target 'iOS' do
 end
 
 target 'OS X' do
- platform :osx, '10.10'
+ platform :osx, '10.12'
  target 'OS XTests' do
  	pod "OCMock"
  end
 end
 
-target 'tvOS' do
- platform :tvos, '9.0'
- target 'tvOSTests' do
- 	pod "OCMock"
- end
-end
+#target 'tvOS' do
+# platform :tvos, '9.0'
+# target 'tvOSTests' do
+# 	pod "OCMock"
+# end
+#end
