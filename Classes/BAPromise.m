@@ -27,6 +27,16 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
     BAPromise_Rejected,
 };
 
+@interface NSObject (RunBlock)
+-(void)ba_runBlock:(dispatch_block_t)block;
+@end
+@implementation NSObject (RunBlock)
+-(void)ba_runBlock:(dispatch_block_t)block
+{
+    block();
+}
+@end
+
 @interface BACancelToken ()
 @property (nonatomic, strong) dispatch_queue_t queue;
 @property (nonatomic) BAPromiseState promiseState;
@@ -93,12 +103,6 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
 - (BOOL)shouldKeepPromise
 {
     return self.done != nil || self.finally != nil || self.rejected != nil;
-}
-
-
--(void)ba_runBlock:(dispatch_block_t)block
-{
-    block();
 }
 
 - (void)callBlocksWithObject:(id)object
