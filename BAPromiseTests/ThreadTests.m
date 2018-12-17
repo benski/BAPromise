@@ -58,5 +58,21 @@
     [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
 
+- (void)testCancelOnThread {
+    XCTestExpectation *expectation = [self expectationWithDescription:NSStringFromSelector(_cmd)];
+
+    BAPromise *promise = BAPromise.new;
+    BACancelToken *cancelToken = [promise then:^id _Nullable(id  _Nullable obj) {
+        return promise;
+    } thread:self.thread];
+    [promise cancelled:^{
+        XCTAssertTrue(YES);
+        [expectation fulfill];
+    }];
+
+    [cancelToken cancel];
+    [self waitForExpectationsWithTimeout:1.5 handler:nil];
+}
+
 
 @end
