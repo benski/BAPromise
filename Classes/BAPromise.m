@@ -27,10 +27,7 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
     BAPromise_Rejected,
 };
 
-@interface NSObject (RunBlock)
--(void)ba_runBlock:(dispatch_block_t)block;
-@end
-@implementation NSObject (RunBlock)
+@implementation BAObject
 -(void)ba_runBlock:(dispatch_block_t)block
 {
     block();

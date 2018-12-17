@@ -14,8 +14,13 @@ typedef void (^BAPromiseOnRejectedBlock)(NSError * _Nonnull error);
 typedef id _Nullable (^BAPromiseThenRejectedBlock)(NSError * _Nonnull error);
 typedef dispatch_block_t BAPromiseFinallyBlock;
 
+/* block runner base for promise / canceltoken */
+@interface BAObject : NSObject
+-(void)ba_runBlock:(dispatch_block_t)block;
+@end
+
 // cancel token for promise
-@interface BACancelToken : NSObject
+@interface BACancelToken : BAObject
 -(void)cancel;
 -(void)cancelled:(nonnull dispatch_block_t)onCancel;
 
