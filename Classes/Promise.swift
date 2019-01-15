@@ -275,7 +275,7 @@ extension Promise {
 
 // Join
 extension Array {
-    func when<ValueType>() -> Promise<Array<ValueType>> where Element == Promise<ValueType> {
+    public func when<ValueType>() -> Promise<Array<ValueType>> where Element == Promise<ValueType> {
         guard self.count > 0 else { return Promise<Array<ValueType>>([]) }
         var cancelTokens = [PromiseCancelToken]()
         
@@ -309,7 +309,7 @@ extension Array {
         return returnedPromise
     }
     
-    func join <ValueType>() -> Promise<Array<PromiseResult<ValueType>>> where Element == Promise<ValueType>  {
+    public func join <ValueType>() -> Promise<Array<PromiseResult<ValueType>>> where Element == Promise<ValueType>  {
         guard self.count > 0 else { return Promise<Array<PromiseResult<ValueType>>>([]) }
         var cancelTokens = [PromiseCancelToken]()
         
