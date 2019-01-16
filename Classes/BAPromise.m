@@ -85,7 +85,7 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
 }
 @end
 
-@interface BAPromiseBlocks : NSObject
+@interface BAPromiseBlocks : BAObject
 @property (nonatomic, copy) BAPromiseOnFulfilledBlock done;
 @property (nonatomic, copy) BAPromiseOnFulfilledBlock observed;
 @property (nonatomic, copy) BAPromiseOnRejectedBlock rejected;
