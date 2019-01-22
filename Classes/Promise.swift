@@ -198,7 +198,7 @@ extension Promise {
         self.fulfilledObject = .success(value)
     }
     
-    public convenience init(_ error: Error) {
+    public convenience init(error: Error) {
         self.init()
         self.fulfilledObject = .failure(error)
     }
