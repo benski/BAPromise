@@ -191,14 +191,14 @@ public class Promise<ValueType> : PromiseCancelToken {
 
 }
 
-// creation
+// MARK: - Creation
 extension Promise {
-    convenience init(_ value: ValueType) {
+    public convenience init(_ value: ValueType) {
         self.init()
         self.fulfilledObject = .success(value)
     }
     
-    convenience init(_ error: Error) {
+    public convenience init(error: Error) {
         self.init()
         self.fulfilledObject = .failure(error)
     }
