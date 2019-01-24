@@ -152,15 +152,11 @@ public class Promise<ValueType> : PromiseCancelToken {
             }
             }, on: queue)
 
-        if let fulfilledObject = self.fulfilledObject, fulfilledObject.resolved {
-            blocks.call(with: fulfilledObject)
-        } else {
-            Promise.queue.async {
-                if let fulfilledObject = self.fulfilledObject, fulfilledObject.resolved {
-                    blocks.call(with: fulfilledObject)
-                } else {
-                    self.blocks.append(blocks)
-                }
+        Promise.queue.async {
+            if let fulfilledObject = self.fulfilledObject, fulfilledObject.resolved {
+                blocks.call(with: fulfilledObject)
+            } else {
+                self.blocks.append(blocks)
             }
         }
         
