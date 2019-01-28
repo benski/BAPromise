@@ -250,13 +250,9 @@ extension Promise {
     public func then<ReturnType>(_ onFulfilled: @escaping ((ValueType) throws -> PromiseResult<ReturnType>),
                           rejected : @escaping ThenRejected<ReturnType> = { return .failure($0) },
                           queue : DispatchQueue) -> Promise<ReturnType> {
-        var cancellationToken: PromiseCancelToken? = nil
         let returnedPromise = Promise<ReturnType>()
-        returnedPromise.cancelled({
-            cancellationToken?.cancel()            
-        }, on: queue)
 
-        cancellationToken = self.then({ value -> Void in
+        let cancellationToken = self.then({ value -> Void in
             do {
                 let chained = try onFulfilled(value)
                 returnedPromise.fulfill(with: chained)
@@ -267,6 +263,10 @@ extension Promise {
             let chained = rejected(error)
             returnedPromise.fulfill(with: chained)
         }, queue: queue)
+        
+        returnedPromise.cancelled({
+            cancellationToken.cancel()
+        }, on: queue)
         
         return returnedPromise
     }
