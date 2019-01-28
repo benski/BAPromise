@@ -8,6 +8,24 @@
 
 import Foundation
 
+internal class AtomicCancel {
+    
+    public var isCanceled: Bool {
+        atomic_thread_fence(memory_order_seq_cst)
+        return underlying == 0 ? false : true
+    }
+    
+    public func cancel() {
+        OSAtomicIncrement32Barrier(&underlying);
+    }
+    
+    public init() {
+        underlying = 0
+    }
+    
+     private var underlying: Int32
+}
+
 public enum PromiseResult<ValueType> {
     case success(ValueType)
     case promise(Promise<ValueType>)
@@ -50,7 +68,7 @@ public class PromiseCancelToken {
     
     public typealias Canceled = () -> Void
     
-    internal var cancelled: Bool = false
+    internal let cancelFlag: AtomicCancel = AtomicCancel()
     static let queue = DispatchQueue(label: "com.github.benski.promise")
     var onCancel : Canceled?
     
@@ -62,8 +80,7 @@ public class PromiseCancelToken {
         }
         
         PromiseCancelToken.queue.async {
-            atomic_thread_fence(memory_order_acquire)
-            if self.cancelled {
+            if self.cancelFlag.isCanceled {
                 wrappedBlock()
             } else {
                 self.onCancel = wrappedBlock
@@ -72,8 +89,7 @@ public class PromiseCancelToken {
     }
     
     public func cancel() {
-        cancelled = true
-        atomic_thread_fence(memory_order_release)
+        cancelFlag.cancel()
         PromiseCancelToken.queue.async {
             self.onCancel?()
             self.onCancel = nil
@@ -112,7 +128,7 @@ public class Promise<ValueType> : PromiseCancelToken {
         
         func call(with object: PromiseResult<ValueType>) {
             queue.async {
-                guard !self.cancellationToken.cancelled else { return }
+                guard !self.cancellationToken.cancelFlag.isCanceled else { return }
                 
                 if case let .failure(error) = object {
                     self.rejected?(error)
@@ -138,7 +154,6 @@ public class Promise<ValueType> : PromiseCancelToken {
         blocks.always = always
         
         cancellationToken.cancelled({ [weak self, weak blocks] in
-            Promise.queue.async {
                 guard let strongBlocks = blocks else { return }
                 strongBlocks.done = nil
                 strongBlocks.observed = nil
@@ -149,8 +164,7 @@ public class Promise<ValueType> : PromiseCancelToken {
                 if !strongSelf.blocks.contains(where: { $0.shouldKeepPromise }) {
                     strongSelf.cancel()
                 }
-            }
-            }, on: queue)
+            }, on: Promise.queue)
 
         Promise.queue.async {
             if let fulfilledObject = self.fulfilledObject, fulfilledObject.resolved {
@@ -174,8 +188,7 @@ public class Promise<ValueType> : PromiseCancelToken {
         
         PromiseCancelToken.queue.async {
             guard let fulfilledObject = self.fulfilledObject, fulfilledObject.resolved else {
-                atomic_thread_fence(memory_order_acquire)
-                if self.cancelled {
+                if self.cancelFlag.isCanceled {
                     wrappedBlock()
                 } else {
                     self.onCancel = wrappedBlock
@@ -217,8 +230,7 @@ extension Promise {
             }
             
         case .promise(let promise):
-            atomic_thread_fence(memory_order_acquire)
-            if self.cancelled {
+            if self.cancelFlag.isCanceled {
                 promise.cancel()
             } else {
                 let cancellationToken = promise.then({ self.fulfill(with: .success($0)) },
