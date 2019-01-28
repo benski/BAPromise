@@ -573,7 +573,8 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
 
 -(void)reject
 {
-    [self rejectWithError:[[NSError alloc] init]];
+    NSError *error = [NSError errorWithDomain:@"benski.promise.error.domain" code:0 userInfo:@{ NSLocalizedDescriptionKey : @"Promise is rejected" }];
+    [self rejectWithError:error];
 }
 
 -(void)fulfillWithObject:(id)object orRejectWithError:(NSError *)error
