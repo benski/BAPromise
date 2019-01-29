@@ -176,4 +176,29 @@
     [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
 
+-(void)testFulfillSeveralTimes
+{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"testFullfillSeveralTimes"];
+    expectation.expectedFulfillmentCount = 1;
+
+    BAPromise *promise = [[BAPromise alloc] init];
+    BAPromise *promise1 = [[BAPromise alloc] init];
+    BAPromise *promise2 = [[BAPromise alloc] init];
+
+    [promise fulfillWithObject:promise1];
+    [promise fulfillWithObject:promise2];
+
+    [promise1 fulfillWithObject:@1];
+    [promise2 fulfillWithObject:@2];
+
+    [promise done:^(id  _Nullable obj) {
+        XCTAssert(((NSNumber *)obj).intValue == 1);
+        [expectation fulfill];
+    }];
+
+
+    [self waitForExpectationsWithTimeout:0.5 handler:nil];
+
+}
+
 @end
