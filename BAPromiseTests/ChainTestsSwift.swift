@@ -133,4 +133,25 @@ class ChainTestsSwift: XCTestCase {
         }
         self.wait(for: [expectation], timeout: 0.5)
     }
+
+    func testFulfillSeveralTimes() {
+        let testExpectation = expectation(description: "\(self)")
+
+            let promise = Promise<NSNumber>()
+            let promise1 = Promise<NSNumber>()
+            let promise2 = Promise<NSNumber>()
+
+            promise.fulfill(with: .promise(promise1))
+            promise.fulfill(with: .promise(promise2))
+
+            promise2.fulfill(with: .success(NSNumber(value: 2)))
+            promise1.fulfill(with: .success(NSNumber(value: 1)))
+
+            promise.then({ (number) in
+                XCTAssert(number.intValue == 2)
+                testExpectation.fulfill()
+            }, queue: .main)
+        
+        wait(for: [testExpectation], timeout: 5)
+    }
 }
