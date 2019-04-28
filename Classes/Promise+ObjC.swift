@@ -8,6 +8,10 @@
 
 import Foundation
 
+class BAPromiseNilError : Error {
+    
+}
+
 extension Promise where ValueType : AnyObject {
     public func objcPromise() -> BAPromise<ValueType> {
         let baPromise = BAPromise<ValueType>()
@@ -21,4 +25,24 @@ extension Promise where ValueType : AnyObject {
         }
         return baPromise
     }
+    /* benski> I have not yet figured out how to get the compiler to genericize this on Optional<ValueType>
+     so as a workaround, this goes down the rejection path with a BAPromiseNilErrors if the ObjC promise fulfills with a nil */
+    public convenience init(from: BAPromise<ValueType>) {
+        self.init()
+        let cancelToken = from.done({ (value: ValueType?) in
+            if let value = value {
+                self.fulfill(with: .success(value))
+            } else {
+                self.fulfill(with: .failure(BAPromiseNilError()))
+            }
+        }, rejected:{ error in
+            self.fulfill(with: .failure(error))
+        }, finally:{
+            
+        })
+        self.cancelled({
+            from.cancel()
+        }, on: DispatchQueue.main)
+    }
 }
+
