@@ -16,7 +16,7 @@ typedef dispatch_block_t BAPromiseFinallyBlock;
 
 /* block runner base for promise / canceltoken */
 @interface BAObject : NSObject
--(void)ba_runBlock:(dispatch_block_t)block;
+-(void)ba_runBlock:(nonnull dispatch_block_t)block;
 @end
 
 // cancel token for promise
