@@ -29,7 +29,7 @@ extension Promise where ValueType : AnyObject {
      so as a workaround, this goes down the rejection path with a BAPromiseNilErrors if the ObjC promise fulfills with a nil */
     public convenience init(from: BAPromise<ValueType>) {
         self.init()
-        let _ = from.done({ (value: ValueType?) in
+        let cancelToken:BACancelToken = from.done({ (value: ValueType?) in
             if let value = value {
                 self.fulfill(with: .success(value))
             } else {
@@ -38,10 +38,10 @@ extension Promise where ValueType : AnyObject {
         }, rejected:{ error in
             self.fulfill(with: .failure(error))
         }, finally:{
-            
+            // noop
         })
         self.cancelled({
-            from.cancel()
+            cancelToken.cancel()
         }, on: DispatchQueue.main)
     }
 }
