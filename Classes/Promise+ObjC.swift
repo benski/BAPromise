@@ -41,7 +41,7 @@ extension Promise where ValueType : AnyObject {
             
         })
         self.cancelled({
-            from.cancel()
+            cancelToken.cancel()
         }, on: DispatchQueue.main)
     }
 }
