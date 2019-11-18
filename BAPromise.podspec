@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
 s.name             = "BAPromise"
-s.version          = "3.0.13"
+s.version          = "3.0.17"
 s.summary          = "Objective C Promise Library"
 s.description      = <<-DESC
     Swift Promise Library. An alternative to NSOperation for asynchronous operations.
@@ -9,8 +9,7 @@ s.homepage         = "https://github.com/benski/BAPromise"
 s.license          = "MIT"
 s.author           = { "Ben Allison" => "benski@winamp.com" }
 s.source           = { :git => "https://github.com/benski/BAPromise.git", :tag => s.version.to_s }
-#s.static_framework = true
-s.swift_version = '4.2'
+s.swift_versions = ['4.2', '5.0']
 
 s.ios.deployment_target = '10.0'
 s.osx.deployment_target = '10.12'

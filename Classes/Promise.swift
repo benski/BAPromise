@@ -274,11 +274,19 @@ extension Promise {
     }
     
     // a simpler method to use when doing type conversion
-    func map<ReturnType>(_ onFulfilled: @escaping ((ValueType) throws -> ReturnType),
+    public func map<ReturnType>(_ onFulfilled: @escaping ((ValueType) throws -> ReturnType),
                           queue : DispatchQueue) -> Promise<ReturnType> {
         return then({ (value) -> PromiseResult<ReturnType> in
             let chained = try onFulfilled(value)
             return .success(chained)
+        }, queue: queue)
+    }
+    
+    public func flatMap<ReturnType>(_ onFulfilled: @escaping ((ValueType) throws -> Promise<ReturnType>),
+                         queue : DispatchQueue) -> Promise<ReturnType> {
+        return then({ (value) -> PromiseResult<ReturnType> in
+            let chained = try onFulfilled(value)
+            return .promise(chained)
         }, queue: queue)
     }
 }
