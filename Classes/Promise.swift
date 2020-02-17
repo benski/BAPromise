@@ -64,6 +64,17 @@ extension PromiseResult where ValueType == Void {
     }
 }
 
+extension Array {
+    public func successes <ValueType>() -> [ValueType] where Element == PromiseResult<ValueType> {
+        return compactMap {
+             switch $0 {
+             case .success(let value): return value
+             default: return nil
+             }
+         }
+    }
+}
+
 public class PromiseCancelToken {
     
     public typealias Canceled = () -> Void
@@ -100,6 +111,7 @@ public class PromiseCancelToken {
 public class Promise<ValueType> : PromiseCancelToken {
     
     public typealias Fulfilled = (ValueType) -> Void
+    public typealias Observed = (PromiseResult<ValueType>) -> Void
     public typealias Rejected = (Error) -> Void
     public typealias Always = () -> Void
     
@@ -111,7 +123,7 @@ public class Promise<ValueType> : PromiseCancelToken {
     
     public class PromiseBlock {
         var done: Fulfilled?
-        var observed: Fulfilled?
+        var observed: Observed?
         var rejected: Rejected?
         var always: Always?
         var queue: DispatchQueue
@@ -129,12 +141,12 @@ public class Promise<ValueType> : PromiseCancelToken {
         func call(with object: PromiseResult<ValueType>) {
             queue.async {
                 guard !self.cancellationToken.cancelFlag.isCanceled else { return }
-                
+
+                self.observed?(object)
                 if case let .failure(error) = object {
                     self.rejected?(error)
                 } else if case let .success(value) = object {
                     self.done?(value)
-                    self.observed?(value)
                 }
                 self.always?()
             }
@@ -142,7 +154,7 @@ public class Promise<ValueType> : PromiseCancelToken {
     }
     
     @discardableResult public func then(_ onFulfilled: Fulfilled? = nil,
-                                 observed: Fulfilled? = nil,
+                                 observed: Observed? = nil,
                                  rejected: Rejected? = nil,
                                  always: Always? = nil,
                                  queue: DispatchQueue) -> PromiseCancelToken {
@@ -357,5 +369,10 @@ extension Array {
         }
         
         return returnedPromise
+    }
+    
+    /// helper method to return only successes from a join()
+    public func compactJoin<ValueType>() -> Promise<Array<ValueType>> where Element == Promise<ValueType> {
+        return join().map({ $0.successes() }, queue: DispatchQueue.global())
     }
 }
