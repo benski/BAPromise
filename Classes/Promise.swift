@@ -209,7 +209,16 @@ public class Promise<ValueType> : PromiseCancelToken {
             }
         }
     }
+}
 
+// MARK: - Completable ( Promise<Void> )
+
+public typealias Completable = Promise<Void>
+
+extension Promise {
+    public class func completed() -> Completable {
+        return Promise<Void>(())
+    }
 }
 
 // MARK: - Creation
@@ -339,7 +348,7 @@ extension Array {
         return returnedPromise
     }
     
-    public func join <ValueType>() -> Promise<Array<PromiseResult<ValueType>>> where Element == Promise<ValueType>  {
+    public func join <ValueType>() -> Promise<Array<PromiseResult<ValueType>>> where Element == Promise<ValueType> {
         guard self.count > 0 else { return Promise<Array<PromiseResult<ValueType>>>([]) }
         var cancelTokens = [PromiseCancelToken]()
         
@@ -374,5 +383,33 @@ extension Array {
     /// helper method to return only successes from a join()
     public func compactJoin<ValueType>() -> Promise<Array<ValueType>> where Element == Promise<ValueType> {
         return join().map({ $0.successes() }, queue: DispatchQueue.global())
+    }
+}
+
+extension Array where Element == Completable {
+    public func join() -> Completable {
+        guard self.count > 0 else { return .completed() }
+        var cancelTokens = [PromiseCancelToken]()
+        
+        let returnedPromise = Completable()
+        var remaining = self.count
+        
+        returnedPromise.cancelled({
+            for token in cancelTokens {
+                token.cancel()
+            }
+        }, on: PromiseCancelToken.queue)
+        
+        for promise in self {
+            let token = promise.then(always: {
+                remaining = remaining - 1
+                if remaining == 0 {
+                    returnedPromise.fulfill(with: .success)
+                }
+            }, queue: PromiseCancelToken.queue)
+            cancelTokens.append(token)
+        }
+        
+        return returnedPromise
     }
 }
