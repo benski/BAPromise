@@ -66,7 +66,7 @@ class PromiseBlocksTests: XCTestCase {
         
         let observedExpect = XCTestExpectation()
         promiseBlock.observed = { (obj) in
-            XCTAssertEqual(obj, callObj)
+            XCTAssertEqual(obj, PromiseResult<Int>.success(callObj))
             observedExpect.fulfill()
         }
         
@@ -87,7 +87,7 @@ class PromiseBlocksTests: XCTestCase {
     func testCallNonErrorOnQueue() {
         let promiseBlock = Promise<Int>.PromiseBlock(cancellationToken: PromiseCancelToken(), queue:DispatchQueue(label: "testCallNonErrorOnQueue"))
         let key = DispatchSpecificKey<String>()
-        promiseBlock.queue.setSpecific(key: key, value: "testCallNonErrorOnQueue")
+        promiseBlock.queue?.setSpecific(key: key, value: "testCallNonErrorOnQueue")
         let callObj = 7
         
         let doneExpect = XCTestExpectation()
@@ -99,7 +99,7 @@ class PromiseBlocksTests: XCTestCase {
         
         let observedExpect = XCTestExpectation()
         promiseBlock.observed = { obj in
-            XCTAssertEqual(obj , callObj)
+            XCTAssertEqual(obj, .success(callObj))
             XCTAssertEqual(DispatchQueue.getSpecific(key: key), "testCallNonErrorOnQueue")
             observedExpect.fulfill()
         }
@@ -129,7 +129,9 @@ class PromiseBlocksTests: XCTestCase {
         }
         
         promiseBlock.observed = { obj in
-            XCTFail("unexpected success")
+            if case .success = obj {
+                XCTFail("unexpected success")
+            }
         }
         
         let rejectedExpectation = XCTestExpectation()
@@ -150,7 +152,7 @@ class PromiseBlocksTests: XCTestCase {
     func testCallErrorOnQueue() {
         let promiseBlock = Promise<Void>.PromiseBlock(cancellationToken: PromiseCancelToken(), queue:DispatchQueue(label: "testCallNonErrorOnQueue"))
         let key = DispatchSpecificKey<String>()
-        promiseBlock.queue.setSpecific(key: key, value: "testCallNonErrorOnQueue")
+        promiseBlock.queue?.setSpecific(key: key, value: "testCallNonErrorOnQueue")
         let callObj = DummyError.dummy
         
         promiseBlock.done = { obj in
@@ -158,7 +160,10 @@ class PromiseBlocksTests: XCTestCase {
         }
         
         promiseBlock.observed = { obj in
-            XCTFail("unexpected success")
+            if case .success = obj {
+                XCTFail("unexpected success")
+            }
+            XCTAssertEqual(DispatchQueue.getSpecific(key: key), "testCallNonErrorOnQueue")
         }
         
         let rejectedExpectation = XCTestExpectation()

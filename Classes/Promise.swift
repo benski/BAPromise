@@ -54,6 +54,17 @@ public enum PromiseResult<ValueType> {
     
 }
 
+extension PromiseResult : Equatable where ValueType: Equatable {
+    public static func == (lhs: PromiseResult<ValueType>, rhs: PromiseResult<ValueType>) -> Bool {
+        if case let .success(l) = lhs, case let .success(r) = rhs {
+            return l == r
+        }
+        return false
+    }
+
+
+}
+
 extension PromiseResult where ValueType == Void {
     static var success: PromiseResult {
         return .success(())
@@ -108,6 +119,16 @@ public class PromiseCancelToken {
     }
 }
 
+extension Thread {
+    @objc func baRunBlock(_ block: @escaping () -> Void) {
+        block()
+    }
+
+    func baAsync(_ block: @escaping () -> Void) {
+        perform(#selector(baRunBlock), on: self, with: block, waitUntilDone: false)
+    }
+}
+
 public class Promise<ValueType> : PromiseCancelToken {
     
     public typealias Fulfilled = (ValueType) -> Void
@@ -126,7 +147,8 @@ public class Promise<ValueType> : PromiseCancelToken {
         var observed: Observed?
         var rejected: Rejected?
         var always: Always?
-        var queue: DispatchQueue
+        var queue: DispatchQueue?
+        var thread: Thread?
         let cancellationToken: PromiseCancelToken
         
         init(cancellationToken: PromiseCancelToken,
@@ -134,12 +156,19 @@ public class Promise<ValueType> : PromiseCancelToken {
             self.cancellationToken = cancellationToken
             self.queue = queue
         }
+
+        init(cancellationToken: PromiseCancelToken,
+             thread: Thread) {
+            self.cancellationToken = cancellationToken
+            self.thread = thread
+        }
+
         var shouldKeepPromise: Bool {
             return done != nil || always != nil || rejected != nil
         }
         
         func call(with object: PromiseResult<ValueType>) {
-            queue.async {
+            let block = {
                 guard !self.cancellationToken.cancelFlag.isCanceled else { return }
 
                 self.observed?(object)
@@ -150,16 +179,29 @@ public class Promise<ValueType> : PromiseCancelToken {
                 }
                 self.always?()
             }
+            if let queue = queue {
+                queue.async(execute: block)
+            } else if let thread = thread {
+                thread.baAsync(block)
+            }
         }
     }
     
-    @discardableResult public func then(_ onFulfilled: Fulfilled? = nil,
+    internal func internalThen(_ onFulfilled: Fulfilled? = nil,
                                  observed: Observed? = nil,
                                  rejected: Rejected? = nil,
                                  always: Always? = nil,
-                                 queue: DispatchQueue) -> PromiseCancelToken {
+                                 queue: DispatchQueue? = nil,
+                                 thread: Thread? = nil) -> PromiseCancelToken {
         let cancellationToken = PromiseCancelToken()
-        let blocks = PromiseBlock(cancellationToken: cancellationToken, queue: queue)
+        let blocks: PromiseBlock
+        if let queue = queue {
+            blocks = PromiseBlock(cancellationToken: cancellationToken, queue: queue)
+        } else if let thread = thread {
+            blocks = PromiseBlock(cancellationToken: cancellationToken, thread: thread)
+        } else {
+            blocks = PromiseBlock(cancellationToken: cancellationToken, queue: .main)
+        }
         blocks.done = onFulfilled
         blocks.observed = observed
         blocks.rejected = rejected
@@ -187,6 +229,22 @@ public class Promise<ValueType> : PromiseCancelToken {
         }
         
         return cancellationToken
+    }
+
+    @discardableResult public func then(_ onFulfilled: Fulfilled? = nil,
+                                 observed: Observed? = nil,
+                                 rejected: Rejected? = nil,
+                                 always: Always? = nil,
+                                 queue: DispatchQueue) -> PromiseCancelToken {
+        return internalThen(onFulfilled, observed: observed, rejected: rejected, always: always, queue: queue, thread: nil)
+    }
+
+    @discardableResult public func then(_ onFulfilled: Fulfilled? = nil,
+                                 observed: Observed? = nil,
+                                 rejected: Rejected? = nil,
+                                 always: Always? = nil,
+                                 thread: Thread) -> PromiseCancelToken {
+        return internalThen(onFulfilled, observed: observed, rejected: rejected, always: always,thread: thread)
     }
     
     fileprivate lazy var blocks: Array<PromiseBlock> = []
@@ -382,7 +440,7 @@ extension Array {
     
     /// helper method to return only successes from a join()
     public func compactJoin<ValueType>() -> Promise<Array<ValueType>> where Element == Promise<ValueType> {
-        return join().map({ $0.successes() }, queue: DispatchQueue.global())
+        return join().map({ $0.successes() }, queue: PromiseCancelToken.queue)
     }
 }
 

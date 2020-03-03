@@ -192,7 +192,7 @@
     [promise2 fulfillWithObject:@2];
 
     [promise done:^(id  _Nullable obj) {
-        XCTAssert(((NSNumber *)obj).intValue == 1);
+        XCTAssertEqualObjects(obj, @1);
         [expectation fulfill];
     }];
 

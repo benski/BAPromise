@@ -8,7 +8,7 @@
 
 import Foundation
 
-class BAPromiseNilError : Error {
+public class BAPromiseNilError : Error {
     
 }
 

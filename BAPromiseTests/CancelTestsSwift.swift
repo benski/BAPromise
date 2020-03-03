@@ -35,7 +35,7 @@ class CancelTestsSwift: XCTestCase {
         
         let token = promise.then({
             XCTFail("Cancelation should prevent calling of done block")
-        }, observed: {
+        }, observed: { _ in
             XCTFail("Cancelation should prevent calling of observed block")
         }, rejected: { (error) in
             XCTFail("Cancelation should prevent calling of rejected block")
@@ -90,7 +90,7 @@ class CancelTestsSwift: XCTestCase {
         
         let token = promise.then({
             XCTFail("Cancelation should prevent calling of done block")
-        }, observed: {
+        }, observed: { _ in
             XCTFail("Cancelation should prevent calling of observed block")
         }, rejected: { (error) in
             XCTFail("Cancelation should prevent calling of rejected block")
@@ -115,7 +115,7 @@ class CancelTestsSwift: XCTestCase {
             promise.fulfill(with: .success)
             let token = promise.then({
                 XCTFail("Cancelation should prevent calling of done block")
-            }, observed: {
+            }, observed: { _ in
                 XCTFail("Cancelation should prevent calling of observed block")
             }, rejected: { (error) in
                 XCTFail("Cancelation should prevent calling of rejected block")
@@ -140,7 +140,7 @@ class CancelTestsSwift: XCTestCase {
         
         let token = promise.then({
             XCTFail("Cancelation should prevent calling of done block")
-        }, observed: {
+        }, observed: { _ in
             XCTFail("Cancelation should prevent calling of observed block")
         }, rejected: { (error) in
             XCTFail("Cancelation should prevent calling of rejected block")
@@ -165,7 +165,7 @@ class CancelTestsSwift: XCTestCase {
             promise.fulfill(with: .failure(NSError()))
             let token = promise.then({
                 XCTFail("Cancelation should prevent calling of done block")
-            }, observed: {
+            }, observed: { _ in
                 XCTFail("Cancelation should prevent calling of observed block")
             }, rejected: { (error) in
                 XCTFail("Cancelation should prevent calling of rejected block")
