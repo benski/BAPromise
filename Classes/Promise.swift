@@ -11,19 +11,24 @@ import Foundation
 internal class AtomicCancel {
     
     public var isCanceled: Bool {
-        atomic_thread_fence(memory_order_seq_cst)
-        return underlying == 0 ? false : true
+        defer { lock.unlock() }
+        lock.lock()
+        return underlying
     }
     
     public func cancel() {
-        OSAtomicIncrement32Barrier(&underlying);
+        lock.lock()
+        underlying = true;
+        lock.unlock()
     }
     
     public init() {
-        underlying = 0
+        underlying = false
+        lock = NSLock()
     }
-    
-     private var underlying: Int32
+
+    private let lock: NSLock
+    private var underlying: Bool
 }
 
 public enum PromiseResult<ValueType> {
