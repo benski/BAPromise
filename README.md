@@ -2,7 +2,7 @@
 
 [![Coverage Status](https://coveralls.io/repos/github/benski/BAPromise/badge.svg?branch=master)](https://coveralls.io/github/benski/BAPromise?branch=master)
 
-## Objective C Promise Library ##
+## Swift & Objective C Promise Library ##
 
 This is a promise library for Objective C. It is a lightweight library and does not bring in any additional dependencies and adds very little complexity.
 
