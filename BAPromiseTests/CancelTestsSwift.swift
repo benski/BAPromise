@@ -215,8 +215,10 @@ class CancelTestsSwift: XCTestCase {
         let cancelToken = fulfilledPromise.then({ () -> PromiseResult<Void> in
             return .promise(thenPromise)
         }, queue: DispatchQueue.main)
-        
-        cancelToken.cancel()
+
+        DispatchQueue.main.async {
+            cancelToken.cancel()
+        }
         self.wait(for: [expectation], timeout: 0.5)
     }
 }
