@@ -8,7 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import "TestWaiter.h"
-#import "BAPromise.h"
+@import BAPromise;
 #import <OCMock/OCMock.h>
 
 @interface DoneTests : XCTestCase
