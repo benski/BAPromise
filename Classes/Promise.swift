@@ -222,15 +222,6 @@ public class Promise<ValueType> : PromiseCancelToken {
     }
     
     fileprivate lazy var blocks: Array<PromiseBlock> = []
-
-//    public override func cancelled(_ onCancel: @escaping Canceled, on queue: DispatchQueue) {
-//        PromiseCancelToken.queue.async {
-//            guard let fulfilledObject = self.fulfilledObject, fulfilledObject.resolved else {
-//                super.cancelled(onCancel, on: queue)
-//                return
-//            }
-//        }
-//    }
 }
 
 // MARK: - Completable ( Promise<Void> )
