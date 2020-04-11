@@ -54,6 +54,7 @@ public enum PromiseResult<ValueType> {
     
 }
 
+/// this is mostly used for Unit Tests
 extension PromiseResult : Equatable where ValueType: Equatable {
     public static func == (lhs: PromiseResult<ValueType>, rhs: PromiseResult<ValueType>) -> Bool {
         if case let .success(l) = lhs, case let .success(r) = rhs {
@@ -61,8 +62,6 @@ extension PromiseResult : Equatable where ValueType: Equatable {
         }
         return false
     }
-
-
 }
 
 extension PromiseResult where ValueType == Void {

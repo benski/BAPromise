@@ -22,6 +22,15 @@
 		0CFAEB2C212F370100777107 /* ChainTestsSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFAEB2B212F370100777107 /* ChainTestsSwift.swift */; };
 		0CFAEB2D212F370100777107 /* ChainTestsSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFAEB2B212F370100777107 /* ChainTestsSwift.swift */; };
 		0CFAEB2E212F370100777107 /* ChainTestsSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFAEB2B212F370100777107 /* ChainTestsSwift.swift */; };
+		2E6CDA2C24427746002E0376 /* PromiseResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA2B24427746002E0376 /* PromiseResultTests.swift */; };
+		2E6CDA2D24427746002E0376 /* PromiseResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA2B24427746002E0376 /* PromiseResultTests.swift */; };
+		2E6CDA2E24427746002E0376 /* PromiseResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA2B24427746002E0376 /* PromiseResultTests.swift */; };
+		2E6CDA3024427CE0002E0376 /* SwiftArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA2F24427CE0002E0376 /* SwiftArrayTests.swift */; };
+		2E6CDA3124427CE0002E0376 /* SwiftArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA2F24427CE0002E0376 /* SwiftArrayTests.swift */; };
+		2E6CDA3224427CE0002E0376 /* SwiftArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA2F24427CE0002E0376 /* SwiftArrayTests.swift */; };
+		2E6CDA3424427EC9002E0376 /* MapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA3324427EC9002E0376 /* MapTests.swift */; };
+		2E6CDA3524427EC9002E0376 /* MapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA3324427EC9002E0376 /* MapTests.swift */; };
+		2E6CDA3624427EC9002E0376 /* MapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA3324427EC9002E0376 /* MapTests.swift */; };
 		3214F58F6DA81220AA8CC2F1 /* Pods_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1877D722813E904D61872347 /* Pods_iOS.framework */; };
 		6F6C8C0B6970DFB7A14E3423 /* Pods_OS_X_OS_XTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B90205B55A87D2F3869C79E4 /* Pods_OS_X_OS_XTests.framework */; };
 		AFA0CEFE21F7272400B9769E /* PromiseInitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA0CEFD21F7272400B9769E /* PromiseInitTests.swift */; };
@@ -123,6 +132,9 @@
 		243B8F2E624F6BE5D0C933E7 /* Pods-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-ios/Pods-ios.release.xcconfig"; sourceTree = "<group>"; };
 		2667770040C7B146CCC69D3D /* Pods_tvOS_tvOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tvOS_tvOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		297F45050D01BCF34E393ECC /* Pods_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2E6CDA2B24427746002E0376 /* PromiseResultTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PromiseResultTests.swift; path = BAPromiseTests/PromiseResultTests.swift; sourceTree = "<group>"; };
+		2E6CDA2F24427CE0002E0376 /* SwiftArrayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SwiftArrayTests.swift; path = BAPromiseTests/SwiftArrayTests.swift; sourceTree = "<group>"; };
+		2E6CDA3324427EC9002E0376 /* MapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MapTests.swift; path = BAPromiseTests/MapTests.swift; sourceTree = "<group>"; };
 		2E9195B178DB790ED866E310 /* Pods-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ios/Pods-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		3EF2D03E2BA940AD4BF4FB27 /* Pods-osx.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-osx.release.xcconfig"; path = "Pods/Target Support Files/Pods-osx/Pods-osx.release.xcconfig"; sourceTree = "<group>"; };
 		5129D17C789F624CAE958541 /* Pods-OS X.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OS X.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OS X/Pods-OS X.debug.xcconfig"; sourceTree = "<group>"; };
@@ -387,6 +399,9 @@
 				E76F50711DC8FF7100C6425C /* LeakTests.m */,
 				B3AADFC31E1448DF00E538A2 /* OS XTests-Bridging-Header.h */,
 				E7A7152F20D435A5004CCDEE /* PromiseBlocksTests.swift */,
+				2E6CDA2B24427746002E0376 /* PromiseResultTests.swift */,
+				2E6CDA2F24427CE0002E0376 /* SwiftArrayTests.swift */,
+				2E6CDA3324427EC9002E0376 /* MapTests.swift */,
 			);
 			name = Tests;
 			sourceTree = "<group>";
@@ -724,7 +739,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-iOS/Pods-iOS-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-iOS/Pods-iOS-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/BAPromise/BAPromise.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -733,7 +748,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iOS/Pods-iOS-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS/Pods-iOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C97CF3414709012E06DC305D /* [CP] Check Pods Manifest.lock */ = {
@@ -760,7 +775,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-iOS-iOSTests/Pods-iOS-iOSTests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-iOSTests/Pods-iOS-iOSTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/BAPromise/BAPromise.framework",
 				"${BUILT_PRODUCTS_DIR}/OCMock-iOS/OCMock.framework",
 			);
@@ -771,7 +786,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iOS-iOSTests/Pods-iOS-iOSTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-iOSTests/Pods-iOS-iOSTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		ED19499E40F5FCA5FE0D70F2 /* [CP] Embed Pods Frameworks */ = {
@@ -780,7 +795,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-OS X-OS XTests/Pods-OS X-OS XTests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-OS X-OS XTests/Pods-OS X-OS XTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/OCMock-macOS/OCMock.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -789,7 +804,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OS X-OS XTests/Pods-OS X-OS XTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OS X-OS XTests/Pods-OS X-OS XTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -817,6 +832,8 @@
 				0CFAEB2C212F370100777107 /* ChainTestsSwift.swift in Sources */,
 				E7E3E8D01CBD511F00C55538 /* WhenTests.m in Sources */,
 				E7B8D22E1B7E6CFE00823BFC /* ChainTests.m in Sources */,
+				2E6CDA3424427EC9002E0376 /* MapTests.swift in Sources */,
+				2E6CDA2C24427746002E0376 /* PromiseResultTests.swift in Sources */,
 				E7B8D22F1B7E6CFE00823BFC /* DoneTests.m in Sources */,
 				AFA0CEFE21F7272400B9769E /* PromiseInitTests.swift in Sources */,
 				E7B8D2301B7E6CFE00823BFC /* JoinTests.m in Sources */,
@@ -824,6 +841,7 @@
 				0CFAEB28212F1DE200777107 /* CancelTestsSwift.swift in Sources */,
 				E7B8D2311B7E6CFE00823BFC /* RejectTests.m in Sources */,
 				E7B8D2321B7E6CFE00823BFC /* TestWaiter.h in Sources */,
+				2E6CDA3024427CE0002E0376 /* SwiftArrayTests.swift in Sources */,
 				E7B8D2331B7E6CFE00823BFC /* TestWaiter.m in Sources */,
 				0CFAEB1D212C9A8F00777107 /* DoneTestsSwift.swift in Sources */,
 				E7B8D2341B7E6CFE00823BFC /* ThenTests.m in Sources */,
@@ -854,6 +872,8 @@
 				0CFAEB2D212F370100777107 /* ChainTestsSwift.swift in Sources */,
 				0CFAEB1E212C9A8F00777107 /* DoneTestsSwift.swift in Sources */,
 				E77B335B1D58EACA0083903F /* ThreadTests.m in Sources */,
+				2E6CDA3524427EC9002E0376 /* MapTests.swift in Sources */,
+				2E6CDA2D24427746002E0376 /* PromiseResultTests.swift in Sources */,
 				E7E3E8D11CBD511F00C55538 /* WhenTests.m in Sources */,
 				AFA0CEFF21F7272400B9769E /* PromiseInitTests.swift in Sources */,
 				E7B8D2361B7E6D0200823BFC /* ChainTests.m in Sources */,
@@ -861,6 +881,7 @@
 				0CFAEB29212F1DE200777107 /* CancelTestsSwift.swift in Sources */,
 				E7B8D2381B7E6D0200823BFC /* JoinTests.m in Sources */,
 				E76F50731DC8FF7100C6425C /* LeakTests.m in Sources */,
+				2E6CDA3124427CE0002E0376 /* SwiftArrayTests.swift in Sources */,
 				E7B8D2391B7E6D0200823BFC /* RejectTests.m in Sources */,
 				E7B8D23B1B7E6D0200823BFC /* TestWaiter.m in Sources */,
 				E7B8D23C1B7E6D0200823BFC /* ThenTests.m in Sources */,
@@ -886,6 +907,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0CFAEB1F212C9A8F00777107 /* DoneTestsSwift.swift in Sources */,
+				2E6CDA3224427CE0002E0376 /* SwiftArrayTests.swift in Sources */,
 				E7CA17131BB9B0FC002D7196 /* tvOSTests.m in Sources */,
 				E7CA171C1BB9B151002D7196 /* CancelTests.m in Sources */,
 				E7CA171D1BB9B153002D7196 /* ChainTests.m in Sources */,
@@ -899,6 +921,8 @@
 				E7CA17211BB9B15C002D7196 /* TestWaiter.m in Sources */,
 				E7CA17221BB9B15E002D7196 /* ThenTests.m in Sources */,
 				0CFAEB2E212F370100777107 /* ChainTestsSwift.swift in Sources */,
+				2E6CDA2E24427746002E0376 /* PromiseResultTests.swift in Sources */,
+				2E6CDA3624427EC9002E0376 /* MapTests.swift in Sources */,
 				E7E3E8D21CBD511F00C55538 /* WhenTests.m in Sources */,
 				E76F50741DC8FF7100C6425C /* LeakTests.m in Sources */,
 			);

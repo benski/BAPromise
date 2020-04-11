@@ -37,4 +37,12 @@ class PromiseInitTests: XCTestCase {
         wait(for: [expectation], timeout: 0.5)
     }
 
+    func testCompleted() {
+        let expectation = self.expectation(description: "\(self)")
+        let promise = Completable.completed()
+        promise.then({ _ in
+            expectation.fulfill()
+        }, queue: .main)
+        wait(for: [expectation], timeout: 0.5)
+    }
 }
