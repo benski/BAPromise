@@ -8,24 +8,6 @@
 
 import Foundation
 
-internal class AtomicCancel {
-    
-    public var isCanceled: Bool {
-        atomic_thread_fence(memory_order_seq_cst)
-        return underlying == 0 ? false : true
-    }
-    
-    public func cancel() {
-        OSAtomicIncrement32Barrier(&underlying);
-    }
-    
-    public init() {
-        underlying = 0
-    }
-    
-     private var underlying: Int32
-}
-
 public enum PromiseResult<ValueType> {
     case success(ValueType)
     case promise(Promise<ValueType>)
@@ -92,9 +74,6 @@ public class PromiseCancelToken {
     var workItem: DispatchWorkItem? = DispatchWorkItem(block: {}) // we can't inherit so we will use Decorator Pattern instead
     static let queue = DispatchQueue(label: "com.github.benski.promise")
     internal var isCanceled : Bool { return workItem?.isCancelled ?? false}
-//    internal let cancelFlag: AtomicCancel = AtomicCancel()
-//
-//    var onCancel : Canceled?
     internal var cancelBlocks = [DispatchWorkItem]()
 
     public func cancelled(_ onCancel: @escaping Canceled, on queue: DispatchQueue) {
@@ -104,7 +83,7 @@ public class PromiseCancelToken {
             workItem.notify(queue: queue, execute: cancelItem)
         }
     }
-//
+
     public func cancel() {
         if let workItem = workItem {
             workItem.cancel()
