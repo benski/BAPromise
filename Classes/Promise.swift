@@ -294,10 +294,10 @@ extension Promise {
 extension Promise {
     
     public func fulfill(with: PromiseResult<ValueType>) {
-        switch(with) {
-        case .success, .failure:
-            Promise.queue.async {
-                if let fulfilledObject = self.fulfilledObject, fulfilledObject.resolved { return }
+        Promise.queue.async {
+            if let fulfilledObject = self.fulfilledObject, fulfilledObject.resolved { return }
+            switch(with) {
+            case .success, .failure:
                 self.fulfilledObject = with
                 for block in self.blocks {
                     block.call(with: with)
@@ -305,17 +305,17 @@ extension Promise {
                 // remove references we'll never call now
                 self.blocks.removeAll()
                 self.onCancel = nil
-            }
-            
-        case .promise(let promise):
-            if self.cancelFlag.isCanceled {
-                promise.cancel()
-            } else {
-                let cancellationToken = promise.then({ self.fulfill(with: .success($0)) },
-                                                     rejected: { self.fulfill(with: .failure($0)) },
-                                                     queue: Promise.queue)
-                
-                self.cancelled({ cancellationToken.cancel() }, on: Promise.queue)
+
+            case .promise(let promise):
+                if self.cancelFlag.isCanceled {
+                    promise.cancel()
+                } else {
+                    let cancellationToken = promise.then({ self.fulfill(with: .success($0)) },
+                                                         rejected: { self.fulfill(with: .failure($0)) },
+                                                         queue: Promise.queue)
+
+                    self.cancelled({ cancellationToken.cancel() }, on: Promise.queue)
+                }
             }
         }
     }

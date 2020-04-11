@@ -50,35 +50,62 @@ class CancelTestsSwift: XCTestCase {
     }
     
     func testCancelTokenAfterFulfillment() {
+        let expectation = XCTestExpectation()
+        expectation.isInverted = true
         let promise = Promise<Void>()
         promise.fulfill(with: .success)
-        promise.cancelled({ XCTFail("Unexpected cancelled callback") }, on: DispatchQueue.main)
-        let token = promise.then({ }, queue: DispatchQueue.main)
-        token.cancel()
-        RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.1))
+        promise.cancelled({
+            XCTFail("Unexpected cancelled callback")
+            expectation.fulfill()
+        }, on: DispatchQueue.main)
+
+        let forFulfillment = XCTestExpectation()
+        let token = promise.then({ forFulfillment.fulfill() }, queue: DispatchQueue.main)
+        self.wait(for: [forFulfillment], timeout: 0.5)
+
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
+            token.cancel()
+        }
+        self.wait(for: [expectation], timeout: 0.5)
     }
     
     func testCancelPromiseAfterFulfilment() {
+        let expectation = XCTestExpectation()
+        expectation.isInverted = true
         let promise = Promise<Void>()
         promise.fulfill(with: .success)
-        promise.cancelled({ XCTFail("Unexpected cancelled callback") }, on: DispatchQueue.main)
-        promise.cancel()
-        RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.1))
+        promise.cancelled({
+            XCTFail("Unexpected cancelled callback")
+            expectation.fulfill()
+        }, on: DispatchQueue.main)
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
+            promise.cancel()
+        }
+        self.wait(for: [expectation], timeout: 0.5)
     }
     
     func testCancelPromiseAfterRejection() {
+        let expectation = XCTestExpectation()
+        expectation.isInverted = true
         let promise = Promise<Void>()
         promise.fulfill(with: .failure(NSError()))
-        promise.cancelled({ XCTFail("Unexpected cancelled callback") }, on: DispatchQueue.main)
-        promise.cancel()
-        RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.1))
+        promise.cancelled({
+            XCTFail("Unexpected cancelled callback")
+            expectation.fulfill()
+        }, on: DispatchQueue.main)
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
+            promise.cancel()
+        }
+        self.wait(for: [expectation], timeout: 0.5)
     }
-   
+
     func testLateCancelCallback() {
         let expectation = XCTestExpectation()
         let promise = Promise<Void>()
         promise.cancel()
-        promise.cancelled({ expectation.fulfill() }, on: DispatchQueue.main)
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
+            promise.cancelled({ expectation.fulfill() }, on: DispatchQueue.main)
+        }
         
         self.wait(for: [expectation], timeout: 0.5)
     }
@@ -202,6 +229,32 @@ class CancelTestsSwift: XCTestCase {
         cancelToken.cancel()
         self.wait(for: [expectation2], timeout: 0.5)
     }
+
+    func testCancelThenWithExistingCancelBlock() {
+        let expectation1 = XCTestExpectation()
+        let thenPromise = Promise<Void>()
+        let fulfilledPromise = Promise<Void>()
+        fulfilledPromise.fulfill(with: .success)
+
+        fulfilledPromise.cancelled({
+            XCTFail("unexpected cancelation of first link of the promise chain")
+        }, on: DispatchQueue.main)
+
+        let cancelToken = fulfilledPromise.then({ () -> PromiseResult<Void> in
+            expectation1.fulfill()
+            return .promise(thenPromise)
+        }, queue: DispatchQueue.main)
+        self.wait(for: [expectation1], timeout: 0.5)
+
+        let expectation2 = XCTestExpectation()
+        thenPromise.cancelled({
+            expectation2.fulfill()
+        }, on: DispatchQueue.main)
+
+        cancelToken.cancel()
+        self.wait(for: [expectation2], timeout: 0.5)
+    }
+
     
     func testCancelThenRaceCondition() {
         let expectation = XCTestExpectation()
