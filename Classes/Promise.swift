@@ -8,24 +8,6 @@
 
 import Foundation
 
-internal class AtomicCancel {
-    
-    public var isCanceled: Bool {
-        atomic_thread_fence(memory_order_seq_cst)
-        return underlying == 0 ? false : true
-    }
-    
-    public func cancel() {
-        OSAtomicIncrement32Barrier(&underlying);
-    }
-    
-    public init() {
-        underlying = 0
-    }
-    
-     private var underlying: Int32
-}
-
 public enum PromiseResult<ValueType> {
     case success(ValueType)
     case promise(Promise<ValueType>)
@@ -88,32 +70,23 @@ extension Array {
 public class PromiseCancelToken {
     
     public typealias Canceled = () -> Void
-    
-    internal let cancelFlag: AtomicCancel = AtomicCancel()
+    var workItem: DispatchWorkItem? = DispatchWorkItem(block: {}) // we can't inherit so we will use Decorator Pattern instead
     static let queue = DispatchQueue(label: "com.github.benski.promise")
-    var onCancel : Canceled?
-    
+    internal var isCanceled : Bool { return workItem?.isCancelled ?? false}
+    internal var cancelBlocks = [DispatchWorkItem]()
+
     public func cancelled(_ onCancel: @escaping Canceled, on queue: DispatchQueue) {
-        let wrappedBlock = {
-            queue.async {
-                onCancel()
-            }
-        }
-        
-        PromiseCancelToken.queue.async {
-            if self.cancelFlag.isCanceled {
-                wrappedBlock()
-            } else {
-                self.onCancel = wrappedBlock
-            }
+        if let workItem = workItem {
+            let cancelItem = DispatchWorkItem(block: onCancel)
+            cancelBlocks.append(cancelItem)
+            workItem.notify(queue: queue, execute: cancelItem)
         }
     }
-    
+
     public func cancel() {
-        cancelFlag.cancel()
-        PromiseCancelToken.queue.async {
-            self.onCancel?()
-            self.onCancel = nil
+        if let workItem = workItem {
+            workItem.cancel()
+            workItem.perform()
         }
     }
 }
@@ -129,7 +102,8 @@ extension Thread {
 }
 
 public class Promise<ValueType> : PromiseCancelToken {
-    
+
+
     public typealias Fulfilled = (ValueType) -> Void
     public typealias Observed = (PromiseResult<ValueType>) -> Void
     public typealias Rejected = (Error) -> Void
@@ -168,7 +142,7 @@ public class Promise<ValueType> : PromiseCancelToken {
         
         func call(with object: PromiseResult<ValueType>) {
             let block = {
-                guard !self.cancellationToken.cancelFlag.isCanceled else { return }
+                guard !self.cancellationToken.isCanceled else { return }
 
                 self.observed?(object)
                 if case let .failure(error) = object {
@@ -247,25 +221,6 @@ public class Promise<ValueType> : PromiseCancelToken {
     }
     
     fileprivate lazy var blocks: Array<PromiseBlock> = []
-
-    public override func cancelled(_ onCancel: @escaping Canceled, on queue: DispatchQueue) {
-        let wrappedBlock = {
-            queue.async {
-                onCancel()
-            }
-        }
-        
-        PromiseCancelToken.queue.async {
-            guard let fulfilledObject = self.fulfilledObject, fulfilledObject.resolved else {
-                if self.cancelFlag.isCanceled {
-                    wrappedBlock()
-                } else {
-                    self.onCancel = wrappedBlock
-                }
-                return
-            }
-        }
-    }
 }
 
 // MARK: - Completable ( Promise<Void> )
@@ -304,11 +259,12 @@ extension Promise {
                 }
                 // remove references we'll never call now
                 self.blocks.removeAll()
-                self.onCancel = nil
+                self.cancelBlocks.forEach { $0.cancel() }
+                self.workItem = nil
             }
             
         case .promise(let promise):
-            if self.cancelFlag.isCanceled {
+            if self.isCanceled {
                 promise.cancel()
             } else {
                 let cancellationToken = promise.then({ self.fulfill(with: .success($0)) },
