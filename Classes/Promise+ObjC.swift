@@ -20,6 +20,7 @@ extension Promise where ValueType : AnyObject {
         }, rejected: { (error) in
             baPromise.rejectWithError(error)
         }, queue: baPromise.queue)
+
         baPromise.cancelled {
             token.cancel()
         }
@@ -41,7 +42,7 @@ extension Promise where ValueType : AnyObject {
             
         })
         self.cancelled({
-            from.cancel()
+            cancelToken.cancel()
         }, on: DispatchQueue.main)
     }
 }
