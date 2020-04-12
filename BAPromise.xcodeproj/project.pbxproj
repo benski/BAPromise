@@ -31,6 +31,9 @@
 		2E6CDA3424427EC9002E0376 /* MapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA3324427EC9002E0376 /* MapTests.swift */; };
 		2E6CDA3524427EC9002E0376 /* MapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA3324427EC9002E0376 /* MapTests.swift */; };
 		2E6CDA3624427EC9002E0376 /* MapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA3324427EC9002E0376 /* MapTests.swift */; };
+		2E6CDA382442A93C002E0376 /* InteropTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA372442A93C002E0376 /* InteropTests.swift */; };
+		2E6CDA392442A93C002E0376 /* InteropTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA372442A93C002E0376 /* InteropTests.swift */; };
+		2E6CDA3A2442A93C002E0376 /* InteropTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA372442A93C002E0376 /* InteropTests.swift */; };
 		3214F58F6DA81220AA8CC2F1 /* Pods_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1877D722813E904D61872347 /* Pods_iOS.framework */; };
 		6F6C8C0B6970DFB7A14E3423 /* Pods_OS_X_OS_XTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B90205B55A87D2F3869C79E4 /* Pods_OS_X_OS_XTests.framework */; };
 		AFA0CEFE21F7272400B9769E /* PromiseInitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA0CEFD21F7272400B9769E /* PromiseInitTests.swift */; };
@@ -62,7 +65,6 @@
 		E7A7153220D437B8004CCDEE /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = E750EAC620D4212C008417E6 /* Promise.swift */; };
 		E7A7153320D437B9004CCDEE /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = E750EAC620D4212C008417E6 /* Promise.swift */; };
 		E7A7153420D437C0004CCDEE /* PromiseBlocksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A7152F20D435A5004CCDEE /* PromiseBlocksTests.swift */; };
-		E7A7153620D43AE5004CCDEE /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = E750EAC620D4212C008417E6 /* Promise.swift */; };
 		E7B8D22D1B7E6CFE00823BFC /* CancelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D21D1B7E6CDF00823BFC /* CancelTests.m */; };
 		E7B8D22E1B7E6CFE00823BFC /* ChainTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D21E1B7E6CDF00823BFC /* ChainTests.m */; };
 		E7B8D22F1B7E6CFE00823BFC /* DoneTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D21F1B7E6CDF00823BFC /* DoneTests.m */; };
@@ -135,6 +137,7 @@
 		2E6CDA2B24427746002E0376 /* PromiseResultTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PromiseResultTests.swift; path = BAPromiseTests/PromiseResultTests.swift; sourceTree = "<group>"; };
 		2E6CDA2F24427CE0002E0376 /* SwiftArrayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SwiftArrayTests.swift; path = BAPromiseTests/SwiftArrayTests.swift; sourceTree = "<group>"; };
 		2E6CDA3324427EC9002E0376 /* MapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MapTests.swift; path = BAPromiseTests/MapTests.swift; sourceTree = "<group>"; };
+		2E6CDA372442A93C002E0376 /* InteropTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InteropTests.swift; path = BAPromiseTests/InteropTests.swift; sourceTree = "<group>"; };
 		2E9195B178DB790ED866E310 /* Pods-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ios/Pods-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		3EF2D03E2BA940AD4BF4FB27 /* Pods-osx.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-osx.release.xcconfig"; path = "Pods/Target Support Files/Pods-osx/Pods-osx.release.xcconfig"; sourceTree = "<group>"; };
 		5129D17C789F624CAE958541 /* Pods-OS X.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OS X.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OS X/Pods-OS X.debug.xcconfig"; sourceTree = "<group>"; };
@@ -402,6 +405,7 @@
 				2E6CDA2B24427746002E0376 /* PromiseResultTests.swift */,
 				2E6CDA2F24427CE0002E0376 /* SwiftArrayTests.swift */,
 				2E6CDA3324427EC9002E0376 /* MapTests.swift */,
+				2E6CDA372442A93C002E0376 /* InteropTests.swift */,
 			);
 			name = Tests;
 			sourceTree = "<group>";
@@ -835,6 +839,7 @@
 				2E6CDA3424427EC9002E0376 /* MapTests.swift in Sources */,
 				2E6CDA2C24427746002E0376 /* PromiseResultTests.swift in Sources */,
 				E7B8D22F1B7E6CFE00823BFC /* DoneTests.m in Sources */,
+				2E6CDA382442A93C002E0376 /* InteropTests.swift in Sources */,
 				AFA0CEFE21F7272400B9769E /* PromiseInitTests.swift in Sources */,
 				E7B8D2301B7E6CFE00823BFC /* JoinTests.m in Sources */,
 				E76F50721DC8FF7100C6425C /* LeakTests.m in Sources */,
@@ -868,13 +873,13 @@
 			files = (
 				E7A7153120D4374B004CCDEE /* PromiseBlocksTests.swift in Sources */,
 				E7B8D2351B7E6D0200823BFC /* CancelTests.m in Sources */,
-				E7A7153620D43AE5004CCDEE /* Promise.swift in Sources */,
 				0CFAEB2D212F370100777107 /* ChainTestsSwift.swift in Sources */,
 				0CFAEB1E212C9A8F00777107 /* DoneTestsSwift.swift in Sources */,
 				E77B335B1D58EACA0083903F /* ThreadTests.m in Sources */,
 				2E6CDA3524427EC9002E0376 /* MapTests.swift in Sources */,
 				2E6CDA2D24427746002E0376 /* PromiseResultTests.swift in Sources */,
 				E7E3E8D11CBD511F00C55538 /* WhenTests.m in Sources */,
+				2E6CDA392442A93C002E0376 /* InteropTests.swift in Sources */,
 				AFA0CEFF21F7272400B9769E /* PromiseInitTests.swift in Sources */,
 				E7B8D2361B7E6D0200823BFC /* ChainTests.m in Sources */,
 				E7B8D2371B7E6D0200823BFC /* DoneTests.m in Sources */,
@@ -919,6 +924,7 @@
 				E7A7153420D437C0004CCDEE /* PromiseBlocksTests.swift in Sources */,
 				0CFAEB2A212F1DE200777107 /* CancelTestsSwift.swift in Sources */,
 				E7CA17211BB9B15C002D7196 /* TestWaiter.m in Sources */,
+				2E6CDA3A2442A93C002E0376 /* InteropTests.swift in Sources */,
 				E7CA17221BB9B15E002D7196 /* ThenTests.m in Sources */,
 				0CFAEB2E212F370100777107 /* ChainTestsSwift.swift in Sources */,
 				2E6CDA2E24427746002E0376 /* PromiseResultTests.swift in Sources */,
@@ -990,6 +996,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_CODE_COVERAGE = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
@@ -1045,6 +1052,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_CODE_COVERAGE = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;

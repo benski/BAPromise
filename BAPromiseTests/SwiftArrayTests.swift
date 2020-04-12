@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import BAPromise
 
 class SwiftArrayTests: XCTestCase {
 
