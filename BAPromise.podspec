@@ -20,4 +20,10 @@ s.source_files = 'Classes/*'
 
 s.public_header_files = 'Classes/BAPromise.h'
 
+  s.test_spec 'Tests' do |test_spec|
+    test_spec.source_files = 'BAPromiseTests/*'
+    test_spec.scheme = { 
+		:code_coverage => true
+    }
+  end
 end

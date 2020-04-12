@@ -8,37 +8,68 @@
 
 /* Begin PBXBuildFile section */
 		0CFAEB19212C71C500777107 /* Promise+ObjC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFAEB18212C71C500777107 /* Promise+ObjC.swift */; };
-		0CFAEB1D212C9A8F00777107 /* DoneTestsSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFAEB1C212C9A8F00777107 /* DoneTestsSwift.swift */; };
-		0CFAEB1E212C9A8F00777107 /* DoneTestsSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFAEB1C212C9A8F00777107 /* DoneTestsSwift.swift */; };
-		0CFAEB1F212C9A8F00777107 /* DoneTestsSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFAEB1C212C9A8F00777107 /* DoneTestsSwift.swift */; };
-		0CFAEB20212DF38400777107 /* Promise+ObjC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFAEB18212C71C500777107 /* Promise+ObjC.swift */; };
 		0CFAEB21212DF38400777107 /* Promise+ObjC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFAEB18212C71C500777107 /* Promise+ObjC.swift */; };
 		0CFAEB24212EFE9D00777107 /* BAPromise.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CFAEB22212EFE9D00777107 /* BAPromise.m */; };
-		0CFAEB25212EFE9D00777107 /* BAPromise.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CFAEB22212EFE9D00777107 /* BAPromise.m */; };
 		0CFAEB26212EFE9D00777107 /* BAPromise.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CFAEB22212EFE9D00777107 /* BAPromise.m */; };
-		0CFAEB28212F1DE200777107 /* CancelTestsSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFAEB27212F1DE200777107 /* CancelTestsSwift.swift */; };
-		0CFAEB29212F1DE200777107 /* CancelTestsSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFAEB27212F1DE200777107 /* CancelTestsSwift.swift */; };
-		0CFAEB2A212F1DE200777107 /* CancelTestsSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFAEB27212F1DE200777107 /* CancelTestsSwift.swift */; };
-		0CFAEB2C212F370100777107 /* ChainTestsSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFAEB2B212F370100777107 /* ChainTestsSwift.swift */; };
-		0CFAEB2D212F370100777107 /* ChainTestsSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFAEB2B212F370100777107 /* ChainTestsSwift.swift */; };
-		0CFAEB2E212F370100777107 /* ChainTestsSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFAEB2B212F370100777107 /* ChainTestsSwift.swift */; };
-		2E6CDA2C24427746002E0376 /* PromiseResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA2B24427746002E0376 /* PromiseResultTests.swift */; };
-		2E6CDA2D24427746002E0376 /* PromiseResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA2B24427746002E0376 /* PromiseResultTests.swift */; };
-		2E6CDA2E24427746002E0376 /* PromiseResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA2B24427746002E0376 /* PromiseResultTests.swift */; };
-		2E6CDA3024427CE0002E0376 /* SwiftArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA2F24427CE0002E0376 /* SwiftArrayTests.swift */; };
-		2E6CDA3124427CE0002E0376 /* SwiftArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA2F24427CE0002E0376 /* SwiftArrayTests.swift */; };
-		2E6CDA3224427CE0002E0376 /* SwiftArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA2F24427CE0002E0376 /* SwiftArrayTests.swift */; };
-		2E6CDA3424427EC9002E0376 /* MapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA3324427EC9002E0376 /* MapTests.swift */; };
-		2E6CDA3524427EC9002E0376 /* MapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA3324427EC9002E0376 /* MapTests.swift */; };
-		2E6CDA3624427EC9002E0376 /* MapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA3324427EC9002E0376 /* MapTests.swift */; };
-		2E6CDA382442A93C002E0376 /* InteropTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA372442A93C002E0376 /* InteropTests.swift */; };
-		2E6CDA392442A93C002E0376 /* InteropTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA372442A93C002E0376 /* InteropTests.swift */; };
-		2E6CDA3A2442A93C002E0376 /* InteropTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA372442A93C002E0376 /* InteropTests.swift */; };
+		2E6CDA512442D24A002E0376 /* PromiseInitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA3D2442D249002E0376 /* PromiseInitTests.swift */; };
+		2E6CDA522442D24A002E0376 /* PromiseInitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA3D2442D249002E0376 /* PromiseInitTests.swift */; };
+		2E6CDA532442D24A002E0376 /* PromiseInitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA3D2442D249002E0376 /* PromiseInitTests.swift */; };
+		2E6CDA542442D24A002E0376 /* ChainTestsSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA3E2442D249002E0376 /* ChainTestsSwift.swift */; };
+		2E6CDA552442D24A002E0376 /* ChainTestsSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA3E2442D249002E0376 /* ChainTestsSwift.swift */; };
+		2E6CDA562442D24A002E0376 /* ChainTestsSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA3E2442D249002E0376 /* ChainTestsSwift.swift */; };
+		2E6CDA572442D24A002E0376 /* CancelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA3F2442D249002E0376 /* CancelTests.m */; };
+		2E6CDA582442D24A002E0376 /* CancelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA3F2442D249002E0376 /* CancelTests.m */; };
+		2E6CDA592442D24A002E0376 /* CancelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA3F2442D249002E0376 /* CancelTests.m */; };
+		2E6CDA5A2442D24A002E0376 /* MapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA402442D249002E0376 /* MapTests.swift */; };
+		2E6CDA5B2442D24A002E0376 /* MapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA402442D249002E0376 /* MapTests.swift */; };
+		2E6CDA5C2442D24A002E0376 /* MapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA402442D249002E0376 /* MapTests.swift */; };
+		2E6CDA5D2442D24A002E0376 /* InteropTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA412442D249002E0376 /* InteropTests.swift */; };
+		2E6CDA5E2442D24A002E0376 /* InteropTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA412442D249002E0376 /* InteropTests.swift */; };
+		2E6CDA5F2442D24A002E0376 /* InteropTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA412442D249002E0376 /* InteropTests.swift */; };
+		2E6CDA602442D24A002E0376 /* ChainTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA422442D249002E0376 /* ChainTests.m */; };
+		2E6CDA612442D24A002E0376 /* ChainTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA422442D249002E0376 /* ChainTests.m */; };
+		2E6CDA622442D24A002E0376 /* ChainTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA422442D249002E0376 /* ChainTests.m */; };
+		2E6CDA632442D24A002E0376 /* SwiftArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA432442D249002E0376 /* SwiftArrayTests.swift */; };
+		2E6CDA642442D24A002E0376 /* SwiftArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA432442D249002E0376 /* SwiftArrayTests.swift */; };
+		2E6CDA652442D24A002E0376 /* SwiftArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA432442D249002E0376 /* SwiftArrayTests.swift */; };
+		2E6CDA662442D24A002E0376 /* LeakTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA442442D249002E0376 /* LeakTests.m */; };
+		2E6CDA672442D24A002E0376 /* LeakTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA442442D249002E0376 /* LeakTests.m */; };
+		2E6CDA682442D24A002E0376 /* LeakTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA442442D249002E0376 /* LeakTests.m */; };
+		2E6CDA692442D24A002E0376 /* JoinTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA452442D249002E0376 /* JoinTests.m */; };
+		2E6CDA6A2442D24A002E0376 /* JoinTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA452442D249002E0376 /* JoinTests.m */; };
+		2E6CDA6B2442D24A002E0376 /* JoinTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA452442D249002E0376 /* JoinTests.m */; };
+		2E6CDA6C2442D24A002E0376 /* RejectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA462442D249002E0376 /* RejectTests.m */; };
+		2E6CDA6D2442D24A002E0376 /* RejectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA462442D249002E0376 /* RejectTests.m */; };
+		2E6CDA6E2442D24A002E0376 /* RejectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA462442D249002E0376 /* RejectTests.m */; };
+		2E6CDA6F2442D24A002E0376 /* ThreadTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA482442D249002E0376 /* ThreadTests.m */; };
+		2E6CDA702442D24A002E0376 /* ThreadTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA482442D249002E0376 /* ThreadTests.m */; };
+		2E6CDA712442D24A002E0376 /* ThreadTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA482442D249002E0376 /* ThreadTests.m */; };
+		2E6CDA722442D24A002E0376 /* TestWaiter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA492442D249002E0376 /* TestWaiter.m */; };
+		2E6CDA732442D24A002E0376 /* TestWaiter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA492442D249002E0376 /* TestWaiter.m */; };
+		2E6CDA742442D24A002E0376 /* TestWaiter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA492442D249002E0376 /* TestWaiter.m */; };
+		2E6CDA752442D24A002E0376 /* ThenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA4A2442D24A002E0376 /* ThenTests.m */; };
+		2E6CDA762442D24A002E0376 /* ThenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA4A2442D24A002E0376 /* ThenTests.m */; };
+		2E6CDA772442D24A002E0376 /* ThenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA4A2442D24A002E0376 /* ThenTests.m */; };
+		2E6CDA782442D24A002E0376 /* DoneTestsSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA4B2442D24A002E0376 /* DoneTestsSwift.swift */; };
+		2E6CDA792442D24A002E0376 /* DoneTestsSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA4B2442D24A002E0376 /* DoneTestsSwift.swift */; };
+		2E6CDA7A2442D24A002E0376 /* DoneTestsSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA4B2442D24A002E0376 /* DoneTestsSwift.swift */; };
+		2E6CDA7B2442D24A002E0376 /* CancelTestsSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA4C2442D24A002E0376 /* CancelTestsSwift.swift */; };
+		2E6CDA7C2442D24A002E0376 /* CancelTestsSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA4C2442D24A002E0376 /* CancelTestsSwift.swift */; };
+		2E6CDA7D2442D24A002E0376 /* CancelTestsSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA4C2442D24A002E0376 /* CancelTestsSwift.swift */; };
+		2E6CDA7E2442D24A002E0376 /* DoneTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA4D2442D24A002E0376 /* DoneTests.m */; };
+		2E6CDA7F2442D24A002E0376 /* DoneTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA4D2442D24A002E0376 /* DoneTests.m */; };
+		2E6CDA802442D24A002E0376 /* DoneTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA4D2442D24A002E0376 /* DoneTests.m */; };
+		2E6CDA812442D24A002E0376 /* PromiseResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA4E2442D24A002E0376 /* PromiseResultTests.swift */; };
+		2E6CDA822442D24A002E0376 /* PromiseResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA4E2442D24A002E0376 /* PromiseResultTests.swift */; };
+		2E6CDA832442D24A002E0376 /* PromiseResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA4E2442D24A002E0376 /* PromiseResultTests.swift */; };
+		2E6CDA842442D24A002E0376 /* WhenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA4F2442D24A002E0376 /* WhenTests.m */; };
+		2E6CDA852442D24A002E0376 /* WhenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA4F2442D24A002E0376 /* WhenTests.m */; };
+		2E6CDA862442D24A002E0376 /* WhenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA4F2442D24A002E0376 /* WhenTests.m */; };
+		2E6CDA872442D24A002E0376 /* PromiseBlocksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA502442D24A002E0376 /* PromiseBlocksTests.swift */; };
+		2E6CDA882442D24A002E0376 /* PromiseBlocksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA502442D24A002E0376 /* PromiseBlocksTests.swift */; };
+		2E6CDA892442D24A002E0376 /* PromiseBlocksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CDA502442D24A002E0376 /* PromiseBlocksTests.swift */; };
 		3214F58F6DA81220AA8CC2F1 /* Pods_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1877D722813E904D61872347 /* Pods_iOS.framework */; };
 		6F6C8C0B6970DFB7A14E3423 /* Pods_OS_X_OS_XTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B90205B55A87D2F3869C79E4 /* Pods_OS_X_OS_XTests.framework */; };
-		AFA0CEFE21F7272400B9769E /* PromiseInitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA0CEFD21F7272400B9769E /* PromiseInitTests.swift */; };
-		AFA0CEFF21F7272400B9769E /* PromiseInitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA0CEFD21F7272400B9769E /* PromiseInitTests.swift */; };
-		AFA0CF0021F7272400B9769E /* PromiseInitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA0CEFD21F7272400B9769E /* PromiseInitTests.swift */; };
 		C9843192B1033B9887D6325A /* Pods_iOS_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9EB8957964B1D09D022C484 /* Pods_iOS_iOSTests.framework */; };
 		D1E0E9C2C71BFBE3BFDF4F22 /* Pods_OS_X.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E77BFEAC3DF4C3784C6CBB4F /* Pods_OS_X.framework */; };
 		E712B3311B7E6B4800590AA8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E712B3301B7E6B4800590AA8 /* AppDelegate.m */; };
@@ -54,48 +85,13 @@
 		E712B3641B7E6B7900590AA8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E712B3621B7E6B7900590AA8 /* LaunchScreen.storyboard */; };
 		E712B36F1B7E6B7900590AA8 /* iOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E712B36E1B7E6B7900590AA8 /* iOSTests.m */; };
 		E750EAC720D4212C008417E6 /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = E750EAC620D4212C008417E6 /* Promise.swift */; };
-		E76F50721DC8FF7100C6425C /* LeakTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E76F50711DC8FF7100C6425C /* LeakTests.m */; };
-		E76F50731DC8FF7100C6425C /* LeakTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E76F50711DC8FF7100C6425C /* LeakTests.m */; };
-		E76F50741DC8FF7100C6425C /* LeakTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E76F50711DC8FF7100C6425C /* LeakTests.m */; };
-		E77B335A1D58EACA0083903F /* ThreadTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E77B33591D58EACA0083903F /* ThreadTests.m */; };
-		E77B335B1D58EACA0083903F /* ThreadTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E77B33591D58EACA0083903F /* ThreadTests.m */; };
-		E77B335C1D58EACA0083903F /* ThreadTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E77B33591D58EACA0083903F /* ThreadTests.m */; };
-		E7A7153020D435A5004CCDEE /* PromiseBlocksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A7152F20D435A5004CCDEE /* PromiseBlocksTests.swift */; };
-		E7A7153120D4374B004CCDEE /* PromiseBlocksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A7152F20D435A5004CCDEE /* PromiseBlocksTests.swift */; };
-		E7A7153220D437B8004CCDEE /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = E750EAC620D4212C008417E6 /* Promise.swift */; };
 		E7A7153320D437B9004CCDEE /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = E750EAC620D4212C008417E6 /* Promise.swift */; };
-		E7A7153420D437C0004CCDEE /* PromiseBlocksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A7152F20D435A5004CCDEE /* PromiseBlocksTests.swift */; };
-		E7B8D22D1B7E6CFE00823BFC /* CancelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D21D1B7E6CDF00823BFC /* CancelTests.m */; };
-		E7B8D22E1B7E6CFE00823BFC /* ChainTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D21E1B7E6CDF00823BFC /* ChainTests.m */; };
-		E7B8D22F1B7E6CFE00823BFC /* DoneTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D21F1B7E6CDF00823BFC /* DoneTests.m */; };
-		E7B8D2301B7E6CFE00823BFC /* JoinTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D2201B7E6CDF00823BFC /* JoinTests.m */; };
-		E7B8D2311B7E6CFE00823BFC /* RejectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D2211B7E6CDF00823BFC /* RejectTests.m */; };
-		E7B8D2321B7E6CFE00823BFC /* TestWaiter.h in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D2221B7E6CDF00823BFC /* TestWaiter.h */; };
-		E7B8D2331B7E6CFE00823BFC /* TestWaiter.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D2231B7E6CDF00823BFC /* TestWaiter.m */; };
-		E7B8D2341B7E6CFE00823BFC /* ThenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D2241B7E6CDF00823BFC /* ThenTests.m */; };
-		E7B8D2351B7E6D0200823BFC /* CancelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D21D1B7E6CDF00823BFC /* CancelTests.m */; };
-		E7B8D2361B7E6D0200823BFC /* ChainTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D21E1B7E6CDF00823BFC /* ChainTests.m */; };
-		E7B8D2371B7E6D0200823BFC /* DoneTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D21F1B7E6CDF00823BFC /* DoneTests.m */; };
-		E7B8D2381B7E6D0200823BFC /* JoinTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D2201B7E6CDF00823BFC /* JoinTests.m */; };
-		E7B8D2391B7E6D0200823BFC /* RejectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D2211B7E6CDF00823BFC /* RejectTests.m */; };
-		E7B8D23B1B7E6D0200823BFC /* TestWaiter.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D2231B7E6CDF00823BFC /* TestWaiter.m */; };
-		E7B8D23C1B7E6D0200823BFC /* ThenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D2241B7E6CDF00823BFC /* ThenTests.m */; };
 		E7CA16FD1BB9B0FC002D7196 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CA16FC1BB9B0FC002D7196 /* main.m */; };
 		E7CA17001BB9B0FC002D7196 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CA16FF1BB9B0FC002D7196 /* AppDelegate.m */; };
 		E7CA17031BB9B0FC002D7196 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CA17021BB9B0FC002D7196 /* ViewController.m */; };
 		E7CA17061BB9B0FC002D7196 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7CA17041BB9B0FC002D7196 /* Main.storyboard */; };
 		E7CA17081BB9B0FC002D7196 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7CA17071BB9B0FC002D7196 /* Assets.xcassets */; };
 		E7CA17131BB9B0FC002D7196 /* tvOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CA17121BB9B0FC002D7196 /* tvOSTests.m */; };
-		E7CA171C1BB9B151002D7196 /* CancelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D21D1B7E6CDF00823BFC /* CancelTests.m */; };
-		E7CA171D1BB9B153002D7196 /* ChainTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D21E1B7E6CDF00823BFC /* ChainTests.m */; };
-		E7CA171E1BB9B154002D7196 /* DoneTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D21F1B7E6CDF00823BFC /* DoneTests.m */; };
-		E7CA171F1BB9B156002D7196 /* JoinTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D2201B7E6CDF00823BFC /* JoinTests.m */; };
-		E7CA17201BB9B158002D7196 /* RejectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D2211B7E6CDF00823BFC /* RejectTests.m */; };
-		E7CA17211BB9B15C002D7196 /* TestWaiter.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D2231B7E6CDF00823BFC /* TestWaiter.m */; };
-		E7CA17221BB9B15E002D7196 /* ThenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8D2241B7E6CDF00823BFC /* ThenTests.m */; };
-		E7E3E8D01CBD511F00C55538 /* WhenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E3E8CF1CBD511F00C55538 /* WhenTests.m */; };
-		E7E3E8D11CBD511F00C55538 /* WhenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E3E8CF1CBD511F00C55538 /* WhenTests.m */; };
-		E7E3E8D21CBD511F00C55538 /* WhenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E3E8CF1CBD511F00C55538 /* WhenTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,20 +120,33 @@
 
 /* Begin PBXFileReference section */
 		0CFAEB18212C71C500777107 /* Promise+ObjC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Promise+ObjC.swift"; path = "Classes/Promise+ObjC.swift"; sourceTree = "<group>"; };
-		0CFAEB1C212C9A8F00777107 /* DoneTestsSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DoneTestsSwift.swift; path = BAPromiseTests/DoneTestsSwift.swift; sourceTree = "<group>"; };
 		0CFAEB22212EFE9D00777107 /* BAPromise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BAPromise.m; path = Classes/BAPromise.m; sourceTree = "<group>"; };
 		0CFAEB23212EFE9D00777107 /* BAPromise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BAPromise.h; path = Classes/BAPromise.h; sourceTree = "<group>"; };
-		0CFAEB27212F1DE200777107 /* CancelTestsSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CancelTestsSwift.swift; path = BAPromiseTests/CancelTestsSwift.swift; sourceTree = "<group>"; };
-		0CFAEB2B212F370100777107 /* ChainTestsSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChainTestsSwift.swift; path = BAPromiseTests/ChainTestsSwift.swift; sourceTree = "<group>"; };
 		16DD4F3550F929C5BBD8BDD9 /* Pods-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOS/Pods-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		1877D722813E904D61872347 /* Pods_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		243B8F2E624F6BE5D0C933E7 /* Pods-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-ios/Pods-ios.release.xcconfig"; sourceTree = "<group>"; };
 		2667770040C7B146CCC69D3D /* Pods_tvOS_tvOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tvOS_tvOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		297F45050D01BCF34E393ECC /* Pods_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2E6CDA2B24427746002E0376 /* PromiseResultTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PromiseResultTests.swift; path = BAPromiseTests/PromiseResultTests.swift; sourceTree = "<group>"; };
-		2E6CDA2F24427CE0002E0376 /* SwiftArrayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SwiftArrayTests.swift; path = BAPromiseTests/SwiftArrayTests.swift; sourceTree = "<group>"; };
-		2E6CDA3324427EC9002E0376 /* MapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MapTests.swift; path = BAPromiseTests/MapTests.swift; sourceTree = "<group>"; };
-		2E6CDA372442A93C002E0376 /* InteropTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InteropTests.swift; path = BAPromiseTests/InteropTests.swift; sourceTree = "<group>"; };
+		2E6CDA3D2442D249002E0376 /* PromiseInitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromiseInitTests.swift; sourceTree = "<group>"; };
+		2E6CDA3E2442D249002E0376 /* ChainTestsSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChainTestsSwift.swift; sourceTree = "<group>"; };
+		2E6CDA3F2442D249002E0376 /* CancelTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CancelTests.m; sourceTree = "<group>"; };
+		2E6CDA402442D249002E0376 /* MapTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapTests.swift; sourceTree = "<group>"; };
+		2E6CDA412442D249002E0376 /* InteropTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteropTests.swift; sourceTree = "<group>"; };
+		2E6CDA422442D249002E0376 /* ChainTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChainTests.m; sourceTree = "<group>"; };
+		2E6CDA432442D249002E0376 /* SwiftArrayTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftArrayTests.swift; sourceTree = "<group>"; };
+		2E6CDA442442D249002E0376 /* LeakTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeakTests.m; sourceTree = "<group>"; };
+		2E6CDA452442D249002E0376 /* JoinTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JoinTests.m; sourceTree = "<group>"; };
+		2E6CDA462442D249002E0376 /* RejectTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RejectTests.m; sourceTree = "<group>"; };
+		2E6CDA472442D249002E0376 /* TestWaiter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestWaiter.h; sourceTree = "<group>"; };
+		2E6CDA482442D249002E0376 /* ThreadTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThreadTests.m; sourceTree = "<group>"; };
+		2E6CDA492442D249002E0376 /* TestWaiter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestWaiter.m; sourceTree = "<group>"; };
+		2E6CDA4A2442D24A002E0376 /* ThenTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThenTests.m; sourceTree = "<group>"; };
+		2E6CDA4B2442D24A002E0376 /* DoneTestsSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoneTestsSwift.swift; sourceTree = "<group>"; };
+		2E6CDA4C2442D24A002E0376 /* CancelTestsSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CancelTestsSwift.swift; sourceTree = "<group>"; };
+		2E6CDA4D2442D24A002E0376 /* DoneTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoneTests.m; sourceTree = "<group>"; };
+		2E6CDA4E2442D24A002E0376 /* PromiseResultTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromiseResultTests.swift; sourceTree = "<group>"; };
+		2E6CDA4F2442D24A002E0376 /* WhenTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WhenTests.m; sourceTree = "<group>"; };
+		2E6CDA502442D24A002E0376 /* PromiseBlocksTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromiseBlocksTests.swift; sourceTree = "<group>"; };
 		2E9195B178DB790ED866E310 /* Pods-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ios/Pods-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		3EF2D03E2BA940AD4BF4FB27 /* Pods-osx.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-osx.release.xcconfig"; path = "Pods/Target Support Files/Pods-osx/Pods-osx.release.xcconfig"; sourceTree = "<group>"; };
 		5129D17C789F624CAE958541 /* Pods-OS X.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OS X.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OS X/Pods-OS X.debug.xcconfig"; sourceTree = "<group>"; };
@@ -145,8 +154,6 @@
 		742837DFA25D4147301AE923 /* Pods-iOS-iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-iOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOS-iOSTests/Pods-iOS-iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8A66D686E60BD55536E75979 /* Pods-OS X.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OS X.release.xcconfig"; path = "Pods/Target Support Files/Pods-OS X/Pods-OS X.release.xcconfig"; sourceTree = "<group>"; };
 		8AC2F4560C0EB728686E1554 /* Pods-osx.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-osx.debug.xcconfig"; path = "Pods/Target Support Files/Pods-osx/Pods-osx.debug.xcconfig"; sourceTree = "<group>"; };
-		AFA0CEFD21F7272400B9769E /* PromiseInitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromiseInitTests.swift; sourceTree = "<group>"; };
-		B3AADFC31E1448DF00E538A2 /* OS XTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OS XTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		B90205B55A87D2F3869C79E4 /* Pods_OS_X_OS_XTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OS_X_OS_XTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9EB8957964B1D09D022C484 /* Pods_iOS_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC02C6D8EBC5AA822D8AE4DD /* Pods-tvos.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tvos.release.xcconfig"; path = "Pods/Target Support Files/Pods-tvos/Pods-tvos.release.xcconfig"; sourceTree = "<group>"; };
@@ -178,18 +185,7 @@
 		E712B3701B7E6B7900590AA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E750EAC520D4212B008417E6 /* BAPromise-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BAPromise-Bridging-Header.h"; sourceTree = "<group>"; };
 		E750EAC620D4212C008417E6 /* Promise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Promise.swift; path = Classes/Promise.swift; sourceTree = "<group>"; };
-		E76F50711DC8FF7100C6425C /* LeakTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeakTests.m; sourceTree = "<group>"; };
-		E77B33591D58EACA0083903F /* ThreadTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ThreadTests.m; path = BAPromiseTests/ThreadTests.m; sourceTree = "<group>"; };
 		E77BFEAC3DF4C3784C6CBB4F /* Pods_OS_X.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OS_X.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E7A7152F20D435A5004CCDEE /* PromiseBlocksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PromiseBlocksTests.swift; path = BAPromiseTests/PromiseBlocksTests.swift; sourceTree = "<group>"; };
-		E7B8D21D1B7E6CDF00823BFC /* CancelTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CancelTests.m; path = BAPromiseTests/CancelTests.m; sourceTree = "<group>"; };
-		E7B8D21E1B7E6CDF00823BFC /* ChainTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChainTests.m; path = BAPromiseTests/ChainTests.m; sourceTree = "<group>"; };
-		E7B8D21F1B7E6CDF00823BFC /* DoneTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DoneTests.m; path = BAPromiseTests/DoneTests.m; sourceTree = "<group>"; };
-		E7B8D2201B7E6CDF00823BFC /* JoinTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JoinTests.m; path = BAPromiseTests/JoinTests.m; sourceTree = "<group>"; };
-		E7B8D2211B7E6CDF00823BFC /* RejectTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RejectTests.m; path = BAPromiseTests/RejectTests.m; sourceTree = "<group>"; };
-		E7B8D2221B7E6CDF00823BFC /* TestWaiter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestWaiter.h; path = BAPromiseTests/TestWaiter.h; sourceTree = "<group>"; };
-		E7B8D2231B7E6CDF00823BFC /* TestWaiter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestWaiter.m; path = BAPromiseTests/TestWaiter.m; sourceTree = "<group>"; };
-		E7B8D2241B7E6CDF00823BFC /* ThenTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ThenTests.m; path = BAPromiseTests/ThenTests.m; sourceTree = "<group>"; };
 		E7CA16F91BB9B0FC002D7196 /* tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tvOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7CA16FC1BB9B0FC002D7196 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E7CA16FE1BB9B0FC002D7196 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -202,7 +198,6 @@
 		E7CA170E1BB9B0FC002D7196 /* tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = tvOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7CA17121BB9B0FC002D7196 /* tvOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = tvOSTests.m; sourceTree = "<group>"; };
 		E7CA17141BB9B0FC002D7196 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E7E3E8CF1CBD511F00C55538 /* WhenTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WhenTests.m; sourceTree = "<group>"; };
 		FA23215336889692FFAFE84A /* Pods-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOS/Pods-iOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -385,29 +380,29 @@
 		E7B8D22C1B7E6CE400823BFC /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				E7B8D21D1B7E6CDF00823BFC /* CancelTests.m */,
-				0CFAEB27212F1DE200777107 /* CancelTestsSwift.swift */,
-				E7B8D21E1B7E6CDF00823BFC /* ChainTests.m */,
-				0CFAEB2B212F370100777107 /* ChainTestsSwift.swift */,
-				E7B8D21F1B7E6CDF00823BFC /* DoneTests.m */,
-				0CFAEB1C212C9A8F00777107 /* DoneTestsSwift.swift */,
-				E7B8D2201B7E6CDF00823BFC /* JoinTests.m */,
-				E7B8D2211B7E6CDF00823BFC /* RejectTests.m */,
-				E7B8D2221B7E6CDF00823BFC /* TestWaiter.h */,
-				AFA0CEFD21F7272400B9769E /* PromiseInitTests.swift */,
-				E7B8D2231B7E6CDF00823BFC /* TestWaiter.m */,
-				E7B8D2241B7E6CDF00823BFC /* ThenTests.m */,
-				E7E3E8CF1CBD511F00C55538 /* WhenTests.m */,
-				E77B33591D58EACA0083903F /* ThreadTests.m */,
-				E76F50711DC8FF7100C6425C /* LeakTests.m */,
-				B3AADFC31E1448DF00E538A2 /* OS XTests-Bridging-Header.h */,
-				E7A7152F20D435A5004CCDEE /* PromiseBlocksTests.swift */,
-				2E6CDA2B24427746002E0376 /* PromiseResultTests.swift */,
-				2E6CDA2F24427CE0002E0376 /* SwiftArrayTests.swift */,
-				2E6CDA3324427EC9002E0376 /* MapTests.swift */,
-				2E6CDA372442A93C002E0376 /* InteropTests.swift */,
+				2E6CDA3F2442D249002E0376 /* CancelTests.m */,
+				2E6CDA4C2442D24A002E0376 /* CancelTestsSwift.swift */,
+				2E6CDA422442D249002E0376 /* ChainTests.m */,
+				2E6CDA3E2442D249002E0376 /* ChainTestsSwift.swift */,
+				2E6CDA4D2442D24A002E0376 /* DoneTests.m */,
+				2E6CDA4B2442D24A002E0376 /* DoneTestsSwift.swift */,
+				2E6CDA412442D249002E0376 /* InteropTests.swift */,
+				2E6CDA452442D249002E0376 /* JoinTests.m */,
+				2E6CDA442442D249002E0376 /* LeakTests.m */,
+				2E6CDA402442D249002E0376 /* MapTests.swift */,
+				2E6CDA502442D24A002E0376 /* PromiseBlocksTests.swift */,
+				2E6CDA3D2442D249002E0376 /* PromiseInitTests.swift */,
+				2E6CDA4E2442D24A002E0376 /* PromiseResultTests.swift */,
+				2E6CDA462442D249002E0376 /* RejectTests.m */,
+				2E6CDA432442D249002E0376 /* SwiftArrayTests.swift */,
+				2E6CDA472442D249002E0376 /* TestWaiter.h */,
+				2E6CDA492442D249002E0376 /* TestWaiter.m */,
+				2E6CDA4A2442D24A002E0376 /* ThenTests.m */,
+				2E6CDA482442D249002E0376 /* ThreadTests.m */,
+				2E6CDA4F2442D24A002E0376 /* WhenTests.m */,
 			);
 			name = Tests;
+			path = BAPromiseTests;
 			sourceTree = "<group>";
 		};
 		E7CA16FA1BB9B0FC002D7196 /* tvOS */ = {
@@ -594,7 +589,7 @@
 					};
 					E712B3691B7E6B7900590AA8 = {
 						CreatedOnToolsVersion = 7.0;
-						LastSwiftMigration = 1010;
+						LastSwiftMigration = 1120;
 						TestTargetID = E712B3511B7E6B7800590AA8;
 					};
 					E7CA16F81BB9B0FC002D7196 = {
@@ -602,6 +597,7 @@
 					};
 					E7CA170D1BB9B0FC002D7196 = {
 						CreatedOnToolsVersion = 7.1;
+						LastSwiftMigration = 1120;
 						TestTargetID = E7CA16F81BB9B0FC002D7196;
 					};
 				};
@@ -830,27 +826,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E7B8D22D1B7E6CFE00823BFC /* CancelTests.m in Sources */,
-				E7A7153020D435A5004CCDEE /* PromiseBlocksTests.swift in Sources */,
-				E77B335A1D58EACA0083903F /* ThreadTests.m in Sources */,
-				0CFAEB2C212F370100777107 /* ChainTestsSwift.swift in Sources */,
-				E7E3E8D01CBD511F00C55538 /* WhenTests.m in Sources */,
-				E7B8D22E1B7E6CFE00823BFC /* ChainTests.m in Sources */,
-				2E6CDA3424427EC9002E0376 /* MapTests.swift in Sources */,
-				2E6CDA2C24427746002E0376 /* PromiseResultTests.swift in Sources */,
-				E7B8D22F1B7E6CFE00823BFC /* DoneTests.m in Sources */,
-				2E6CDA382442A93C002E0376 /* InteropTests.swift in Sources */,
-				AFA0CEFE21F7272400B9769E /* PromiseInitTests.swift in Sources */,
-				E7B8D2301B7E6CFE00823BFC /* JoinTests.m in Sources */,
-				E76F50721DC8FF7100C6425C /* LeakTests.m in Sources */,
-				0CFAEB28212F1DE200777107 /* CancelTestsSwift.swift in Sources */,
-				E7B8D2311B7E6CFE00823BFC /* RejectTests.m in Sources */,
-				E7B8D2321B7E6CFE00823BFC /* TestWaiter.h in Sources */,
-				2E6CDA3024427CE0002E0376 /* SwiftArrayTests.swift in Sources */,
-				E7B8D2331B7E6CFE00823BFC /* TestWaiter.m in Sources */,
-				0CFAEB1D212C9A8F00777107 /* DoneTestsSwift.swift in Sources */,
-				E7B8D2341B7E6CFE00823BFC /* ThenTests.m in Sources */,
+				2E6CDA782442D24A002E0376 /* DoneTestsSwift.swift in Sources */,
+				2E6CDA752442D24A002E0376 /* ThenTests.m in Sources */,
+				2E6CDA602442D24A002E0376 /* ChainTests.m in Sources */,
+				2E6CDA872442D24A002E0376 /* PromiseBlocksTests.swift in Sources */,
+				2E6CDA542442D24A002E0376 /* ChainTestsSwift.swift in Sources */,
+				2E6CDA5A2442D24A002E0376 /* MapTests.swift in Sources */,
+				2E6CDA692442D24A002E0376 /* JoinTests.m in Sources */,
+				2E6CDA812442D24A002E0376 /* PromiseResultTests.swift in Sources */,
+				2E6CDA6C2442D24A002E0376 /* RejectTests.m in Sources */,
+				2E6CDA7B2442D24A002E0376 /* CancelTestsSwift.swift in Sources */,
+				2E6CDA662442D24A002E0376 /* LeakTests.m in Sources */,
+				2E6CDA572442D24A002E0376 /* CancelTests.m in Sources */,
+				2E6CDA842442D24A002E0376 /* WhenTests.m in Sources */,
+				2E6CDA6F2442D24A002E0376 /* ThreadTests.m in Sources */,
+				2E6CDA5D2442D24A002E0376 /* InteropTests.swift in Sources */,
 				E712B3441B7E6B4900590AA8 /* OS_XTests.m in Sources */,
+				2E6CDA722442D24A002E0376 /* TestWaiter.m in Sources */,
+				2E6CDA512442D24A002E0376 /* PromiseInitTests.swift in Sources */,
+				2E6CDA632442D24A002E0376 /* SwiftArrayTests.swift in Sources */,
+				2E6CDA7E2442D24A002E0376 /* DoneTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -858,11 +853,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0CFAEB20212DF38400777107 /* Promise+ObjC.swift in Sources */,
 				E712B35C1B7E6B7900590AA8 /* ViewController.m in Sources */,
 				E712B3591B7E6B7800590AA8 /* AppDelegate.m in Sources */,
-				E7A7153220D437B8004CCDEE /* Promise.swift in Sources */,
-				0CFAEB25212EFE9D00777107 /* BAPromise.m in Sources */,
 				E712B3561B7E6B7800590AA8 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -871,26 +863,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E7A7153120D4374B004CCDEE /* PromiseBlocksTests.swift in Sources */,
-				E7B8D2351B7E6D0200823BFC /* CancelTests.m in Sources */,
-				0CFAEB2D212F370100777107 /* ChainTestsSwift.swift in Sources */,
-				0CFAEB1E212C9A8F00777107 /* DoneTestsSwift.swift in Sources */,
-				E77B335B1D58EACA0083903F /* ThreadTests.m in Sources */,
-				2E6CDA3524427EC9002E0376 /* MapTests.swift in Sources */,
-				2E6CDA2D24427746002E0376 /* PromiseResultTests.swift in Sources */,
-				E7E3E8D11CBD511F00C55538 /* WhenTests.m in Sources */,
-				2E6CDA392442A93C002E0376 /* InteropTests.swift in Sources */,
-				AFA0CEFF21F7272400B9769E /* PromiseInitTests.swift in Sources */,
-				E7B8D2361B7E6D0200823BFC /* ChainTests.m in Sources */,
-				E7B8D2371B7E6D0200823BFC /* DoneTests.m in Sources */,
-				0CFAEB29212F1DE200777107 /* CancelTestsSwift.swift in Sources */,
-				E7B8D2381B7E6D0200823BFC /* JoinTests.m in Sources */,
-				E76F50731DC8FF7100C6425C /* LeakTests.m in Sources */,
-				2E6CDA3124427CE0002E0376 /* SwiftArrayTests.swift in Sources */,
-				E7B8D2391B7E6D0200823BFC /* RejectTests.m in Sources */,
-				E7B8D23B1B7E6D0200823BFC /* TestWaiter.m in Sources */,
-				E7B8D23C1B7E6D0200823BFC /* ThenTests.m in Sources */,
+				2E6CDA792442D24A002E0376 /* DoneTestsSwift.swift in Sources */,
+				2E6CDA762442D24A002E0376 /* ThenTests.m in Sources */,
+				2E6CDA612442D24A002E0376 /* ChainTests.m in Sources */,
+				2E6CDA882442D24A002E0376 /* PromiseBlocksTests.swift in Sources */,
+				2E6CDA552442D24A002E0376 /* ChainTestsSwift.swift in Sources */,
+				2E6CDA5B2442D24A002E0376 /* MapTests.swift in Sources */,
+				2E6CDA6A2442D24A002E0376 /* JoinTests.m in Sources */,
+				2E6CDA822442D24A002E0376 /* PromiseResultTests.swift in Sources */,
+				2E6CDA6D2442D24A002E0376 /* RejectTests.m in Sources */,
+				2E6CDA7C2442D24A002E0376 /* CancelTestsSwift.swift in Sources */,
+				2E6CDA672442D24A002E0376 /* LeakTests.m in Sources */,
+				2E6CDA582442D24A002E0376 /* CancelTests.m in Sources */,
+				2E6CDA852442D24A002E0376 /* WhenTests.m in Sources */,
+				2E6CDA702442D24A002E0376 /* ThreadTests.m in Sources */,
+				2E6CDA5E2442D24A002E0376 /* InteropTests.swift in Sources */,
 				E712B36F1B7E6B7900590AA8 /* iOSTests.m in Sources */,
+				2E6CDA732442D24A002E0376 /* TestWaiter.m in Sources */,
+				2E6CDA522442D24A002E0376 /* PromiseInitTests.swift in Sources */,
+				2E6CDA642442D24A002E0376 /* SwiftArrayTests.swift in Sources */,
+				2E6CDA7F2442D24A002E0376 /* DoneTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -911,26 +903,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0CFAEB1F212C9A8F00777107 /* DoneTestsSwift.swift in Sources */,
-				2E6CDA3224427CE0002E0376 /* SwiftArrayTests.swift in Sources */,
+				2E6CDA7A2442D24A002E0376 /* DoneTestsSwift.swift in Sources */,
+				2E6CDA772442D24A002E0376 /* ThenTests.m in Sources */,
+				2E6CDA622442D24A002E0376 /* ChainTests.m in Sources */,
+				2E6CDA892442D24A002E0376 /* PromiseBlocksTests.swift in Sources */,
+				2E6CDA562442D24A002E0376 /* ChainTestsSwift.swift in Sources */,
+				2E6CDA5C2442D24A002E0376 /* MapTests.swift in Sources */,
+				2E6CDA6B2442D24A002E0376 /* JoinTests.m in Sources */,
+				2E6CDA832442D24A002E0376 /* PromiseResultTests.swift in Sources */,
+				2E6CDA6E2442D24A002E0376 /* RejectTests.m in Sources */,
+				2E6CDA7D2442D24A002E0376 /* CancelTestsSwift.swift in Sources */,
+				2E6CDA682442D24A002E0376 /* LeakTests.m in Sources */,
+				2E6CDA592442D24A002E0376 /* CancelTests.m in Sources */,
+				2E6CDA862442D24A002E0376 /* WhenTests.m in Sources */,
+				2E6CDA712442D24A002E0376 /* ThreadTests.m in Sources */,
+				2E6CDA5F2442D24A002E0376 /* InteropTests.swift in Sources */,
 				E7CA17131BB9B0FC002D7196 /* tvOSTests.m in Sources */,
-				E7CA171C1BB9B151002D7196 /* CancelTests.m in Sources */,
-				E7CA171D1BB9B153002D7196 /* ChainTests.m in Sources */,
-				E77B335C1D58EACA0083903F /* ThreadTests.m in Sources */,
-				E7CA171E1BB9B154002D7196 /* DoneTests.m in Sources */,
-				E7CA171F1BB9B156002D7196 /* JoinTests.m in Sources */,
-				AFA0CF0021F7272400B9769E /* PromiseInitTests.swift in Sources */,
-				E7CA17201BB9B158002D7196 /* RejectTests.m in Sources */,
-				E7A7153420D437C0004CCDEE /* PromiseBlocksTests.swift in Sources */,
-				0CFAEB2A212F1DE200777107 /* CancelTestsSwift.swift in Sources */,
-				E7CA17211BB9B15C002D7196 /* TestWaiter.m in Sources */,
-				2E6CDA3A2442A93C002E0376 /* InteropTests.swift in Sources */,
-				E7CA17221BB9B15E002D7196 /* ThenTests.m in Sources */,
-				0CFAEB2E212F370100777107 /* ChainTestsSwift.swift in Sources */,
-				2E6CDA2E24427746002E0376 /* PromiseResultTests.swift in Sources */,
-				2E6CDA3624427EC9002E0376 /* MapTests.swift in Sources */,
-				E7E3E8D21CBD511F00C55538 /* WhenTests.m in Sources */,
-				E76F50741DC8FF7100C6425C /* LeakTests.m in Sources */,
+				2E6CDA742442D24A002E0376 /* TestWaiter.m in Sources */,
+				2E6CDA532442D24A002E0376 /* PromiseInitTests.swift in Sources */,
+				2E6CDA652442D24A002E0376 /* SwiftArrayTests.swift in Sources */,
+				2E6CDA802442D24A002E0376 /* DoneTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1211,14 +1203,15 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 742837DFA25D4147301AE923 /* Pods-iOS-iOSTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = iOSTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.benski.promise.iOSTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iOS.app/iOS";
 			};
@@ -1228,8 +1221,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5D414C51DEAAB359F2B867D1 /* Pods-iOS-iOSTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = iOSTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1284,11 +1277,13 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = tvOSTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.benski.promise.tvOSTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/tvOS.app/tvOS";
 				TVOS_DEPLOYMENT_TARGET = 9.0;
@@ -1300,6 +1295,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = tvOSTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.benski.promise.tvOSTests;
