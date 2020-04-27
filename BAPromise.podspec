@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
 s.name             = "BAPromise"
-s.version          = "3.2.1"
+s.version          = "3.3.0"
 s.summary          = "Objective C Promise Library"
 s.description      = <<-DESC
     Swift Promise Library. An alternative to NSOperation for asynchronous operations.
@@ -14,6 +14,7 @@ s.swift_versions = ['4.2', '5.0', '5.1']
 s.ios.deployment_target = '10.0'
 s.osx.deployment_target = '10.12'
 s.tvos.deployment_target = '10.0'
+s.watchos.deployment_target = '6.0'
 s.requires_arc = true
 
 s.source_files = 'Classes/*'
