@@ -276,6 +276,11 @@ extension Promise {
     public class func completed() -> Completable {
         return Promise<Void>(())
     }
+
+    public var completable: Completable {
+        return map({ _ -> Void in
+        }, queue: Promise.queue)
+    }
 }
 
 // MARK: - Creation

@@ -81,5 +81,25 @@ class MapTests: XCTestCase {
         self.wait(for: [expectation], timeout: 0.5)
     }
 
+    func testCompletable() {
+        let expectation = XCTestExpectation()
+        let promise = Promise<String>("1.4")
+        promise.completable.then({ 
+            expectation.fulfill()
+        }, rejected:{ (error) in
+            XCTFail("Unexpected rejection")
+        }, queue: DispatchQueue.main)
+        self.wait(for: [expectation], timeout: 0.5)
+    }
 
+    func testCompletableError() {
+        let expectation = XCTestExpectation()
+        let promise = Promise<String>(error: dummyError)
+        promise.completable.then({
+            XCTFail("Unexpected fulfillment")
+        }, rejected:{ (error) in
+            expectation.fulfill()
+        }, queue: DispatchQueue.main)
+        self.wait(for: [expectation], timeout: 0.5)
+    }
 }
