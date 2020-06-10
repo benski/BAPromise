@@ -47,3 +47,30 @@ extension Promise where ValueType : AnyObject {
     }
 }
 
+public protocol PromiseTypeOptional: ExpressibleByNilLiteral {
+    associatedtype WrappedType: AnyObject
+    var baOptional: WrappedType? { get }
+}
+
+extension Optional: PromiseTypeOptional where Wrapped: AnyObject {
+    public var baOptional: Wrapped? {
+        return self
+    }
+}
+
+extension Promise where ValueType: PromiseTypeOptional {
+    // This lets a Promise<T?> convert to BAPromise<T>
+    public func objcPromise() -> BAPromise<ValueType.WrappedType> {
+        let baPromise = BAPromise<ValueType.WrappedType>()
+        let token = self.then({ (value) in
+            baPromise.fulfill(with: value.baOptional)
+        }, rejected: { (error) in
+            baPromise.rejectWithError(error)
+        }, queue: baPromise.queue)
+
+        baPromise.cancelled {
+            token.cancel()
+        }
+        return baPromise
+    }
+}
