@@ -91,15 +91,15 @@ public class PromiseCancelToken {
     
     internal let cancelFlag: AtomicCancel = AtomicCancel()
     static let queue = DispatchQueue(label: "com.github.benski.promise")
-    var onCancel : Canceled?
-    
+    var onCancel: Canceled?
+
     public func cancelled(_ onCancel: @escaping Canceled, on queue: DispatchQueue) {
         let wrappedBlock = {
             queue.async {
                 onCancel()
             }
         }
-        
+
         PromiseCancelToken.queue.async {
             if self.cancelFlag.isCanceled {
                 wrappedBlock()
@@ -266,6 +266,25 @@ public class Promise<ValueType> : PromiseCancelToken {
             }
         }
     }
+
+    public func cancelled(_ onCancel: @escaping Canceled, thread: Thread) {
+        let wrappedBlock = {
+            thread.baAsync {
+                onCancel()
+            }
+        }
+
+        PromiseCancelToken.queue.async {
+            guard let fulfilledObject = self.fulfilledObject, fulfilledObject.resolved else {
+                if self.cancelFlag.isCanceled {
+                    wrappedBlock()
+                } else {
+                    self.onCancel = wrappedBlock
+                }
+                return
+            }
+        }
+    }
 }
 
 // MARK: - Completable ( Promise<Void> )
@@ -331,9 +350,9 @@ extension Promise {
     public typealias ThenRejected<ReturnType> = (Error) -> PromiseResult<ReturnType>
     
     public func then<ReturnType>(_ onFulfilled: @escaping ((ValueType) throws -> PromiseResult<ReturnType>),
-                          rejected : @escaping ThenRejected<ReturnType> = { return .failure($0) },
+                          rejected: @escaping ThenRejected<ReturnType> = { return .failure($0) },
                           always: Always? = nil,
-                          queue : DispatchQueue) -> Promise<ReturnType> {
+                          queue: DispatchQueue) -> Promise<ReturnType> {
         let returnedPromise = Promise<ReturnType>()
 
         let cancellationToken = self.then({ value -> Void in
@@ -355,22 +374,64 @@ extension Promise {
         
         return returnedPromise
     }
+
+    public func then<ReturnType>(_ onFulfilled: @escaping ((ValueType) throws -> PromiseResult<ReturnType>),
+                          rejected: @escaping ThenRejected<ReturnType> = { return .failure($0) },
+                          always: Always? = nil,
+                          thread: Thread) -> Promise<ReturnType> {
+        let returnedPromise = Promise<ReturnType>()
+
+        let cancellationToken = self.then({ value -> Void in
+            do {
+                let chained = try onFulfilled(value)
+                returnedPromise.fulfill(with: chained)
+            } catch let error {
+                returnedPromise.fulfill(with: .failure(error))
+            }
+        }, rejected: { error in
+            let chained = rejected(error)
+            returnedPromise.fulfill(with: chained)
+        }, always: always,
+           thread: thread)
+
+        returnedPromise.cancelled({
+            cancellationToken.cancel()
+        }, thread: thread)
+
+        return returnedPromise
+    }
     
     // a simpler method to use when doing type conversion
     public func map<ReturnType>(_ onFulfilled: @escaping ((ValueType) throws -> ReturnType),
-                          queue : DispatchQueue) -> Promise<ReturnType> {
+                          queue: DispatchQueue) -> Promise<ReturnType> {
         return then({ (value) -> PromiseResult<ReturnType> in
             let chained = try onFulfilled(value)
             return .success(chained)
         }, queue: queue)
     }
+
+    public func map<ReturnType>(_ onFulfilled: @escaping ((ValueType) throws -> ReturnType),
+                          thread: Thread) -> Promise<ReturnType> {
+        return then({ (value) -> PromiseResult<ReturnType> in
+            let chained = try onFulfilled(value)
+            return .success(chained)
+        }, thread: thread)
+    }
     
     public func flatMap<ReturnType>(_ onFulfilled: @escaping ((ValueType) throws -> Promise<ReturnType>),
-                         queue : DispatchQueue) -> Promise<ReturnType> {
+                         queue: DispatchQueue) -> Promise<ReturnType> {
         return then({ (value) -> PromiseResult<ReturnType> in
             let chained = try onFulfilled(value)
             return .promise(chained)
         }, queue: queue)
+    }
+
+    public func flatMap<ReturnType>(_ onFulfilled: @escaping ((ValueType) throws -> Promise<ReturnType>),
+                         thread: Thread) -> Promise<ReturnType> {
+        return then({ (value) -> PromiseResult<ReturnType> in
+            let chained = try onFulfilled(value)
+            return .promise(chained)
+        }, thread: thread)
     }
 }
 

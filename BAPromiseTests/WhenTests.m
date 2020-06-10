@@ -187,7 +187,6 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Promise should complete"];
     [@[].whenPromises done:^(NSArray *obj) {
         XCTAssertNil(obj);
-        XCTAssertTrue(@YES, @"Just noting which path the promise should follow");
     } rejected:^(NSError *error) {
         XCTFail(@"Unexpected Rejection");
     } finally:^{
