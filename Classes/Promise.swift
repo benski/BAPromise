@@ -118,16 +118,6 @@ public class PromiseCancelToken {
     }
 }
 
-extension Thread {
-    @objc func baRunBlock(_ block: @escaping () -> Void) {
-        block()
-    }
-
-    func baAsync(_ block: @escaping () -> Void) {
-        perform(#selector(baRunBlock), on: self, with: block, waitUntilDone: false)
-    }
-}
-
 public class Promise<ValueType> : PromiseCancelToken {
     
     public typealias Fulfilled = (ValueType) -> Void
@@ -269,9 +259,7 @@ public class Promise<ValueType> : PromiseCancelToken {
 
     public func cancelled(_ onCancel: @escaping Canceled, thread: Thread) {
         let wrappedBlock = {
-            thread.baAsync {
-                onCancel()
-            }
+            thread.baAsync(onCancel)
         }
 
         PromiseCancelToken.queue.async {

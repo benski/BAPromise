@@ -27,12 +27,22 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
     BAPromise_Rejected,
 };
 
-@implementation BAObject
--(void)ba_runBlock:(dispatch_block_t)block
+@implementation NSThread (BAPromise)
++(void)ba_runBlock:(dispatch_block_t)block
 {
     block();
 }
+
+-(void)baAsync:(dispatch_block_t)block
+{
+    if ([NSThread.currentThread isEqual:self]) {
+        block();
+    } else {
+        [NSThread performSelector:@selector(ba_runBlock:) onThread:self withObject:[block copy] waitUntilDone:NO];
+    }
+}
 @end
+
 
 @interface BACancelToken ()
 @property (nonatomic, strong) dispatch_queue_t queue;
@@ -85,7 +95,7 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
 }
 @end
 
-@interface BAPromiseBlocks : BAObject
+@interface BAPromiseBlocks : NSObject
 @property (nonatomic, copy) BAPromiseOnFulfilledBlock done;
 @property (nonatomic, copy) BAPromiseOnFulfilledBlock observed;
 @property (nonatomic, copy) BAPromiseOnRejectedBlock rejected;
@@ -105,7 +115,7 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
 - (void)callBlocksWithObject:(id)object
 {
     if (self.thread) {
-        [self performSelector:@selector(ba_runBlock:) onThread:self.thread withObject:^{
+        [NSThread performSelector:@selector(ba_runBlock:) onThread:self.thread withObject:^{
             if (!self.cancellationToken.cancelled) {
                 if ([object isKindOfClass:NSError.class]) {
                     if (self.rejected) {
@@ -384,10 +394,9 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
 {
     __block BACancelToken *cancellationToken=nil;
     BAPromise *returnedPromise = [[BAPromise alloc] init];
-    __weak typeof(self) weakSelf = self;
     [returnedPromise cancelled:^{
         if (thread) {
-            [weakSelf performSelector:@selector(ba_runBlock:) onThread:thread withObject:^{
+            [NSThread performSelector:@selector(ba_runBlock:) onThread:thread withObject:^{
                 [cancellationToken cancel];
             } waitUntilDone:NO];
         } else {
