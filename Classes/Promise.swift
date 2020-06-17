@@ -281,7 +281,7 @@ public typealias Completable = Promise<Void>
 
 extension Promise {
     public class func completed() -> Completable {
-        return Promise<Void>(())
+        return Completable(())
     }
 
     public var completable: Completable {
@@ -302,6 +302,14 @@ extension Promise {
         self.fulfilledObject = .failure(error)
     }
 }
+
+extension Promise where ValueType == Void {
+    public func complete() {
+        self.fulfill(with: .success(()))
+    }
+}
+
+
 // fulfillment
 extension Promise {
     
@@ -329,6 +337,14 @@ extension Promise {
                     self.cancelled({ cancellationToken.cancel() }, on: Promise.queue)
                 }
             }
+        }
+    }
+
+    public func fulfill(with value: ValueType?, orRejectWith error: Error?) {
+        if let error = error {
+            fulfill(with: .failure(error))
+        } else if let value = value {
+            fulfill(with: .success(value))
         }
     }
 }
