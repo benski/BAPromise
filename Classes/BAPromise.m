@@ -35,11 +35,7 @@ typedef NS_ENUM(NSInteger, BAPromiseState) {
 
 -(void)baAsync:(dispatch_block_t)block
 {
-    if ([NSThread.currentThread isEqual:self]) {
-        block();
-    } else {
-        [NSThread performSelector:@selector(ba_runBlock:) onThread:self withObject:[block copy] waitUntilDone:NO];
-    }
+    [NSThread performSelector:@selector(ba_runBlock:) onThread:self withObject:[block copy] waitUntilDone:NO];
 }
 @end
 
