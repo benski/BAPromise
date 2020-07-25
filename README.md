@@ -1,6 +1,6 @@
 # BAPromise 
 
-[![Coverage Status](https://coveralls.io/repos/github/benski/BAPromise/badge.svg?branch=master)](https://coveralls.io/github/benski/BAPromise?branch=master)
+[![codecov](https://codecov.io/gh/benski/BAPromise/branch/master/graph/badge.svg)](https://codecov.io/gh/benski/BAPromise)
 
 ## Swift & Objective C Promise Library ##
 
@@ -79,13 +79,7 @@ A few things of note:
 
 ### Installation
 
-Xcode 6
 ```ruby
-pod "BAPromise", "~> 1.0"
-```
-
-Xcode 7
-```ruby
-pod "BAPromise", "~> 1.1"
+pod "BAPromise"
 ```
 
