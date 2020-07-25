@@ -1,0 +1,5 @@
+coverage_service: cobertura_xml
+workspace: ./BAPromise.xcworkspace
+xcodeproj: ./BAPromise.xcodeproj
+scheme: iOS
+output_directory: ./
