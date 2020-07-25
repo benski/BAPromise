@@ -175,4 +175,56 @@ class InteropTests: XCTestCase {
         self.wait(for: [expectation], timeout: 0.5)
     }
 
+    func testObjcOptionalNil() {
+        let expectation = XCTestExpectation()
+        let promise = Promise<NSString?>()
+        let baPromise = promise.objcPromise()
+        baPromise.done({ string in
+            XCTAssertNil(string)
+            expectation.fulfill()
+        }, rejected: { error in
+            XCTFail("Unexpected rejection")
+        })
+        promise.fulfill(with: .success(nil))
+        self.wait(for: [expectation], timeout: 0.5)
+    }
+
+    func testObjcOptionalNotNil() {
+        let expectation = XCTestExpectation()
+        let promise = Promise<NSString?>()
+        let baPromise = promise.objcPromise()
+        baPromise.done({ string in
+            XCTAssertNotNil(string)
+            expectation.fulfill()
+        }, rejected: { error in
+            XCTFail("Unexpected rejection")
+        })
+        promise.fulfill(with: .success("test"))
+        self.wait(for: [expectation], timeout: 0.5)
+    }
+
+    func testObjcOptionalReject() {
+        let expectation = XCTestExpectation()
+        let promise = Promise<NSString?>()
+        let baPromise = promise.objcPromise()
+        baPromise.done({ string in
+            XCTFail("Unexpected succest")
+        }, rejected: { error in
+            expectation.fulfill()
+        })
+        promise.fulfill(with: .failure(dummyError))
+        self.wait(for: [expectation], timeout: 0.5)
+    }
+
+    func testObjcOptionalCancel() {
+        let expectation = XCTestExpectation()
+        let promise = Promise<NSString?>()
+        promise.cancelled({
+            expectation.fulfill()
+        }, on: .main)
+
+        let baPromise = promise.objcPromise()
+        baPromise.cancel()
+        self.wait(for: [expectation], timeout: 0.5)
+    }
 }
