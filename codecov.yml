@@ -18,3 +18,8 @@ comment:
   layout: "reach,diff,flags,tree"
   behavior: default
   require_changes: no
+
+ignore:
+  - "iOS/AppDelegate.m"
+  - "iOS/ViewController.m"
+  - "iOS/main.m"
