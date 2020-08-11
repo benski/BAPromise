@@ -227,4 +227,85 @@ class InteropTests: XCTestCase {
         baPromise.cancel()
         self.wait(for: [expectation], timeout: 0.5)
     }
+
+    func testCompletableFulfill() {
+          let expectation = XCTestExpectation()
+          let baPromise = BAPromise<NSString>()
+          let promise = Completable(from: baPromise)
+          promise.then({
+              expectation.fulfill()
+          }, rejected: { error in
+              XCTFail("Unexpected rejection")
+          }, queue: .main)
+          baPromise.fulfill(with: "test")
+          self.wait(for: [expectation], timeout: 0.5)
+      }
+
+      func testCompletableReject() {
+          let expectation = XCTestExpectation()
+          let baPromise = BAPromise<NSString>()
+          let promise = Completable(from: baPromise)
+          promise.then({
+              XCTFail("Unexpected succest")
+          }, rejected: { error in
+              expectation.fulfill()
+          }, queue: .main)
+          baPromise.reject()
+          self.wait(for: [expectation], timeout: 0.5)
+      }
+
+      func testCompletableNil() {
+          let expectation = XCTestExpectation()
+          let baPromise = BAPromise<NSString>()
+          let promise = Completable(from: baPromise)
+          promise.then({
+              expectation.fulfill()
+          }, rejected: { error in
+            XCTFail("Unexpected failure")
+          }, queue: .main)
+          baPromise.fulfill(with: nil)
+          self.wait(for: [expectation], timeout: 0.5)
+      }
+
+      func testCompletableCancel() {
+          let expectation = XCTestExpectation()
+          let baPromise = BAPromise<NSString>()
+          baPromise.cancelled {
+              expectation.fulfill()
+          }
+
+          let promise = Completable(from: baPromise)
+          promise.cancel()
+          self.wait(for: [expectation], timeout: 0.5)
+      }
+
+      /// make sure that we don't cancel early when only one of several converted promises cancels
+      func testCompletableCancelMultiple() {
+          let expectation = XCTestExpectation()
+          let baPromise = BAPromise<NSString>()
+          baPromise.cancelled {
+              expectation.fulfill()
+          }
+
+          let promise = Completable(from: baPromise)
+          let promise2 = Completable(from: baPromise)
+          promise.cancel()
+          promise2.cancel()
+          self.wait(for: [expectation], timeout: 0.5)
+      }
+
+      /// make sure that we don't cancel early when only one of several converted promises cancels
+      func testCompletableCancelMultipleOnlyOne() {
+          let expectation = XCTestExpectation()
+          expectation.isInverted = true
+          let baPromise = BAPromise<NSString>()
+          baPromise.cancelled {
+              expectation.fulfill()
+          }
+
+          let promise = Completable(from: baPromise)
+          _ = Completable(from: baPromise)
+          promise.cancel()
+          self.wait(for: [expectation], timeout: 0.5)
+      }
 }

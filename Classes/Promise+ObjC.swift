@@ -74,3 +74,19 @@ extension Promise where ValueType: PromiseTypeOptional {
         return baPromise
     }
 }
+
+extension Completable {
+    public convenience init<T>(from: BAPromise<T>) {
+        self.init()
+        let cancelToken = from.done({ (value: T?) in
+            self.fulfill(with: .success(()))
+        }, rejected:{ error in
+            self.fulfill(with: .failure(error))
+        }, finally:{
+
+        })
+        self.cancelled({
+            cancelToken.cancel()
+        }, on: DispatchQueue.main)
+    }
+}
