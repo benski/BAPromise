@@ -102,4 +102,30 @@ class MapTests: XCTestCase {
         }, queue: DispatchQueue.main)
         self.wait(for: [expectation], timeout: 0.5)
     }
+
+    func testRecover() {
+        let expectation = XCTestExpectation()
+        let promise = Promise<String>(error: dummyError)
+        promise.recover({ _ in
+            return "1.4"
+        }, queue: DispatchQueue.main)
+            .then({ (value) in
+                XCTAssertEqual(value, "1.4")
+                expectation.fulfill()
+            }, queue: DispatchQueue.main)
+        self.wait(for: [expectation], timeout: 0.5)
+    }
+
+    func testFlatRecover() {
+        let expectation = XCTestExpectation()
+        let promise = Promise<String>(error: dummyError)
+        promise.flatRecover({ _ in
+            return Promise("1.4")
+        }, queue: DispatchQueue.main)
+            .then({ (value) in
+                XCTAssertEqual(value, "1.4")
+                expectation.fulfill()
+            }, queue: DispatchQueue.main)
+        self.wait(for: [expectation], timeout: 0.5)
+    }
 }

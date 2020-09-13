@@ -437,6 +437,26 @@ extension Promise {
             return .promise(chained)
         }, thread: thread)
     }
+
+    /// helper method for recovering from rejection with a synchronously calculated value.
+    public func recover(_ onRejected: @escaping ((Error) -> ValueType),
+        queue: DispatchQueue) -> Promise<ValueType> {
+        return then({ value in
+            return .success(value)
+        }, rejected: { error -> PromiseResult<ValueType> in
+            return .success(onRejected(error))
+        }, queue: queue)
+     }
+
+    /// helper method for recovering from rejection by chaining another promise.
+    public func flatRecover(_ onRejected: @escaping ((Error) -> Promise<ValueType>),
+    queue: DispatchQueue) -> Promise<ValueType> {
+        return then({ value in
+            return .success(value)
+        }, rejected: { error -> PromiseResult<ValueType> in
+            return .promise(onRejected(error))
+        }, queue: queue)
+    }
 }
 
 // Join
