@@ -7,23 +7,23 @@
 //
 
 import Foundation
+import Atomics
 
 internal class AtomicCancel {
-    
+    private let underlying = ManagedAtomic<Int>(0)
+
     public var isCanceled: Bool {
-        atomic_thread_fence(memory_order_seq_cst)
-        return underlying == 0 ? false : true
+        return underlying.load(ordering: .relaxed) == 0 ? false : true
     }
     
     public func cancel() {
-        OSAtomicIncrement32Barrier(&underlying);
+        underlying.wrappingIncrement(ordering: .relaxed)
     }
     
     public init() {
-        underlying = 0
+      underlying.store(0, ordering: .relaxed)
     }
     
-     private var underlying: Int32
 }
 
 public enum PromiseResult<ValueType> {

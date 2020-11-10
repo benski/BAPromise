@@ -7,10 +7,6 @@ enum TestError: Error {
 
 final class BAPromiseTests: XCTestCase {
     func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-        XCTAssertEqual(BAPromise().text, "Hello, World!")
       let promise = Promise<Int>()
       promise.then({ (myInt) -> PromiseResult<Int> in
         XCTAssertEqual(myInt, 42)
