@@ -171,7 +171,7 @@ public class Promise<ValueType> : PromiseCancelToken {
             if let queue = queue {
                 queue.async(execute: block)
             } else if let thread = thread {
-                thread.baAsync(block)
+                thread.async(block)
             }
         }
     }
@@ -259,7 +259,7 @@ public class Promise<ValueType> : PromiseCancelToken {
 
     public func cancelled(_ onCancel: @escaping Canceled, thread: Thread) {
         let wrappedBlock = {
-            thread.baAsync(onCancel)
+            thread.async(onCancel)
         }
 
         PromiseCancelToken.queue.async {
@@ -353,6 +353,7 @@ extension Promise {
 extension Promise {
     public typealias ThenRejected<ReturnType> = (Error) -> PromiseResult<ReturnType>
     
+    @discardableResult
     public func then<ReturnType>(_ onFulfilled: @escaping ((ValueType) throws -> PromiseResult<ReturnType>),
                           rejected: @escaping ThenRejected<ReturnType> = { return .failure($0) },
                           always: Always? = nil,
@@ -379,6 +380,7 @@ extension Promise {
         return returnedPromise
     }
 
+    @discardableResult
     public func then<ReturnType>(_ onFulfilled: @escaping ((ValueType) throws -> PromiseResult<ReturnType>),
                           rejected: @escaping ThenRejected<ReturnType> = { return .failure($0) },
                           always: Always? = nil,
@@ -559,4 +561,20 @@ extension Array where Element == Completable {
         
         return returnedPromise
     }
+}
+
+typealias dispatch_block_t_swift = () -> Void
+
+extension Thread {
+  
+  func runBlock(_ block: @escaping dispatch_block_t_swift) {
+      block()
+  }
+
+  func async(_ block: @escaping dispatch_block_t_swift) {
+    perform(Selector(("runBlock:")),
+            on: self,
+            with: block,
+            waitUntilDone: false)
+  }
 }
