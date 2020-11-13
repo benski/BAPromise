@@ -8,7 +8,28 @@
 
 import Foundation
 
-internal class AtomicCancel {
+internal protocol AtomicCancel {
+    var isCanceled: Bool { get }
+    func cancel() -> Void
+}
+
+#if canImport(Atomics)
+import Atomics
+internal class AtomicsCancel: AtomicCancel {
+    public var isCanceled: Bool {
+        return underlying.load(ordering: .relaxed) == 0 ? false : true
+    }
+    public func cancel() {
+        underlying.wrappingIncrement(ordering: .relaxed)
+    }
+    public init() {
+      underlying.store(0, ordering: .relaxed)
+    }
+}
+#endif
+
+
+internal class CAtomicCancel: AtomicCancel {
     
     public var isCanceled: Bool {
         atomic_thread_fence(memory_order_seq_cst)
@@ -89,7 +110,11 @@ public class PromiseCancelToken {
     
     public typealias Canceled = () -> Void
     
-    internal let cancelFlag: AtomicCancel = AtomicCancel()
+#if canImport(Atomics)
+    internal let cancelFlag: AtomicCancel = AtomicsCancel()
+#else
+    internal let cancelFlag: AtomicCancel = CAtomicCancel()
+#endif
     static let queue = DispatchQueue(label: "com.github.benski.promise")
     var onCancel: Canceled?
 
@@ -171,7 +196,7 @@ public class Promise<ValueType> : PromiseCancelToken {
             if let queue = queue {
                 queue.async(execute: block)
             } else if let thread = thread {
-                thread.baAsync(block)
+                thread.async(block)
             }
         }
     }
@@ -259,7 +284,7 @@ public class Promise<ValueType> : PromiseCancelToken {
 
     public func cancelled(_ onCancel: @escaping Canceled, thread: Thread) {
         let wrappedBlock = {
-            thread.baAsync(onCancel)
+            thread.async(onCancel)
         }
 
         PromiseCancelToken.queue.async {
@@ -353,6 +378,7 @@ extension Promise {
 extension Promise {
     public typealias ThenRejected<ReturnType> = (Error) -> PromiseResult<ReturnType>
     
+    @discardableResult
     public func then<ReturnType>(_ onFulfilled: @escaping ((ValueType) throws -> PromiseResult<ReturnType>),
                           rejected: @escaping ThenRejected<ReturnType> = { return .failure($0) },
                           always: Always? = nil,
@@ -379,6 +405,7 @@ extension Promise {
         return returnedPromise
     }
 
+    @discardableResult
     public func then<ReturnType>(_ onFulfilled: @escaping ((ValueType) throws -> PromiseResult<ReturnType>),
                           rejected: @escaping ThenRejected<ReturnType> = { return .failure($0) },
                           always: Always? = nil,
@@ -559,4 +586,20 @@ extension Array where Element == Completable {
         
         return returnedPromise
     }
+}
+
+typealias dispatch_block_t_swift = () -> Void
+
+extension Thread {
+  
+  func runBlock(_ block: @escaping dispatch_block_t_swift) {
+      block()
+  }
+
+  func async(_ block: @escaping dispatch_block_t_swift) {
+    perform(Selector(("runBlock:")),
+            on: self,
+            with: block,
+            waitUntilDone: false)
+  }
 }

@@ -1,0 +1,1043 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		"BAPromise::BAPromisePackageTests::ProductTarget" /* BAPromisePackageTests */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = OBJ_105 /* Build configuration list for PBXAggregateTarget "BAPromisePackageTests" */;
+			buildPhases = (
+			);
+			dependencies = (
+				OBJ_108 /* PBXTargetDependency */,
+			);
+			name = BAPromisePackageTests;
+			productName = BAPromisePackageTests;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		575EA9DC255B39BE007B16DF /* libswiftCore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 575EA9DB255B39BE007B16DF /* libswiftCore.tbd */; };
+		OBJ_103 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
+		OBJ_114 /* BAPromiseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* BAPromiseTests.swift */; };
+		OBJ_115 /* MapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* MapTests.swift */; };
+		OBJ_116 /* PromiseBlocksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* PromiseBlocksTests.swift */; };
+		OBJ_117 /* PromiseInitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* PromiseInitTests.swift */; };
+		OBJ_118 /* PromiseResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* PromiseResultTests.swift */; };
+		OBJ_119 /* SwiftArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* SwiftArrayTests.swift */; };
+		OBJ_120 /* SwiftWhenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_19 /* SwiftWhenTests.swift */; };
+		OBJ_121 /* XCTestManifests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* XCTestManifests.swift */; };
+		OBJ_123 /* BAPromise.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "BAPromise::BAPromise::Product" /* BAPromise.framework */; };
+		OBJ_124 /* Atomics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "swift-atomics::Atomics::Product" /* Atomics.framework */; };
+		OBJ_125 /* _AtomicsShims.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "swift-atomics::_AtomicsShims::Product" /* _AtomicsShims.framework */; };
+		OBJ_133 /* _AtomicsShims.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_39 /* _AtomicsShims.c */; };
+		OBJ_135 /* _AtomicsShims.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_41 /* _AtomicsShims.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		OBJ_142 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_42 /* Package.swift */; };
+		OBJ_70 /* AtomicInteger.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_24 /* AtomicInteger.swift */; };
+		OBJ_71 /* AtomicMemoryOrderings.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* AtomicMemoryOrderings.swift */; };
+		OBJ_72 /* AtomicOptional.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* AtomicOptional.swift */; };
+		OBJ_73 /* AtomicRawRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* AtomicRawRepresentable.swift */; };
+		OBJ_74 /* AtomicStrongReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* AtomicStrongReference.swift */; };
+		OBJ_75 /* AtomicValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* AtomicValue.swift */; };
+		OBJ_76 /* DoubleWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* DoubleWord.swift */; };
+		OBJ_77 /* AtomicBool.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_32 /* AtomicBool.swift */; };
+		OBJ_78 /* AtomicLazyReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_33 /* AtomicLazyReference.swift */; };
+		OBJ_79 /* HighLevelTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_34 /* HighLevelTypes.swift */; };
+		OBJ_80 /* IntegerConformances.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_35 /* IntegerConformances.swift */; };
+		OBJ_81 /* PointerConformances.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_36 /* PointerConformances.swift */; };
+		OBJ_83 /* _AtomicsShims.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "swift-atomics::_AtomicsShims::Product" /* _AtomicsShims.framework */; };
+		OBJ_92 /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Promise.swift */; };
+		OBJ_94 /* Atomics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "swift-atomics::Atomics::Product" /* Atomics.framework */; };
+		OBJ_95 /* _AtomicsShims.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "swift-atomics::_AtomicsShims::Product" /* _AtomicsShims.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		575EA9CC255B38FA007B16DF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "swift-atomics::Atomics";
+			remoteInfo = Atomics;
+		};
+		575EA9CD255B38FA007B16DF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "swift-atomics::_AtomicsShims";
+			remoteInfo = _AtomicsShims;
+		};
+		575EA9CE255B38FA007B16DF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "swift-atomics::_AtomicsShims";
+			remoteInfo = _AtomicsShims;
+		};
+		575EA9CF255B38FB007B16DF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "BAPromise::BAPromise";
+			remoteInfo = BAPromise;
+		};
+		575EA9D0255B38FB007B16DF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "swift-atomics::Atomics";
+			remoteInfo = Atomics;
+		};
+		575EA9D1255B38FB007B16DF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "swift-atomics::_AtomicsShims";
+			remoteInfo = _AtomicsShims;
+		};
+		575EA9D5255B38FC007B16DF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "BAPromise::BAPromiseTests";
+			remoteInfo = BAPromiseTests;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		575EA9DB255B39BE007B16DF /* libswiftCore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libswiftCore.tbd; path = usr/lib/swift/libswiftCore.tbd; sourceTree = SDKROOT; };
+		"BAPromise::BAPromise::Product" /* BAPromise.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BAPromise.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"BAPromise::BAPromiseTests::Product" /* BAPromiseTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = BAPromiseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		OBJ_10 /* Promise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Promise.swift; sourceTree = "<group>"; };
+		OBJ_13 /* BAPromiseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BAPromiseTests.swift; sourceTree = "<group>"; };
+		OBJ_14 /* MapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTests.swift; sourceTree = "<group>"; };
+		OBJ_15 /* PromiseBlocksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromiseBlocksTests.swift; sourceTree = "<group>"; };
+		OBJ_16 /* PromiseInitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromiseInitTests.swift; sourceTree = "<group>"; };
+		OBJ_17 /* PromiseResultTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromiseResultTests.swift; sourceTree = "<group>"; };
+		OBJ_18 /* SwiftArrayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftArrayTests.swift; sourceTree = "<group>"; };
+		OBJ_19 /* SwiftWhenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftWhenTests.swift; sourceTree = "<group>"; };
+		OBJ_20 /* XCTestManifests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestManifests.swift; sourceTree = "<group>"; };
+		OBJ_24 /* AtomicInteger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicInteger.swift; sourceTree = "<group>"; };
+		OBJ_25 /* AtomicMemoryOrderings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicMemoryOrderings.swift; sourceTree = "<group>"; };
+		OBJ_26 /* AtomicOptional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicOptional.swift; sourceTree = "<group>"; };
+		OBJ_27 /* AtomicRawRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicRawRepresentable.swift; sourceTree = "<group>"; };
+		OBJ_28 /* AtomicStrongReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicStrongReference.swift; sourceTree = "<group>"; };
+		OBJ_29 /* AtomicValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicValue.swift; sourceTree = "<group>"; };
+		OBJ_30 /* DoubleWord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleWord.swift; sourceTree = "<group>"; };
+		OBJ_32 /* AtomicBool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicBool.swift; sourceTree = "<group>"; };
+		OBJ_33 /* AtomicLazyReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicLazyReference.swift; sourceTree = "<group>"; };
+		OBJ_34 /* HighLevelTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighLevelTypes.swift; sourceTree = "<group>"; };
+		OBJ_35 /* IntegerConformances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegerConformances.swift; sourceTree = "<group>"; };
+		OBJ_36 /* PointerConformances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointerConformances.swift; sourceTree = "<group>"; };
+		OBJ_39 /* _AtomicsShims.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = _AtomicsShims.c; sourceTree = "<group>"; };
+		OBJ_41 /* _AtomicsShims.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = _AtomicsShims.h; sourceTree = "<group>"; };
+		OBJ_42 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Package.swift; path = "/Users/ralph.seaman/code/BAPromise/.build/checkouts/swift-atomics/Package.swift"; sourceTree = "<group>"; };
+		OBJ_48 /* bin */ = {isa = PBXFileReference; lastKnownFileType = folder; path = bin; sourceTree = SOURCE_ROOT; };
+		OBJ_49 /* iOSTests */ = {isa = PBXFileReference; lastKnownFileType = folder; path = iOSTests; sourceTree = SOURCE_ROOT; };
+		OBJ_50 /* Classes */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Classes; sourceTree = SOURCE_ROOT; };
+		OBJ_51 /* BAPromiseTests */ = {isa = PBXFileReference; lastKnownFileType = folder; path = BAPromiseTests; sourceTree = SOURCE_ROOT; };
+		OBJ_52 /* iOS */ = {isa = PBXFileReference; lastKnownFileType = folder; path = iOS; sourceTree = SOURCE_ROOT; };
+		OBJ_53 /* BAPromise.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; path = BAPromise.xcworkspace; sourceTree = SOURCE_ROOT; };
+		OBJ_54 /* OS XTests */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "OS XTests"; sourceTree = SOURCE_ROOT; };
+		OBJ_55 /* OS X */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "OS X"; sourceTree = SOURCE_ROOT; };
+		OBJ_56 /* DerivedData */ = {isa = PBXFileReference; lastKnownFileType = folder; path = DerivedData; sourceTree = SOURCE_ROOT; };
+		OBJ_57 /* codecov.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = codecov.yml; sourceTree = "<group>"; };
+		OBJ_58 /* BAPromise-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BAPromise-Bridging-Header.h"; sourceTree = "<group>"; };
+		OBJ_59 /* BAPromise.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = BAPromise.podspec; sourceTree = "<group>"; };
+		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		OBJ_60 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		OBJ_61 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		OBJ_62 /* OS XTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OS XTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		OBJ_63 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		OBJ_64 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		"swift-atomics::Atomics::Product" /* Atomics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Atomics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"swift-atomics::_AtomicsShims::Product" /* _AtomicsShims.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = _AtomicsShims.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		OBJ_122 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_123 /* BAPromise.framework in Frameworks */,
+				OBJ_124 /* Atomics.framework in Frameworks */,
+				OBJ_125 /* _AtomicsShims.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_136 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				575EA9DC255B39BE007B16DF /* libswiftCore.tbd in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_82 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_83 /* _AtomicsShims.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_93 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_94 /* Atomics.framework in Frameworks */,
+				OBJ_95 /* _AtomicsShims.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		575EA9DA255B39BE007B16DF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				575EA9DB255B39BE007B16DF /* libswiftCore.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		OBJ_11 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_12 /* BAPromiseTests */,
+			);
+			name = Tests;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_12 /* BAPromiseTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_13 /* BAPromiseTests.swift */,
+				OBJ_14 /* MapTests.swift */,
+				OBJ_15 /* PromiseBlocksTests.swift */,
+				OBJ_16 /* PromiseInitTests.swift */,
+				OBJ_17 /* PromiseResultTests.swift */,
+				OBJ_18 /* SwiftArrayTests.swift */,
+				OBJ_19 /* SwiftWhenTests.swift */,
+				OBJ_20 /* XCTestManifests.swift */,
+			);
+			name = BAPromiseTests;
+			path = Tests/BAPromiseTests;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_21 /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_22 /* swift-atomics 0.0.2 */,
+			);
+			name = Dependencies;
+			sourceTree = "<group>";
+		};
+		OBJ_22 /* swift-atomics 0.0.2 */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_23 /* Atomics */,
+				OBJ_37 /* _AtomicsShims */,
+				OBJ_42 /* Package.swift */,
+			);
+			name = "swift-atomics 0.0.2";
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_23 /* Atomics */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_24 /* AtomicInteger.swift */,
+				OBJ_25 /* AtomicMemoryOrderings.swift */,
+				OBJ_26 /* AtomicOptional.swift */,
+				OBJ_27 /* AtomicRawRepresentable.swift */,
+				OBJ_28 /* AtomicStrongReference.swift */,
+				OBJ_29 /* AtomicValue.swift */,
+				OBJ_30 /* DoubleWord.swift */,
+				OBJ_31 /* autogenerated */,
+			);
+			name = Atomics;
+			path = ".build/checkouts/swift-atomics/Sources/Atomics";
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_31 /* autogenerated */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_32 /* AtomicBool.swift */,
+				OBJ_33 /* AtomicLazyReference.swift */,
+				OBJ_34 /* HighLevelTypes.swift */,
+				OBJ_35 /* IntegerConformances.swift */,
+				OBJ_36 /* PointerConformances.swift */,
+			);
+			path = autogenerated;
+			sourceTree = "<group>";
+		};
+		OBJ_37 /* _AtomicsShims */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_38 /* src */,
+				OBJ_40 /* include */,
+			);
+			name = _AtomicsShims;
+			path = ".build/checkouts/swift-atomics/Sources/_AtomicsShims";
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_38 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_39 /* _AtomicsShims.c */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		OBJ_40 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_41 /* _AtomicsShims.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		OBJ_43 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				"swift-atomics::_AtomicsShims::Product" /* _AtomicsShims.framework */,
+				"swift-atomics::Atomics::Product" /* Atomics.framework */,
+				"BAPromise::BAPromise::Product" /* BAPromise.framework */,
+				"BAPromise::BAPromiseTests::Product" /* BAPromiseTests.xctest */,
+			);
+			name = Products;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		OBJ_5 /*  */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_6 /* Package.swift */,
+				OBJ_7 /* Sources */,
+				OBJ_11 /* Tests */,
+				OBJ_21 /* Dependencies */,
+				OBJ_43 /* Products */,
+				OBJ_48 /* bin */,
+				OBJ_49 /* iOSTests */,
+				OBJ_50 /* Classes */,
+				OBJ_51 /* BAPromiseTests */,
+				OBJ_52 /* iOS */,
+				OBJ_53 /* BAPromise.xcworkspace */,
+				OBJ_54 /* OS XTests */,
+				OBJ_55 /* OS X */,
+				OBJ_56 /* DerivedData */,
+				OBJ_57 /* codecov.yml */,
+				OBJ_58 /* BAPromise-Bridging-Header.h */,
+				OBJ_59 /* BAPromise.podspec */,
+				OBJ_60 /* LICENSE */,
+				OBJ_61 /* Makefile */,
+				OBJ_62 /* OS XTests-Bridging-Header.h */,
+				OBJ_63 /* README.md */,
+				OBJ_64 /* Podfile */,
+				575EA9DA255B39BE007B16DF /* Frameworks */,
+			);
+			name = "";
+			sourceTree = "<group>";
+		};
+		OBJ_7 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_8 /* BAPromise */,
+			);
+			name = Sources;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_8 /* BAPromise */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_10 /* Promise.swift */,
+			);
+			name = BAPromise;
+			path = Sources/BAPromise;
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		OBJ_134 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_135 /* _AtomicsShims.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		"BAPromise::BAPromise" /* BAPromise */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_87 /* Build configuration list for PBXNativeTarget "BAPromise" */;
+			buildPhases = (
+				OBJ_90 /* Sources */,
+				OBJ_93 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				OBJ_96 /* PBXTargetDependency */,
+				OBJ_97 /* PBXTargetDependency */,
+			);
+			name = BAPromise;
+			productName = BAPromise;
+			productReference = "BAPromise::BAPromise::Product" /* BAPromise.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		"BAPromise::BAPromiseTests" /* BAPromiseTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_110 /* Build configuration list for PBXNativeTarget "BAPromiseTests" */;
+			buildPhases = (
+				OBJ_113 /* Sources */,
+				OBJ_122 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				OBJ_126 /* PBXTargetDependency */,
+				OBJ_127 /* PBXTargetDependency */,
+				OBJ_128 /* PBXTargetDependency */,
+			);
+			name = BAPromiseTests;
+			productName = BAPromiseTests;
+			productReference = "BAPromise::BAPromiseTests::Product" /* BAPromiseTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		"BAPromise::SwiftPMPackageDescription" /* BAPromisePackageDescription */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_99 /* Build configuration list for PBXNativeTarget "BAPromisePackageDescription" */;
+			buildPhases = (
+				OBJ_102 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BAPromisePackageDescription;
+			productName = BAPromisePackageDescription;
+			productType = "com.apple.product-type.framework";
+		};
+		"swift-atomics::Atomics" /* Atomics */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_66 /* Build configuration list for PBXNativeTarget "Atomics" */;
+			buildPhases = (
+				OBJ_69 /* Sources */,
+				OBJ_82 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				OBJ_84 /* PBXTargetDependency */,
+			);
+			name = Atomics;
+			productName = Atomics;
+			productReference = "swift-atomics::Atomics::Product" /* Atomics.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		"swift-atomics::SwiftPMPackageDescription" /* swift-atomicsPackageDescription */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_138 /* Build configuration list for PBXNativeTarget "swift-atomicsPackageDescription" */;
+			buildPhases = (
+				OBJ_141 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "swift-atomicsPackageDescription";
+			productName = "swift-atomicsPackageDescription";
+			productType = "com.apple.product-type.framework";
+		};
+		"swift-atomics::_AtomicsShims" /* _AtomicsShims */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_129 /* Build configuration list for PBXNativeTarget "_AtomicsShims" */;
+			buildPhases = (
+				OBJ_132 /* Sources */,
+				OBJ_134 /* Headers */,
+				OBJ_136 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = _AtomicsShims;
+			productName = _AtomicsShims;
+			productReference = "swift-atomics::_AtomicsShims::Product" /* _AtomicsShims.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		OBJ_1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftMigration = 9999;
+				LastUpgradeCheck = 9999;
+			};
+			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "BAPromise-SwiftPackage" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = OBJ_5 /*  */;
+			productRefGroup = OBJ_43 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				"swift-atomics::Atomics" /* Atomics */,
+				"BAPromise::BAPromise" /* BAPromise */,
+				"BAPromise::SwiftPMPackageDescription" /* BAPromisePackageDescription */,
+				"BAPromise::BAPromisePackageTests::ProductTarget" /* BAPromisePackageTests */,
+				"BAPromise::BAPromiseTests" /* BAPromiseTests */,
+				"swift-atomics::_AtomicsShims" /* _AtomicsShims */,
+				"swift-atomics::SwiftPMPackageDescription" /* swift-atomicsPackageDescription */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		OBJ_102 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_103 /* Package.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_113 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_114 /* BAPromiseTests.swift in Sources */,
+				OBJ_115 /* MapTests.swift in Sources */,
+				OBJ_116 /* PromiseBlocksTests.swift in Sources */,
+				OBJ_117 /* PromiseInitTests.swift in Sources */,
+				OBJ_118 /* PromiseResultTests.swift in Sources */,
+				OBJ_119 /* SwiftArrayTests.swift in Sources */,
+				OBJ_120 /* SwiftWhenTests.swift in Sources */,
+				OBJ_121 /* XCTestManifests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_132 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_133 /* _AtomicsShims.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_141 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_142 /* Package.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_69 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_70 /* AtomicInteger.swift in Sources */,
+				OBJ_71 /* AtomicMemoryOrderings.swift in Sources */,
+				OBJ_72 /* AtomicOptional.swift in Sources */,
+				OBJ_73 /* AtomicRawRepresentable.swift in Sources */,
+				OBJ_74 /* AtomicStrongReference.swift in Sources */,
+				OBJ_75 /* AtomicValue.swift in Sources */,
+				OBJ_76 /* DoubleWord.swift in Sources */,
+				OBJ_77 /* AtomicBool.swift in Sources */,
+				OBJ_78 /* AtomicLazyReference.swift in Sources */,
+				OBJ_79 /* HighLevelTypes.swift in Sources */,
+				OBJ_80 /* IntegerConformances.swift in Sources */,
+				OBJ_81 /* PointerConformances.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_90 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_92 /* Promise.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		OBJ_108 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "BAPromise::BAPromiseTests" /* BAPromiseTests */;
+			targetProxy = 575EA9D5255B38FC007B16DF /* PBXContainerItemProxy */;
+		};
+		OBJ_126 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "BAPromise::BAPromise" /* BAPromise */;
+			targetProxy = 575EA9CF255B38FB007B16DF /* PBXContainerItemProxy */;
+		};
+		OBJ_127 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "swift-atomics::Atomics" /* Atomics */;
+			targetProxy = 575EA9D0255B38FB007B16DF /* PBXContainerItemProxy */;
+		};
+		OBJ_128 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "swift-atomics::_AtomicsShims" /* _AtomicsShims */;
+			targetProxy = 575EA9D1255B38FB007B16DF /* PBXContainerItemProxy */;
+		};
+		OBJ_84 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "swift-atomics::_AtomicsShims" /* _AtomicsShims */;
+			targetProxy = 575EA9CD255B38FA007B16DF /* PBXContainerItemProxy */;
+		};
+		OBJ_96 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "swift-atomics::Atomics" /* Atomics */;
+			targetProxy = 575EA9CC255B38FA007B16DF /* PBXContainerItemProxy */;
+		};
+		OBJ_97 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "swift-atomics::_AtomicsShims" /* _AtomicsShims */;
+			targetProxy = 575EA9CE255B38FA007B16DF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		OBJ_100 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LD = /usr/bin/true;
+				OTHER_SWIFT_FLAGS = "-swift-version 5 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -package-description-version 5.3.0";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		OBJ_101 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LD = /usr/bin/true;
+				OTHER_SWIFT_FLAGS = "-swift-version 5 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -package-description-version 5.3.0";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		OBJ_106 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		OBJ_107 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		OBJ_111 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/.build/checkouts/swift-atomics/Sources/_AtomicsShims/include",
+				);
+				INFOPLIST_FILE = "BAPromise-SwiftPackage.xcodeproj/BAPromiseTests_Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = BAPromiseTests;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+			};
+			name = Debug;
+		};
+		OBJ_112 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/.build/checkouts/swift-atomics/Sources/_AtomicsShims/include",
+				);
+				INFOPLIST_FILE = "BAPromise-SwiftPackage.xcodeproj/BAPromiseTests_Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = BAPromiseTests;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+			};
+			name = Release;
+		};
+		OBJ_130 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/.build/checkouts/swift-atomics/Sources/_AtomicsShims/include",
+				);
+				INFOPLIST_FILE = "BAPromise-SwiftPackage.xcodeproj/_AtomicsShims_Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/swift",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "-AtomicsShims";
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				TARGET_NAME = _AtomicsShims;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		OBJ_131 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/.build/checkouts/swift-atomics/Sources/_AtomicsShims/include",
+				);
+				INFOPLIST_FILE = "BAPromise-SwiftPackage.xcodeproj/_AtomicsShims_Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/swift",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "-AtomicsShims";
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				TARGET_NAME = _AtomicsShims;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Release;
+		};
+		OBJ_139 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LD = /usr/bin/true;
+				OTHER_SWIFT_FLAGS = "-swift-version 5 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -package-description-version 5.1.0";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		OBJ_140 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LD = /usr/bin/true;
+				OTHER_SWIFT_FLAGS = "-swift-version 5 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -package-description-version 5.1.0";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		OBJ_3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"SWIFT_PACKAGE=1",
+					"DEBUG=1",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "$(inherited) -DXcode";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator appletvos appletvsimulator watchos watchsimulator";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) SWIFT_PACKAGE DEBUG";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				USE_HEADERMAP = NO;
+			};
+			name = Debug;
+		};
+		OBJ_4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"SWIFT_PACKAGE=1",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_SWIFT_FLAGS = "$(inherited) -DXcode";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator appletvos appletvsimulator watchos watchsimulator";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) SWIFT_PACKAGE";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				USE_HEADERMAP = NO;
+			};
+			name = Release;
+		};
+		OBJ_67 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/.build/checkouts/swift-atomics/Sources/_AtomicsShims/include",
+				);
+				INFOPLIST_FILE = "BAPromise-SwiftPackage.xcodeproj/Atomics_Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = Atomics;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = Atomics;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		OBJ_68 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/.build/checkouts/swift-atomics/Sources/_AtomicsShims/include",
+				);
+				INFOPLIST_FILE = "BAPromise-SwiftPackage.xcodeproj/Atomics_Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = Atomics;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = Atomics;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Release;
+		};
+		OBJ_88 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/.build/checkouts/swift-atomics/Sources/_AtomicsShims/include",
+				);
+				INFOPLIST_FILE = "BAPromise-SwiftPackage.xcodeproj/BAPromise_Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = BAPromise;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = BAPromise;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+			};
+			name = Debug;
+		};
+		OBJ_89 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/.build/checkouts/swift-atomics/Sources/_AtomicsShims/include",
+				);
+				INFOPLIST_FILE = "BAPromise-SwiftPackage.xcodeproj/BAPromise_Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = BAPromise;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = BAPromise;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		OBJ_105 /* Build configuration list for PBXAggregateTarget "BAPromisePackageTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_106 /* Debug */,
+				OBJ_107 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_110 /* Build configuration list for PBXNativeTarget "BAPromiseTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_111 /* Debug */,
+				OBJ_112 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_129 /* Build configuration list for PBXNativeTarget "_AtomicsShims" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_130 /* Debug */,
+				OBJ_131 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_138 /* Build configuration list for PBXNativeTarget "swift-atomicsPackageDescription" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_139 /* Debug */,
+				OBJ_140 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_2 /* Build configuration list for PBXProject "BAPromise-SwiftPackage" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_3 /* Debug */,
+				OBJ_4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_66 /* Build configuration list for PBXNativeTarget "Atomics" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_67 /* Debug */,
+				OBJ_68 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_87 /* Build configuration list for PBXNativeTarget "BAPromise" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_88 /* Debug */,
+				OBJ_89 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_99 /* Build configuration list for PBXNativeTarget "BAPromisePackageDescription" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_100 /* Debug */,
+				OBJ_101 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = OBJ_1 /* Project object */;
+}
