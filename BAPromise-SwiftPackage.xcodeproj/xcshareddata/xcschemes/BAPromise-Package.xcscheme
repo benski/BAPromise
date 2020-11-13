@@ -17,7 +17,7 @@
                BlueprintIdentifier = "BAPromise::BAPromise"
                BuildableName = "BAPromise.framework"
                BlueprintName = "BAPromise"
-               ReferencedContainer = "container:BAPromise.xcodeproj">
+               ReferencedContainer = "container:BAPromise-SwiftPackage.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -36,7 +36,7 @@
                BlueprintIdentifier = "BAPromise::BAPromiseTests"
                BuildableName = "BAPromiseTests.xctest"
                BlueprintName = "BAPromiseTests"
-               ReferencedContainer = "container:BAPromise.xcodeproj">
+               ReferencedContainer = "container:BAPromise-SwiftPackage.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>

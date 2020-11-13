@@ -7,23 +7,44 @@
 //
 
 import Foundation
+
+internal protocol AtomicCancel {
+    var isCanceled: Bool { get }
+    func cancel() -> Void
+}
+
+#if canImport(Atomics)
 import Atomics
-
-internal class AtomicCancel {
-    private let underlying = ManagedAtomic<Int>(0)
-
+internal class AtomicsCancel: AtomicCancel {
     public var isCanceled: Bool {
         return underlying.load(ordering: .relaxed) == 0 ? false : true
     }
-    
     public func cancel() {
         underlying.wrappingIncrement(ordering: .relaxed)
     }
-    
     public init() {
       underlying.store(0, ordering: .relaxed)
     }
+}
+#endif
+
+
+internal class CAtomicCancel: AtomicCancel {
     
+    public var isCanceled: Bool {
+        atomic_thread_fence(memory_order_seq_cst)
+        return underlying == 0 ? false : true
+    }
+    
+    public func cancel() {
+        OSAtomicIncrement32Barrier(&underlying);
+    }
+    
+    public init() {
+        underlying = 0
+    }
+    
+     private var underlying: Int32
 }
 
 public enum PromiseResult<ValueType> {
@@ -89,7 +110,11 @@ public class PromiseCancelToken {
     
     public typealias Canceled = () -> Void
     
-    internal let cancelFlag: AtomicCancel = AtomicCancel()
+#if canImport(Atomics)
+    internal let cancelFlag: AtomicCancel = AtomicsCancel()
+#else
+    internal let cancelFlag: AtomicCancel = CAtomicCancel()
+#endif
     static let queue = DispatchQueue(label: "com.github.benski.promise")
     var onCancel: Canceled?
 
