@@ -1,4 +1,4 @@
-xcodeproj 'BAPromise'
+project 'BAPromise'
 use_frameworks!
 
 target 'iOS' do
